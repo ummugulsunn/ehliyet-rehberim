@@ -17,8 +17,29 @@ class PurchaseService {
   bool _isPro = false;
   final StreamController<bool> _proStatusController = StreamController<bool>.broadcast();
 
-  Stream<bool> get proStatusStream => _proStatusController.stream;
-  bool get isPro => _isPro;
+  Stream<bool> get proStatusStream {
+    // --- START OF NEW CODE ---
+    // Developer Override: If in debug mode, return a stream that always says "Pro".
+    if (kDebugMode) {
+      return Stream<bool>.value(true);
+    }
+    // --- END OF NEW CODE ---
+    return _proStatusController.stream;
+  }
+  bool get isPro {
+    // --- START OF NEW CODE ---
+    // Developer Override: If in debug mode, always return true for easy testing.
+    if (kDebugMode) {
+      return true;
+    }
+    // --- END OF NEW CODE ---
+    try {
+      return _isPro;
+    } catch (e) {
+      debugPrint('Error getting isPro: $e');
+      return false;
+    }
+  }
 
   /// Initialize RevenueCat with API keys
   Future<void> init() async {
@@ -30,8 +51,22 @@ class PurchaseService {
       
       // Use different API keys for iOS and Android
       if (Platform.isIOS) {
+        if (_appleApiKey == 'appl_YOUR_APPLE_API_KEY_HERE') {
+          debugPrint('Apple API key not configured, skipping RevenueCat initialization');
+          _isPro = false;
+          _isInitialized = true;
+          _proStatusController.add(false);
+          return;
+        }
         configuration = PurchasesConfiguration(_appleApiKey);
       } else if (Platform.isAndroid) {
+        if (_googleApiKey == 'google_YOUR_GOOGLE_API_KEY_HERE') {
+          debugPrint('Google API key not configured, skipping RevenueCat initialization');
+          _isPro = false;
+          _isInitialized = true;
+          _proStatusController.add(false);
+          return;
+        }
         configuration = PurchasesConfiguration(_googleApiKey);
       } else {
         throw UnsupportedError('Platform not supported');
@@ -45,7 +80,10 @@ class PurchaseService {
       _isInitialized = true;
     } catch (e) {
       debugPrint('Failed to initialize RevenueCat: $e');
-      rethrow;
+      // Don't rethrow, just set as not pro
+      _isPro = false;
+      _proStatusController.add(false);
+      _isInitialized = true;
     }
   }
 
@@ -119,4 +157,4 @@ class PurchaseService {
   void dispose() {
     _proStatusController.close();
   }
-} 
+}

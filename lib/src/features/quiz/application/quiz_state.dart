@@ -8,6 +8,9 @@ class QuizState {
   final Map<int, String> selectedAnswers;
   final int score;
   final QuizStatus status;
+  final int currentCombo;
+  final int bestCombo;
+  final String? examId;
 
   const QuizState({
     required this.questions,
@@ -15,6 +18,9 @@ class QuizState {
     required this.selectedAnswers,
     required this.score,
     required this.status,
+    required this.currentCombo,
+    required this.bestCombo,
+    this.examId,
   });
 
   factory QuizState.initial() {
@@ -24,6 +30,9 @@ class QuizState {
       selectedAnswers: {},
       score: 0,
       status: QuizStatus.initial,
+      currentCombo: 0,
+      bestCombo: 0,
+      examId: null,
     );
   }
 
@@ -51,6 +60,9 @@ class QuizState {
     Map<int, String>? selectedAnswers,
     int? score,
     QuizStatus? status,
+    int? currentCombo,
+    int? bestCombo,
+    String? examId,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
@@ -58,6 +70,9 @@ class QuizState {
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
       score: score ?? this.score,
       status: status ?? this.status,
+      currentCombo: currentCombo ?? this.currentCombo,
+      bestCombo: bestCombo ?? this.bestCombo,
+      examId: examId ?? this.examId,
     );
   }
 }

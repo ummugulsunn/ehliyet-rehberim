@@ -1,0 +1,4124 @@
+{
+  "summary": {
+    "totalExams": 15,
+    "totalQuestions": 750,
+    "missingImageCount": 246,
+    "invalidCorrectKeyCount": 0,
+    "duplicateConflictClusters": 34
+  },
+  "missingImageQuestions": [
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 4,
+      "questionText": "Resimde görülen ilk yardım uygulaması,aşağıdaki durumların hangisinde tercih edilmez?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 17,
+      "questionText": "Şekle göre, tek yönlü yolda 3 numaralı aracın sürücüsü şerit değiştirebilmek için aşağıdakilerden hangisinin gerçekleşmesini beklemelidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 18,
+      "questionText": "Yerleşim yeri dışında, trafik işaret levhalarına yaklaşım yönünde kaç metre mesafede duraklamak yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 19,
+      "questionText": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 20,
+      "questionText": "Aşağıdakilerden hangisi girişi olmayan yol işaret levhasıdır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 21,
+      "questionText": "Bir araç çevreyi rahatsız edecek şekilde duman ve gürültü çıkarıyorsa aşağıdakilerden hangisi uygulanır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 22,
+      "questionText": "Aksine bir işaret yoksa, dönüş yaparak doğrultu değiştirecek olan araç sürücülerinin aşağıdakilerden hangisini yapması yanlıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 24,
+      "questionText": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 27,
+      "questionText": "Şekle göre kontrolsüz kavşakta karşılaşan araçlardan hangisi ilk geçiş hakkını kullanmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 28,
+      "questionText": "Şekildeki gibi yeterince aydınlatılmamış tünele giriş yapan aracın sürücüsü aşağıdakilerden hangisini yapmak zorundadır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 29,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 31,
+      "questionText": "Aşağıdakilerden hangisi ana yol - tali yol kavşağını bildiren trafik işaret levhalarından biri değildir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 32,
+      "questionText": "Şekildeki araç sürücüsü, kamu hizmeti yapan yolcu taşıtı durağının en az kaç metre mesafe dışına aracını park edebilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 33,
+      "questionText": "Trafik polisinin verdiği işarete göre aşağıdakilerden hangisi doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 35,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 37,
+      "questionText": "Resimde görülen seyir hâlindeki aracın arkasındaki kırmızı lambaların aniden yanması, trafikteki diğer sürücülere aşağıdakilerden hangisini bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 38,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 39,
+      "questionText": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 41,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_1",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki ikaz ışığı, aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 13,
+      "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 17,
+      "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 19,
+      "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 21,
+      "questionText": "Aksine bir durum yoksa, şekildeki motosiklet sürücüsü 60 km/saat hızla seyrederken önündeki araca en fazla kaç metre yaklaşabilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 22,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "Yol üzeri yatay işaretleme (ör. yaya geçidi, taralı alan) görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 28,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 30,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 32,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 34,
+      "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 35,
+      "questionText": "Aşağıdakilerden hangisi trafik kazalarının en önemli sebebidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 39,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 42,
+      "questionText": "Araçların güvenli bir şekilde yavaşlamasını, durmasını ve sabitlenmesini sağlayan sistem aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_2",
+      "id": 48,
+      "questionText": "Aşağıdakilerden hangisi, trafik denetim görevlileriyle iletişim kuran sürücünün trafik adabı açısından özen göstermesi gereken davranışlardandır?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 12,
+      "questionText": "Omuz ve koldaki kanamalarda, şekilde gösterilen hangi bölgeye basınç uygulanmalıdır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 13,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretleme sürücülere aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 15,
+      "questionText": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 16,
+      "questionText": "Şekle göre, araç sürücüsünün aşağıdakilerden hangisini yapması yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 17,
+      "questionText": "Aşağıdakilerden hangisinde 1 numaralı taşıt sürücüsünün yaptığı asli kusurlu hâllerden sayılır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 21,
+      "questionText": "Şekildeki durumda sürücünün hangisini yapması zorunludur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 22,
+      "questionText": "Şekildeki trafik kazası, aşağıdakilerden hangisine uyulmaması sonucu meydana gelmiş olabilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 25,
+      "questionText": "Yerleşim yeri dışında, trafik işaret levhalarına yaklaşım yönünde kaç metre mesafede duraklamak yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 26,
+      "questionText": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 28,
+      "questionText": "Şekildeki araç sürücüsü kavşaktan sağa dönerek seyrini sürdürmek istiyor. Bu sürücünün aşağıdakilerden hangisini yapması yanlıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 30,
+      "questionText": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 31,
+      "questionText": "Şekildeki kazada hangi numaralı araç sürücüsü asli kusurlu sayılır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 37,
+      "questionText": "Resimde görülen seyir hâlindeki aracın arkasındaki kırmızı lambaların aniden yanması, trafikteki diğer sürücülere aşağıdakilerden hangisini bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 38,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 39,
+      "questionText": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 41,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_3",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki ikaz ışığı, aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 13,
+      "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 17,
+      "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 19,
+      "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 21,
+      "questionText": "Aksine bir durum yoksa, şekildeki motosiklet sürücüsü 60 km/saat hızla seyrederken önündeki araca en fazla kaç metre yaklaşabilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 22,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "Yol üzeri yatay işaretleme (ör. yaya geçidi, taralı alan) görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 28,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 30,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 32,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 34,
+      "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 35,
+      "questionText": "Aşağıdakilerden hangisi trafik kazalarının en önemli sebebidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 39,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 42,
+      "questionText": "Araçların güvenli bir şekilde yavaşlamasını, durmasını ve sabitlenmesini sağlayan sistem aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_4",
+      "id": 48,
+      "questionText": "Aşağıdakilerden hangisi, trafik denetim görevlileriyle iletişim kuran sürücünün trafik adabı açısından özen göstermesi gereken davranışlardandır?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 5,
+      "questionText": "Aşağıdakilerden hangisi çıkık belirtisi değildir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 14,
+      "questionText": "• Görev hâlinde iken geçiş üstünlüğü hakkına sahiptir. • Görev hâli dışında geçiş üstünlüğü işaretini ve hakkını kullanması yasaktır. • Hizmetin yerine getirilmesini sağlamak amacına uygun olması şartıyla, Kara Yolları Trafik Kanunu ve bu Yönetmelikte gösterilen trafik kısıtlamalarına ve yasaklarına bağlı değildir. Buna göre aşağıdakilerden hangisi sürülmelerine ilişkin esas ve kuralları verilen araçlardandır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 15,
+      "questionText": "Şekildeki trafik işareti neyi bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 18,
+      "questionText": "Araç sürücülerinin duraklanan veya parkedilen yerden çıkarken; I. Işıkla veya kolla çıkış işareti vermeleri, II. Araçlarını ve araçların etrafını kontrol etmeleri, III. Yoldan geçen araçları ikaz ederek durdurmaları, IV. Görüş alanları dışında kalan yerler varsa gözcü bulundurmaları mecburidir. Verilen bilgilerden hangileri doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 19,
+      "questionText": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 20,
+      "questionText": "Şekildeki otoyolda numaralanmış şeritlerden hangisi ayrılma (yavaşlama) şerididir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 21,
+      "questionText": "Şekildeki gibi ışıklı trafik işaret cihazında, sarı ve kırmızı ışığın birlikte yanması sürücüye neyi bildirir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 23,
+      "questionText": "Geceleyin arkasındaki aracın geçme uyarısını alan araç sürücüsünün aşağıdakilerden hangisini yapması doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 26,
+      "questionText": "Şekildeki trafik işaretinin anlamı nedir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 27,
+      "questionText": "Şekildeki kavşakta karşılaşan araçların geçiş hakkı sıralaması nasıl olmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 29,
+      "questionText": "Kara yollarında, taşıtların yan yana gitme sayısı aşağıdakilerden hangisi ile belirlenir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 30,
+      "questionText": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 31,
+      "questionText": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 34,
+      "questionText": "Şekle göre hangi numaralı yollar tali yoldur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 35,
+      "questionText": "Şekildeki otoyolda numaralanmış şeritlerden hangisi katılma (hızlanma) şerididir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 37,
+      "questionText": "Seyir hâlindeyken gösterge panelinde şekildeki ikaz ışığının yanması durumunda aşağıdakilerden hangisi yapılmalıdır?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 38,
+      "questionText": "Dizel motorlu aracın gösterge panelinde bulunan şekildeki uyarı lambasının yanıyor olması neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_5",
+      "id": 42,
+      "questionText": "Şekilde soru işareti (?) ile gösterilen ve motorda yanma sonucu oluşan gazların dışarı atılmasını sağlayan parça aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 12,
+      "questionText": "Çocuklarda temel yaşam desteği uygulamasıyla ilgili verilenlerden hangisi doğrudur?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 15,
+      "questionText": "Kavşaklara yaklaşırken yol üzerine çizilmiş şekildeki oklar sürücülere neyi bildirir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 21,
+      "questionText": "Şekle göre, geçme işlemi yapan 1 numaralı aracın sürücüsü için aşağıdakilerden hangileri söylenebilir? I- Geçiş kurallarına uyduğu II- Karşı yönden gelen aracın hızını dikkate almadığı III- Geçilen araçtan yeterince uzaklaşmadan sağ şeride geçtiği",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 23,
+      "questionText": "Aşağıdakilerden hangisi trafik görevlisinin geceleyin \"dur\" işaretidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 24,
+      "questionText": "Şekildeki trafik işaretinin bulunduğu yola aşağıdaki taşıtlardan hangisi girebilir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 27,
+      "questionText": "Şekildeki tehlike uyarı işaretini gören sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 28,
+      "questionText": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti neyi bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 34,
+      "questionText": "Şekildeki araç sürücüsü, kamu hizmeti yapan yolcu taşıtı durağının en az kaç metre mesafe dışına aracını park edebilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 35,
+      "questionText": "Trafik görevlisinin geceleyin ışıklı işaret çubuğunu şekildeki gibi hareket ettirmesinin sürücüler için anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 36,
+      "questionText": "Aşağıdakilerden hangisinin motor çalışma sıcaklığına ulaşmadan önce yapılması uygun değildir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 40,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, araç yakıtının bitmek üzere olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 41,
+      "questionText": "Araçların güvenli bir şekilde yavaşlamasını, durmasını ve sabitlenmesini sağlayan sistem aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_6",
+      "id": 45,
+      "questionText": "Ters yönden gelen bir sürücüye \"Bu sokak tek yönlü, herhalde siz girişteki levhayı görmediniz, lütfen daha dikkatli olun.\" diyen bir sürücü, trafikteki temel değerlerden hangisine uygun davranmıştır?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 1,
+      "questionText": "Yetişkinlerde temel yaşam desteği uygulaması ile ilgili olarak verilenlerden hangisi doğrudur?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 4,
+      "questionText": "Aşağıdakilerden hangisi kılcal damar kanamasının özelliğidir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 7,
+      "questionText": "Aşağıdakilerden hangisi ilk yardımın temel kurallarından biri değildir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 15,
+      "questionText": "Şekildeki gibi sola dönüş yapacak olan 2 numaralı araç sürücüsü aşağıdakilerden hangilerini yapmalıdır? I. Dar bir kavisle dönmeli II. Yayanın geçmesini beklemeli III. Sola dönüş lambasını yakmalı IV. İlk geçiş hakkını 1 numaralı araca vermeli",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 18,
+      "questionText": "Trafik zabıtası veya trafik işaret levhası ve ışıklı işaret cihazı bulunmayan kontrolsüz kavşaklarda, aşağıdakilerden hangisinin yapılması yanlıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 19,
+      "questionText": "Şekildeki kara yoluna ne ad verilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 20,
+      "questionText": "Trafik görevlisinin hangi hareketi geceleyin \"geç\" işaretidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 22,
+      "questionText": "Aşağıdakilerden hangisi iki yönlü trafik işaret levhasıdır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 23,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 25,
+      "questionText": "Trafik uygun olsa bile şekildeki aracın hangi yöndeki hareketi kesinlikle yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 26,
+      "questionText": "Şekildeki durumda sürücünün hangisini yapması zorunludur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 29,
+      "questionText": "Şekilde görülen geçiş üstünlüğüne sahip araçların, görev hâlinde karşılaşmaları durumunda ilk geçiş hakkını hangisi kullanmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 43,
+      "questionText": "Şekilde soru işareti (?) ile gösterilen ve aracın hızı ile torkunu ayarlayan güç aktarma organı hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 44,
+      "questionText": "Şekilde soru işareti (?) ile gösterilen ve araç için gerekli elektriği üreten parçaya ne ad verilir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 49,
+      "questionText": "Aşağıdakilerden hangisi, trafik kazalarının ülke ekonomisine verdiği zararlardan biri değildir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_7",
+      "id": 50,
+      "questionText": "Aşağıdakilerden hangisi, öfkeyi başarılı bir şekilde yönetmek için önerilen davranışlardan biri değildir?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 4,
+      "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 13,
+      "questionText": "Aşağıdaki trafik tanzim işaretlerinden hangisi \"taşıt trafiğine kapalı yol\" anlamındadır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 14,
+      "questionText": "Aksine bir durum yoksa, ışıklı trafik işaret cihazında kırmızı ışık yanmakta ise sürücü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 17,
+      "questionText": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 21,
+      "questionText": "Şekildeki trafik işaretini gören sürücünün aşağıdakilerden hangisini yapması yanlıştır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 23,
+      "questionText": "Şekildeki gibi sağa dönüş yapmak isteyen sürücülerin aşağıdakilerden hangisini yapması yanlıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 25,
+      "questionText": "Şekildeki taşıt yolu üzerine çizilen yatay işaretlemeye göre araç sürücüsü nasıl davranmalıdır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 26,
+      "questionText": "Şekildeki gibi bir karşılaşmada ilk geçiş hakkını hangisi kullanmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 27,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 28,
+      "questionText": "Şekildeki araçların seyrettiği taşıt yolunun çizgilerle ayrılmış her bir bölümüne ne ad verilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 30,
+      "questionText": "Aşağıdakilerden hangisi sürücüye ait trafik kazası sebebidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 34,
+      "questionText": "Şekildeki gibi eğimsiz iki yönlü dar yoldaki karşılaşmada 2 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 39,
+      "questionText": "Şekildeki araç güç aktarma organlarının adları hangi seçenekte doğru olarak verilmiştir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 42,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_8",
+      "id": 46,
+      "questionText": "Ters yönden gelen bir sürücüye \"Bu sokak tek yönlü, herhalde siz girişteki levhayı görmediniz, lütfen daha dikkatli olun.\" diyen bir sürücü, trafikte aşağıdaki değerlerden hangisine uygun davranmıştır?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 8,
+      "questionText": "Diz ile kalça arasındaki kemikte kırık varsa yaralıya aşağıdakilerden hangisi uygulanır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 13,
+      "questionText": "Aşağıdakilerden hangisi \"tehlikeli viraj yön levhası\" anlamındadır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 14,
+      "questionText": "Şekilde iki yönlü ve üç şeritli kara yolu bölümünde seyreden araçlar görülmektedir. Yol çizgilerine göre hangi numaralı araç sürücüleri hatalı sollama yapmaktadır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 16,
+      "questionText": "Bölünmüş kara yollarında geçilen araç sürücüleri, geçmek isteyen aracın geçiş işaretini aldığında ne yapmak zorundadır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 17,
+      "questionText": "Şekle göre aşağıdakilerden hangisi yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 18,
+      "questionText": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 19,
+      "questionText": "Aşağıdakilerin hangisindeki araçlar park yerine uygun şekilde park edilmiştir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 20,
+      "questionText": "Bir otobüs, eğimsiz iki yönlü dar yolda aksine işaret yoksa aşağıdakilerden hangisine geçiş kolaylığı sağlamalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 21,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 23,
+      "questionText": "Şekle göre araç sürücüsü hangi şeritleri kullanabilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 25,
+      "questionText": "Aşağıdakilerden hangisi yandan rüzgâr işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 27,
+      "questionText": "Şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_9",
+      "id": 34,
+      "questionText": "\"Trafik kazalarında insan, araç, yol ve iklim koşulları etkili olmaktadır.\" Buna göre aşağıdaki trafik işaretlerinden hangisi yol koşullarından kaynaklanan bir tehlike olabileceğini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 8,
+      "questionText": "Aşağıdakilerden hangisi atardamar kanamasının özelliğidir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 11,
+      "questionText": "Yetişkinlere yapılan dış kalp masajı uygulamasıyla ilgili verilenlerden hangisi doğrudur?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 14,
+      "questionText": "Aksine bir işaret yoksa yerleşim yeri dışındaki bölünmüş kara yolunda, şekildeki 1 numaralı aracın azami (en yüksek) hızı saatte kaç kilometredir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 18,
+      "questionText": "Kavşağa yaklaşan bir sürücü, trafik işaret ışığının aralıklarla kırmızı yanıp söndüğünü fark etmiştir. Bu durumda sürücü nasıl davranmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 19,
+      "questionText": "Şekildeki tehlike uyarı işaretini gören sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 24,
+      "questionText": "Şekildeki trafik polisinin verdiği işarete göre numaralandırılmış araçlardan hangilerinin geçmesi doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 26,
+      "questionText": "Aşağıdakilerden hangisi yandan rüzgâr işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 28,
+      "questionText": "Araçların durma ve duraklama halleri dışında, genelde uzun süreli olarak bekletilmek üzere bırakılmasına ne ad verilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 29,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 37,
+      "questionText": "Şekilde soru işareti (?) ile gösterilen kapaktan motora ne konulur?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 39,
+      "questionText": "Marşa basılıp motor çalıştığında, aracın gösterge panelinde bulunan aşağıdaki ikaz ışıklarından hangisinin sönmesi gerekir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_10",
+      "id": 40,
+      "questionText": "Şekilde gösterilen marş motorunun görevi nedir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 1,
+      "questionText": "Resimde uygulaması gösterilen ve kazazedenin omuriliğine zarar verilmeden araçtan çıkarılmasında kullanılan tekniğe ne ad verilir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 5,
+      "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 6,
+      "questionText": "Kazazedede boyun travması yoksa, hava yolunu açmak için verilebilecek en uygun baş pozisyonu aşağıdakilerden hangisidir?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 13,
+      "questionText": "I- Görülmelerinin engellenmesi II- Sorumlu kuruluşların eskiyenleri yenisi ile değiştirmesi III- Üzerlerine yazı yazılması, çizilmesi, kırılması, delinmesi, sökülmesi Trafik işaretleri ile ilgili olarak yukarıdaki davranışlardan hangilerinin yapılması yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 15,
+      "questionText": "Şekildeki kontrolsüz kavşakta ilk geçiş hakkını hangi araç kullanmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 17,
+      "questionText": "Şekildeki aracın bulunduğu kara yoluna ne ad verilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 21,
+      "questionText": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 22,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 23,
+      "questionText": "Dönel kavşaklardaki geriye dönüşlerde aşağıdakilerden hangisinin yapılması yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Dönel kavşak şeması/görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 24,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi yükseklik anlamında gabari sınırlamasının olduğunu bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 25,
+      "questionText": "Şekildeki devamlı yol çizgisi, sürücülere aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 28,
+      "questionText": "Bir kavşakta geçiş üstünlüğüne sahip aracın sesli ve ışıklı uyarısını alan sürücü nasıl hareket etmelidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 29,
+      "questionText": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 30,
+      "questionText": "Şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 32,
+      "questionText": "Aşağıdaki yer işaretlemelerinden hangisi bölünmüş yol başlangıcı anlamındadır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 35,
+      "questionText": "Şekildeki kavşakta; ileriye yeşil, sola kırmızı ve sağa yeşil oklu ışık yanmaktadır. Buna göre hangi numaralı şeritteki araçlar yollarına devam edebilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_11",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde şekildeki uyarı lambasının yanıyor olması neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 3,
+      "questionText": "Öksüren, nefes alabilen ve tıkandığını ifade edebilen bir kazazedeye aşağıdaki ilk yardım uygulamalarından hangisi yapılır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 4,
+      "questionText": "Aşağıdakilerden hangisi, bebeklere yapılan suni solunum uygulamasında dikkat edilecek kurallardandır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 6,
+      "questionText": "Resimde görülen manevra, hangi amaçla uygulanır?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 14,
+      "questionText": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 16,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi yolda gizli buzlanma olabileceğini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 17,
+      "questionText": "Aksine bir işaret yoksa şekildeki aracın yerleşim yeri içindeki azami hızı saatte kaç kilometredir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 18,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 21,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 23,
+      "questionText": "Şekildeki trafik işaretini gören sürücünün aşağıdakilerden hangisini yapması doğrudur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 24,
+      "questionText": "Şekildeki aracın bulunduğu kara yoluna ne ad verilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 25,
+      "questionText": "Şekildeki trafik işareti neyi bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 27,
+      "questionText": "Şekildeki trafik tanzim işareti, kamyona hangi anlamda gabari sınırlaması getirmektedir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 28,
+      "questionText": "Araç sürücüleri, taşıt yolunun dar olduğu yerlerdeki karşılaşmalarda, aksini gösteren bir trafik işareti yoksa aşağıdakilerden hangisine geçiş hakkı vermek suretiyle geçiş kolaylığı sağlamak zorundadır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 30,
+      "questionText": "Aksine bir işaret yoksa dönüş yaparak doğrultu değiştirecek olan araç sürücülerinin aşağıdakilerden hangisini yapması zorunludur?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 31,
+      "questionText": "Şekildeki gibi devamlı çizgi bulunan kara yolu için aşağıdakilerden hangisi söylenemez?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 33,
+      "questionText": "Trafikte bulunanları uyarmak için, şekildeki aracın arkasında yanmakta olan geri vites lambalarının rengi aşağıdakilerden hangisidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_12",
+      "id": 35,
+      "questionText": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 1,
+      "questionText": "Bazı sürücülerin, trafik kurallarına uymamasının en önemli sebebi aşağıdakilerden hangisidir?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 8,
+      "questionText": "Yetişkinlere ve bebeklere yapılan temel yaşam desteği uygulamasında, göğüs kemiği kaç cm aşağı inecek şekilde kalp basısı uygulanır? Yetişkin -------- Bebek",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 14,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 15,
+      "questionText": "Şekle göre, 1 numaralı aracın sürücüsü aşağıdakilerden hangisini yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 16,
+      "questionText": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 17,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 18,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 19,
+      "questionText": "Şekildeki aracın sürücüsü, dönel kavşaktan geriye dönüş yapmak için hangi şeridi izlemelidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Dönel kavşak şeması/görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 22,
+      "questionText": "Aksine bir işaret bulunmadıkça, otoyolda otomobiller için azami hız saatte kaç kilometredir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 23,
+      "questionText": "Şekildeki araç sürücüsü, kamu hizmeti yapan yolcu taşıtı durağının en az kaç metre mesafe dışına aracını park edebilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 24,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 26,
+      "questionText": "Aşağıdakilerden hangisi \"köprü yaklaşımı\" levhasıdır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 27,
+      "questionText": "I- Yer işaretlemeleri II- Trafik işaret levhaları III- Işıklı ve sesli trafik işaretleri Belediyeler, yapım ve bakımından sorumlu oldukları kara yollarında, trafiği düzenleme amacı ile yukarıdakilerden hangilerini temin ve tesis etmekle görevlidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 28,
+      "questionText": "\"Kırmızı ışıklı trafik işaretinde veya yetkili memurun dur işaretinde geçme\" trafik kazalarında - - - - sayılan hâllerdendir. Verilen ifadede boş bırakılan yere aşağıdakilerden hangisi yazılmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 29,
+      "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 31,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi tali yolda bulunur?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 32,
+      "questionText": "Şekle göre hangi numaralı araçların, bulundukları şeridi sürekli olarak işgal etmeleri yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 33,
+      "questionText": "Aşağıdakilerden hangisi tehlikeli viraj yön levhasıdır?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 40,
+      "questionText": "Direksiyon döndürme kuvvetini azaltarak sürücüye daha kolay bir şekilde aracı yönlendirme imkânı veren sistem aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 41,
+      "questionText": "Resimde görülen seyir hâlindeki aracın arkasındaki kırmızı lambaların aniden yanması, trafikteki diğer sürücülere aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_13",
+      "id": 43,
+      "questionText": "Marşa basılıp motor çalıştığında, aracın gösterge panelinde bulunan aşağıdaki ikaz ışıklarından hangisinin sönmesi gerekir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 9,
+      "questionText": "Şekildeki gibi cisim batması durumunda ilk yardım olarak aşağıdaki uygulamalardan hangisinin yapılması doğrudur?",
+      "category": "İlk Yardım",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 13,
+      "questionText": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 15,
+      "questionText": "Şekildeki kazada hangi numaralı araç sürücüsü asli kusurlu sayılır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 16,
+      "questionText": "Şekle göre hangi numaralı aracın sürücüsü hatalı davranmıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 17,
+      "questionText": "Aşağıdakilerden hangisi, tüm kara yollarındaki işaretleme standartlarının tespiti, yayınlanması ve kontrolü ile görevlidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 18,
+      "questionText": "Aksine bir işaret yoksa, otomobillerin yerleşim yeri dışındaki şehirler arası çift yönlü kara yollarında azami hızı saatte kaç kilometredir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 21,
+      "questionText": "1. Işıklı trafik işaret cihazı 2. Trafik levhası ve yer işaretlemeleri 3. Trafik görevlisi Yukarıda verilenlerin bir kavşakta bulunması hâlinde, sürücülerin bunlara uymadaki öncelik sıralaması nasıl olmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 23,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 25,
+      "questionText": "Trafik işaretleri ile ilgili olarak aşağıdaki davranışlardan hangilerinin yapılması yasaktır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 26,
+      "questionText": "İşaret levhalarıyla ilgili aşağıdaki davranışlardan hangisi trafiği tehlikeye düşürmez?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 27,
+      "questionText": "Şekildeki gibi sola dönüş yapacak olan sürücü, aşağıdakilerden hangilerini yapmalıdır? I- Sola dönüş lambasını yakmalı II- Hızını azaltmalı III- Geniş bir kavisle dönmeli",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 28,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 31,
+      "questionText": "Şekildeki taşıt yolu üzerinde bulunan yazı neyi bildirmektedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 32,
+      "questionText": "Geceleri kara yolunda seyrederken, resimde görüldüğü gibi karşı yönden gelen araç sürücülerinin ve kara yolunu kullanan diğer kişilerin gözlerini kamaştırmamak için uzağı gösteren ışıkların yerine hangisi yakılmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 33,
+      "questionText": "Şekildeki araç sürücüsü kavşaktan sağa dönerek seyrini sürdürmek istiyor. Bu sürücünün aşağıdakilerden hangisini yapması yanlıştır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 35,
+      "questionText": "Şekildeki kavşakta karşılaşan araçların geçiş hakkı sıralaması nasıl olmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 37,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 42,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge, sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_14",
+      "id": 43,
+      "questionText": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 13,
+      "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 17,
+      "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 19,
+      "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 21,
+      "questionText": "Aksine bir durum yoksa, şekildeki motosiklet sürücüsü 60 km/saat hızla seyrederken önündeki araca en fazla kaç metre yaklaşabilir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 22,
+      "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "Yol üzeri yatay işaretleme (ör. yaya geçidi, taralı alan) görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 28,
+      "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 30,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 32,
+      "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 33,
+      "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+      "category": "Trafik İşaretleri",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 34,
+      "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili trafik işaret/levha görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 35,
+      "questionText": "Aşağıdakilerden hangisi trafik kazalarının en önemli sebebidir?",
+      "category": "Trafik ve Çevre Bilgisi",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 39,
+      "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 42,
+      "questionText": "Araçların güvenli bir şekilde yavaşlamasını, durmasını ve sabitlenmesini sağlayan sistem aşağıdakilerden hangisidir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Soruda atıf yapılan şekil/resim görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 43,
+      "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "category": "Motor ve Araç Tekniği",
+      "imageUrl": null,
+      "suggestedImageHint": "Araç gösterge paneli simgesi/ikaz ışığı görseli"
+    },
+    {
+      "examId": "deneme_sinavi_15",
+      "id": 48,
+      "questionText": "Aşağıdakilerden hangisi, trafik denetim görevlileriyle iletişim kuran sürücünün trafik adabı açısından özen göstermesi gereken davranışlardandır?",
+      "category": "Trafik Adabı",
+      "imageUrl": null,
+      "suggestedImageHint": "İlgili görsel (işaret/şekil)"
+    }
+  ],
+  "invalidCorrectKeyQuestions": [],
+  "duplicateConflictClusters": [
+    {
+      "questionTextNormalized": "manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 19,
+          "text": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "İşaret verdiği anda manevraya başlamalı",
+            "B": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+            "C": "Manevraya başladıktan sonra işaret vermeli",
+            "D": "Manevra bitmeden önce işaret vermeyi sona erdirmeli"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+          "explanation": "Manevra yapacak sürücü ön, arka ve yanlardaki trafiği kontrol etmelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 24,
+          "text": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+            "B": "İşaret verdiği anda manevraya başlamalı",
+            "C": "Manevraya başladıktan sonra işaret vermeli",
+            "D": "Manevra bitmeden önce işaret vermeyi sona erdirmeli"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+          "explanation": "Manevra yapacak sürücü ön, arka ve yanlardaki trafiği kontrol etmelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 17,
+          "text": "Manevra yapacak sürücü aşağıdakilerden hangisini yapmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "İşaret verdiği anda manevraya başlamalı",
+            "B": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+            "C": "Manevraya başladıktan sonra işaret vermeli",
+            "D": "Manevra bitmeden önce işaret vermeyi sona erdirmeli"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Ön, arka ve yanlardaki trafiği kontrol etmeli",
+          "explanation": "Manevra yapacak sürücü ön, arka ve yanlardaki trafiği kontrol etmelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Ön, arka ve yanlardaki trafiği kontrol etmeli",
+        "A::Ön, arka ve yanlardaki trafiği kontrol etmeli"
+      ],
+      "distinctExplanations": [
+        "Manevra yapacak sürücü ön, arka ve yanlardaki trafiği kontrol etmelidir."
+      ]
+    },
+    {
+      "questionTextNormalized": "taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 29,
+          "text": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yaya geçidi",
+            "B": "Bisiklet yolu",
+            "C": "Bölünmüş yol başlangıcı",
+            "D": "Trafiği hızlandırma işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Yaya geçidi",
+          "explanation": "Taşıt yolu üzerine çizilen şekildeki yatay işaretleme yaya geçidi anlamındadır.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 18,
+          "text": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dur",
+            "B": "Yolver",
+            "C": "Ayrılma şeridi",
+            "D": "Tırmanma şeridi"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Dur",
+          "explanation": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı durdur.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 18,
+          "text": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Bisiklet yolu",
+            "B": "Motosiklet yolu",
+            "C": "Bisiklet giremez",
+            "D": "Motorlu bisiklet yolu"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Bisiklet yolu",
+          "explanation": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı bisiklet yoludur.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Yaya geçidi",
+        "A::Dur",
+        "A::Bisiklet yolu"
+      ],
+      "distinctExplanations": [
+        "Taşıt yolu üzerine çizilen şekildeki yatay işaretleme yaya geçidi anlamındadır.",
+        "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı durdur.",
+        "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı bisiklet yoludur."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi karşıdan gelene yol ver anlamındadır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 34,
+          "text": "Aşağıdakilerden hangisi karşıdan gelene yol ver anlamındadır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karşıdan gelene yol ver",
+            "B": "Geçiş üstünlüğü",
+            "C": "Dur",
+            "D": "Yavaşla"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Karşıdan gelene yol ver",
+          "explanation": "Karşıdan gelene yol ver anlamındaki trafik işareti, karşıdan gelen araçlara yol vermek gerektiğini belirtir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 24,
+          "text": "Aşağıdakilerden hangisi karşıdan gelene yol ver anlamındadır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karşıdan gelene yol ver",
+            "B": "Yaya geçidi",
+            "C": "Okul geçidi",
+            "D": "Bisiklet yolu"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Karşıdan gelene yol ver",
+          "explanation": "Karşıdan gelene yol ver anlamındadır.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Karşıdan gelene yol ver"
+      ],
+      "distinctExplanations": [
+        "Karşıdan gelene yol ver anlamındaki trafik işareti, karşıdan gelen araçlara yol vermek gerektiğini belirtir.",
+        "Karşıdan gelene yol ver anlamındadır."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 35,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "08.00-16.00 saatleri arasında yayaların yola giremeyeceğini",
+            "B": "08.00-16.00 saatleri arasında motorlu taşıtların yola girebileceğini",
+            "C": "08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu",
+            "D": "08.00-16.00 saatleri arasında motorlu taşıtların yol kenarına park yapabileceğini"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu",
+          "explanation": "Şekildeki trafik işareti 08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 28,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa yaklaşıldığını",
+            "B": "Kontrolsüz kavşağa yaklaşıldığını",
+            "C": "Demir yolu geçidine yaklaşıldığını",
+            "D": "Ana yol - tali yol kavşağına yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz kavşağa yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti kontrolsüz kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 33,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Taşıt yolunun soldan daralacağını",
+            "B": "Taşıt yolunun sağdan daralacağını",
+            "C": "Taşıt yolunun her iki taraftan daralacağını",
+            "D": "İki yönlü yoldan tek yönlü yola girileceğini"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Taşıt yolunun her iki taraftan daralacağını",
+          "explanation": "Bu trafik işareti taşıt yolunun her iki taraftan daralacağını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 28,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa yaklaşıldığını",
+            "B": "Kontrolsüz kavşağa yaklaşıldığını",
+            "C": "Demir yolu geçidine yaklaşıldığını",
+            "D": "Ana yol - tali yol kavşağına yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz kavşağa yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti kontrolsüz kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 27,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yaya yolunu",
+            "B": "Yaya geçidini",
+            "C": "Yola yayanın çıkabileceğini",
+            "D": "Yola yayanın giremeyeceğini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Yaya geçidini",
+          "explanation": "Şekildeki trafik işareti yaya geçidini bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 33,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Mopet yolunu",
+            "B": "Bisiklet yolunu",
+            "C": "Mopetin giremeyeceğini",
+            "D": "Motosikletin giremeyeceğini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Bisiklet yolunu",
+          "explanation": "Şekildeki trafik işareti bisiklet yolunu bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 21,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Traktörün geçebileceğini",
+            "B": "Traktörün giremeyeceğini",
+            "C": "Traktörlerin park edebileceğini",
+            "D": "Sadece traktörün girebileceğini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Traktörün giremeyeceğini",
+          "explanation": "Şekildeki trafik işareti traktörün giremeyeceğini bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "id": 29,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "08.00-16.00 saatleri arasında yayaların yola giremeyeceğini",
+            "B": "08.00-16.00 saatleri arasında motorlu taşıtların yola girebileceğini",
+            "C": "08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu",
+            "D": "08.00-16.00 saatleri arasında motorlu taşıtların yol kenarına park yapabileceğini"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu",
+          "explanation": "Şekildeki trafik işareti 08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 22,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Sola tehlikeli devamlı virajlara yaklaşıldığını",
+            "B": "Sağa tehlikeli devamlı virajlara yaklaşıldığını",
+            "C": "Sola ve sağa dönemeçli olan bir kesime yaklaşıldığını",
+            "D": "Yolda kasis, tümsek, çukur gibi satıh bozukluklarının olduğunu"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Sola tehlikeli devamlı virajlara yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti sola tehlikeli devamlı virajlara yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 17,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Öndeki taşıtı geçmenin yasak olduğunu",
+            "B": "Hız sınırlaması sonunu",
+            "C": "Geçme yasağı sonunu",
+            "D": "Park yasağını"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Öndeki taşıtı geçmenin yasak olduğunu",
+          "explanation": "Şekildeki trafik işareti öndeki taşıtı geçmenin yasak olduğunu bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 24,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa yaklaşıldığını",
+            "B": "Kontrolsüz kavşağa yaklaşıldığını",
+            "C": "Demir yolu geçidine yaklaşıldığını",
+            "D": "Ana yol - tali yol kavşağına yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz kavşağa yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti kontrolsüz kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 28,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa yaklaşıldığını",
+            "B": "Kontrolsüz kavşağa yaklaşıldığını",
+            "C": "Demir yolu geçidine yaklaşıldığını",
+            "D": "Ana yol - tali yol kavşağına yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz kavşağa yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti kontrolsüz kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "C::08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu",
+        "B::Kontrolsüz kavşağa yaklaşıldığını",
+        "C::Taşıt yolunun her iki taraftan daralacağını",
+        "B::Yaya geçidini",
+        "B::Bisiklet yolunu",
+        "B::Traktörün giremeyeceğini",
+        "A::Sola tehlikeli devamlı virajlara yaklaşıldığını",
+        "A::Öndeki taşıtı geçmenin yasak olduğunu"
+      ],
+      "distinctExplanations": [
+        "Şekildeki trafik işareti 08.00-16.00 saatleri arasında yolun motorlu taşıt trafiğine kapalı olduğunu bildirir.",
+        "Şekildeki trafik işareti kontrolsüz kavşağa yaklaşıldığını bildirir.",
+        "Bu trafik işareti taşıt yolunun her iki taraftan daralacağını bildirir.",
+        "Şekildeki trafik işareti yaya geçidini bildirir.",
+        "Şekildeki trafik işareti bisiklet yolunu bildirir.",
+        "Şekildeki trafik işareti traktörün giremeyeceğini bildirir.",
+        "Şekildeki trafik işareti sola tehlikeli devamlı virajlara yaklaşıldığını bildirir.",
+        "Şekildeki trafik işareti öndeki taşıtı geçmenin yasak olduğunu bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 38,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karterdeki yağ miktarını",
+            "B": "Depodaki yakıt miktarını",
+            "C": "Soğutma suyu sıcaklığını",
+            "D": "Radyatördeki su seviyesini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Depodaki yakıt miktarını",
+          "explanation": "Bu gösterge depodaki yakıt miktarını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 41,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karterdeki yağ miktarını",
+            "B": "Depodaki yakıt miktarını",
+            "C": "Soğutma suyu sıcaklığını",
+            "D": "Radyatördeki su seviyesini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Depodaki yakıt miktarını",
+          "explanation": "Bu gösterge depodaki yakıt miktarını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 43,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Araç hızını",
+            "B": "Yakıt miktarını",
+            "C": "Motor sıcaklığını",
+            "D": "Motor devir sayısını"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Araç hızını",
+          "explanation": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye araç hızını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 38,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karterdeki yağ miktarını",
+            "B": "Depodaki yakıt miktarını",
+            "C": "Soğutma suyu sıcaklığını",
+            "D": "Radyatördeki su seviyesini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Depodaki yakıt miktarını",
+          "explanation": "Bu gösterge depodaki yakıt miktarını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 41,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Karterdeki yağ miktarını",
+            "B": "Depodaki yakıt miktarını",
+            "C": "Soğutma suyu sıcaklığını",
+            "D": "Radyatördeki su seviyesini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Depodaki yakıt miktarını",
+          "explanation": "Bu gösterge depodaki yakıt miktarını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 43,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Araç hızını",
+            "B": "Yakıt miktarını",
+            "C": "Motor sıcaklığını",
+            "D": "Motor devir sayısını"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Araç hızını",
+          "explanation": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye araç hızını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 43,
+          "text": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Araç hızını",
+            "B": "Yakıt miktarını",
+            "C": "Motor sıcaklığını",
+            "D": "Motor devir sayısını"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Araç hızını",
+          "explanation": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye araç hızını bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Depodaki yakıt miktarını",
+        "A::Araç hızını"
+      ],
+      "distinctExplanations": [
+        "Bu gösterge depodaki yakıt miktarını bildirir.",
+        "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye araç hızını bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_1",
+          "id": 39,
+          "text": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kırmızı ışık",
+            "B": "Sarı ışık",
+            "C": "Mavi ışık",
+            "D": "Yeşil ışık"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Sarı ışık",
+          "explanation": "Dizel motorlu aracın gösterge panelinde sarı ışığın yanıyor olması ısıtma bujilerinin çalışmakta olduğunu bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 39,
+          "text": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kırmızı ışık",
+            "B": "Sarı ışık",
+            "C": "Mavi ışık",
+            "D": "Yeşil ışık"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Sarı ışık",
+          "explanation": "Dizel motorlu aracın gösterge panelinde sarı ışığın yanıyor olması ısıtma bujilerinin çalışmakta olduğunu bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 43,
+          "text": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Isıtma bujileri ikaz ışığı",
+            "B": "Yağ basıncı ikaz ışığı",
+            "C": "El freni ikaz ışığı",
+            "D": "Sinyal lambası ikaz ışığı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Isıtma bujileri ikaz ışığı",
+          "explanation": "Isıtma bujileri ikaz ışığı dizel motorlu aracın gösterge panelinde yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Sarı ışık",
+        "A::Isıtma bujileri ikaz ışığı"
+      ],
+      "distinctExplanations": [
+        "Dizel motorlu aracın gösterge panelinde sarı ışığın yanıyor olması ısıtma bujilerinin çalışmakta olduğunu bildirir.",
+        "Isıtma bujileri ikaz ışığı dizel motorlu aracın gösterge panelinde yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi ilk yardımın öncelikli amaçlarındandır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 7,
+          "text": "Aşağıdakilerden hangisi ilk yardımın öncelikli amaçlarındandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafik kazalarının önlenmesi",
+            "B": "Mesleki başarının artırılması",
+            "C": "Hayati tehlikenin ortadan kaldırılması",
+            "D": "Ülkedeki sağlık sisteminin iyileştirilmesi"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Hayati tehlikenin ortadan kaldırılması",
+          "explanation": "Hayati tehlikenin ortadan kaldırılması ilk yardımın öncelikli amaçlarındandır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 7,
+          "text": "Aşağıdakilerden hangisi ilk yardımın öncelikli amaçlarındandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafik kazalarının önlenmesi",
+            "B": "Mesleki başarının artırılması",
+            "C": "Hayati tehlikenin ortadan kaldırılması",
+            "D": "Ülkedeki sağlık sisteminin iyileştirilmesi"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Hayati tehlikenin ortadan kaldırılması",
+          "explanation": "Hayati tehlikenin ortadan kaldırılması ilk yardımın öncelikli amaçlarındandır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 9,
+          "text": "Aşağıdakilerden hangisi ilk yardımın öncelikli amaçlarındandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafikteki kaza sayısını azaltmak",
+            "B": "Sağlık personelinin mesleki başarısını artırmak",
+            "C": "İnsanları zararlı alışkanlıklarından uzaklaştırmak",
+            "D": "Yaşamsal fonksiyonların sürdürülmesini sağlamak"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Yaşamsal fonksiyonların sürdürülmesini sağlamak",
+          "explanation": "Yaşamsal fonksiyonların sürdürülmesini sağlamak ilk yardımın öncelikli amaçlarındandır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 7,
+          "text": "Aşağıdakilerden hangisi ilk yardımın öncelikli amaçlarındandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafik kazalarının önlenmesi",
+            "B": "Mesleki başarının artırılması",
+            "C": "Hayati tehlikenin ortadan kaldırılması",
+            "D": "Ülkedeki sağlık sisteminin iyileştirilmesi"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Hayati tehlikenin ortadan kaldırılması",
+          "explanation": "Hayati tehlikenin ortadan kaldırılması ilk yardımın öncelikli amaçlarındandır.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "C::Hayati tehlikenin ortadan kaldırılması",
+        "D::Yaşamsal fonksiyonların sürdürülmesini sağlamak"
+      ],
+      "distinctExplanations": [
+        "Hayati tehlikenin ortadan kaldırılması ilk yardımın öncelikli amaçlarındandır.",
+        "Yaşamsal fonksiyonların sürdürülmesini sağlamak ilk yardımın öncelikli amaçlarındandır."
+      ]
+    },
+    {
+      "questionTextNormalized": "baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye aşağıdaki baş pozisyonlarından hangisi verilir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 8,
+          "text": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye aşağıdaki baş pozisyonlarından hangisi verilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Baş geriye doğru itilir",
+            "B": "Baş öne doğru eğilir",
+            "C": "Baş yana çevrilir",
+            "D": "Baş yukarı kaldırılır"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Baş geriye doğru itilir",
+          "explanation": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için baş geriye doğru itilir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 8,
+          "text": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye aşağıdaki baş pozisyonlarından hangisi verilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Baş geriye doğru itilir",
+            "B": "Baş öne doğru eğilir",
+            "C": "Baş yana çevrilir",
+            "D": "Baş yukarı kaldırılır"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Baş geriye doğru itilir",
+          "explanation": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için baş geriye doğru itilir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 3,
+          "text": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye aşağıdaki baş pozisyonlarından hangisi verilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Baş geriye doğru itilir",
+            "B": "Baş öne doğru eğilir",
+            "C": "Baş yana çevrilir",
+            "D": "Baş yukarı kaldırılır"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Baş geriye doğru itilir",
+          "explanation": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için baş geriye doğru itilir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 8,
+          "text": "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye aşağıdaki baş pozisyonlarından hangisi verilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Baş geriye doğru itilir",
+            "B": "Baş öne doğru eğilir",
+            "C": "Baş yana çevrilir",
+            "D": "Baş sabit tutulur"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Baş geriye doğru itilir",
+          "explanation": "Baş geriye doğru itilir baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye verilir.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Baş geriye doğru itilir"
+      ],
+      "distinctExplanations": [
+        "Baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için baş geriye doğru itilir.",
+        "Baş geriye doğru itilir baş ve omurga yaralanması olmayan,bilinci kapalı kazazedenin hava yolunu açmak için kazazedeye verilir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 13,
+          "text": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Üçgen şeklinde kırmızı işaret",
+            "B": "Daire şeklinde mavi işaret",
+            "C": "Sekizgen şeklinde kırmızı işaret",
+            "D": "Kare şeklinde sarı işaret"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Üçgen şeklinde kırmızı işaret",
+          "explanation": "Kontrolsüz kavşak trafik işareti üçgen şeklinde kırmızı işarettir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 13,
+          "text": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Üçgen şeklinde kırmızı işaret",
+            "B": "Daire şeklinde mavi işaret",
+            "C": "Sekizgen şeklinde kırmızı işaret",
+            "D": "Kare şeklinde sarı işaret"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Üçgen şeklinde kırmızı işaret",
+          "explanation": "Kontrolsüz kavşak trafik işareti üçgen şeklinde kırmızı işarettir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 29,
+          "text": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kontrolsüz kavşak işareti",
+            "B": "Kontrollü kavşak işareti",
+            "C": "Ana yol işareti",
+            "D": "Tali yol işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kontrolsüz kavşak işareti",
+          "explanation": "Kontrolsüz kavşak işareti kontrolsüz kavşak trafik işaretidir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 13,
+          "text": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kontrolsüz kavşak işareti",
+            "B": "Kontrollü kavşak işareti",
+            "C": "Ana yol işareti",
+            "D": "Tali yol işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kontrolsüz kavşak işareti",
+          "explanation": "Kontrolsüz kavşak işareti kontrolsüz kavşak trafik işaretidir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Üçgen şeklinde kırmızı işaret",
+        "A::Kontrolsüz kavşak işareti"
+      ],
+      "distinctExplanations": [
+        "Kontrolsüz kavşak trafik işareti üçgen şeklinde kırmızı işarettir.",
+        "Kontrolsüz kavşak işareti kontrolsüz kavşak trafik işaretidir."
+      ]
+    },
+    {
+      "questionTextNormalized": "taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 22,
+          "text": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yavaşlama çizgisi",
+            "B": "Taralı alana girilmez.",
+            "C": "Bölünmüş yol başlangıcı",
+            "D": "Taralı alan içine park edilebilir."
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Taralı alana girilmez.",
+          "explanation": "Yol yüzeyi ‘yatay işaretlemeler’ şerit kullanımı ve yasak alanları bildirir; taralı alanlar trafik güvenliği gereği girilmez. Dayanak: Karayolları Trafik Yönetmeliği ‘Yatay işaretlemeler’ ve KGM İşaretleme Standartları.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 22,
+          "text": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yavaşlama çizgisi",
+            "B": "Taralı alana girilmez.",
+            "C": "Bölünmüş yol başlangıcı",
+            "D": "Taralı alan içine park edilebilir."
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Taralı alana girilmez.",
+          "explanation": "Taşıt yolu üzerine çizilen şekildeki çizgiler taralı alana girilmez anlamındadır.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 22,
+          "text": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yavaşlama çizgisi",
+            "B": "Taralı alana girilmez.",
+            "C": "Bölünmüş yol başlangıcı",
+            "D": "Taralı alan içine park edilebilir."
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Taralı alana girilmez.",
+          "explanation": "Taşıt yolu üzerine çizilen şekildeki çizgiler taralı alana girilmez anlamındadır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Taralı alana girilmez."
+      ],
+      "distinctExplanations": [
+        "Yol yüzeyi ‘yatay işaretlemeler’ şerit kullanımı ve yasak alanları bildirir; taralı alanlar trafik güvenliği gereği girilmez. Dayanak: Karayolları Trafik Yönetmeliği ‘Yatay işaretlemeler’ ve KGM İşaretleme Standartları.",
+        "Taşıt yolu üzerine çizilen şekildeki çizgiler taralı alana girilmez anlamındadır."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 30,
+          "text": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Motosiklet giremez işareti",
+            "B": "Motosiklet girebilir işareti",
+            "C": "Taşıt giremez işareti",
+            "D": "Yaya giremez işareti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Motosiklet girebilir işareti",
+          "explanation": "Motosiklet girebilir işaretinin bulunduğu yola motosiklet girebilir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 30,
+          "text": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Motosiklet giremez işareti",
+            "B": "Motosiklet girebilir işareti",
+            "C": "Taşıt giremez işareti",
+            "D": "Yaya giremez işareti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Motosiklet girebilir işareti",
+          "explanation": "Motosiklet girebilir işaretinin bulunduğu yola motosiklet girebilir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 28,
+          "text": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Motosiklet girebilir işareti",
+            "B": "Motosiklet giremez işareti",
+            "C": "Araç giremez işareti",
+            "D": "Yaya giremez işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Motosiklet girebilir işareti",
+          "explanation": "Motosiklet girebilir işareti bulunduğu yola motosiklet girebilir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 30,
+          "text": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Motosiklet girebilir işareti",
+            "B": "Motosiklet giremez işareti",
+            "C": "Araç giremez işareti",
+            "D": "Yaya giremez işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Motosiklet girebilir işareti",
+          "explanation": "Motosiklet girebilir işareti bulunduğu yola motosiklet girebilir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Motosiklet girebilir işareti",
+        "A::Motosiklet girebilir işareti"
+      ],
+      "distinctExplanations": [
+        "Motosiklet girebilir işaretinin bulunduğu yola motosiklet girebilir.",
+        "Motosiklet girebilir işareti bulunduğu yola motosiklet girebilir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 32,
+          "text": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yükseklik sınırlaması",
+            "B": "Genişlik sınırlaması",
+            "C": "Uzunluk sınırlaması",
+            "D": "Ağırlık sınırlaması"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Uzunluk sınırlaması",
+          "explanation": "Uzunluk anlamında gabari sınırlamasının olduğunu bildiren trafik işareti uzunluk sınırlamasıdır.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 32,
+          "text": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yükseklik sınırlaması",
+            "B": "Genişlik sınırlaması",
+            "C": "Uzunluk sınırlaması",
+            "D": "Ağırlık sınırlaması"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Uzunluk sınırlaması",
+          "explanation": "Uzunluk anlamında gabari sınırlamasının olduğunu bildiren trafik işareti uzunluk sınırlamasıdır.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 32,
+          "text": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Gabari sınırlaması işareti",
+            "B": "Yükseklik sınırlaması işareti",
+            "C": "Genişlik sınırlaması işareti",
+            "D": "Uzunluk sınırlaması işareti"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Uzunluk sınırlaması işareti",
+          "explanation": "Uzunluk sınırlaması işareti uzunluk anlamında gabari sınırlamasının olduğunu bildirir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "C::Uzunluk sınırlaması",
+        "D::Uzunluk sınırlaması işareti"
+      ],
+      "distinctExplanations": [
+        "Uzunluk anlamında gabari sınırlamasının olduğunu bildiren trafik işareti uzunluk sınırlamasıdır.",
+        "Uzunluk sınırlaması işareti uzunluk anlamında gabari sınırlamasının olduğunu bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 34,
+          "text": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafiğin bütün istikametlere kapanma hâli",
+            "B": "Trafiğin bütün istikametlere açılma hâli",
+            "C": "Trafiği hızlandırma işareti",
+            "D": "Trafiği yavaşlatma işareti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Trafiğin bütün istikametlere açılma hâli",
+          "explanation": "Trafik görevlisinin göğsü/arkası yönleri kapalı, omuzlara paralel uzanan kol doğrultuları açık/önceliklidir. Dayanak: Karayolları Trafik Yönetmeliği ‘Trafik görevlisinin işaretleri’.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 34,
+          "text": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafiğin bütün istikametlere kapanma hâli",
+            "B": "Trafiğin bütün istikametlere açılma hâli",
+            "C": "Trafiği hızlandırma işareti",
+            "D": "Trafiği yavaşlatma işareti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Trafiğin bütün istikametlere açılma hâli",
+          "explanation": "Şekildeki trafik görevlisinin yapmış olduğu işaret trafiğin bütün istikametlere açılma hâli anlamındadır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 34,
+          "text": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Trafiğin bütün istikametlere kapanma hâli",
+            "B": "Trafiğin bütün istikametlere açılma hâli",
+            "C": "Trafiği hızlandırma işareti",
+            "D": "Trafiği yavaşlatma işareti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Trafiğin bütün istikametlere açılma hâli",
+          "explanation": "Şekildeki trafik görevlisinin yapmış olduğu işaret trafiğin bütün istikametlere açılma hâli anlamındadır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Trafiğin bütün istikametlere açılma hâli"
+      ],
+      "distinctExplanations": [
+        "Trafik görevlisinin göğsü/arkası yönleri kapalı, omuzlara paralel uzanan kol doğrultuları açık/önceliklidir. Dayanak: Karayolları Trafik Yönetmeliği ‘Trafik görevlisinin işaretleri’.",
+        "Şekildeki trafik görevlisinin yapmış olduğu işaret trafiğin bütün istikametlere açılma hâli anlamındadır."
+      ]
+    },
+    {
+      "questionTextNormalized": "aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_2",
+          "id": 39,
+          "text": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yağ lambası",
+            "B": "Şarj lambası",
+            "C": "Fren lambası",
+            "D": "Sinyal lambası"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Şarj lambası",
+          "explanation": "Aracın gösterge panelinde şarj lambasının yanıyor olması, şarj sisteminin çalışmadığını gösterir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "id": 39,
+          "text": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Yağ lambası",
+            "B": "Şarj lambası",
+            "C": "Fren lambası",
+            "D": "Sinyal lambası"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Şarj lambası",
+          "explanation": "Aracın gösterge panelinde şarj lambasının yanıyor olması, şarj sisteminin çalışmadığını gösterir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "id": 39,
+          "text": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Şarj sistemi ikaz ışığı",
+            "B": "Yağ basıncı ikaz ışığı",
+            "C": "El freni ikaz ışığı",
+            "D": "Sinyal lambası ikaz ışığı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Şarj sistemi ikaz ışığı",
+          "explanation": "Şarj sistemi ikaz ışığı aracın gösterge panelinde yanıyor olması, şarj sisteminin çalışmadığını gösterir.",
+          "category": "Motor ve Araç Tekniği"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Şarj lambası",
+        "A::Şarj sistemi ikaz ışığı"
+      ],
+      "distinctExplanations": [
+        "Aracın gösterge panelinde şarj lambasının yanıyor olması, şarj sisteminin çalışmadığını gösterir.",
+        "Şarj sistemi ikaz ışığı aracın gösterge panelinde yanıyor olması, şarj sisteminin çalışmadığını gösterir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 15,
+          "text": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Halkın can ve mal güvenliğinin korunması",
+            "B": "Işıklı ve sesli uyarı işaretlerinin bir arada verilmesi",
+            "C": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması",
+            "D": "Geçiş üstünlüğü hakkının görev hâlinde iken kullanılması"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması",
+          "explanation": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 18,
+          "text": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Bu araçlar, görev hâlinde iken geçiş üstünlüğü hakkına sahiptir.",
+            "B": "Bu hak, halkın can ve mal güvenliğini tehlikeye sokmamak, ışıklı ve sesli uyarı işaretlerini bir arada vermek şartı ile kullanılır.",
+            "C": "Emniyet ve asayiş işlerinde kullanılan, boyama şekilleri ve ayrım işareti bulunmayan araçlar anında sökülüp takılabilen ışıklı ihbar işareti bulundurmak zorundadır.",
+            "D": "Bu araçların görev hâli dışında geçiş üstünlüğü işaret ve hakkını kullanmaları serbesttir."
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Bu araçların görev hâli dışında geçiş üstünlüğü işaret ve hakkını kullanmaları serbesttir.",
+          "explanation": "Bu araçların görev hâli dışında geçiş üstünlüğü işaret ve hakkını kullanmaları serbesttir geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 35,
+          "text": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Halkın can ve mal güvenliğinin korunması",
+            "B": "Işıklı ve sesli uyarı işaretlerinin bir arada verilmesi",
+            "C": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması",
+            "D": "Geçiş üstünlüğü hakkının görev hâlinde iken kullanılması"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması",
+          "explanation": "Görev hâli dışında bazı kişilere ayrıcalık sağlanması geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "C::Görev hâli dışında bazı kişilere ayrıcalık sağlanması",
+        "D::Bu araçların görev hâli dışında geçiş üstünlüğü işaret ve hakkını kullanmaları serbesttir."
+      ],
+      "distinctExplanations": [
+        "Görev hâli dışında bazı kişilere ayrıcalık sağlanması geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir.",
+        "Bu araçların görev hâli dışında geçiş üstünlüğü işaret ve hakkını kullanmaları serbesttir geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekildeki trafik işareti sürücüye neyi bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 26,
+          "text": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kontrollü demir yolu geçidini",
+            "B": "Kontrolsüz demir yolu geçidini",
+            "C": "Tramvay hattı ile oluşan kavşağı",
+            "D": "Demir yolu köprüsüne yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz demir yolu geçidini",
+          "explanation": "Bu işaret, bariyer veya ışıklı koruma olmadan demiryolu kesişimi olduğunu bildirir; hız düşürülür, geçiş öncesi duruş-kontrol yapılır. Dayanak: KTY ‘Uyarı işaretleri’ ve KGM İşaretleme Standartları.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 19,
+          "text": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kontrollü demir yolu geçidini",
+            "B": "Kontrolsüz demir yolu geçidini",
+            "C": "Tramvay hattı ile oluşan kavşağı",
+            "D": "Demir yolu köprüsüne yaklaşıldığını"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Kontrolsüz demir yolu geçidini",
+          "explanation": "Şekildeki trafik işareti kontrolsüz demir yolu geçidini bildirir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Kontrolsüz demir yolu geçidini"
+      ],
+      "distinctExplanations": [
+        "Bu işaret, bariyer veya ışıklı koruma olmadan demiryolu kesişimi olduğunu bildirir; hız düşürülür, geçiş öncesi duruş-kontrol yapılır. Dayanak: KTY ‘Uyarı işaretleri’ ve KGM İşaretleme Standartları.",
+        "Şekildeki trafik işareti kontrolsüz demir yolu geçidini bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi kasisli yol işaretidir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_3",
+          "id": 30,
+          "text": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kırmızı üçgen işaret",
+            "B": "Mavi daire işaret",
+            "C": "Sarı dikdörtgen işaret",
+            "D": "Beyaz yuvarlak işaret"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kırmızı üçgen işaret",
+          "explanation": "Kırmızı üçgen işaret kasisli yol işaretidir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 30,
+          "text": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kasisli yol işareti",
+            "B": "Düz yol işareti",
+            "C": "Virajlı yol işareti",
+            "D": "Kaygan yol işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kasisli yol işareti",
+          "explanation": "Kasisli yol işareti kasisli yol işaretidir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 13,
+          "text": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kasisli yol işareti",
+            "B": "Viraj işareti",
+            "C": "Dönel kavşak işareti",
+            "D": "Kavşak işareti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kasisli yol işareti",
+          "explanation": "Kasisli yol işareti kasisli yol işaretidir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Kırmızı üçgen işaret",
+        "A::Kasisli yol işareti"
+      ],
+      "distinctExplanations": [
+        "Kırmızı üçgen işaret kasisli yol işaretidir.",
+        "Kasisli yol işareti kasisli yol işaretidir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi, çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının dikkat etmesi gereken kurallardandır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 7,
+          "text": "Aşağıdakilerden hangisi, çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının dikkat etmesi gereken kurallardandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Çift kemik bulunan bölgeye uygulaması",
+            "B": "Tel, lastik, ip gibi malzemeleri kullanması",
+            "C": "Uygulanan bölgenin üzerini sargı bezi ile kapatması",
+            "D": "Kazazedenin alnına \"turnike\" ya da \"T\"harfi yazması"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Kazazedenin alnına \"turnike\" ya da \"T\"harfi yazması",
+          "explanation": "Çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının kazazedenin alnına \"turnike\" ya da \"T\"harfi yazması dikkat etmesi gereken kurallardandır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 7,
+          "text": "Aşağıdakilerden hangisi, çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının dikkat etmesi gereken kurallardandır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Çift kemik bulunan bölgeye uygulaması",
+            "B": "Tel, lastik, ip gibi malzemeleri kullanması",
+            "C": "Uygulanan bölgenin üzerini sargı bezi ile kapatması",
+            "D": "Kazazedenin alnına \"turnike\" ya da \"T\" harfi yazması"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Kazazedenin alnına \"turnike\" ya da \"T\" harfi yazması",
+          "explanation": "Kazazedenin alnına \"turnike\" ya da \"T\" harfi yazması çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının dikkat etmesi gereken kurallardandır.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "D::Kazazedenin alnına \"turnike\" ya da \"T\"harfi yazması",
+        "D::Kazazedenin alnına \"turnike\" ya da \"T\" harfi yazması"
+      ],
+      "distinctExplanations": [
+        "Çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının kazazedenin alnına \"turnike\" ya da \"T\"harfi yazması dikkat etmesi gereken kurallardandır.",
+        "Kazazedenin alnına \"turnike\" ya da \"T\" harfi yazması çok sayıda yaralının bulunduğu olay yerinde uzuv kopması olan bir kazazedeye turnike uygulayan ilk yardımcının dikkat etmesi gereken kurallardandır."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekildeki trafik işareti neyi bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 15,
+          "text": "Şekildeki trafik işareti neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Ehlî hayvanların giremeyeceğini",
+            "B": "Ehlî hayvanların yola çıkabileceğini",
+            "C": "Vahşi hayvanların yola çıkabileceğini",
+            "D": "Hayvanla çekilen taşıtların yola çıkabileceğini"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Ehlî hayvanların yola çıkabileceğini",
+          "explanation": "Şekildeki trafik işareti ehlî hayvanların yola çıkabileceğini bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "id": 33,
+          "text": "Şekildeki trafik işareti neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa yaklaşıldığını",
+            "B": "Kontrolsüz kavşağa yaklaşıldığını",
+            "C": "Demir yolu geçidine yaklaşıldığını",
+            "D": "Ana yol - tali yol kavşağına yaklaşıldığını"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Dönel kavşağa yaklaşıldığını",
+          "explanation": "Şekildeki trafik işareti dönel kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 25,
+          "text": "Şekildeki trafik işareti neyi bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kamyonlar için geçme yasağı sonunu",
+            "B": "Karşıdan gelene yol verilmesi gerektiğini",
+            "C": "Kamyonlar için geçme yasağı başlangıcını",
+            "D": "Öndeki taşıtın geçilmesinin yasak olduğunu"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Kamyonlar için geçme yasağı sonunu",
+          "explanation": "Şekildeki trafik işareti kamyonlar için geçme yasağı sonunu bildirir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Ehlî hayvanların yola çıkabileceğini",
+        "A::Dönel kavşağa yaklaşıldığını",
+        "A::Kamyonlar için geçme yasağı sonunu"
+      ],
+      "distinctExplanations": [
+        "Şekildeki trafik işareti ehlî hayvanların yola çıkabileceğini bildirir.",
+        "Şekildeki trafik işareti dönel kavşağa yaklaşıldığını bildirir.",
+        "Şekildeki trafik işareti kamyonlar için geçme yasağı sonunu bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerin hangisinde 1 numaralı aracın sürücüsü geçme yasağına uymamıştır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 28,
+          "text": "Aşağıdakilerin hangisinde 1 numaralı aracın sürücüsü geçme yasağına uymamıştır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Geçme yasağı olan yerde geçme yapması",
+            "B": "Geçme yasağı olmayan yerde geçme yapması",
+            "C": "Geçme yasağı olan yerde geçme yapmaması",
+            "D": "Geçme yasağı olmayan yerde geçme yapmaması"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Geçme yasağı olan yerde geçme yapması",
+          "explanation": "Geçme yasağı olan yerde geçme yapması durumunda 1 numaralı aracın sürücüsü geçme yasağına uymamıştır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "id": 20,
+          "text": "Aşağıdakilerin hangisinde 1 numaralı aracın sürücüsü geçme yasağına uymamıştır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Geçme yasağı olan yerde geçme yapması",
+            "B": "Geçme yasağı olmayan yerde geçme yapması",
+            "C": "Geçme yasağı olan yerde geçme yapmaması",
+            "D": "Geçme yasağı olmayan yerde geçme yapmaması"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Geçme yasağı olan yerde geçme yapması",
+          "explanation": "Geçme yasağı olan yerde geçme yapması durumunda 1 numaralı aracın sürücüsü geçme yasağına uymamıştır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 31,
+          "text": "Aşağıdakilerin hangisinde 1 numaralı aracın sürücüsü geçme yasağına uymamıştır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Geçme yasağına uymamış durum",
+            "B": "Geçme yasağına uymuş durum",
+            "C": "Geçme yasağına uygun durum",
+            "D": "Geçme yasağına uygun olmayan durum"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Geçme yasağına uymamış durum",
+          "explanation": "Geçme yasağına uymamış durum 1 numaralı aracın sürücüsü geçme yasağına uymamıştır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Geçme yasağı olan yerde geçme yapması",
+        "A::Geçme yasağına uymamış durum"
+      ],
+      "distinctExplanations": [
+        "Geçme yasağı olan yerde geçme yapması durumunda 1 numaralı aracın sürücüsü geçme yasağına uymamıştır.",
+        "Geçme yasağına uymamış durum 1 numaralı aracın sürücüsü geçme yasağına uymamıştır."
+      ]
+    },
+    {
+      "questionTextNormalized": "okul taşıtının arkasındaki dur ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_5",
+          "id": 31,
+          "text": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Aracını durdurmalı",
+            "B": "Diğer sürücüleri uyarmalı",
+            "C": "Dikkatli ve yavaş geçmeli",
+            "D": "Hızını artırarak uzaklaşmalı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Aracını durdurmalı",
+          "explanation": "‘DUR’ uyarısı yanarken durulur; öğrencilerin inip-binmesi tamamlanmadan hareket edilmez. Dayanak: Karayolları Trafik Yönetmeliği okul servisleri/uyarı sistemleri.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 16,
+          "text": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Aracını durdurmalı",
+            "B": "Diğer sürücüleri uyarmalı",
+            "C": "Dikkatli ve yavaş geçmeli",
+            "D": "Hızını artırarak uzaklaşmalı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Aracını durdurmalı",
+          "explanation": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü aracını durdurmalıdır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Aracını durdurmalı"
+      ],
+      "distinctExplanations": [
+        "‘DUR’ uyarısı yanarken durulur; öğrencilerin inip-binmesi tamamlanmadan hareket edilmez. Dayanak: Karayolları Trafik Yönetmeliği okul servisleri/uyarı sistemleri.",
+        "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü aracını durdurmalıdır."
+      ]
+    },
+    {
+      "questionTextNormalized": "b sınıfı sürücü belgesine sahip olan mehmet, a2 sınıfı sürücü belgesi almak için başvuru yapıyor. bu durumda mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_6",
+          "id": 28,
+          "text": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Otomobil",
+            "B": "Motosiklet",
+            "C": "Kamyon",
+            "D": "Otobüs"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Motosiklet",
+          "explanation": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için motosiklet kullanmak istemektedir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 14,
+          "text": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "A2 sınıfı araç",
+            "B": "B sınıfı araç",
+            "C": "C sınıfı araç",
+            "D": "D sınıfı araç"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "A2 sınıfı araç",
+          "explanation": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, A2 sınıfı araç kullanmak istemektedir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Motosiklet",
+        "A::A2 sınıfı araç"
+      ],
+      "distinctExplanations": [
+        "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için motosiklet kullanmak istemektedir.",
+        "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, A2 sınıfı araç kullanmak istemektedir."
+      ]
+    },
+    {
+      "questionTextNormalized": "şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı nedir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_7",
+          "id": 6,
+          "text": "Şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Beyne yeterince kan gitmesini sağlamak",
+            "B": "Solunumun düzenli olmasını sağlamak",
+            "C": "Vücut sıcaklığını düşürmek",
+            "D": "Sindirime yardımcı olmak"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Beyne yeterince kan gitmesini sağlamak",
+          "explanation": "Şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı beyne yeterince kan gitmesini sağlamaktır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 11,
+          "text": "Şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı nedir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Sindirime yardımcı olmak",
+            "B": "Vücut sıcaklığını düşürmek",
+            "C": "Solunumun düzenli olmasını sağlamak",
+            "D": "Beyne yeterince kan gitmesini sağlamak"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Beyne yeterince kan gitmesini sağlamak",
+          "explanation": "Şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı beyne yeterince kan gitmesini sağlamaktır.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Beyne yeterince kan gitmesini sağlamak",
+        "D::Beyne yeterince kan gitmesini sağlamak"
+      ],
+      "distinctExplanations": [
+        "Şok pozisyonunda hastanın ayaklarının yukarıya kaldırılmasının amacı beyne yeterince kan gitmesini sağlamaktır."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_7",
+          "id": 23,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Okul geçidine",
+            "B": "Yürüyüş yoluna",
+            "C": "Gençlik kampına",
+            "D": "Alt veya üst geçitlere"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Okul geçidine",
+          "explanation": "Şekildeki trafik işareti okul geçidine yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 21,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönel kavşağa",
+            "B": "Açılan köprüye",
+            "C": "Ana yol - tali yol kavşağına",
+            "D": "Kontrollü demir yolu geçidine"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Dönel kavşağa",
+          "explanation": "Şekildeki trafik işareti dönel kavşağa yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 14,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Demir yolu alt geçidine",
+            "B": "Demir yolu üst geçidine",
+            "C": "Kontrollü demir yolu geçidine",
+            "D": "Kontrolsüz demir yolu geçidine"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Kontrollü demir yolu geçidine",
+          "explanation": "Şekildeki trafik işareti kontrollü demir yolu geçidine yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 23,
+          "text": "Şekildeki trafik işareti aşağıdakilerden hangisine yaklaşıldığını bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Okul geçidine",
+            "B": "Yürüyüş yoluna",
+            "C": "Gençlik kampına",
+            "D": "Alt veya üst geçitlere"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Okul geçidine",
+          "explanation": "Şekildeki trafik işareti okul geçidine yaklaşıldığını bildirir.",
+          "category": "Trafik İşaretleri"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Okul geçidine",
+        "A::Dönel kavşağa",
+        "C::Kontrollü demir yolu geçidine"
+      ],
+      "distinctExplanations": [
+        "Şekildeki trafik işareti okul geçidine yaklaşıldığını bildirir.",
+        "Şekildeki trafik işareti dönel kavşağa yaklaşıldığını bildirir.",
+        "Şekildeki trafik işareti kontrollü demir yolu geçidine yaklaşıldığını bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisinin eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_7",
+          "id": 41,
+          "text": "Aşağıdakilerden hangisinin eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Antifriz",
+            "B": "Motor yağı",
+            "C": "Fren hidroliği",
+            "D": "Akü elektroliti"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Motor yağı",
+          "explanation": "Motor yağının eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 36,
+          "text": "Aşağıdakilerden hangisinin eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Motor yağı",
+            "B": "Antifriz",
+            "C": "Fren hidroliği",
+            "D": "Akü elektroliti"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Motor yağı",
+          "explanation": "Motor yağının eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır.",
+          "category": "Motor ve Araç Tekniği"
+        }
+      ],
+      "distinctAnswers": [
+        "B::Motor yağı",
+        "A::Motor yağı"
+      ],
+      "distinctExplanations": [
+        "Motor yağının eksilmesi veya özelliğini kaybetmesi durumunda kuru sürtünme sonucu oluşan ısının etkisiyle motor parçaları birbirine kaynar ve sıkışır."
+      ]
+    },
+    {
+      "questionTextNormalized": "resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 4,
+          "text": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Kalp durması",
+            "B": "Bacak kemiği kırılması",
+            "C": "Solunum yolu tıkanması",
+            "D": "Delici göğüs yaralanması"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Delici göğüs yaralanması",
+          "explanation": "Resimde görülen pozisyon delici göğüs yaralanmasında uygulanır.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 5,
+          "text": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Şok",
+            "B": "Koma",
+            "C": "Tam tıkanma",
+            "D": "Omurga yaralanması"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Şok",
+          "explanation": "Resimde görülen pozisyon şok durumunda uygulanır.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "D::Delici göğüs yaralanması",
+        "A::Şok"
+      ],
+      "distinctExplanations": [
+        "Resimde görülen pozisyon delici göğüs yaralanmasında uygulanır.",
+        "Resimde görülen pozisyon şok durumunda uygulanır."
+      ]
+    },
+    {
+      "questionTextNormalized": "• gözlerini açık tutmakta zorlanıyorsa • dalıyor ya da dikkatini toplayamıyorsa araç kullanırken yukarıda verilen belirtilerin sürücüde sezilmesi halinde aşağıdakilerden hangisi yapılmalıdır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 15,
+          "text": "• Gözlerini açık tutmakta zorlanıyorsa • Dalıyor ya da dikkatini toplayamıyorsa Araç kullanırken yukarıda verilen belirtilerin sürücüde sezilmesi halinde aşağıdakilerden hangisi yapılmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Mola verilmeli",
+            "B": "Yola devam edilmeli",
+            "C": "Gözler ovuşturulmalı",
+            "D": "Baş dik tutulmaya çalışılmalı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Mola verilmeli",
+          "explanation": "Gözlerini açık tutmakta zorlanıyorsa, dalıyor ya da dikkatini toplayamıyorsa araç kullanırken mola verilmeli.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 13,
+          "text": "• Gözlerini açık tutmakta zorlanıyorsa • Dalıyor ya da dikkatini toplayamıyorsa Araç kullanırken yukarıda verilen belirtilerin sürücüde sezilmesi halinde aşağıdakilerden hangisi yapılmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Mola verilmeli",
+            "B": "Yola devam edilmeli",
+            "C": "Gözler ovuşturulmalı",
+            "D": "Baş dik tutmaya çalışılmalı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Mola verilmeli",
+          "explanation": "Mola verilmeli araç kullanırken yukarıda verilen belirtilerin sürücüde sezilmesi halinde yapılmalıdır.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Mola verilmeli"
+      ],
+      "distinctExplanations": [
+        "Gözlerini açık tutmakta zorlanıyorsa, dalıyor ya da dikkatini toplayamıyorsa araç kullanırken mola verilmeli.",
+        "Mola verilmeli araç kullanırken yukarıda verilen belirtilerin sürücüde sezilmesi halinde yapılmalıdır."
+      ]
+    },
+    {
+      "questionTextNormalized": "aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_8",
+          "id": 42,
+          "text": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Arka cam rezistansı ikaz ışığı",
+            "B": "Yağ basıncı ikaz ışığı",
+            "C": "Şarj sistemi ikaz ışığı",
+            "D": "Fren sistemi ikaz ışığı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Arka cam rezistansı ikaz ışığı",
+          "explanation": "Aracın gösterge panelinde arka cam rezistansı ikaz ışığının yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 37,
+          "text": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Arka cam rezistansı ikaz ışığı",
+            "B": "Yağ basıncı ikaz ışığı",
+            "C": "El freni ikaz ışığı",
+            "D": "Sinyal lambası ikaz ışığı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Arka cam rezistansı ikaz ışığı",
+          "explanation": "Arka cam rezistansı ikaz ışığı aracın gösterge panelinde yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir.",
+          "category": "Motor ve Araç Tekniği"
+        }
+      ],
+      "distinctAnswers": [
+        "A::Arka cam rezistansı ikaz ışığı"
+      ],
+      "distinctExplanations": [
+        "Aracın gösterge panelinde arka cam rezistansı ikaz ışığının yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir.",
+        "Arka cam rezistansı ikaz ışığı aracın gösterge panelinde yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir."
+      ]
+    },
+    {
+      "questionTextNormalized": "kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına ne denir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 2,
+          "text": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına ne denir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Hâlsizlik",
+            "B": "Şok",
+            "C": "Kansızlık",
+            "D": "Koma"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Koma",
+          "explanation": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına koma denir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "id": 2,
+          "text": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına ne denir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Şok",
+            "B": "Koma",
+            "C": "Hâlsizlik",
+            "D": "Zehirlenme"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Koma",
+          "explanation": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına koma denir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 12,
+          "text": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına ne denir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Hâlsizlik",
+            "B": "Şok",
+            "C": "Kansızlık",
+            "D": "Koma"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Koma",
+          "explanation": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına koma denir.",
+          "category": "İlk Yardım"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 8,
+          "text": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına ne denir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Şok",
+            "B": "Koma",
+            "C": "Hâlsizlik",
+            "D": "Zehirlenme"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "Koma",
+          "explanation": "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına koma denir.",
+          "category": "İlk Yardım"
+        }
+      ],
+      "distinctAnswers": [
+        "D::Koma",
+        "B::Koma"
+      ],
+      "distinctExplanations": [
+        "Kişinin çevre ile bağlantısının tamamen kesildiği, uyaranlara cevap veremediği derin bilinç kaybına koma denir."
+      ]
+    },
+    {
+      "questionTextNormalized": "geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini nasıl haber vermelidir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 26,
+          "text": "Geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini nasıl haber vermelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Dönüş ışıklarını yakarak",
+            "B": "Birkaç defa korna çalarak",
+            "C": "Acil uyarı ışıklarını yakarak",
+            "D": "Birkaç defa selektör yaparak"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Birkaç defa selektör yaparak",
+          "explanation": "Geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini birkaç defa selektör yaparak haber vermelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "id": 32,
+          "text": "Geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini nasıl haber vermelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Birkaç defa selektör yaparak",
+            "B": "Acil uyarı ışıklarını yakarak",
+            "C": "Birkaç defa korna çalarak",
+            "D": "Dönüş ışıklarını yakarak"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Birkaç defa selektör yaparak",
+          "explanation": "Geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini birkaç defa selektör yaparak haber vermelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "D::Birkaç defa selektör yaparak",
+        "A::Birkaç defa selektör yaparak"
+      ],
+      "distinctExplanations": [
+        "Geceleyin, görüşün yeterli olmadığı kavşağa yaklaşan sürücü gelişini birkaç defa selektör yaparak haber vermelidir."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_9",
+          "id": 27,
+          "text": "Şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+          "imageUrl": null,
+          "options": {
+            "A": "3 numaralı aracın takip mesafesini azaltması",
+            "B": "2 numaralı aracın 3 numaralı aracın geçişine yardımcı olması",
+            "C": "2 numaralı aracın 1 numaralı aracı geçmesi",
+            "D": "2 numaralı aracın hızını artırması"
+          },
+          "correctAnswerKey": "B",
+          "correctAnswerText": "2 numaralı aracın 3 numaralı aracın geçişine yardımcı olması",
+          "explanation": "Şekle göre 2 numaralı aracın 3 numaralı aracın geçişine yardımcı olması doğrudur.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 30,
+          "text": "Şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+          "imageUrl": null,
+          "options": {
+            "A": "Takip mesafesinin azaltılması",
+            "B": "Araçların aynı şeritte seyretmesi",
+            "C": "Öndeki aracın karşı şeride geçmesi",
+            "D": "Arkadaki aracın öndeki aracı geçmesi"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Arkadaki aracın öndeki aracı geçmesi",
+          "explanation": "Şekle göre arkadaki aracın öndeki aracı geçmesi doğrudur.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "B::2 numaralı aracın 3 numaralı aracın geçişine yardımcı olması",
+        "D::Arkadaki aracın öndeki aracı geçmesi"
+      ],
+      "distinctExplanations": [
+        "Şekle göre 2 numaralı aracın 3 numaralı aracın geçişine yardımcı olması doğrudur.",
+        "Şekle göre arkadaki aracın öndeki aracı geçmesi doğrudur."
+      ]
+    },
+    {
+      "questionTextNormalized": "kontrollü demir yolu geçidine yaklaşan sürücü nasıl hareket etmelidir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_10",
+          "id": 22,
+          "text": "Kontrollü demir yolu geçidine yaklaşan sürücü nasıl hareket etmelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "İnmiş bariyer varsa geçide girmeli",
+            "B": "Yol açıksa hızlı geçerek uzaklaşmalı",
+            "C": "Bariyer inmekte ise dikkatli ve hızlı geçmeli",
+            "D": "Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli",
+          "explanation": "Kontrollü demir yolu geçidine yaklaşan sürücü hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "id": 31,
+          "text": "Kontrollü demir yolu geçidine yaklaşan sürücü nasıl hareket etmelidir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli",
+            "B": "Bariyer inmekte ise dikkatli ve hızlı geçmeli",
+            "C": "Yol açıksa hızlı geçerek uzaklaşmalı",
+            "D": "İnmiş bariyer varsa geçide girmeli"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli",
+          "explanation": "Kontrollü demir yolu geçidine yaklaşan sürücü hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "D::Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli",
+        "A::Hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli"
+      ],
+      "distinctExplanations": [
+        "Kontrollü demir yolu geçidine yaklaşan sürücü hızını azaltıp, bariyerin izin vermesi hâlinde uygun hızla geçmeli."
+      ]
+    },
+    {
+      "questionTextNormalized": "şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 21,
+          "text": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "1 numaralı araca yol vermeli",
+            "B": "Geçiş hakkını kendisi kullanmalı",
+            "C": "Hızını artırarak kavşağa önce girmeli",
+            "D": "Korna çalıp 1 numaralı aracı durdurmalı"
+          },
+          "correctAnswerKey": "A",
+          "correctAnswerText": "1 numaralı araca yol vermeli",
+          "explanation": "Şekle göre 2 numaralı aracın sürücüsü 1 numaralı araca yol vermelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "id": 29,
+          "text": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+          "imageUrl": null,
+          "options": {
+            "A": "Hızını artırıp kavşağa girmeli",
+            "B": "Geçiş hakkını kendisi kullanmalı",
+            "C": "Geçiş hakkını 1 numaralı araca vermeli",
+            "D": "Korna çalıp 1 numaralı aracın geçmesini beklemeli"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Geçiş hakkını 1 numaralı araca vermeli",
+          "explanation": "Şekle göre 2 numaralı aracın sürücüsü geçiş hakkını 1 numaralı araca vermelidir.",
+          "category": "Trafik ve Çevre Bilgisi"
+        }
+      ],
+      "distinctAnswers": [
+        "A::1 numaralı araca yol vermeli",
+        "C::Geçiş hakkını 1 numaralı araca vermeli"
+      ],
+      "distinctExplanations": [
+        "Şekle göre 2 numaralı aracın sürücüsü 1 numaralı araca yol vermelidir.",
+        "Şekle göre 2 numaralı aracın sürücüsü geçiş hakkını 1 numaralı araca vermelidir."
+      ]
+    },
+    {
+      "questionTextNormalized": "aşağıdakilerden hangisi trafikte bireye yapılan hak ihlallerindendir?",
+      "instances": [
+        {
+          "examId": "deneme_sinavi_13",
+          "id": 48,
+          "text": "Aşağıdakilerden hangisi trafikte bireye yapılan hak ihlallerindendir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Aşırı hız yapmaktan kaçınılması",
+            "B": "Geçiş önceliğine sahip araçlara yol verilmesi",
+            "C": "Engelli kişiler için ayrılmış yerlere park edilmesi",
+            "D": "Trafikte sürücülerin tek başına olmadığının düşünülmesi"
+          },
+          "correctAnswerKey": "C",
+          "correctAnswerText": "Engelli kişiler için ayrılmış yerlere park edilmesi",
+          "explanation": "Engelli kişiler için ayrılmış yerlere park edilmesi trafikte bireye yapılan hak ihlallerindendir.",
+          "category": "Trafik Adabı"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "id": 45,
+          "text": "Aşağıdakilerden hangisi trafikte bireye yapılan hak ihlallerindendir?",
+          "imageUrl": null,
+          "options": {
+            "A": "Aşırı hız yapmaktan kaçınılması",
+            "B": "Geçiş önceliğine sahip araçlara yol verilmesi",
+            "C": "Trafikte sürücülerin tek başına olmadığının düşünülmesi",
+            "D": "Engeli olmadığı hâlde engelli kişiler için ayrılmış yerlere park edilmesi"
+          },
+          "correctAnswerKey": "D",
+          "correctAnswerText": "Engeli olmadığı hâlde engelli kişiler için ayrılmış yerlere park edilmesi",
+          "explanation": "Engeli olmadığı hâlde engelli kişiler için ayrılmış yerlere park edilmesi trafikte bireye yapılan hak ihlallerindendir.",
+          "category": "Trafik Adabı"
+        }
+      ],
+      "distinctAnswers": [
+        "C::Engelli kişiler için ayrılmış yerlere park edilmesi",
+        "D::Engeli olmadığı hâlde engelli kişiler için ayrılmış yerlere park edilmesi"
+      ],
+      "distinctExplanations": [
+        "Engelli kişiler için ayrılmış yerlere park edilmesi trafikte bireye yapılan hak ihlallerindendir.",
+        "Engeli olmadığı hâlde engelli kişiler için ayrılmış yerlere park edilmesi trafikte bireye yapılan hak ihlallerindendir."
+      ]
+    }
+  ]
+}

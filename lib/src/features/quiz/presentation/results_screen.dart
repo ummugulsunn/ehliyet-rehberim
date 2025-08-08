@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/quiz_providers.dart';
+import '../../../core/theme/app_colors.dart';
 
 class ResultsScreen extends ConsumerWidget {
   const ResultsScreen({super.key});
@@ -29,10 +30,10 @@ class ResultsScreen extends ConsumerWidget {
           children: [
             // Congratulatory message
             const SizedBox(height: 32),
-            const Icon(
+            Icon(
               Icons.celebration,
               size: 80,
-              color: Colors.orange,
+              color: AppColors.secondary,
             ),
             const SizedBox(height: 16),
             Text(
@@ -56,7 +57,7 @@ class ResultsScreen extends ConsumerWidget {
                     child: CircularProgressIndicator(
                       value: successPercentage / 100,
                       strokeWidth: 12,
-                      backgroundColor: Colors.grey[300],
+                      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         _getScoreColor(successPercentage),
                       ),
@@ -74,7 +75,7 @@ class ResultsScreen extends ConsumerWidget {
                       Text(
                         '%$successPercentage',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.grey[600],
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -96,7 +97,7 @@ class ResultsScreen extends ConsumerWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: Theme.of(context).colorScheme.shadow,
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -109,7 +110,7 @@ class ResultsScreen extends ConsumerWidget {
                     'Doğru Sayısı',
                     correctAnswers.toString(),
                     Icons.check_circle,
-                    Colors.green,
+                    AppColors.success,
                   ),
                   const SizedBox(height: 16),
                   _buildResultRow(
@@ -117,7 +118,7 @@ class ResultsScreen extends ConsumerWidget {
                     'Yanlış Sayısı',
                     incorrectAnswers.toString(),
                     Icons.cancel,
-                    Colors.red,
+                    AppColors.error,
                   ),
                   const SizedBox(height: 16),
                   _buildResultRow(
@@ -145,7 +146,7 @@ class ResultsScreen extends ConsumerWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -234,11 +235,11 @@ class ResultsScreen extends ConsumerWidget {
 
   Color _getScoreColor(int percentage) {
     if (percentage >= 80) {
-      return Colors.green;
+      return AppColors.success;
     } else if (percentage >= 60) {
-      return Colors.orange;
+      return AppColors.secondary;
     } else {
-      return Colors.red;
+      return AppColors.error;
     }
   }
 } 

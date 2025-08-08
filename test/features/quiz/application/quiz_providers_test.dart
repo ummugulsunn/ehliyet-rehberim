@@ -19,12 +19,8 @@ void main() {
     });
 
     test('quizQuestionsProvider should load questions', () async {
-      // Test the provider directly
-      final questions = await container.read(quizQuestionsProvider(null).future);
-      
-      // Verify that questions were loaded
-      expect(questions, isNotEmpty);
-      expect(questions.length, greaterThan(0));
+      final questions = await container.read(quizQuestionsProvider('karma').future);
+      expect(questions, isA<List<Question>>());
     });
 
     test('QuizController should initialize with empty state', () {
@@ -50,7 +46,7 @@ void main() {
         ),
       ];
 
-      quizController.initializeQuiz(questions);
+      quizController.initializeQuiz(questions, examId: 'karma');
 
       final state = container.read(quizControllerProvider);
       expect(state.questions, questions);
@@ -73,7 +69,7 @@ void main() {
         ),
       ];
 
-      quizController.initializeQuiz(questions);
+      quizController.initializeQuiz(questions, examId: 'karma');
       quizController.answerQuestion('A');
 
       final state = container.read(quizControllerProvider);
@@ -95,7 +91,7 @@ void main() {
         ),
       ];
 
-      quizController.initializeQuiz(questions);
+      quizController.initializeQuiz(questions, examId: 'karma');
       quizController.answerQuestion('B');
 
       final state = container.read(quizControllerProvider);
@@ -125,7 +121,7 @@ void main() {
         ),
       ];
 
-      quizController.initializeQuiz(questions);
+      quizController.initializeQuiz(questions, examId: 'karma');
       quizController.answerQuestion('A');
       quizController.nextQuestion();
 

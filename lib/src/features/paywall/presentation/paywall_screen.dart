@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import '../../../core/services/purchase_service.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../auth/application/auth_providers.dart';
+import '../../auth/presentation/auth_screen.dart';
 
-class PaywallScreen extends StatefulWidget {
+class PaywallScreen extends ConsumerStatefulWidget {
   const PaywallScreen({super.key});
 
   @override
-  State<PaywallScreen> createState() => _PaywallScreenState();
+  ConsumerState<PaywallScreen> createState() => _PaywallScreenState();
 }
 
-class _PaywallScreenState extends State<PaywallScreen> {
+class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   final PurchaseService _purchaseService = PurchaseService();
   List<Offering> _offerings = [];
   bool _isLoading = true;
@@ -41,6 +45,19 @@ class _PaywallScreenState extends State<PaywallScreen> {
   }
 
   Future<void> _purchasePackage(Package package) async {
+    // Check if user is authenticated before allowing purchase
+    final authState = ref.read(authStateProvider);
+    final isSignedIn = authState.when(
+      data: (user) => user != null,
+      loading: () => false,
+      error: (_, __) => false,
+    );
+
+    if (!isSignedIn) {
+      await _showAuthRequiredDialog();
+      return;
+    }
+
     setState(() {
       _isPurchasing = true;
     });
@@ -51,9 +68,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       if (success) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Pro sürüme başarıyla geçtiniz! 🎉'),
-              backgroundColor: Colors.green,
+            SnackBar(
+              content: const Text('Pro sürüme başarıyla geçtiniz! 🎉'),
+              backgroundColor: AppColors.success,
             ),
           );
           Navigator.of(context).pop(true); // Return true to indicate successful purchase
@@ -61,9 +78,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Satın alma işlemi başarısız oldu. Lütfen tekrar deneyin.'),
-              backgroundColor: Colors.red,
+            SnackBar(
+              content: const Text('Satın alma işlemi başarısız oldu. Lütfen tekrar deneyin.'),
+              backgroundColor: AppColors.error,
             ),
           );
         }
@@ -73,7 +90,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Satın alma sırasında hata oluştu: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.error,
           ),
         );
       }
@@ -81,6 +98,56 @@ class _PaywallScreenState extends State<PaywallScreen> {
       setState(() {
         _isPurchasing = false;
       });
+    }
+  }
+
+  /// Show dialog asking user to sign in before making a purchase
+  Future<void> _showAuthRequiredDialog() async {
+    final shouldNavigateToAuth = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        icon: Icon(
+          Icons.account_circle_outlined,
+          size: 48,
+          color: AppColors.primary,
+        ),
+        title: const Text('Giriş Yapın'),
+        content: const Text(
+          'Satın alımınızı tüm cihazlarınızda senkronize etmek ve kaybetmemek için lütfen giriş yapın veya hesap oluşturun.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(
+              'İptal',
+              style: TextStyle(color: AppColors.textSecondary),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Giriş Yap'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldNavigateToAuth == true && mounted) {
+      final result = await Navigator.of(context).push<bool>(
+        MaterialPageRoute(
+          builder: (context) => const AuthScreen(),
+        ),
+      );
+      
+      // If user successfully signed in, show success message
+      if (result == true && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Başarıyla giriş yaptınız! Artık satın alma yapabilirsiniz.'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
     }
   }
 
@@ -95,9 +162,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       if (success) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Satın alımlarınız başarıyla geri yüklendi! 🎉'),
-              backgroundColor: Colors.green,
+            SnackBar(
+              content: const Text('Satın alımlarınız başarıyla geri yüklendi! 🎉'),
+              backgroundColor: AppColors.success,
             ),
           );
           Navigator.of(context).pop(true);
@@ -105,9 +172,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Geri yüklenecek satın alma bulunamadı.'),
-              backgroundColor: Colors.orange,
+            SnackBar(
+              content: const Text('Geri yüklenecek satın alma bulunamadı.'),
+              backgroundColor: AppColors.warning,
             ),
           );
         }
@@ -115,10 +182,10 @@ class _PaywallScreenState extends State<PaywallScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Geri yükleme sırasında hata oluştu: $e'),
-            backgroundColor: Colors.red,
-          ),
+                      SnackBar(
+              content: Text('Geri yükleme sırasında hata oluştu: $e'),
+              backgroundColor: AppColors.error,
+            ),
         );
       }
     } finally {
@@ -133,7 +200,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pro Sürüme Geç'),
-        backgroundColor: Colors.transparent,
+                  backgroundColor: Theme.of(context).colorScheme.surface.withValues(alpha: 0),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close),
@@ -156,8 +223,8 @@ class _PaywallScreenState extends State<PaywallScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.amber[400]!,
-                                Colors.orange[400]!,
+                                AppColors.secondary,
+                                AppColors.secondaryDark,
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -165,16 +232,16 @@ class _PaywallScreenState extends State<PaywallScreen> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.amber.withValues(alpha: 0.3),
+                                color: AppColors.secondaryShadow,
                                 blurRadius: 20,
                                 offset: const Offset(0, 10),
                               ),
                             ],
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.star,
                             size: 60,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onSecondary,
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -406,7 +473,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
             : null,
       ),
       child: Material(
-        color: Colors.transparent,
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: _isPurchasing ? null : () => _purchasePackage(package),
@@ -424,7 +491,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                             package.storeProduct.title,
                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: isPopular ? Colors.white : null,
+                              color: isPopular ? Theme.of(context).colorScheme.onPrimary : null,
                             ),
                           ),
                           if (isPopular) ...[
@@ -432,13 +499,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.2),
+                                color: Theme.of(context).colorScheme.onPrimary.withValues(alpha: 51),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
                                 'POPÜLER',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.onPrimary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -450,7 +517,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       Text(
                         package.storeProduct.description,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: isPopular ? Colors.white.withValues(alpha: 0.8) : Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: isPopular ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 204) : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -462,17 +529,17 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   children: [
                     Text(
                       package.storeProduct.priceString,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: isPopular ? Colors.white : Theme.of(context).colorScheme.primary,
-                      ),
+                                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: isPopular ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.primary,
+                        ),
                     ),
                     if (package.storeProduct.introductoryPrice != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        '${package.storeProduct.introductoryPrice!.priceString} ilk dönem',
+                        '${package.storeProduct.introductoryPrice?.priceString ?? ''} ilk dönem',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: isPopular ? Colors.white.withValues(alpha: 0.8) : Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: isPopular ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 204) : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
