@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Yol zemini -->
+  <rect x="0" y="0" width="200" height="100" fill="#333333"/>
+  
+  <!-- Taralı alan (girilmez) -->
+  <g>
+    <!-- Çizgiler -->
+    <line x1="50" y1="20" x2="90" y2="20" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="30" x2="90" y2="30" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="40" x2="90" y2="40" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="50" x2="90" y2="50" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="60" x2="90" y2="60" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="70" x2="90" y2="70" stroke="white" stroke-width="3"/>
+    <line x1="50" y1="80" x2="90" y2="80" stroke="white" stroke-width="3"/>
+    
+    <!-- Diyagonal çizgiler -->
+    <line x1="55" y1="20" x2="65" y2="40" stroke="white" stroke-width="2"/>
+    <line x1="65" y1="20" x2="75" y2="40" stroke="white" stroke-width="2"/>
+    <line x1="75" y1="20" x2="85" y2="40" stroke="white" stroke-width="2"/>
+    <line x1="55" y1="40" x2="65" y2="60" stroke="white" stroke-width="2"/>
+    <line x1="65" y1="40" x2="75" y2="60" stroke="white" stroke-width="2"/>
+    <line x1="75" y1="40" x2="85" y2="60" stroke="white" stroke-width="2"/>
+    <line x1="55" y1="60" x2="65" y2="80" stroke="white" stroke-width="2"/>
+    <line x1="65" y1="60" x2="75" y2="80" stroke="white" stroke-width="2"/>
+    <line x1="75" y1="60" x2="85" y2="80" stroke="white" stroke-width="2"/>
+  </g>
+  
+  <!-- Şerit çizgileri -->
+  <line x1="120" y1="10" x2="120" y2="90" stroke="white" stroke-width="4"/>
+  <line x1="160" y1="10" x2="160" y2="90" stroke="white" stroke-width="4"/>
+</svg>
+

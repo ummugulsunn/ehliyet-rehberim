@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import '../models/question_model.dart';
 import '../models/exam_model.dart';
+import '../models/traffic_sign_model.dart';
 
 /// Service responsible for loading quiz questions from local JSON file
 class QuizService {
@@ -39,5 +40,22 @@ class QuizService {
       orElse: () => Exam(examId: examId, examName: 'Unknown', questions: const [])
     );
     return exam.questions.map((q) => q.withExamId(exam.examId)).toList();
+  }
+
+  /// Load traffic signs categories from assets/data/traffic_signs.json
+  Future<List<TrafficSignCategory>> loadTrafficSigns() async {
+    try {
+      final String jsonString = await rootBundle.loadString('assets/data/traffic_signs.json');
+      final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
+      return jsonList
+          .map((e) => TrafficSignCategory.fromJson(e as Map<String, dynamic>))
+          .toList(growable: false);
+    } on PlatformException catch (e) {
+      throw Exception('Failed to load traffic signs: ${e.message}');
+    } on FormatException catch (e) {
+      throw Exception('Failed to parse traffic signs JSON: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error loading traffic signs: $e');
+    }
   }
 } 

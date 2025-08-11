@@ -1,0 +1,384 @@
+{
+  "summary": {
+    "targets": [
+      "deneme_sinavi_11",
+      "deneme_sinavi_12",
+      "deneme_sinavi_13",
+      "deneme_sinavi_14",
+      "deneme_sinavi_15"
+    ],
+    "source_exam_range": "deneme_sinavi_1..deneme_sinavi_10",
+    "total_target_exams": 5,
+    "total_questions": 250,
+    "repeated_questions": 36,
+    "can_add_main_images": 0,
+    "already_has_main_images": 36,
+    "conflicting_main_images": 0,
+    "option_images_candidates": 20
+  },
+  "exams": {
+    "deneme_sinavi_11": {
+      "total_questions": 50,
+      "repeated_questions": 3,
+      "can_add_main_images": 0,
+      "already_has_main_images": 3,
+      "conflicting_main_images": 0,
+      "option_images_candidates": 0,
+      "details": [
+        {
+          "questionId": 5,
+          "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_8_soru_4.png",
+          "recommendedImage": "assets/images/deneme_sinavi_8_soru_4.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 22,
+          "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 30,
+          "questionText": "Şekle göre aşağıdakilerden hangisinin yapılması doğrudur?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_9_soru_27.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_9_soru_27.jpg",
+          "optionImages": {}
+        }
+      ]
+    },
+    "deneme_sinavi_12": {
+      "total_questions": 50,
+      "repeated_questions": 4,
+      "can_add_main_images": 0,
+      "already_has_main_images": 4,
+      "conflicting_main_images": 0,
+      "option_images_candidates": 0,
+      "details": [
+        {
+          "questionId": 14,
+          "questionText": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_6_soru_28.png",
+          "recommendedImage": "assets/images/deneme_sinavi_6_soru_28.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 18,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_1_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_1_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 25,
+          "questionText": "Şekildeki trafik işareti neyi bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_6_soru_33.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_6_soru_33.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 35,
+          "questionText": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sürülmesine ilişkin esaslardan biri değildir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_15.png",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_15.png",
+          "optionImages": {}
+        }
+      ]
+    },
+    "deneme_sinavi_13": {
+      "total_questions": 50,
+      "repeated_questions": 6,
+      "can_add_main_images": 0,
+      "already_has_main_images": 6,
+      "conflicting_main_images": 0,
+      "option_images_candidates": 4,
+      "details": [
+        {
+          "questionId": 17,
+          "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 18,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_1_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_1_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 23,
+          "questionText": "Şekildeki araç sürücüsü, kamu hizmeti yapan yolcu taşıtı durağının en az kaç metre mesafe dışına aracını park edebilir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_6_soru_34.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_6_soru_34.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 24,
+          "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 29,
+          "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_13_new.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_13_new.png",
+          "optionImages": {
+            "A": "assets/images/deneme_sinavi_2_soru_13_A.jpg",
+            "B": "assets/images/deneme_sinavi_2_soru_13_B.jpg",
+            "C": "assets/images/deneme_sinavi_2_soru_13_C.jpg",
+            "D": "assets/images/deneme_sinavi_2_soru_13_D.jpg"
+          }
+        },
+        {
+          "questionId": 41,
+          "questionText": "Resimde görülen seyir hâlindeki aracın arkasındaki kırmızı lambaların aniden yanması, trafikteki diğer sürücülere aşağıdakilerden hangisini bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_37.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_37.jpg",
+          "optionImages": {}
+        }
+      ]
+    },
+    "deneme_sinavi_14": {
+      "total_questions": 50,
+      "repeated_questions": 8,
+      "can_add_main_images": 0,
+      "already_has_main_images": 8,
+      "conflicting_main_images": 0,
+      "option_images_candidates": 8,
+      "details": [
+        {
+          "questionId": 13,
+          "questionText": "Aşağıdakilerden hangisi kasisli yol işaretidir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_30.png",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_30.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 15,
+          "questionText": "Şekildeki kazada hangi numaralı araç sürücüsü asli kusurlu sayılır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_31.png",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_31.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 28,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_30.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_30.png",
+          "optionImages": {
+            "A": "assets/images/deneme_sinavi_2_soru_30_A.jpg",
+            "B": "assets/images/deneme_sinavi_2_soru_30_B.jpg",
+            "C": "assets/images/deneme_sinavi_2_soru_30_C.jpg",
+            "D": "assets/images/deneme_sinavi_2_soru_30_D.jpg"
+          }
+        },
+        {
+          "questionId": 33,
+          "questionText": "Şekildeki araç sürücüsü kavşaktan sağa dönerek seyrini sürdürmek istiyor. Bu sürücünün aşağıdakilerden hangisini yapması yanlıştır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_28.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_28.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 35,
+          "questionText": "Şekildeki kavşakta karşılaşan araçların geçiş hakkı sıralaması nasıl olmalıdır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_5_soru_27.png",
+          "recommendedImage": "assets/images/deneme_sinavi_5_soru_27.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 37,
+          "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansının çalışmakta olduğunu bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_8_soru_42.png",
+          "recommendedImage": "assets/images/deneme_sinavi_8_soru_42.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 42,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge, sürücüye neyi bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_41.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_41.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 43,
+          "questionText": "Dizel motorlu aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, ısıtma bujilerinin çalışmakta olduğunu bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_39.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_39.jpg",
+          "optionImages": {
+            "A": "assets/images/deneme_sinavi_1_soru_39/option_A.jpg",
+            "B": "assets/images/deneme_sinavi_1_soru_39/option_B.jpg",
+            "C": "assets/images/deneme_sinavi_1_soru_39/option_C.jpg",
+            "D": "assets/images/deneme_sinavi_1_soru_39/option_D.jpg"
+          }
+        }
+      ]
+    },
+    "deneme_sinavi_15": {
+      "total_questions": 50,
+      "repeated_questions": 15,
+      "can_add_main_images": 0,
+      "already_has_main_images": 15,
+      "conflicting_main_images": 0,
+      "option_images_candidates": 8,
+      "details": [
+        {
+          "questionId": 13,
+          "questionText": "Aşağıdakilerden hangisi kontrolsüz kavşak trafik işaretidir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_13_new.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_13_new.png",
+          "optionImages": {
+            "A": "assets/images/deneme_sinavi_2_soru_13_A.jpg",
+            "B": "assets/images/deneme_sinavi_2_soru_13_B.jpg",
+            "C": "assets/images/deneme_sinavi_2_soru_13_C.jpg",
+            "D": "assets/images/deneme_sinavi_2_soru_13_D.jpg"
+          }
+        },
+        {
+          "questionId": 17,
+          "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_17.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_17.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 19,
+          "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_19.gif",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_19.gif",
+          "optionImages": {}
+        },
+        {
+          "questionId": 21,
+          "questionText": "Aksine bir durum yoksa, şekildeki motosiklet sürücüsü 60 km/saat hızla seyrederken önündeki araca en fazla kaç metre yaklaşabilir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_21.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_21.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 22,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_22.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_22.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 28,
+          "questionText": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_10_soru_29.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 30,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_30.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_30.png",
+          "optionImages": {
+            "A": "assets/images/deneme_sinavi_2_soru_30_A.jpg",
+            "B": "assets/images/deneme_sinavi_2_soru_30_B.jpg",
+            "C": "assets/images/deneme_sinavi_2_soru_30_C.jpg",
+            "D": "assets/images/deneme_sinavi_2_soru_30_D.jpg"
+          }
+        },
+        {
+          "questionId": 32,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_32.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_32.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 33,
+          "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_33.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_33.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 34,
+          "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_34.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_34.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 35,
+          "questionText": "Aşağıdakilerden hangisi trafik kazalarının en önemli sebebidir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_35.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_35.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 39,
+          "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, şarj sisteminin çalışmadığını gösterir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_39.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_39.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 42,
+          "questionText": "Araçların güvenli bir şekilde yavaşlamasını, durmasını ve sabitlenmesini sağlayan sistem aşağıdakilerden hangisidir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_42.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_42.png",
+          "optionImages": {}
+        },
+        {
+          "questionId": 43,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_3_soru_41.jpg",
+          "recommendedImage": "assets/images/deneme_sinavi_3_soru_41.jpg",
+          "optionImages": {}
+        },
+        {
+          "questionId": 48,
+          "questionText": "Aşağıdakilerden hangisi, trafik denetim görevlileriyle iletişim kuran sürücünün trafik adabı açısından özen göstermesi gereken davranışlardandır?",
+          "status": "has_same_main_image",
+          "currentImage": "assets/images/deneme_sinavi_2_soru_48.png",
+          "recommendedImage": "assets/images/deneme_sinavi_2_soru_48.png",
+          "optionImages": {}
+        }
+      ]
+    }
+  }
+}

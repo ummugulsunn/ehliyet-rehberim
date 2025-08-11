@@ -83,6 +83,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/data/exams.json
+    - assets/data/traffic_signs.json
     - assets/images/
     - assets/images/traffic_signs/
 

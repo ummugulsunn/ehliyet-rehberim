@@ -651,9 +651,10 @@ class _QuestionCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -698,22 +699,36 @@ class _QuestionCard extends StatelessWidget {
           if (question.imageUrl != null && !question.hasOptionImages) ...[
             Container(
               width: double.infinity,
-              height: 200,
+              height: 150,
               decoration: BoxDecoration(
+                color: AppColors.surfaceVariant,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.outline.withValues(alpha: 0.3)),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   question.imageUrl ?? '',
-                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 150,
+                  fit: BoxFit.contain,
+                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded) return child;
+                    if (frame == null) {
+                      return Center(
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      );
+                    }
+                    return child;
+                  },
                   errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: AppColors.surfaceContainerHighest,
+                    return Center(
                       child: Icon(
                         Icons.image_not_supported,
-                        size: 64,
+                        size: 40,
                         color: AppColors.onSurfaceVariant,
                       ),
                     );
@@ -731,14 +746,14 @@ class _QuestionCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          Expanded(
-            child: ListView.separated(
+          // Options list should size to its content so that the whole card can scroll
+          ListView.separated(
+              shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: question.options.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, idx) {
                 final optionKey = question.options.keys.elementAt(idx);
-                final optionValue = question.options.values.elementAt(idx);
                 final optionText = question.getOptionText(optionKey);
                 final optionImageUrl = question.getOptionImageUrl(optionKey);
                 final isSelected = selectedAnswer == optionKey;
@@ -859,7 +874,6 @@ class _QuestionCard extends StatelessWidget {
                 );
               },
             ),
-          ),
 
           // Auto show explanation block for Wrong Answers Test when answered incorrectly
           if (isAnswered && !isCorrect && autoShowExplainOnWrong) ...[
@@ -1035,6 +1049,7 @@ class _QuestionCard extends StatelessWidget {
             ),
           ],
         ],
+        ),
       ),
     );
   }

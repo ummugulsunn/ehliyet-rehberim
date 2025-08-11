@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gösterge paneli çerçevesi -->
+  <circle cx="50" cy="50" r="35" 
+          fill="#333333" 
+          stroke="#ffffff" 
+          stroke-width="3"/>
+  
+  <!-- Uyarı ışığı -->
+  <circle cx="50" cy="50" r="20" 
+          fill="#ff6600" 
+          stroke="#ffffff" 
+          stroke-width="2"/>
+  
+  <!-- Ünlem işareti -->
+  <text x="50" y="58" 
+        text-anchor="middle" 
+        fill="white" 
+        font-family="Arial, sans-serif" 
+        font-size="20" 
+        font-weight="bold">!</text>
+</svg>
+

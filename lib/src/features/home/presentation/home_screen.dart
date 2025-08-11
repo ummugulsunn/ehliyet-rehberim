@@ -11,6 +11,7 @@ import '../presentation/widgets/dynamic_header_widget.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../exams/presentation/exam_selection_screen.dart';
 import '../../stats/presentation/stats_screen.dart';
+import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -361,6 +362,19 @@ class HomeScreen extends ConsumerWidget {
             }
           },
         ),
+        _buildFeatureCard(
+          context,
+          icon: Icons.traffic_outlined,
+          title: 'Trafik\nİşaretleri',
+          color: AppColors.secondary,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const TrafficSignsScreen(),
+              ),
+            );
+          },
+        ),
         if (kDebugMode)
           _buildFeatureCard(
             context,
@@ -378,20 +392,7 @@ class HomeScreen extends ConsumerWidget {
                 );
               }
             },
-          )
-        else
-        _buildFeatureCard(
-          context,
-          icon: Icons.traffic_outlined,
-          title: 'Trafik\nİşaretleri',
-          color: AppColors.secondary,
-          onTap: () {
-            // TODO: Navigate to traffic signs screen
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Trafik işaretleri yakında!')),
-            );
-          },
-        ),
+          ),
       ],
     );
   }

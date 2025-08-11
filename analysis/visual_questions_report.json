@@ -1,0 +1,1170 @@
+{
+  "generatedAt": "2024-12-19",
+  "reportType": "Sadece Görsel İçermesi Gereken Sorular",
+  "summary": {
+    "totalQuestions": 750,
+    "visualQuestions": 117,
+    "visualQuestionsWithImage": 82,
+    "visualQuestionsWithoutImage": 35
+  },
+  "exams": {
+    "deneme_sinavi_1": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 2,
+          "questionText": "Trafik işaretlerinden hangisi 'dur' anlamına gelir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/stop_sign.png"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 4,
+          "questionText": "Resimde görülen ilk yardım uygulaması,aşağıdaki durumların hangisinde tercih edilmez?",
+          "category": "İlk Yardım",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_4.png"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 27,
+          "questionText": "Şekle göre kontrolsüz kavşakta karşılaşan araçlardan hangisi ilk geçiş hakkını kullanmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_27.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 29,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_29.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 38,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_38.png"
+        },
+        {
+          "examId": "deneme_sinavi_1",
+          "examName": "Ehliyet Deneme Sınavı - 1 (Çıkmış Sorular)",
+          "id": 41,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_41.png"
+        }
+      ],
+      "total": 6,
+      "withImage": 6,
+      "withoutImage": 0
+    },
+    "deneme_sinavi_2": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 17,
+          "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_17.png"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_19.gif"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 22,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_22.png"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 30,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_30.png"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_32.png"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 33,
+          "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_33.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_34.png"
+        },
+        {
+          "examId": "deneme_sinavi_2",
+          "examName": "Ehliyet Deneme Sınavı - 2 (Çıkmış Sorular)",
+          "id": 43,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_43.png"
+        }
+      ],
+      "total": 8,
+      "withImage": 8,
+      "withoutImage": 0
+    },
+    "deneme_sinavi_3": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 12,
+          "questionText": "Omuz ve koldaki kanamalarda, şekilde gösterilen hangi bölgeye basınç uygulanmalıdır?",
+          "category": "İlk Yardım",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_12.png"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 21,
+          "questionText": "Şekildeki durumda sürücünün hangisini yapması zorunludur?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_21.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 26,
+          "questionText": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_26.png"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 31,
+          "questionText": "Şekildeki kazada hangi numaralı araç sürücüsü asli kusurlu sayılır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_31.png"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 38,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_38.png"
+        },
+        {
+          "examId": "deneme_sinavi_3",
+          "examName": "Ehliyet Deneme Sınavı - 3 (Çıkmış Sorular)",
+          "id": 41,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_41.jpg"
+        }
+      ],
+      "total": 6,
+      "withImage": 6,
+      "withoutImage": 0
+    },
+    "deneme_sinavi_4": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 17,
+          "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_17.png"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_19.gif"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 22,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_22.png"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 30,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_30.png"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_32.png"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 33,
+          "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_33.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_34.png"
+        },
+        {
+          "examId": "deneme_sinavi_4",
+          "examName": "Ehliyet Deneme Sınavı - 4 (Çıkmış Sorular)",
+          "id": 43,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_41.jpg"
+        }
+      ],
+      "total": 8,
+      "withImage": 8,
+      "withoutImage": 0
+    },
+    "deneme_sinavi_5": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 15,
+          "questionText": "Şekildeki trafik işareti neyi bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_15.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 18,
+          "questionText": "Araç sürücülerinin duraklanan veya parkedilen yerden çıkarken; I. Işıkla veya kolla çıkış işareti vermeleri, II. Araçlarını ve araçların etrafını kontrol etmeleri, III. Yoldan geçen araçları ikaz ederek durdurmaları, IV. Görüş alanları dışında kalan yerler varsa gözcü bulundurmaları mecburidir. Verilen bilgilerden hangileri doğrudur?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki trafik işareti sürücüye neyi bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_26.png"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 20,
+          "questionText": "Şekildeki otoyolda numaralanmış şeritlerden hangisi ayrılma (yavaşlama) şerididir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 21,
+          "questionText": "Şekildeki gibi ışıklı trafik işaret cihazında, sarı ve kırmızı ışığın birlikte yanması sürücüye neyi bildirir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_21.png"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 25,
+          "questionText": "Ticari amaçla şehirler arası yolda yük ve yolcu taşımacılığı yapan araç sürücüleri, 24 saatlik süre içinde devamlı olarak en fazla kaç saat araç kullanabilirler?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 26,
+          "questionText": "Şekildeki trafik işaretinin anlamı nedir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 27,
+          "questionText": "Şekildeki kavşakta karşılaşan araçların geçiş hakkı sıralaması nasıl olmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_27.png"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 31,
+          "questionText": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "Şekle göre hangi numaralı yollar tali yoldur?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_34.png"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 35,
+          "questionText": "Şekildeki otoyolda numaralanmış şeritlerden hangisi katılma (hızlanma) şerididir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_35.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_5",
+          "examName": "Ehliyet Deneme Sınavı - 5 (Çıkmış Sorular)",
+          "id": 38,
+          "questionText": "Dizel motorlu aracın gösterge panelinde bulunan şekildeki uyarı lambasının yanıyor olması neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": false,
+          "imageUrl": null
+        }
+      ],
+      "total": 12,
+      "withImage": 6,
+      "withoutImage": 6
+    },
+    "deneme_sinavi_6": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 15,
+          "questionText": "Kavşaklara yaklaşırken yol üzerine çizilmiş şekildeki oklar sürücülere neyi bildirir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_15.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 21,
+          "questionText": "Şekle göre, geçme işlemi yapan 1 numaralı aracın sürücüsü için aşağıdakilerden hangileri söylenebilir? I- Geçiş kurallarına uyduğu II- Karşı yönden gelen aracın hızını dikkate almadığı III- Geçilen araçtan yeterince uzaklaşmadan sağ şeride geçtiği",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_21.png"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 24,
+          "questionText": "Şekildeki trafik işaretinin bulunduğu yola aşağıdaki taşıtlardan hangisi girebilir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_24.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 33,
+          "questionText": "Şekildeki trafik işareti neyi bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_33.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 35,
+          "questionText": "Trafik görevlisinin geceleyin ışıklı işaret çubuğunu şekildeki gibi hareket ettirmesinin sürücüler için anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_35.png"
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 45,
+          "questionText": "Ters yönden gelen bir sürücüye \"Bu sokak tek yönlü, herhalde siz girişteki levhayı görmediniz, lütfen daha dikkatli olun.\" diyen bir sürücü, trafikteki temel değerlerden hangisine uygun davranmıştır?",
+          "category": "Trafik Adabı",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_6",
+          "examName": "Ehliyet Deneme Sınavı - 6 (Çıkmış Sorular)",
+          "id": 50,
+          "questionText": "Aracı arıza yaptığı için yolda kalmış ve trafiğin aksamasına sebep olmuş sürücünün sorununa, yoldan geçen diğer bir sürücünün durup çözüm bulması hâli, trafikte hangi temel değere sahip olunduğuna örnektir?",
+          "category": "Trafik Adabı",
+          "hasImage": false,
+          "imageUrl": null
+        }
+      ],
+      "total": 7,
+      "withImage": 5,
+      "withoutImage": 2
+    },
+    "deneme_sinavi_7": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 15,
+          "questionText": "Şekildeki gibi sola dönüş yapacak olan 2 numaralı araç sürücüsü aşağıdakilerden hangilerini yapmalıdır? I. Dar bir kavisle dönmeli II. Yayanın geçmesini beklemeli III. Sola dönüş lambasını yakmalı IV. İlk geçiş hakkını 1 numaralı araca vermeli",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_15.png"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki kara yoluna ne ad verilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_19.png"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 20,
+          "questionText": "Trafik görevlisinin hangi hareketi geceleyin \"geç\" işaretidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_20.png"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 25,
+          "questionText": "Trafik uygun olsa bile şekildeki aracın hangi yöndeki hareketi kesinlikle yasaktır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_25.gif"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 26,
+          "questionText": "Şekildeki durumda sürücünün hangisini yapması zorunludur?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_26.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 29,
+          "questionText": "Şekilde görülen geçiş üstünlüğüne sahip araçların, görev hâlinde karşılaşmaları durumunda ilk geçiş hakkını hangisi kullanmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_29.png"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 43,
+          "questionText": "Şekilde soru işareti (?) ile gösterilen ve aracın hızı ile torkunu ayarlayan güç aktarma organı hangisidir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_43.png"
+        },
+        {
+          "examId": "deneme_sinavi_7",
+          "examName": "Ehliyet Deneme Sınavı - 7 (Çıkmış Sorular)",
+          "id": 44,
+          "questionText": "Şekilde soru işareti (?) ile gösterilen ve araç için gerekli elektriği üreten parçaya ne ad verilir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_44.png"
+        }
+      ],
+      "total": 8,
+      "withImage": 8,
+      "withoutImage": 0
+    },
+    "deneme_sinavi_8": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 4,
+          "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+          "category": "İlk Yardım",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_4.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 13,
+          "questionText": "Aşağıdaki trafik tanzim işaretlerinden hangisi \"taşıt trafiğine kapalı yol\" anlamındadır?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_13.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 14,
+          "questionText": "Aksine bir durum yoksa, ışıklı trafik işaret cihazında kırmızı ışık yanmakta ise sürücü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 25,
+          "questionText": "Şekildeki taşıt yolu üzerine çizilen yatay işaretlemeye göre araç sürücüsü nasıl davranmalıdır?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_25.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 26,
+          "questionText": "Şekildeki gibi bir karşılaşmada ilk geçiş hakkını hangisi kullanmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_26.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 28,
+          "questionText": "Şekildeki araçların seyrettiği taşıt yolunun çizgilerle ayrılmış her bir bölümüne ne ad verilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_28.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "Şekildeki gibi eğimsiz iki yönlü dar yoldaki karşılaşmada 2 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_34.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 39,
+          "questionText": "Şekildeki araç güç aktarma organlarının adları hangi seçenekte doğru olarak verilmiştir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_39.png"
+        },
+        {
+          "examId": "deneme_sinavi_8",
+          "examName": "Ehliyet Deneme Sınavı - 8 (Çıkmış Sorular)",
+          "id": 46,
+          "questionText": "Ters yönden gelen bir sürücüye \"Bu sokak tek yönlü, herhalde siz girişteki levhayı görmediniz, lütfen daha dikkatli olun.\" diyen bir sürücü, trafikte aşağıdaki değerlerden hangisine uygun davranmıştır?",
+          "category": "Trafik Adabı",
+          "hasImage": false,
+          "imageUrl": null
+        }
+      ],
+      "total": 9,
+      "withImage": 7,
+      "withoutImage": 2
+    },
+    "deneme_sinavi_9": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_9",
+          "examName": "Ehliyet Deneme Sınavı - 9 (Çıkmış Sorular)",
+          "id": 14,
+          "questionText": "Şekilde iki yönlü ve üç şeritli kara yolu bölümünde seyreden araçlar görülmektedir. Yol çizgilerine göre hangi numaralı araç sürücüleri hatalı sollama yapmaktadır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_9_soru_14.png"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "examName": "Ehliyet Deneme Sınavı - 9 (Çıkmış Sorular)",
+          "id": 16,
+          "questionText": "Bölünmüş kara yollarında geçilen araç sürücüleri, geçmek isteyen aracın geçiş işaretini aldığında ne yapmak zorundadır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "examName": "Ehliyet Deneme Sınavı - 9 (Çıkmış Sorular)",
+          "id": 23,
+          "questionText": "Şekle göre araç sürücüsü hangi şeritleri kullanabilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_9_soru_23.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_9",
+          "examName": "Ehliyet Deneme Sınavı - 9 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "\"Trafik kazalarında insan, araç, yol ve iklim koşulları etkili olmaktadır.\" Buna göre aşağıdaki trafik işaretlerinden hangisi yol koşullarından kaynaklanan bir tehlike olabileceğini bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_9_soru_34.png"
+        }
+      ],
+      "total": 4,
+      "withImage": 3,
+      "withoutImage": 1
+    },
+    "deneme_sinavi_10": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_10",
+          "examName": "Ehliyet Deneme Sınavı - 10 (Çıkmış Sorular)",
+          "id": 18,
+          "questionText": "Kavşağa yaklaşan bir sürücü, trafik işaret ışığının aralıklarla kırmızı yanıp söndüğünü fark etmiştir. Bu durumda sürücü nasıl davranmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "examName": "Ehliyet Deneme Sınavı - 10 (Çıkmış Sorular)",
+          "id": 24,
+          "questionText": "Şekildeki trafik polisinin verdiği işarete göre numaralandırılmış araçlardan hangilerinin geçmesi doğrudur?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_10_soru_24.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "examName": "Ehliyet Deneme Sınavı - 10 (Çıkmış Sorular)",
+          "id": 37,
+          "questionText": "Şekilde soru işareti (?) ile gösterilen kapaktan motora ne konulur?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_10_soru_37.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_10",
+          "examName": "Ehliyet Deneme Sınavı - 10 (Çıkmış Sorular)",
+          "id": 40,
+          "questionText": "Şekilde gösterilen marş motorunun görevi nedir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_10_soru_40.png"
+        }
+      ],
+      "total": 4,
+      "withImage": 3,
+      "withoutImage": 1
+    },
+    "deneme_sinavi_11": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 1,
+          "questionText": "Resimde uygulaması gösterilen ve kazazedenin omuriliğine zarar verilmeden araçtan çıkarılmasında kullanılan tekniğe ne ad verilir?",
+          "category": "İlk Yardım",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 5,
+          "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?",
+          "category": "İlk Yardım",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_8_soru_4.png"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 13,
+          "questionText": "I- Görülmelerinin engellenmesi II- Sorumlu kuruluşların eskiyenleri yenisi ile değiştirmesi III- Üzerlerine yazı yazılması, çizilmesi, kırılması, delinmesi, sökülmesi Trafik işaretleri ile ilgili olarak yukarıdaki davranışlardan hangilerinin yapılması yasaktır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 15,
+          "questionText": "Şekildeki kontrolsüz kavşakta ilk geçiş hakkını hangi araç kullanmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 17,
+          "questionText": "Şekildeki aracın bulunduğu kara yoluna ne ad verilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_19.png"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 21,
+          "questionText": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 24,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi yükseklik anlamında gabari sınırlamasının olduğunu bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_32.png"
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 28,
+          "questionText": "Bir kavşakta geçiş üstünlüğüne sahip aracın sesli ve ışıklı uyarısını alan sürücü nasıl hareket etmelidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 29,
+          "questionText": "Şekle göre 2 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Aşağıdaki yer işaretlemelerinden hangisi bölünmüş yol başlangıcı anlamındadır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 35,
+          "questionText": "Şekildeki kavşakta; ileriye yeşil, sola kırmızı ve sağa yeşil oklu ışık yanmaktadır. Buna göre hangi numaralı şeritteki araçlar yollarına devam edebilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_11",
+          "examName": "Ehliyet Deneme Sınavı - 11 (Çıkmış Sorular)",
+          "id": 43,
+          "questionText": "Aracın gösterge panelinde şekildeki uyarı lambasının yanıyor olması neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": false,
+          "imageUrl": null
+        }
+      ],
+      "total": 12,
+      "withImage": 3,
+      "withoutImage": 9
+    },
+    "deneme_sinavi_12": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 2,
+          "questionText": "Kazazedelerde görülen kırık ve ezilmeler hangi sistemi ilgilendiren bir konudur?",
+          "category": "İlk Yardım",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 6,
+          "questionText": "Resimde görülen manevra, hangi amaçla uygulanır?",
+          "category": "İlk Yardım",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 16,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi yolda gizli buzlanma olabileceğini bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 18,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_29.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 24,
+          "questionText": "Şekildeki aracın bulunduğu kara yoluna ne ad verilir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_7_soru_19.png"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 25,
+          "questionText": "Şekildeki trafik işareti neyi bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_6_soru_33.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_12",
+          "examName": "Ehliyet Deneme Sınavı - 12 (Çıkmış Sorular)",
+          "id": 27,
+          "questionText": "Şekildeki trafik tanzim işareti, kamyona hangi anlamda gabari sınırlaması getirmektedir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": false,
+          "imageUrl": null
+        }
+      ],
+      "total": 7,
+      "withImage": 3,
+      "withoutImage": 4
+    },
+    "deneme_sinavi_13": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 16,
+          "questionText": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 18,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki yatay işaretlemenin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_1_soru_29.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki aracın sürücüsü, dönel kavşaktan geriye dönüş yapmak için hangi şeridi izlemelidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_13_soru_19.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 27,
+          "questionText": "I- Yer işaretlemeleri II- Trafik işaret levhaları III- Işıklı ve sesli trafik işaretleri Belediyeler, yapım ve bakımından sorumlu oldukları kara yollarında, trafiği düzenleme amacı ile yukarıdakilerden hangilerini temin ve tesis etmekle görevlidir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 31,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi tali yolda bulunur?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_13_soru_31.png"
+        },
+        {
+          "examId": "deneme_sinavi_13",
+          "examName": "Ehliyet Deneme Sınavı - 13 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Şekle göre hangi numaralı araçların, bulundukları şeridi sürekli olarak işgal etmeleri yasaktır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_13_soru_32.png"
+        }
+      ],
+      "total": 6,
+      "withImage": 4,
+      "withoutImage": 2
+    },
+    "deneme_sinavi_14": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 9,
+          "questionText": "Şekildeki gibi cisim batması durumunda ilk yardım olarak aşağıdaki uygulamalardan hangisinin yapılması doğrudur?",
+          "category": "İlk Yardım",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 15,
+          "questionText": "Şekildeki kazada hangi numaralı araç sürücüsü asli kusurlu sayılır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_31.png"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 16,
+          "questionText": "Şekle göre hangi numaralı aracın sürücüsü hatalı davranmıştır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 21,
+          "questionText": "1. Işıklı trafik işaret cihazı 2. Trafik levhası ve yer işaretlemeleri 3. Trafik görevlisi Yukarıda verilenlerin bir kavşakta bulunması hâlinde, sürücülerin bunlara uymadaki öncelik sıralaması nasıl olmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 25,
+          "questionText": "Trafik işaretleri ile ilgili olarak aşağıdaki davranışlardan hangilerinin yapılması yasaktır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 26,
+          "questionText": "İşaret levhalarıyla ilgili aşağıdaki davranışlardan hangisi trafiği tehlikeye düşürmez?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 27,
+          "questionText": "Şekildeki gibi sola dönüş yapacak olan sürücü, aşağıdakilerden hangilerini yapmalıdır? I- Sola dönüş lambasını yakmalı II- Hızını azaltmalı III- Geniş bir kavisle dönmeli",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 28,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_30.png"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 31,
+          "questionText": "Şekildeki taşıt yolu üzerinde bulunan yazı neyi bildirmektedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Geceleri kara yolunda seyrederken, resimde görüldüğü gibi karşı yönden gelen araç sürücülerinin ve kara yolunu kullanan diğer kişilerin gözlerini kamaştırmamak için uzağı gösteren ışıkların yerine hangisi yakılmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": false,
+          "imageUrl": null
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 35,
+          "questionText": "Şekildeki kavşakta karşılaşan araçların geçiş hakkı sıralaması nasıl olmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_5_soru_27.png"
+        },
+        {
+          "examId": "deneme_sinavi_14",
+          "examName": "Ehliyet Deneme Sınavı - 14 (Çıkmış Sorular)",
+          "id": 42,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge, sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_41.jpg"
+        }
+      ],
+      "total": 12,
+      "withImage": 4,
+      "withoutImage": 8
+    },
+    "deneme_sinavi_15": {
+      "questions": [
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 17,
+          "questionText": "Aksine bir durum yoksa, şekildeki gibi ışıklı trafik işaret cihazında kırmızı ışığın yandığını gören sürücü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_17.png"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 19,
+          "questionText": "Şekildeki gibi dönel kavşağa gelen 1 numaralı aracın sürücüsü ne yapmalıdır?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_19.gif"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 22,
+          "questionText": "Taşıt yolu üzerine çizilen şekildeki çizgilerin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_22.png"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 30,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisinin bulunduğu yola motosiklet girebilir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_30.png"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 32,
+          "questionText": "Aşağıdaki trafik işaretlerinden hangisi uzunluk anlamında gabari sınırlamasının olduğunu bildirir?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_32.png"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 33,
+          "questionText": "Şekildeki trafik işareti neyi yasaklar?",
+          "category": "Trafik İşaretleri",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_33.jpg"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 34,
+          "questionText": "Şekildeki trafik görevlisinin yapmış olduğu işaretin anlamı nedir?",
+          "category": "Trafik ve Çevre Bilgisi",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_2_soru_34.png"
+        },
+        {
+          "examId": "deneme_sinavi_15",
+          "examName": "Ehliyet Deneme Sınavı - 15 (Çıkmış Sorular)",
+          "id": 43,
+          "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+          "category": "Motor ve Araç Tekniği",
+          "hasImage": true,
+          "imageUrl": "assets/images/deneme_sinavi_3_soru_41.jpg"
+        }
+      ],
+      "total": 8,
+      "withImage": 8,
+      "withoutImage": 0
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "propagation_stats": {
+    "total_questions_updated": 2,
+    "main_images_added": 2,
+    "option_images_added": 0,
+    "exams_affected": [
+      "deneme_sinavi_11",
+      "deneme_sinavi_14"
+    ],
+    "questions_updated": [
+      {
+        "examId": "deneme_sinavi_11",
+        "questionId": 5,
+        "questionText": "Resimde görülen pozisyon, aşağıdaki durumların hangisinde uygulanır?...",
+        "mainImageAdded": "assets/images/deneme_sinavi_8_soru_4.png",
+        "optionImagesAdded": []
+      },
+      {
+        "examId": "deneme_sinavi_14",
+        "questionId": 37,
+        "questionText": "Aracın gösterge panelinde aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, arka cam rezistansı...",
+        "mainImageAdded": "assets/images/deneme_sinavi_8_soru_42.png",
+        "optionImagesAdded": []
+      }
+    ]
+  },
+  "source_questions_count": 73,
+  "source_exams": [
+    "deneme_sinavi_1",
+    "deneme_sinavi_2",
+    "deneme_sinavi_3",
+    "deneme_sinavi_4",
+    "deneme_sinavi_5",
+    "deneme_sinavi_6",
+    "deneme_sinavi_7",
+    "deneme_sinavi_8"
+  ],
+  "target_exams": [
+    "deneme_sinavi_9",
+    "deneme_sinavi_10",
+    "deneme_sinavi_11",
+    "deneme_sinavi_12",
+    "deneme_sinavi_13",
+    "deneme_sinavi_14",
+    "deneme_sinavi_15"
+  ]
+}

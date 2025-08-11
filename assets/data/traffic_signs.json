@@ -1,0 +1,472 @@
+[
+  {
+    "categoryName": "Tehlike Uyarı İşaretleri",
+    "signs": [
+      {
+        "id": "T-1",
+        "name": "Sağa Tehlikeli Viraj",
+        "imageUrl": "assets/images/traffic_signs/T-1a.jpg",
+        "description": "İleride yol sağa doğru keskin bir viraj almaktadır. Hızınızı azaltın ve dikkatli ilerleyin."
+      },
+      {
+        "id": "T-1a",
+        "name": "Sağa Tehlikeli Viraj (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-1a.jpg",
+        "description": "İleride yol sağa doğru keskin bir viraj almaktadır. Hızınızı azaltın ve dikkatli ilerleyin."
+      },
+      {
+        "id": "T-1b",
+        "name": "Sola Tehlikeli Viraj (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-1b.jpg",
+        "description": "İleride yol sola doğru keskin bir viraj almaktadır. Hızınızı azaltın ve dikkatli ilerleyin."
+      },
+      {
+        "id": "T-2",
+        "name": "Sola Tehlikeli Viraj",
+        "imageUrl": "assets/images/traffic_signs/T-2a.jpg",
+        "description": "İleride yol sola doğru keskin bir viraj almaktadır. Hızınızı azaltın ve dikkatli ilerleyin."
+      },
+      {
+        "id": "T-2a",
+        "name": "Sağa Tehlikeli Devamlı Virajlar",
+        "imageUrl": "assets/images/traffic_signs/T-2a.jpg",
+        "description": "İleride birbiri ardınca sağa doğru tehlikeli virajlar bulunmaktadır. Hızınızı düşürün ve dikkatli sürün."
+      },
+      {
+        "id": "T-2b",
+        "name": "Sola Tehlikeli Devamlı Virajlar",
+        "imageUrl": "assets/images/traffic_signs/T-2b.jpg",
+        "description": "İleride birbiri ardınca sola doğru tehlikeli virajlar bulunmaktadır. Hızınızı düşürün ve dikkatli sürün."
+      },
+      {
+        "id": "T-3a",
+        "name": "Tehlikeli Eğim (İniş)",
+        "imageUrl": "assets/images/traffic_signs/T-3a.jpg",
+        "description": "İleride tehlikeli eğimli iniş vardır. Düşük vites kullanın ve motor freni ile hızınızı kontrol edin."
+      },
+      {
+        "id": "T-3b",
+        "name": "Tehlikeli Eğim (Çıkış)",
+        "imageUrl": "assets/images/traffic_signs/T-3b.jpg",
+        "description": "İleride tehlikeli eğimli çıkış vardır. Motor gücünüzü kontrol edin ve uygun vites seçin."
+      },
+      {
+        "id": "T-4",
+        "name": "Sağdan Yokuş",
+        "imageUrl": "assets/images/traffic_signs/T-4a.jpg",
+        "description": "İleride sağa doğru yokuş vardır. Motor gücünüzü kontrol edin ve uygun vites seçin."
+      },
+      {
+        "id": "T-4a",
+        "name": "İki Taraftan Daralan Kaplama",
+        "imageUrl": "assets/images/traffic_signs/T-4a.jpg",
+        "description": "İleride yol her iki taraftan daralmaktadır. Sollama yapmayın ve şerit disiplinine dikkat edin."
+      },
+      {
+        "id": "T-4b",
+        "name": "Sağdan Daralan Kaplama",
+        "imageUrl": "assets/images/traffic_signs/T-4b.jpg",
+        "description": "İleride yol sağ taraftan daralmaktadır. Sağdaki araçlara öncelik tanıyın."
+      },
+      {
+        "id": "T-4c",
+        "name": "Soldan Daralan Kaplama",
+        "imageUrl": "assets/images/traffic_signs/T-4c.jpg",
+        "description": "İleride yol sol taraftan daralmaktadır. Soldaki araçlara öncelik tanıyın."
+      },
+      {
+        "id": "T-5",
+        "name": "Açılan Köprü",
+        "imageUrl": "assets/images/traffic_signs/T-5.jpg",
+        "description": "İleride açılabilen köprü vardır. Köprü açıldığında bekleyin."
+      },
+      {
+        "id": "T-6",
+        "name": "Deniz veya Nehir Kıyısında Biten Yol",
+        "imageUrl": "assets/images/traffic_signs/T-6.jpg",
+        "description": "İleride yol deniz veya nehir kıyısında bitmektedir. Hızınızı azaltın ve dikkatli olun."
+      },
+      {
+        "id": "T-7",
+        "name": "Kasisli Yol",
+        "imageUrl": "assets/images/traffic_signs/T-7.jpg",
+        "description": "İleride kasisli yol vardır. Hızınızı azaltın ve araç kontrolünüzü kaybetmeyin."
+      },
+      {
+        "id": "T-8",
+        "name": "Kaygan Yol",
+        "imageUrl": "assets/images/traffic_signs/T-8.jpg",
+        "description": "Yol kaygan olabilir. Hızınızı azaltın ve ani fren veya direksiyon hareketlerinden kaçının."
+      },
+      {
+        "id": "T-9",
+        "name": "Gevşek Malzemeli Zemin",
+        "imageUrl": "assets/images/traffic_signs/T-9.jpg",
+        "description": "İleride gevşek malzemeli zemin vardır. Hızınızı azaltın ve araç kontrolünüzü kaybetmeyin."
+      },
+      {
+        "id": "T-10",
+        "name": "Gevşek Şev",
+        "imageUrl": "assets/images/traffic_signs/T-10.jpg",
+        "description": "İleride gevşek şev vardır. Hızınızı azaltın ve dikkatli sürün."
+      },
+      {
+        "id": "T-11",
+        "name": "Yaya Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-11.jpg",
+        "description": "İleride yaya geçidi vardır. Hızınızı azaltın ve yayalara dikkat edin."
+      },
+      {
+        "id": "T-12",
+        "name": "Okul Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-12.jpg",
+        "description": "İleride okul geçidi vardır. Çocuklara özellikle dikkat edin."
+      },
+      {
+        "id": "T-13",
+        "name": "Bisiklet Geçebilir",
+        "imageUrl": "assets/images/traffic_signs/T-13.jpg",
+        "description": "İleride bisiklet geçidi vardır. Bisikletlilere dikkat edin."
+      },
+      {
+        "id": "T-14a",
+        "name": "Ehli Hayvanlar Geçebilir",
+        "imageUrl": "assets/images/traffic_signs/T-14a.jpg",
+        "description": "İleride ehli hayvanlar geçebilir. Hızınızı azaltın ve dikkatli sürün."
+      },
+      {
+        "id": "T-14b",
+        "name": "Vahşi Hayvanlar Geçebilir",
+        "imageUrl": "assets/images/traffic_signs/T-14b.jpg",
+        "description": "İleride vahşi hayvanlar geçebilir. Hızınızı azaltın ve dikkatli sürün."
+      },
+      {
+        "id": "T-15",
+        "name": "Yolda Çalışma",
+        "imageUrl": "assets/images/traffic_signs/T-15.jpg",
+        "description": "İleride yol çalışması vardır. Hızınızı azaltın ve işçilere dikkat edin."
+      },
+      {
+        "id": "T-16",
+        "name": "Işıklı İşaret Cihazı",
+        "imageUrl": "assets/images/traffic_signs/T-16.jpg",
+        "description": "İleride ışıklı işaret cihazı vardır. İşaretlere dikkat edin."
+      },
+      {
+        "id": "T-18",
+        "name": "Yandan Rüzgar",
+        "imageUrl": "assets/images/traffic_signs/T-18.jpg",
+        "description": "İleride şiddetli yan rüzgar bölgesi vardır. Direksiyonu sıkı tutun."
+      },
+      {
+        "id": "T-19",
+        "name": "İki Yönlü Trafik",
+        "imageUrl": "assets/images/traffic_signs/T-19.jpg",
+        "description": "İleride iki yönlü trafik başlamaktadır. Karşı yönden gelecek araçlara dikkat edin."
+      },
+      {
+        "id": "T-20",
+        "name": "Dikkat",
+        "imageUrl": "assets/images/traffic_signs/T-20.jpg",
+        "description": "Genel dikkat işaretidir. Hızınızı azaltın ve dikkatli sürün."
+      },
+      {
+        "id": "T-21",
+        "name": "Kontrolsüz Kavşak",
+        "imageUrl": "assets/images/traffic_signs/T-21.jpg",
+        "description": "İleride kontrolsüz kavşak vardır. Hızınızı azaltın ve dikkatli yaklaşın."
+      },
+      {
+        "id": "T-22a",
+        "name": "Anayol Tali Yol Kavşağı",
+        "imageUrl": "assets/images/traffic_signs/T-22a.jpg",
+        "description": "İleride anayol ile tali yol kavşağı vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-22b",
+        "name": "Anayol Tali Yol Kavşağı (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-22b.jpg",
+        "description": "İleride anayol ile tali yol kavşağı vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-22c",
+        "name": "Anayol Tali Yol Kavşağı (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-22c.jpg",
+        "description": "İleride anayol ile tali yol kavşağı vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-22d",
+        "name": "Anayol Tali Yol Kavşağı (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-22d.jpg",
+        "description": "İleride anayol ile tali yol kavşağı vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-22e",
+        "name": "Anayol Tali Yol Kavşağı (Alternatif)",
+        "imageUrl": "assets/images/traffic_signs/T-22e.jpg",
+        "description": "İleride anayol ile tali yol kavşağı vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-23a",
+        "name": "Sağdan Anayola Giriş",
+        "imageUrl": "assets/images/traffic_signs/T-23a.jpg",
+        "description": "İleride sağdan anayola giriş vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-23b",
+        "name": "Soldan Anayola Giriş",
+        "imageUrl": "assets/images/traffic_signs/T-23b.jpg",
+        "description": "İleride soldan anayola giriş vardır. Anayoldan gelen araçlara dikkat edin."
+      },
+      {
+        "id": "T-24",
+        "name": "Dönel Kavşak",
+        "imageUrl": "assets/images/traffic_signs/T-24.jpg",
+        "description": "İleride dönel kavşak vardır. Dönel kavşak kurallarına uyun."
+      },
+      {
+        "id": "T-25",
+        "name": "Kontrollü Demiryolu Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-25.jpg",
+        "description": "İleride kontrollü demiryolu geçidi vardır. Bariyer ve ışık işaretlerine uyun."
+      },
+      {
+        "id": "T-26",
+        "name": "Kontrolsüz Demiryolu Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-26.jpg",
+        "description": "İleride kontrolsüz demiryolu geçidi vardır. Dur, bak, dinle kuralını uygulayın."
+      },
+      {
+        "id": "T-28a",
+        "name": "Demiryolu Geçidi Yaklaşım Levhaları (Sağ)",
+        "imageUrl": "assets/images/traffic_signs/T-28a.jpg",
+        "description": "Demiryolu geçidine yaklaşıyorsunuz. Sağ tarafta yaklaşım levhası bulunur. Hızınızı azaltın ve dikkatlı olun."
+      },
+      {
+        "id": "T-28b",
+        "name": "Demiryolu Geçidi Yaklaşım Levhaları (Sol)",
+        "imageUrl": "assets/images/traffic_signs/T-28b.jpg",
+        "description": "Demiryolu geçidine yaklaşıyorsunuz. Sol tarafta yaklaşım levhası bulunur. Hızınızı azaltın ve dikkatlı olun."
+      },
+      {
+        "id": "T-29a",
+        "name": "Demiryolu Geçidi Yaklaşım Levhaları (Sağ)",
+        "imageUrl": "assets/images/traffic_signs/T-29a.jpg",
+        "description": "Demiryolu geçidine yaklaşıyorsunuz. Sağ tarafta yaklaşım levhası bulunur. Hızınızı azaltın ve dikkatlı olun."
+      },
+      {
+        "id": "T-29b",
+        "name": "Demiryolu Geçidi Yaklaşım Levhaları (Sol)",
+        "imageUrl": "assets/images/traffic_signs/T-29b.jpg",
+        "description": "Demiryolu geçidine yaklaşıyorsunuz. Sol tarafta yaklaşım levhası bulunur. Hızınızı azaltın ve dikkatlı olun."
+      },
+      {
+        "id": "T-36",
+        "name": "Düşük Banket",
+        "imageUrl": "assets/images/traffic_signs/T-36.jpg",
+        "description": "İleride düşük banket vardır. Yol kenarında düşük banket bulunur. Dikkatli sürün ve gerekirse yavaşlayın."
+      },
+      {
+        "id": "T-37",
+        "name": "Gizli Buzlanma",
+        "imageUrl": "assets/images/traffic_signs/T-37.jpg",
+        "description": "İleride gizli buzlanma tehlikesi vardır. Yol yüzeyi görünürde normal olabilir ancak buzlanmış olabilir. Hızınızı azaltın ve dikkatli sürün."
+      },
+      {
+        "id": "T-14",
+        "name": "Rıhtım veya Uçurum",
+        "imageUrl": "assets/images/traffic_signs/T-14a.jpg",
+        "description": "İleride rıhtım veya uçurum tehlikesi vardır. Çok dikkatli sürün ve hızınızı azaltın."
+      },
+      {
+        "id": "T-17",
+        "name": "Kaygan Yol",
+        "imageUrl": "assets/images/traffic_signs/T-8.jpg",
+        "description": "Yol kaygan olabilir. Hızınızı azaltın ve ani fren veya direksiyon hareketlerinden kaçının."
+      },
+      {
+        "id": "T-22",
+        "name": "Kavşak",
+        "imageUrl": "assets/images/traffic_signs/T-22a.jpg",
+        "description": "İleride kavşak vardır. Hızınızı azaltın ve dikkatli yaklaşın."
+      },
+      {
+        "id": "T-23",
+        "name": "Sağdan Kavşak",
+        "imageUrl": "assets/images/traffic_signs/T-23a.jpg",
+        "description": "İleride sağdan kavşak vardır. Sağdan gelebilecek araçlara dikkat edin."
+      },
+      {
+        "id": "T-27",
+        "name": "Gözetlenmeyen Hemzemin Geçit",
+        "imageUrl": "assets/images/traffic_signs/T-26.jpg",
+        "description": "İleride gözetlenmeyen demiryolu geçidi vardır. Dur, bak, dinle kuralını uygulayın."
+      },
+      {
+        "id": "T-28",
+        "name": "Tramvay Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-28a.jpg",
+        "description": "İleride tramvay geçidi vardır. Tramvaya yol verin."
+      },
+      {
+        "id": "T-29",
+        "name": "Uçak Alçak Uçuş",
+        "imageUrl": "assets/images/traffic_signs/T-29a.jpg",
+        "description": "İleride uçakların alçak uçtuğu bölge vardır. Gürültüye hazır olun."
+      },
+      {
+        "id": "T-30",
+        "name": "Yaya Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-11.jpg",
+        "description": "İleride yaya geçidi vardır. Hızınızı azaltın ve yayalara dikkat edin."
+      },
+      {
+        "id": "T-31",
+        "name": "Okul Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-12.jpg",
+        "description": "İleride okul geçidi vardır. Çocuklara özellikle dikkat edin."
+      },
+      {
+        "id": "T-32",
+        "name": "Bisiklet Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-13.jpg",
+        "description": "İleride bisiklet geçidi vardır. Bisikletlilere dikkat edin."
+      },
+      {
+        "id": "T-33",
+        "name": "Hayvan Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-14a.jpg",
+        "description": "İleride hayvan geçidi vardır. Evcil ve vahşi hayvanlara dikkat edin."
+      },
+      {
+        "id": "T-34",
+        "name": "Yol Çalışması",
+        "imageUrl": "assets/images/traffic_signs/T-15.jpg",
+        "description": "İleride yol çalışması vardır. Hızınızı azaltın ve işçilere dikkat edin."
+      },
+      {
+        "id": "T-35",
+        "name": "Çakıl veya Malzeme Saçılması",
+        "imageUrl": "assets/images/traffic_signs/T-9.jpg",
+        "description": "İleride çakıl veya malzeme saçılma tehlikesi vardır. Mesafeyi koruyun."
+      },
+      {
+        "id": "T-38",
+        "name": "Tehlikeli Madde Taşıyan Araç Geçidi",
+        "imageUrl": "assets/images/traffic_signs/T-25.jpg",
+        "description": "İleride tehlikeli madde taşıyan araçların geçtiği bölge vardır. Mesafeyi koruyun."
+      },
+      {
+        "id": "(T)",
+        "name": "Tehlike Uyarı İşaretleri Görsel Sunum",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Bu işaret, tehlike uyarı işaretlerinin genel görsel sunumunu temsil eder. Sürücüleri ileride tehlike olabileceği konusunda uyarır."
+      }
+    ]
+  },
+  {
+    "categoryName": "Trafik Tanzim İşaretleri",
+    "signs": [
+      {
+        "id": "TT-1",
+        "name": "DUR",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Kavşak veya tehlikeli noktalarda durma mecburiyeti olduğunu bildirir. Tam durup güvenli geçişten sonra ilerleyin."
+      },
+      {
+        "id": "TT-2",
+        "name": "Yol Ver",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Kavşakta ana yoldan gelen araçlara geçiş hakkı tanınması gerektiğini bildirir. Yavaşlayın ve gerekirse durun."
+      },
+      {
+        "id": "TT-3",
+        "name": "Giriş Yasak",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Bu yönden yola girişin yasak olduğunu bildirir. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-4",
+        "name": "Motorlu Araç Giriş Yasak",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Motorlu araçların girişi yasaktır. Sadece yayalar girebilir."
+      },
+      {
+        "id": "TT-20",
+        "name": "Sollama Yasak",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Bu bölgede sollama yapmak yasaktır. Önünüzdeki aracı takip edin."
+      },
+      {
+        "id": "TT-22",
+        "name": "Azami Hız",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Belirtilen hız sınırını aşmayın. Güvenli sürüş için uygun hızda gidin."
+      }
+    ]
+  },
+  {
+    "categoryName": "Bilgi İşaretleri",
+    "signs": [
+      {
+        "id": "B-1",
+        "name": "Hastane",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Yakın çevrede hastane bulunduğunu bildirir. Kornaya basmaktan kaçının ve sessiz ilerleyin."
+      },
+      {
+        "id": "B-3",
+        "name": "Akaryakıt İstasyonu",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Yakın çevrede akaryakıt istasyonu bulunduğunu bildirir."
+      },
+      {
+        "id": "B-13",
+        "name": "Otopark",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Belirtilen alanda otopark bulunduğunu bildirir. Park kurallarına uyun."
+      },
+      {
+        "id": "B-31",
+        "name": "Otoyol Başlangıcı",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Otoyol başlangıcını bildirir. Otoyol kuralları geçerli olur."
+      },
+      {
+        "id": "B-32",
+        "name": "Otoyol Sonu",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Otoyol sonunu bildirir. Normal yol kuralları geçerli olur."
+      }
+    ]
+  },
+  {
+    "categoryName": "Durma ve Park Etme İşaretleri",
+    "signs": [
+      {
+        "id": "P-1",
+        "name": "Durma ve Park Etme Yasak",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Bu bölgede durma ve park etme yasaktır. Hiç durmayın."
+      },
+      {
+        "id": "P-2",
+        "name": "Park Etme Yasak",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Bu bölgede park etme yasaktır. Kısa süreli durabilirsiniz."
+      },
+      {
+        "id": "P-11",
+        "name": "Taksi Durağı",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Taksi durağıdır. Sadece taksiler durup yolcu alabilir."
+      },
+      {
+        "id": "P-12",
+        "name": "Otobüs Durağı",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Otobüs durağıdır. Sadece otobüsler durup yolcu alabilir."
+      }
+    ]
+  }
+]
