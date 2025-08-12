@@ -43,6 +43,7 @@ dependencies:
   
   # Google Fonts for Inter font family
   google_fonts: ^6.2.1
+  flutter_markdown: ^0.7.2
   
   # Firebase Authentication
   firebase_core: ^3.8.0
@@ -84,7 +85,9 @@ flutter:
   assets:
     - assets/data/exams.json
     - assets/data/traffic_signs.json
+    - assets/data/study_guides.json
     - assets/images/
+    - assets/images/guides/
     - assets/images/traffic_signs/
 
   # An image asset can refer to one or more resolution-specific "variants", see

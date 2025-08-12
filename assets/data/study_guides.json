@@ -1,0 +1,4146 @@
+[
+  {
+    "category": "İlk Yardım Bilgisi",
+    "title": "İlk Yardım Temel Uygulamaları",
+    "content": [
+      {
+        "type": "subheading",
+        "text": "İlk Yardımın Temel Amaçları"
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardım, herhangi bir kaza ya da yaşamı tehlikeye düşüren bir durumda, sağlık görevlilerinin tıbbi yardımı sağlanıncaya kadar, hayatın kurtarılması ya da durumun daha kötüye gitmesini önleyebilmek amacıyla olay yerinde, tıbbi araç gereç aranmaksızın mevcut araç ve gereçlerle yapılan ilaçsız uygulamalardır."
+      },
+      {
+        "type": "subheading",
+        "text": "İlk Yardımın Temel Hedefleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yaşamsal fonksiyonların sürdürülmesini sağlamak\n• Hasta/yaralının durumunun kötüleşmesini engellemek\n• İyileştirmeyi kolaylaştırmak\n• Hayati tehlikeyi ortadan kaldırmak"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Not: İlk yardım kesinlikle bir tedavi değildir. İlk yardım uygulamasında kesinlikle ilaç kullanılmaz ve sadece olay yerinde bulunan malzemeler kullanılır."
+      },
+      {
+        "type": "subheading",
+        "text": "Hayat Kurtarma Zinciri"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hayat kurtarma zinciri 6 halkadan oluşur ve ilk 3 halka ilk yardımcının görevidir:\n1. 112 Acil Çağrı Merkezinin aranması\n2. Olay yerinde temel yaşam desteği yapılması\n3. Olay yerinde şok cihazı (OED) kullanılması\n4. Ambulans ekiplerince canlandırma müdahalelerinin yapılması\n5. Hastanede canlandırma sonrası tedavi ve bakım yapılması\n6. İyileşme"
+      },
+      {
+        "type": "subheading",
+        "text": "İlk Yardımın Temel Uygulamaları (KBK)"
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardımın temel uygulamaları Koruma, Bildirme, Kurtarma (KBK) olarak ifade edilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Koruma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kaza sonuçlarının ağırlaşmasını önlemek için olay yerinin değerlendirilmesini kapsar. En önemli işlem olay yerinde oluşabilecek tehlikeleri belirleyerek güvenli bir çevre oluşturmaktır."
+      },
+      {
+        "type": "paragraph",
+        "text": "Olay yerinde yapılması gerekenler:\n• Olay yeri yeterince görünebilir biçimde işaretlenmelidir\n• Kaza noktasının önüne ve arkasına üçgen reflektörler yerleştirilmelidir\n• Kazaya uğrayan aracın kontak anahtarı kapatılmalıdır\n• Meraklı kişiler olay yerinden uzaklaştırılmalıdır\n• Olası infilak ve yangın riskini önlemek için sigara içilmemelidir\n• Gaz varlığı söz konusu ise gerekli önlemler alınmalıdır"
+      },
+      {
+        "type": "subheading",
+        "text": "Bildirme"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olay/kaza mümkün olduğu kadar hızlı bir şekilde 112 acil telefon numarası üzerinden gerekli yardım kuruluşlarına bildirilmelidir."
+      },
+      {
+        "type": "paragraph",
+        "text": "112’yi ararken dikkat edilmesi gerekenler:\n• Sakin olunmalı ya da sakin olan bir kişinin araması sağlanmalı\n• 112 merkezi tarafından sorulan sorulara net bir şekilde cevap verilmeli\n• Kesin yer ve adres bilgileri verilmeli\n• Kimin, hangi numaradan aradığı bildirilmeli\n• Hasta/yaralı sayısı ve durumu bildirilmeli\n• Yapılan ilk yardım uygulaması varsa belirtilmeli\n• 112 hattında bilgi alan kişi gerekli bilgileri aldığını söyleyene kadar telefon kapatılmamalı"
+      },
+      {
+        "type": "subheading",
+        "text": "Kurtarma (Müdahale)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olay yerinde hasta/yaralılara müdahale hızlı ancak sakin bir şekilde yapılmalıdır."
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardımcının yapması gerekenler:\n• Hasta/yaralıların durumunu değerlendirmek (ABC) ve öncelikli müdahale edilecekleri belirlemek\n• Hasta/yaralının korku ve endişelerini gidermek\n• Hasta/yaralının durumunun ağırlaşmasını önlemek için gerekli müdahalelerde bulunmak\n• Kırıklara yerinde müdahale etmek\n• Hasta/yaralıyı sıcak tutmak\n• Hasta/yaralının yarasını görmesine izin vermemek\n• Hasta/yaralıyı hareket ettirmeden müdahale yapmak"
+      },
+      {
+        "type": "subheading",
+        "text": "Kazazedenin Değerlendirilmesi (ABC)"
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardımın en kritik aşamalarından biri hasta/yaralının doğru değerlendirmesidir. Bu değerlendirme ABC kuralı ile yapılır."
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/ilk_yardim_degerlendirme.png"
+      },
+      {
+        "type": "subheading",
+        "text": "Bilinç Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Her türlü hasta veya yaralıya bilinç durumu değerlendirmesi yapılmalıdır. Hasta/yaralıya sözlü uyaranla ya da hafifçe omzuna dokunarak ‘İyi misiniz?’ diye sorularak bilinç durumu değerlendirmesi yapılır."
+      },
+      {
+        "type": "paragraph",
+        "text": "Bilinç düzeyleri:\n• Bilinci yerinde: Tüm uyarılara cevap verir\n• 1. Derece bilinç kaybı: Sözlü ve gürültülü uyaranlara cevap verir\n• 2. Derece bilinç kaybı: Ağrılı uyaranlara cevap verir\n• 3. Derece bilinç kaybı: Tüm uyaranlara karşı tepkisizdir"
+      },
+      {
+        "type": "key_info",
+        "text": "Bebeklerde (0–12 ay) bilinç kontrolü ayak tabanına hafifçe vurarak yapılır."
+      },
+      {
+        "type": "subheading",
+        "text": "A - Airway (Hava Yolu Açıklığı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Özellikle bilinç kaybı olanlarda dil geri kaçarak solunum yolunu tıkayabilir ya da kusmuk, yabancı cisimlerle solunum yolu tıkanabilir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Hava yolu açıklığının sağlanması:\n1) Hasta/yaralı baş, boyun, gövde ekseni düz olacak şekilde yatırılmalı\n2) Ağız içine önce göz ile bakılmalı\n3) Yabancı cisim varsa işaret parmağı yandan ağız içine sokularak çıkarılmalı\n4) Bir el alnına, diğer elin 2 parmağı çene kemiğine koyularak baş geri–çene yukarı pozisyonu verilmeli"
+      },
+      {
+        "type": "subheading",
+        "text": "B - Breathing (Solunum Değerlendirmesi)"
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardımcı, Bak–Dinle–Hisset yöntemi ile solunum yapıp yapmadığını 10 saniye süre ile değerlendirir:\n• Bak: Göğüs kafesinin solunum hareketine bakılır\n• Dinle: Kulağını hastanın ağzına yaklaştırarak solunum dinlenir\n• Hisset: Hastanın soluğunu yanağında hissetmeye çalışılır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Normal solunum sayıları:\n• Yetişkinler: Dakikada 12–20\n• Çocuklar: Dakikada 16–22\n• Bebekler: Dakikada 18–24"
+      },
+      {
+        "type": "subheading",
+        "text": "C - Circulation (Dolaşım Değerlendirmesi)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dolaşımın değerlendirilmesi için ilk yardımcı:\n• Çocuk ve yetişkinlerde: Şah damarından 3 parmakla 5 saniye süre ile nabız alır\n• Bebeklerde: Kol atardamarından nabız alır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Normal nabız sayıları:\n• Yetişkinler: Dakikada 60–100\n• Çocuklar: Dakikada 100–120\n• Bebekler: Dakikada 100–140"
+      },
+      {
+        "type": "subheading",
+        "text": "Kanama Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kanamaların hızlı ve etkili kontrolü hayat kurtarıcıdır. Kanamaların sınıflandırılması ve doğru müdahale teknikleri önemlidir."
+      },
+      {
+        "type": "subheading",
+        "text": "Kanama Türleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "Arteriyel (Atardamar) Kanamalar:\n• Fışkırır tarzda akan parlak kırmızı kan\n• Kalp atışı ile eş zamanlı fışkırır\n• En tehlikeli kanama türüdür\n• Hızlı kan kaybına yol açar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Venöz (Toplar Damar) Kanamalar:\n• Kanama pulsatil değildir ve daha koyu renklidir\n• Kanama arteriyel kanamalara göre daha yavaştır\n• Sürekli akan koyu kırmızı kan"
+      },
+      {
+        "type": "subheading",
+        "text": "Kanama Kontrolü Yöntemleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Yara Üzerine Baskı Uygulanması:\n• En etkili kanama durdurma yöntemidir\n• Baskı aralıksız olarak uygulanmalıdır\n• İlk kullanılan malzeme ıslansa dahi yerinden kaldırılmamalıdır\n• Üzerine başka malzeme eklenerek baskıya devam edilmelidir"
+      },
+      {
+        "type": "paragraph",
+        "text": "2. Baskılı Pansuman veya Bandaj:\n• Yara üzerine uygulanan baskıyı sürekli hale getirir\n• Hastanın taşınması sırasında da kanama kontrolünü sağlar\n• Sargı bezi ya da hastanın giysileri kullanılabilir"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Damar Köküne Baskı Uygulanması:\n• Kanama bölgesini besleyen damara baskı uygulanır\n• Bölgeye gelen kan akımını azaltarak kanama kontrolünü kolaylaştırır\n• Damarın kemiklere en yakın seyrettiği nokta seçilmelidir"
+      },
+      {
+        "type": "paragraph",
+        "text": "4. Turnike Uygulaması:\n• En son çare olarak uygulanır\n• 20–30 dakikada bir yaklaşık 2–3 dakika ara verilmesi gerekir\n• Kravat, kemer, eşarp gibi malzemeler kullanılabilir"
+      },
+      {
+        "type": "key_info",
+        "text": "Kritik Bilgi: Kanamalarda yapılacak ilk girişim kanamayı tamamen durduramasa dahi hastaneye ulaşana kadar kan kaybını azaltmak son derece önemlidir."
+      },
+      {
+        "type": "subheading",
+        "text": "Kırık, Çıkık ve Burkulmalarda İlk Yardım"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kas-iskelet sistemi yaralanmaları trafik kazalarında sık karşılaşılan durumlardır."
+      },
+      {
+        "type": "subheading",
+        "text": "Kırık"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kemik bütünlüğünün bozulmasına kırık denir. Kırıklar darbe sonucu ya da kendiliğinden oluşabilir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Kırık Türleri:\n• Kapalı Kırık: Kemik bütünlüğü bozulmuş ancak deri sağlam\n• Açık Kırık: Deri bütünlüğü de bozulmuş, enfeksiyon riski yüksek"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kırık Belirtileri:\n• Yoğun ağrı\n• Şekil bozukluğu\n• Hareket kısıtlılığı\n• Şişlik ve morarma\n• Anormal hareket"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kırıklarda İlk Yardım:\n• Hayatı tehdit eden yaralanmalara öncelik verilir\n• Hasta/yaralı hareket ettirilmez, sıcak tutulur\n• Kol etkilenmişse yüzük, saat gibi eşyalar çıkarılır\n• Açık kırıklarda tespitten önce yara temiz bezle kapatılır\n• Kırık bölge komşu alt ve üst eklemleri içine alacak şekilde tespit edilir\n• Tespit malzemeleri sert olmalı (tahta, karton, atel)\n• Parmaklar görünecek şekilde tespit yapılır\n• Kırık bölgede sık aralıklarla nabız kontrol edilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Çıkık"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aşırı zorlama ya da baskı sonucunda kemiklerin eklem yerlerinden kalıcı olarak ayrılmasına çıkık denir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Çıkık Belirtileri:\n• Yoğun ağrı\n• Kızarıklık ve şişlik\n• İşlev kaybı\n• Eklem bozukluğu"
+      },
+      {
+        "type": "paragraph",
+        "text": "Çıkıklarda İlk Yardım:\n• Hasta/yaralı hareket ettirilmez\n• Çıkık yerine oturtulmaya çalışılmaz\n• Eklem bulunduğu pozisyonda tespit edilir\n• Hasta/yaralıya ağızdan hiçbir şey verilmez\n• Bölgede nabız, deri rengi ve ısısı kontrol edilir\n• Tıbbi yardım istenir (112)"
+      },
+      {
+        "type": "subheading",
+        "text": "Burkulma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Zorlama sonucu eklem yüzeylerinin anlık olarak ayrılmasıdır."
+      },
+      {
+        "type": "paragraph",
+        "text": "Burkulma Belirtileri:\n• Burkulan bölgede ağrı\n• Kızarıklık\n• Şişlik\n• İşlev kaybı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Burkulmalarda İlk Yardım:\n• Burkulan eklem sıkıştırıcı bandajla tespit edilir\n• Şişliği azaltmak için bölge yukarı kaldırılır\n• Hareket ettirilmez\n• Tıbbi yardım istenir (112)"
+      },
+      {
+        "type": "subheading",
+        "text": "Yanıklarda İlk Yardım"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yanık, herhangi bir ısıya maruz kalma sonucu oluşan doku bozulmasıdır. Yanıklar sıcak su, buhar, sıcak katı maddeler, asit/alkali kimyasal maddeler, elektrik akımı veya radyasyon nedeni ile oluşabilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Yanık Dereceleri"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/yanik_dereceleri_karsilastirmasi.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Derece Yanık:\n• Deride kızarıklık, ağrı, yanık bölgede ödem vardır\n• Yaklaşık 48 saatte iyileşir\n• En hafif yanık türüdür"
+      },
+      {
+        "type": "paragraph",
+        "text": "2. Derece Yanık:\n• Deride içi su dolu kabarcıklar (bül) vardır\n• Çok ağrılıdır\n• Derinin kendini yenilemesi ile iyileşir"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Derece Yanık:\n• Derinin tüm tabakaları etkilenmiştir\n• Kaslar, sinirler ve damarlar etkilenir\n• Beyaz ve kara yaradan siyah renge kadar aşamaları vardır\n• Sinirler zarar gördüğü için ağrı yoktur\n• Cerrahi müdahale gerektirir"
+      },
+      {
+        "type": "subheading",
+        "text": "Isı ile Oluşan Yanıklarda İlk Yardım"
+      },
+      {
+        "type": "paragraph",
+        "text": "Acil Müdahale:\n• Kişi hala yanıyorsa paniğe engel olunur, koşması engellenir\n• Hasta/yaralının üzeri battaniye ile kapatılır ve yuvarlanması sağlanır\n• Yaşam belirtileri değerlendirilir (ABC)\n• Solunum yolunun etkilenip etkilenmediği kontrol edilir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yanık Bakımı:\n• Yanmış alandaki deriler kaldırılmadan giysiler çıkarılır\n• Yanık bölge en az 20 dakika çeşme suyu altında tutulur\n• Ödem oluşabileceği için yüzük, bilezik, saat çıkarılır\n• Su toplamış yerler patlatılmaz\n• Yanık üzerine ilaç ya da merhem sürülmez\n• Yanık üzeri temiz bezle örtülür\n• Hasta/yaralı battaniye ile örtülür\n• Yanık geniş ve sağlık kuruluşu uzaksa bilinci açıksa sıvı verilir (1 litre su + 1 çay kaşığı karbonat + 1 çay kaşığı tuz)"
+      },
+      {
+        "type": "key_info",
+        "text": "Uyarı: Yanık üzerine hiçbir madde sürülmemelidir. Buz uygulanmamalı, diş macunu gibi yanlış uygulamalar yapılmamalıdır."
+      },
+      {
+        "type": "subheading",
+        "text": "Kimyasal Yanıklarda İlk Yardım"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yanan bölgedeki giysiler çıkarılarak kimyasal madde teması kesilir\n• Yanan bölge bol, tazyiksiz akan suyla en az 20–25 dakika yıkanır\n• Hasta/yaralı battaniye ile örtülür\n• Tıbbi yardım istenir (112)"
+      },
+      {
+        "type": "subheading",
+        "text": "Elektrik Yanıklarında İlk Yardım"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sakin olunur\n• Hasta/yaralıya dokunmadan önce elektrik akımı kesilir\n• Akımı kesme imkânı yoksa yalıtkan maddeyle (tahta, plastik) temas engellenir\n• Solunum yolu açıklığı ve solunumu değerlendirilir\n• Hasta/yaralı kımıldatılmaz\n• Bilinci açık olsa dahi tıbbi yardım istenir"
+      },
+      {
+        "type": "subheading",
+        "text": "İlk Yardım Çantası"
+      },
+      {
+        "type": "paragraph",
+        "text": "Karayolları Trafik Kanununa göre tüm motorlu taşıtlarda (motosiklet, motorlu bisiklet, iş makinesi hariç) ilk yardım çantası bulundurmak zorunludur."
+      },
+      {
+        "type": "subheading",
+        "text": "İlk Yardım Çantasının Yeri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sürücünün ulaşabileceği en yakın yerde olmalıdır\n• Malzeme miktarı taşınan yolcu sayısına göre belirlenir\n• Düzenli olarak kontrol edilmeli ve eksik malzemeler tamamlanmalıdır"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/ilk_yardim_cantasi_listesi.png"
+      },
+      {
+        "type": "subheading",
+        "text": "Zorunlu Malzemeler"
+      },
+      {
+        "type": "subheading",
+        "text": "Sargı Malzemeleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Büyük sargı bezi (10 cm x 3–5 m): 2 adet\n• Üçgen sargı bezi: 3 adet\n• Steril hidrofil gaz bezi (10x10 cm): 1 kutu\n• Hidrofil pamuk (70 gr): 1 paket\n• Elastik bandaj (6–8 cm): 1 adet"
+      },
+      {
+        "type": "subheading",
+        "text": "Araçlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Makas: 1 adet\n• Çengelli iğne: 10 adet\n• Cımbız: 1 adet"
+      },
+      {
+        "type": "subheading",
+        "text": "Koruyucu Malzemeler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Suni solunum maskesi: 1 adet\n• Tıbbi eldiven: 2 çift\n• Açık renk plastik örtü: 1 adet"
+      },
+      {
+        "type": "subheading",
+        "text": "Diğer Gerekli Malzemeler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Flaster: 1 adet\n• Yara bandı: 10 adet\n• El feneri: 1 adet\n• Alüminyum yanık örtüsü: 1 adet\n• İlk yardım el kitabı: 1 adet"
+      },
+      {
+        "type": "key_info",
+        "text": "Yasal Zorunluluk: Araçlarda ilk yardım çantası bulunmaması hafif kusur olarak kabul edilir ve para cezası uygulanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sürücülerin Sorumlulukları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye’de ehliyet sahibi her sürücünün trafik kazalarında ilk yardım yapma yükümlülüğü vardır. Bu hem yasal bir zorunluluk hem de insani bir sorumluluktur."
+      },
+      {
+        "type": "subheading",
+        "text": "Yasal Yükümlülükler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kaza anında yaralılara ilk müdahale yapma zorunluluğu\n• Gerekli tedbirleri almama halinde para ve puan cezası\n• 112’yi arama ve yardım isteme sorumluluğu\n• Olay yerini güvenli hale getirme yükümlülüğü"
+      },
+      {
+        "type": "subheading",
+        "text": "İlk Yardımcının Özellikleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İlk yardım bilgisine sahip olmalı\n• Telaşlanmadan, soğukkanlılıkla hareket etmeli\n• Yaralıyı iyi değerlendirmeli, acil olanlara öncelik vermeli\n• Eldeki malzemeyi en iyi şekilde kullanmalı\n• Kendi güvenliğini tehlikeye atmamalı\n• Yaralıya moral vermeli\n• Emin olmadığı uygulamaları yapmamalı"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural: İlk yardımcının ilk görevi, hem kendisinin hem de olay yerinin güvenliğini sağlamaktır. Güvenli olmayan bir ortamda yapılan müdahale daha büyük kazalara neden olabilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "İlk yardım bilgisi, ehliyet sahibi her sürücünün sahip olması gereken hayati önem taşıyan bir beceridir. Trafik kazalarında doğru ve zamanında yapılan ilk müdahale, hayat kurtarabilir ve yaralanmaların etkilerini minimuma indirebilir. Bu çalışma kılavuzunda öğrendiğiniz bilgileri düzenli olarak gözden geçirin ve mümkünse uygulamalı eğitimlere katılarak becerilerinizi geliştirin. Unutmayın, doğru bilgi ve sakin yaklaşım, acil durumlarda hayat kurtaran en önemli faktörlerdir. 112 numarasını unutmayın ve acil durumlarda tereddüt etmeden yardım çağırın."
+      }
+    ]
+  },
+  {
+    "category": "Trafik ve Çevre Bilgisi",
+    "title": "Trafik ve Çevre Bilgisi",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de ehliyet sınavına hazırlanan öğrenciler için kapsamlı ve güncel bilgilere dayanan bu çalışma kılavuzunda, karayollarında güvenli sürüş için gerekli olan trafik kuralları, işaretler ve çevre bilgisini öğreneceksiniz. Bu bilgiler, 2918 sayılı Karayolları Trafik Kanunu ve ilgili yönetmelikler temelinde hazırlanmıştır."
+      },
+      {
+        "type": "subheading",
+        "text": "Temel Kavramlar ve Tanımlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ve çevre bilgisinin temelini oluşturan kavramları doğru anlamak, hem sınav başarısı hem de güvenli sürüş için kritik önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik"
+      },
+      {
+        "type": "paragraph",
+        "text": "Karayollarında araç, sürücü, yolcu ve yayaların oluşturduğu hareket halinin tümüne trafik denir. Can ve mal güvenliğini tehlikeye sokmamak esastır."
+      },
+      {
+        "type": "subheading",
+        "text": "Karayolu"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kamuya açık olup, karayolu trafiğine ayrılmış arazi şeridinin tamamına karayolu denir. Bu kavram şunları kapsar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Taşıt yolu: Araçların geçişi için ayrılmış kısım\n• Yaya yolu: Yayaların kullanımı için ayrılmış kısım\n• Banket: Taşıt yolunun her iki yanındaki emniyet şeridi\n• Şerit: Taşıt yolunun uzunlamasına bölündüğü kısımlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç ve Taşıt"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araç: Karayolunda kullanılan her türlü ulaşım aracı\nTaşıt: Motor gücüyle hareket eden araçlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Kavşak"
+      },
+      {
+        "type": "paragraph",
+        "text": "İki veya daha fazla yolun birleştiği, kesiştiği veya ayrıldığı yerler kavşak olarak tanımlanır. Kavşaklar şunlara ayrılır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kontrollü kavşak: Trafik ışığı, trafik polisi veya işaret levhası bulunan\n• Kontrolsüz kavşak: Herhangi bir trafik kontrolü olmayan"
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Üstünlüğü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Görev sırasında belirli araç sürücülerinin, can ve mal güvenliğini tehlikeye sokmamak şartıyla trafik kısıtlama veya yasaklarına bağlı olmama durumudur."
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş üstünlüğüne sahip araçlar (CIPS Kuralı):"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Cankurtaran araçları (mavi-kırmızı veya mavi tepe lambası)\n2. İtfaiye araçları (kırmızı tepe lambası)\n3. Polis/zabıta araçları (mavi-kırmızı veya mavi tepe lambası)\n4. Sivil savunma araçları (alarm durumunda, kırmızı tepe lambası)"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Not Geçiş üstünlüğüne sahip araçlar birbirleriyle karşılaştıklarında CIPS kuralı uygulanır: Cankurtaran → İtfaiye → Polis → Sivil Savunma sırasıyla geçer."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik İşaretleri ve Anlamları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik işaretleri, karayollarında düzeni sağlamak ve sürücüleri bilgilendirmek için kullanılan görsel sistemlerdir. Türkiye'deki trafik işaretleri Avrupa standartlarına uygun olarak düzenlenmiştir."
+      },
+      {
+        "type": "subheading",
+        "text": "İşaret Türleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlike Uyarı İşaretleri (T Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Karayolu ve yakın çevresindeki tehlikeler hakkında sürücüleri uyaran, genellikle üçgen şeklinde ve kırmızı çerçeveli işaretlerdir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• T-1a/1b: Sağa/sola tehlikeli viraj\n• T-2a/2b: Sağa/sola tehlikeli devamlı virajlar\n• T-3a/3b: Tehlikeli eğim (iniş/çıkış)\n• T-8: Kaygan yol\n• T-11: Yaya geçidi\n• T-12: Okul geçidi\n• T-13: Bisiklet geçebilir\n• T-21: Kontrolsüz kavşak"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Tanzim İşaretleri (TT Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sürücülere uymaları gereken yasaklama, kısıtlama ve mecburiyetleri bildiren, genellikle yuvarlak şeklindeki işaretlerdir:"
+      },
+      {
+        "type": "subheading",
+        "text": "Kırmızı Çerçeveli (Yasaklama):"
+      },
+      {
+        "type": "paragraph",
+        "text": "• TT-2: Dur işareti\n• TT-4: Girilmez (taşıt trafiğine kapalı yol)\n• TT-6: Otomobil giremez\n• TT-7: Motosiklet giremez\n• TT-10: Kamyon giremez"
+      },
+      {
+        "type": "subheading",
+        "text": "Mavi Zeminli (Mecburiyet):"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Mecburi yön işaretleri\n• Hız sınırı işaretleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Bilgi İşaretleri (B Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yol kullanıcılarına yol, yerleşim yerleri ve hizmet birimleri hakkında bilgi veren, genellikle dikdörtgen veya kare şeklindeki işaretlerdir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yön ve konum bildiren işaretler\n• Mesafe işaretleri (örn: İstanbul 120 km)\n• Hizmet işaretleri (hastane, benzin istasyonu)"
+      },
+      {
+        "type": "subheading",
+        "text": "Duraklama ve Park İşaretleri (P Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araçların duraklama ve park etmelerine ilişkin düzenlemeleri belirten işaretlerdir."
+      },
+      {
+        "type": "subheading",
+        "text": "İşaretlerde Renk Kodları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik işaretlerinde kullanılan renkler standardize edilmiştir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kırmızı: Tehlike, yasaklama ve durma\n• Mavi: Zorunluluk ve bilgilendirme\n• Sarı: Geçici düzenlemeler ve dikkat\n• Yeşil: Yol bilgisi ve yönlendirme\n• Beyaz: Zemin rengi ve sembol vurgulama\n• Siyah: Yazı ve sembol rengi"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız Sınırları"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/hiz_sinirlari_turkiye.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de hız sınırları araç cinsine ve yol türüne göre belirlenir. 2024 yılında yapılan güncellemeler ile bazı otoyollarda hız sınırları artırılmıştır."
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Kategorilerine Göre Hız Sınırları"
+      },
+      {
+        "type": "subheading",
+        "text": "Otomobiller için hız sınırları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yerleşim yeri içinde: 50 km/h\n• Şehirlerarası çift yönlü karayollarında: 90 km/h\n• Bölünmüş yollarda: 110 km/h\n• KGM otoyollarında: 130 km/h\n• YİD otoyollarında: 140 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Otobüs ve minibüsler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h\n• Şehirlerarası: 80 km/h\n• Bölünmüş yollar: 90 km/h\n• Otoyollar: 100 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Kamyon ve çekiciler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h\n• Şehirlerarası: 80 km/h\n• Bölünmüş yollar: 85 km/h\n• Otoyollar: 90 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız Sınırı Cezaları"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "Hız sınırını aşma oranına göre cezalar uygulanır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• %10-30 aşma: 1.506 TL ceza + 10 puan\n• %30-50 aşma: 4.512 TL ceza + 15 puan\n• %50'den fazla aşma: 9.268 TL ceza + 15 puan"
+      },
+      {
+        "type": "key_info",
+        "text": "Kritik Bilgi Bir yıl içinde 5 kez hız sınırını aşanlara 1 yıl süreyle ehliyet el koyma cezası uygulanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Kavşaklarda Geçiş Hakkı Kuralları"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/gecis_oncelik_kurallari.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kavşaklar trafik kazalarının en sık yaşandığı yerlerdir. Geçiş hakkı kurallarının doğru bilinmesi hayati önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Hakkı Sıralaması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ışığı, trafik polisi veya işaret levhası bulunmayan kavşaklarda aşağıdaki sıralama uygulanır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Geçiş üstünlüğüne sahip araçlar (CIPS kuralı)\n2. Tramvay ve raylı sistemler (düz giden)\n3. Ana yoldan gelen araçlar (tali yola karşı)\n4. Bölünmüş yoldan gelen araçlar\n5. Düz giden araçlar (dönüş yapanlara karşı)\n6. Sağdan gelen araçlar (eşdeğer yollarda)\n7. Motorlu araçlar (motorsuz araçlara karşı)"
+      },
+      {
+        "type": "subheading",
+        "text": "Dönüş Kuralları"
+      },
+      {
+        "type": "subheading",
+        "text": "Sağa dönüş:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yayalara ve bisikletlilere yol verilir\n• Sağdan gelen trafiğe dikkat edilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Sola dönüş:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşıdan ve sağdan gelen trafiğe yol verilir\n• Yayalara ve bisikletlilere öncelik tanınır"
+      },
+      {
+        "type": "subheading",
+        "text": "Dönel (Göbekli) Kavşaklar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dönel kavşaklarda temel kural basittir: Kavşak içindeki araçların geçiş üstünlüğü vardır. Kavşağa girecek araçlar, içerideki araçları beklemek zorundadır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama (Geçme) Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama, trafikte en riskli manevralardan biridir ve belirli kurallara uygun yapılmalıdır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama Öncesi Kontroller"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama yapmadan önce şu koşullar sağlanmalıdır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Arkadan kontrol: Başka bir aracın kendisini geçmeye başlamamış olması\n2. Öndeki araç kontrolü: Geçilecek aracın başka bir araç geçip geçmediği\n3. Şerit kontrolü: Sol şeridin yeterince açık ve boş olması\n4. Mesafe kontrolü: Güvenli geçiş için yeterli mesafe\n5. Hız farkı: Araçlar arası hız farkının uygun olması"
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama Adımları"
+      },
+      {
+        "type": "subheading",
+        "text": "Doğru sollama prosedürü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Sinyal verme: Sol sinyal lambası yakılır\n2. Uyarı: Gündüz korna, gece selektör ile uyarı\n3. Şerit değiştirme: Takip mesafesi kadar önceden sol şeride geçiş\n4. Geçiş: Hız artırılarak güvenli geçiş\n5. Geri dönüş: Geçilen araç aynadan görülünce sağ sinyal vererek eski şeride dönüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Sollamanın Yasak Olduğu Yerler"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama şu yerlerde kesinlikle yasaktır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İki yönlü köprü ve tünellerde\n• Yaya ve okul geçitlerinde\n• Kavşak ve yakınlarında\n• Demiryolu hemzemin geçitlerinde\n• Görüş yetersizliği olan tepe ve dönemeçlerde\n• Sollama yasağı işareti bulunan yerlerde"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Kural Sollama her zaman soldan yapılır. Sağdan geçmek sadece şu durumlarda izinlidir: sola dönmeye hazırlanan araç, tramvay, trafik zorunluluğu durumunda."
+      },
+      {
+        "type": "subheading",
+        "text": "Durma, Duraklama ve Park Etme Kuralları"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/park_yasak_mesafe_kurallari.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bu konular ehliyet sınavında sıkça sorulur ve günlük sürüşte büyük önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Temel Tanımlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Durma: Trafik mecburiyeti nedeniyle (kırmızı ışık, dur işareti, arıza) aracın durdurulması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Duraklama: Yolcu indirme-bindirme, yük alma-bırakma veya kısa süreli bekleme (en fazla 5 dakika) amacıyla aracın durdurulması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Park Etme: Genellikle uzun süreli bekletmek üzere aracın bırakılması"
+      },
+      {
+        "type": "subheading",
+        "text": "Duraklamanın Yasak Olduğu Yerler"
+      },
+      {
+        "type": "subheading",
+        "text": "Mesafe kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kavşaklara: Şehir içi 5m, şehir dışı 100m\n• İşaret levhalarına: Şehir içi 15m, şehir dışı 100m\n• Otobüs duraklarına: Her iki yön 15m"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasak alanlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sol şerit (raylı sistem hariç)\n• Yaya, okul ve demiryolu geçitleri\n• Tüneller ve köprüler\n• Görüşün yetersiz olduğu tepe üstleri ve dönemeçler"
+      },
+      {
+        "type": "subheading",
+        "text": "Park Etmenin Yasak Olduğu Yerler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Park etme, duraklamanın yasak olduğu tüm yerlerde yasaktır. Ek olarak:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yangın musluklarına: Her iki yön 5m\n• Kamu binalarının giriş-çıkışlarına: Her iki yön 5m\n• Köprü ve alt geçitlere: Her iki yön 10m\n• Parketmiş araçların çıkışına engel olacak şekilde"
+      },
+      {
+        "type": "subheading",
+        "text": "Park Etmede Alınacak Tedbirler"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Motor durdurma ve el freni çekme\n2. Uygun vitese alma (eğimli yerlerde)\n3. Park ışıklarını yakma (gerekli hallerde)\n4. Tekerleklere takoz koyma (eğimli yerlerde)\n5. Kapıları kilitleme (aracı terk ederken)"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Hava Koşullarında Sürüş"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olumsuz hava koşulları sürüş güvenliğini ciddi şekilde etkiler."
+      },
+      {
+        "type": "subheading",
+        "text": "Sisli Havada Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Alınacak önlemler:"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız ve mesafe:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hızı düşürme ve takip mesafesini artırma\n• Hız sabitleyiciyi kapatma\n• Yumuşak fren yapma"
+      },
+      {
+        "type": "subheading",
+        "text": "Işık kullanımı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sis farlarını açma (görüş 100m'nin altında)\n• Kısa farları kullanma (uzun farlar yansır)\n• Kuyruk ışıklarını yakma"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş teknikleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sağ şeridi takip etme\n• Ön cam sileceklerini kullanma\n• Mümkünse sürüşü erteleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağışlı Havada Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Dikkat edilecek noktalar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hız azaltma ve fren mesafesini uzatma\n• Su birikintilerinden kaçınma\n• Lastik tutunmasına dikkat etme\n• Cam buğulanmasını önleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Gece Sürüşü"
+      },
+      {
+        "type": "subheading",
+        "text": "Gece sürüş kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yaklaşan kavşaklarda selektör yapma\n• Karşılaşmalarda kısa fara geçiş\n• Takip mesafesini artırma\n• Hız sınırlarına daha dikkatli uyma"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Işıkları ve Kullanım Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Doğru ışık kullanımı hem görmek hem de görülmek için kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Uzun Far (Uzağı Gösteren Işıklar)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım alanları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yerleşim birimleri dışında gece seyir\n• Aydınlatılmamış tüneller\n• Kavşak, dönemeç ve tepe yaklaşımlarında uyarı"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasak durumlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşılaşmalarda\n• Öndeki araç takibinde\n• Aydınlatılmış yerlerde"
+      },
+      {
+        "type": "subheading",
+        "text": "Kısa Far (Yakını Gösteren Işıklar)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım alanları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşılaşmalarda\n• Öndeki araç takibinde\n• Sisli, yağışlı havalarda\n• Aydınlatılmış yerlerde"
+      },
+      {
+        "type": "subheading",
+        "text": "Sis Farları"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece sisli, karlı ve sağanak yağmurlu havarlarda\n• Diğer farlarla birlikte kullanım zorunlu\n• Normal havalarda kullanımı yasak"
+      },
+      {
+        "type": "subheading",
+        "text": "Işık Kullanımında Yasaklar"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Sis farlarının normal havada kullanımı\n2. Dönüş ışıklarının \"geç\" anlamında kullanımı\n3. Karşılaşmalarda ışıkları söndürme\n4. Sadece park veya sis ışıklarıyla seyretme"
+      },
+      {
+        "type": "subheading",
+        "text": "Kaza ve Arıza Durumunda Prosedürler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kaza ve arıza durumlarında doğru hareket etmek hem güvenlik hem de yasal yükümlülük açısından kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Kazasında Yapılacaklar"
+      },
+      {
+        "type": "subheading",
+        "text": "Hemen yapılması gerekenler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Güvenlik önlemleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Dörtlü ikaz lambaları yakma\n• Reflektör veya kırmızı ışıklı cihaz koyma (150m mesafeden görülecek şekilde)\n• Kaza yerini güvenli hale getirme"
+      },
+      {
+        "type": "paragraph",
+        "text": "2. Yaralı kontrolü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yaralı varsa 112'yi arama\n• İlk yardım tedbirlerini alma\n• Gerekirse yaralıları hastaneye götürme"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Bildirim:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• En yakın zabıta veya sağlık kuruluşuna bildirme\n• Kaza tutanağı düzenleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Maddi Hasarlı Kaza Tutanağı"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "subheading",
+        "text": "Tutanak düzenlenebilme şartları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece maddi hasar olması\n• Yaralı bulunmaması\n• Her iki sürücünün de anlaşması\n• Sürücü belgelerinin mevcut olması\n• Geçerli sigorta bulunması"
+      },
+      {
+        "type": "subheading",
+        "text": "Tutanak düzenlenememe durumları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Tek araçlı kaza\n• Sürücü belgesi eksikliği\n• Sigorta eksikliği\n• Alkol/madde şüphesi\n• Kamu aracının karışması\n• Kamu malına zarar"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Arızası Durumu"
+      },
+      {
+        "type": "subheading",
+        "text": "Arızalı araç işaretlemesi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Ikaz lambaları: Dörtlü ikaz (flasher) yakma\n2. Reflektör yerleştirme:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düz yollarda: 150m mesafeden görülecek şekilde\n• Dönemeç/tepe: En az 30m uzaklığa"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Engel işareti: Otobüs, kamyon, çekiciler için 150x25 cm ebadında"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlikeli madde taşıyan araçlarda:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kırmızı ışıklı cihaz kullanma\n• Sürekli gözetim altında tutma\n• Ek güvenlik önlemleri alma"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasal Yükümlülükler"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "subheading",
+        "text": "Kaza yerinden ayrılma yasağı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Zabıta izni olmadan ayrılmak yasak\n• Maddi hasarlı anlaşma durumu hariç\n• İzinsiz ayrılmaya para cezası"
+      },
+      {
+        "type": "subheading",
+        "text": "Yardım yükümlülüğü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İlk yardım tedbirleri alma\n• 112'yi arama\n• Yaralıları hastaneye götürme"
+      },
+      {
+        "type": "subheading",
+        "text": "Çevre Bilinci ve Sorumlu Sürücülük"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern sürücülük sadece trafik kurallarına uymakla kalmaz, çevre bilinci de gerektirir."
+      },
+      {
+        "type": "subheading",
+        "text": "Çevreye Duyarlı Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Yakıt tasarrufu teknikleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düşük devirde sürüş\n• Ani hızlanma ve frenlemeden kaçınma\n• Düzenli araç bakımı\n• Lastik basınçlarını kontrol"
+      },
+      {
+        "type": "subheading",
+        "text": "Emisyon azaltma:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Gereksiz rölanti yapmama\n• Düzenli egzoz kontrolü\n• Uygun yakıt kullanımı"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplumsal Sorumluluk"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik kültürü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Diğer sürücülere saygı\n• Yayalara öncelik tanıma\n• Trafik kurallarına uyum\n• Örnek sürücü davranışı sergileme"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Durumlar ve İstisna Kurallar"
+      },
+      {
+        "type": "subheading",
+        "text": "Bisiklet ve Elektrikli Scuter Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "2020 yılında yapılan düzenlemelerle bisiklet ve elektrikli scuter kuralları güncellenmiştir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Ayrı bisiklet yolu varsa taşıt yolunda sürmek yasak\n• Yaya yollarında sürmek yasak\n• İkiden fazla yan yana sürmek yasak\n• Dönüşlerde öncelik hakkı tanınması zorunlu"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlikeli Madde Taşıyan Araçlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel kurallar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düşük hız sınırları (30-70 km/h)\n• Özel park ve duraklama kuralları\n• Sürekli gözetim zorunluluğu\n• Ek güvenlik önlemleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Üstünlüğü Detayları"
+      },
+      {
+        "type": "subheading",
+        "text": "Çakar lamba kullanımı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece görev durumunda\n• Can ve mal güvenliğini tehlikeye sokmamak şartıyla\n• Yetkisiz kullanımına ağır cezalar"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural Trafik kurallarının temel amacı can ve mal güvenliğini korumaktır. Her kural bu amaç doğrultusunda şekillenmiştir."
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav İpuçları ve Hatırlatmalar"
+      },
+      {
+        "type": "subheading",
+        "text": "Önemli Rakamlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Mesafe kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kavşaklar: 5m (şehir içi) / 100m (şehir dışı)\n• İşaret levhaları: 15m (şehir içi) / 100m (şehir dışı)\n• Otobüs durakları: 15m (her iki yön)\n• Yangın muslukları: 5m (her iki yön)"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız sınırları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h (genel)\n• Şehirlerarası: 90 km/h (otomobil)\n• Otoyol: 130-140 km/h (otomobil)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik Kurallar"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. CIPS kuralı: Cankurtaran → İtfaiye → Polis → Sivil Savunma\n2. Sağdaki soldan gelen araç: Eşdeğer yollarda geçiş hakkı\n3. Dönel kavşak: İçerideki araçların önceliği\n4. Sollama: Her zaman soldan, uygun koşullarda\n5. Işık kullanımı: Duruma göre doğru far seçimi"
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ve çevre bilgisi, güvenli sürücülük için gerekli olan temel bilgi birikimidir. Bu kılavuzda öğrendiğiniz kuralları sadece sınav için değil, yaşam boyu uygulamanız gereken prensipler olarak görmek önemlidir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unutmayın ki trafik kuralları can ve mal güvenliğini korumak için vardır. Her kuralın arkasında bir güvenlik nedeni bulunur. Sorumlu bir sürücü olmak, sadece kendimizi değil tüm yol kullanıcılarını korumak anlamına gelir."
+      },
+      {
+        "type": "subheading",
+        "text": "Başarılar dileriz ve güvenli yolculuklar!"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de ehliyet sınavına hazırlanan öğrenciler için kapsamlı ve güncel bilgilere dayanan bu çalışma kılavuzunda, karayollarında güvenli sürüş için gerekli olan trafik kuralları, işaretler ve çevre bilgisini öğreneceksiniz. Bu bilgiler, 2918 sayılı Karayolları Trafik Kanunu ve ilgili yönetmelikler temelinde hazırlanmıştır."
+      },
+      {
+        "type": "subheading",
+        "text": "Temel Kavramlar ve Tanımlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ve çevre bilgisinin temelini oluşturan kavramları doğru anlamak, hem sınav başarısı hem de güvenli sürüş için kritik önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik"
+      },
+      {
+        "type": "paragraph",
+        "text": "Karayollarında araç, sürücü, yolcu ve yayaların oluşturduğu hareket halinin tümüne trafik denir. Can ve mal güvenliğini tehlikeye sokmamak esastır."
+      },
+      {
+        "type": "subheading",
+        "text": "Karayolu"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kamuya açık olup, karayolu trafiğine ayrılmış arazi şeridinin tamamına karayolu denir. Bu kavram şunları kapsar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Taşıt yolu: Araçların geçişi için ayrılmış kısım\n• Yaya yolu: Yayaların kullanımı için ayrılmış kısım\n• Banket: Taşıt yolunun her iki yanındaki emniyet şeridi\n• Şerit: Taşıt yolunun uzunlamasına bölündüğü kısımlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç ve Taşıt"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araç: Karayolunda kullanılan her türlü ulaşım aracı\nTaşıt: Motor gücüyle hareket eden araçlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Kavşak"
+      },
+      {
+        "type": "paragraph",
+        "text": "İki veya daha fazla yolun birleştiği, kesiştiği veya ayrıldığı yerler kavşak olarak tanımlanır. Kavşaklar şunlara ayrılır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kontrollü kavşak: Trafik ışığı, trafik polisi veya işaret levhası bulunan\n• Kontrolsüz kavşak: Herhangi bir trafik kontrolü olmayan"
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Üstünlüğü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Görev sırasında belirli araç sürücülerinin, can ve mal güvenliğini tehlikeye sokmamak şartıyla trafik kısıtlama veya yasaklarına bağlı olmama durumudur."
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş üstünlüğüne sahip araçlar (CIPS Kuralı):"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Cankurtaran araçları (mavi-kırmızı veya mavi tepe lambası)\n2. İtfaiye araçları (kırmızı tepe lambası)\n3. Polis/zabıta araçları (mavi-kırmızı veya mavi tepe lambası)\n4. Sivil savunma araçları (alarm durumunda, kırmızı tepe lambası)"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Not Geçiş üstünlüğüne sahip araçlar birbirleriyle karşılaştıklarında CIPS kuralı uygulanır: Cankurtaran → İtfaiye → Polis → Sivil Savunma sırasıyla geçer."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik İşaretleri ve Anlamları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik işaretleri, karayollarında düzeni sağlamak ve sürücüleri bilgilendirmek için kullanılan görsel sistemlerdir. Türkiye'deki trafik işaretleri Avrupa standartlarına uygun olarak düzenlenmiştir."
+      },
+      {
+        "type": "subheading",
+        "text": "İşaret Türleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlike Uyarı İşaretleri (T Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Karayolu ve yakın çevresindeki tehlikeler hakkında sürücüleri uyaran, genellikle üçgen şeklinde ve kırmızı çerçeveli işaretlerdir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• T-1a/1b: Sağa/sola tehlikeli viraj\n• T-2a/2b: Sağa/sola tehlikeli devamlı virajlar\n• T-3a/3b: Tehlikeli eğim (iniş/çıkış)\n• T-8: Kaygan yol\n• T-11: Yaya geçidi\n• T-12: Okul geçidi\n• T-13: Bisiklet geçebilir\n• T-21: Kontrolsüz kavşak"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Tanzim İşaretleri (TT Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sürücülere uymaları gereken yasaklama, kısıtlama ve mecburiyetleri bildiren, genellikle yuvarlak şeklindeki işaretlerdir:"
+      },
+      {
+        "type": "subheading",
+        "text": "Kırmızı Çerçeveli (Yasaklama):"
+      },
+      {
+        "type": "paragraph",
+        "text": "• TT-2: Dur işareti\n• TT-4: Girilmez (taşıt trafiğine kapalı yol)\n• TT-6: Otomobil giremez\n• TT-7: Motosiklet giremez\n• TT-10: Kamyon giremez"
+      },
+      {
+        "type": "subheading",
+        "text": "Mavi Zeminli (Mecburiyet):"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Mecburi yön işaretleri\n• Hız sınırı işaretleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Bilgi İşaretleri (B Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yol kullanıcılarına yol, yerleşim yerleri ve hizmet birimleri hakkında bilgi veren, genellikle dikdörtgen veya kare şeklindeki işaretlerdir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yön ve konum bildiren işaretler\n• Mesafe işaretleri (örn: İstanbul 120 km)\n• Hizmet işaretleri (hastane, benzin istasyonu)"
+      },
+      {
+        "type": "subheading",
+        "text": "Duraklama ve Park İşaretleri (P Grubu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araçların duraklama ve park etmelerine ilişkin düzenlemeleri belirten işaretlerdir."
+      },
+      {
+        "type": "subheading",
+        "text": "İşaretlerde Renk Kodları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik işaretlerinde kullanılan renkler standardize edilmiştir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kırmızı: Tehlike, yasaklama ve durma\n• Mavi: Zorunluluk ve bilgilendirme\n• Sarı: Geçici düzenlemeler ve dikkat\n• Yeşil: Yol bilgisi ve yönlendirme\n• Beyaz: Zemin rengi ve sembol vurgulama\n• Siyah: Yazı ve sembol rengi"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız Sınırları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de hız sınırları araç cinsine ve yol türüne göre belirlenir. 2024 yılında yapılan güncellemeler ile bazı otoyollarda hız sınırları artırılmıştır."
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Kategorilerine Göre Hız Sınırları"
+      },
+      {
+        "type": "subheading",
+        "text": "Otomobiller için hız sınırları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yerleşim yeri içinde: 50 km/h\n• Şehirlerarası çift yönlü karayollarında: 90 km/h\n• Bölünmüş yollarda: 110 km/h\n• KGM otoyollarında: 130 km/h\n• YİD otoyollarında: 140 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Otobüs ve minibüsler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h\n• Şehirlerarası: 80 km/h\n• Bölünmüş yollar: 90 km/h\n• Otoyollar: 100 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Kamyon ve çekiciler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h\n• Şehirlerarası: 80 km/h\n• Bölünmüş yollar: 85 km/h\n• Otoyollar: 90 km/h"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız Sınırı Cezaları"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "Hız sınırını aşma oranına göre cezalar uygulanır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• %10-30 aşma: 1.506 TL ceza + 10 puan\n• %30-50 aşma: 4.512 TL ceza + 15 puan\n• %50'den fazla aşma: 9.268 TL ceza + 15 puan"
+      },
+      {
+        "type": "key_info",
+        "text": "Kritik Bilgi Bir yıl içinde 5 kez hız sınırını aşanlara 1 yıl süreyle ehliyet el koyma cezası uygulanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Kavşaklarda Geçiş Hakkı Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kavşaklar trafik kazalarının en sık yaşandığı yerlerdir. Geçiş hakkı kurallarının doğru bilinmesi hayati önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Hakkı Sıralaması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ışığı, trafik polisi veya işaret levhası bulunmayan kavşaklarda aşağıdaki sıralama uygulanır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Geçiş üstünlüğüne sahip araçlar (CIPS kuralı)\n2. Tramvay ve raylı sistemler (düz giden)\n3. Ana yoldan gelen araçlar (tali yola karşı)\n4. Bölünmüş yoldan gelen araçlar\n5. Düz giden araçlar (dönüş yapanlara karşı)\n6. Sağdan gelen araçlar (eşdeğer yollarda)\n7. Motorlu araçlar (motorsuz araçlara karşı)"
+      },
+      {
+        "type": "subheading",
+        "text": "Dönüş Kuralları"
+      },
+      {
+        "type": "subheading",
+        "text": "Sağa dönüş:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yayalara ve bisikletlilere yol verilir\n• Sağdan gelen trafiğe dikkat edilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Sola dönüş:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşıdan ve sağdan gelen trafiğe yol verilir\n• Yayalara ve bisikletlilere öncelik tanınır"
+      },
+      {
+        "type": "subheading",
+        "text": "Dönel (Göbekli) Kavşaklar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dönel kavşaklarda temel kural basittir: Kavşak içindeki araçların geçiş üstünlüğü vardır. Kavşağa girecek araçlar, içerideki araçları beklemek zorundadır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama (Geçme) Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama, trafikte en riskli manevralardan biridir ve belirli kurallara uygun yapılmalıdır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama Öncesi Kontroller"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama yapmadan önce şu koşullar sağlanmalıdır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Arkadan kontrol: Başka bir aracın kendisini geçmeye başlamamış olması\n2. Öndeki araç kontrolü: Geçilecek aracın başka bir araç geçip geçmediği\n3. Şerit kontrolü: Sol şeridin yeterince açık ve boş olması\n4. Mesafe kontrolü: Güvenli geçiş için yeterli mesafe\n5. Hız farkı: Araçlar arası hız farkının uygun olması"
+      },
+      {
+        "type": "subheading",
+        "text": "Sollama Adımları"
+      },
+      {
+        "type": "subheading",
+        "text": "Doğru sollama prosedürü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Sinyal verme: Sol sinyal lambası yakılır\n2. Uyarı: Gündüz korna, gece selektör ile uyarı\n3. Şerit değiştirme: Takip mesafesi kadar önceden sol şeride geçiş\n4. Geçiş: Hız artırılarak güvenli geçiş\n5. Geri dönüş: Geçilen araç aynadan görülünce sağ sinyal vererek eski şeride dönüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Sollamanın Yasak Olduğu Yerler"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sollama şu yerlerde kesinlikle yasaktır:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İki yönlü köprü ve tünellerde\n• Yaya ve okul geçitlerinde\n• Kavşak ve yakınlarında\n• Demiryolu hemzemin geçitlerinde\n• Görüş yetersizliği olan tepe ve dönemeçlerde\n• Sollama yasağı işareti bulunan yerlerde"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Kural Sollama her zaman soldan yapılır. Sağdan geçmek sadece şu durumlarda izinlidir: sola dönmeye hazırlanan araç, tramvay, trafik zorunluluğu durumunda."
+      },
+      {
+        "type": "subheading",
+        "text": "Durma, Duraklama ve Park Etme Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bu konular ehliyet sınavında sıkça sorulur ve günlük sürüşte büyük önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Temel Tanımlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Durma: Trafik mecburiyeti nedeniyle (kırmızı ışık, dur işareti, arıza) aracın durdurulması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Duraklama: Yolcu indirme-bindirme, yük alma-bırakma veya kısa süreli bekleme (en fazla 5 dakika) amacıyla aracın durdurulması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Park Etme: Genellikle uzun süreli bekletmek üzere aracın bırakılması"
+      },
+      {
+        "type": "subheading",
+        "text": "Duraklamanın Yasak Olduğu Yerler"
+      },
+      {
+        "type": "subheading",
+        "text": "Mesafe kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kavşaklara: Şehir içi 5m, şehir dışı 100m\n• İşaret levhalarına: Şehir içi 15m, şehir dışı 100m\n• Otobüs duraklarına: Her iki yön 15m"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasak alanlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sol şerit (raylı sistem hariç)\n• Yaya, okul ve demiryolu geçitleri\n• Tüneller ve köprüler\n• Görüşün yetersiz olduğu tepe üstleri ve dönemeçler"
+      },
+      {
+        "type": "subheading",
+        "text": "Park Etmenin Yasak Olduğu Yerler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Park etme, duraklamanın yasak olduğu tüm yerlerde yasaktır. Ek olarak:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yangın musluklarına: Her iki yön 5m\n• Kamu binalarının giriş-çıkışlarına: Her iki yön 5m\n• Köprü ve alt geçitlere: Her iki yön 10m\n• Parketmiş araçların çıkışına engel olacak şekilde"
+      },
+      {
+        "type": "subheading",
+        "text": "Park Etmede Alınacak Tedbirler"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Motor durdurma ve el freni çekme\n2. Uygun vitese alma (eğimli yerlerde)\n3. Park ışıklarını yakma (gerekli hallerde)\n4. Tekerleklere takoz koyma (eğimli yerlerde)\n5. Kapıları kilitleme (aracı terk ederken)"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Hava Koşullarında Sürüş"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olumsuz hava koşulları sürüş güvenliğini ciddi şekilde etkiler."
+      },
+      {
+        "type": "subheading",
+        "text": "Sisli Havada Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Alınacak önlemler:"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız ve mesafe:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hızı düşürme ve takip mesafesini artırma\n• Hız sabitleyiciyi kapatma\n• Yumuşak fren yapma"
+      },
+      {
+        "type": "subheading",
+        "text": "Işık kullanımı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sis farlarını açma (görüş 100m'nin altında)\n• Kısa farları kullanma (uzun farlar yansır)\n• Kuyruk ışıklarını yakma"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş teknikleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sağ şeridi takip etme\n• Ön cam sileceklerini kullanma\n• Mümkünse sürüşü erteleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağışlı Havada Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Dikkat edilecek noktalar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hız azaltma ve fren mesafesini uzatma\n• Su birikintilerinden kaçınma\n• Lastik tutunmasına dikkat etme\n• Cam buğulanmasını önleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Gece Sürüşü"
+      },
+      {
+        "type": "subheading",
+        "text": "Gece sürüş kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yaklaşan kavşaklarda selektör yapma\n• Karşılaşmalarda kısa fara geçiş\n• Takip mesafesini artırma\n• Hız sınırlarına daha dikkatli uyma"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Işıkları ve Kullanım Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Doğru ışık kullanımı hem görmek hem de görülmek için kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Uzun Far (Uzağı Gösteren Işıklar)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım alanları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yerleşim birimleri dışında gece seyir\n• Aydınlatılmamış tüneller\n• Kavşak, dönemeç ve tepe yaklaşımlarında uyarı"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasak durumlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşılaşmalarda\n• Öndeki araç takibinde\n• Aydınlatılmış yerlerde"
+      },
+      {
+        "type": "subheading",
+        "text": "Kısa Far (Yakını Gösteren Işıklar)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım alanları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Karşılaşmalarda\n• Öndeki araç takibinde\n• Sisli, yağışlı havalarda\n• Aydınlatılmış yerlerde"
+      },
+      {
+        "type": "subheading",
+        "text": "Sis Farları"
+      },
+      {
+        "type": "subheading",
+        "text": "Kullanım kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece sisli, karlı ve sağanak yağmurlu havarlarda\n• Diğer farlarla birlikte kullanım zorunlu\n• Normal havalarda kullanımı yasak"
+      },
+      {
+        "type": "subheading",
+        "text": "Işık Kullanımında Yasaklar"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Sis farlarının normal havada kullanımı\n2. Dönüş ışıklarının \"geç\" anlamında kullanımı\n3. Karşılaşmalarda ışıkları söndürme\n4. Sadece park veya sis ışıklarıyla seyretme"
+      },
+      {
+        "type": "subheading",
+        "text": "Kaza ve Arıza Durumunda Prosedürler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kaza ve arıza durumlarında doğru hareket etmek hem güvenlik hem de yasal yükümlülük açısından kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Kazasında Yapılacaklar"
+      },
+      {
+        "type": "subheading",
+        "text": "Hemen yapılması gerekenler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Güvenlik önlemleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Dörtlü ikaz lambaları yakma\n• Reflektör veya kırmızı ışıklı cihaz koyma (150m mesafeden görülecek şekilde)\n• Kaza yerini güvenli hale getirme"
+      },
+      {
+        "type": "paragraph",
+        "text": "2. Yaralı kontrolü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yaralı varsa 112'yi arama\n• İlk yardım tedbirlerini alma\n• Gerekirse yaralıları hastaneye götürme"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Bildirim:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• En yakın zabıta veya sağlık kuruluşuna bildirme\n• Kaza tutanağı düzenleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Maddi Hasarlı Kaza Tutanağı"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "subheading",
+        "text": "Tutanak düzenlenebilme şartları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece maddi hasar olması\n• Yaralı bulunmaması\n• Her iki sürücünün de anlaşması\n• Sürücü belgelerinin mevcut olması\n• Geçerli sigorta bulunması"
+      },
+      {
+        "type": "subheading",
+        "text": "Tutanak düzenlenememe durumları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Tek araçlı kaza\n• Sürücü belgesi eksikliği\n• Sigorta eksikliği\n• Alkol/madde şüphesi\n• Kamu aracının karışması\n• Kamu malına zarar"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Arızası Durumu"
+      },
+      {
+        "type": "subheading",
+        "text": "Arızalı araç işaretlemesi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Ikaz lambaları: Dörtlü ikaz (flasher) yakma\n2. Reflektör yerleştirme:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düz yollarda: 150m mesafeden görülecek şekilde\n• Dönemeç/tepe: En az 30m uzaklığa"
+      },
+      {
+        "type": "paragraph",
+        "text": "3. Engel işareti: Otobüs, kamyon, çekiciler için 150x25 cm ebadında"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlikeli madde taşıyan araçlarda:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kırmızı ışıklı cihaz kullanma\n• Sürekli gözetim altında tutma\n• Ek güvenlik önlemleri alma"
+      },
+      {
+        "type": "subheading",
+        "text": "Yasal Yükümlülükler"
+      },
+      {
+        "type": "key_info",
+        "text": "Bu bölümdeki kurallar sınavda sık sorulur ve günlük sürüşte kritiktir. Temel maddeleri dikkatle ezberleyin."
+      },
+      {
+        "type": "subheading",
+        "text": "Kaza yerinden ayrılma yasağı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Zabıta izni olmadan ayrılmak yasak\n• Maddi hasarlı anlaşma durumu hariç\n• İzinsiz ayrılmaya para cezası"
+      },
+      {
+        "type": "subheading",
+        "text": "Yardım yükümlülüğü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İlk yardım tedbirleri alma\n• 112'yi arama\n• Yaralıları hastaneye götürme"
+      },
+      {
+        "type": "subheading",
+        "text": "Çevre Bilinci ve Sorumlu Sürücülük"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern sürücülük sadece trafik kurallarına uymakla kalmaz, çevre bilinci de gerektirir."
+      },
+      {
+        "type": "subheading",
+        "text": "Çevreye Duyarlı Sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Yakıt tasarrufu teknikleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düşük devirde sürüş\n• Ani hızlanma ve frenlemeden kaçınma\n• Düzenli araç bakımı\n• Lastik basınçlarını kontrol"
+      },
+      {
+        "type": "subheading",
+        "text": "Emisyon azaltma:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Gereksiz rölanti yapmama\n• Düzenli egzoz kontrolü\n• Uygun yakıt kullanımı"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplumsal Sorumluluk"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik kültürü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Diğer sürücülere saygı\n• Yayalara öncelik tanıma\n• Trafik kurallarına uyum\n• Örnek sürücü davranışı sergileme"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Durumlar ve İstisna Kurallar"
+      },
+      {
+        "type": "subheading",
+        "text": "Bisiklet ve Elektrikli Scuter Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "2020 yılında yapılan düzenlemelerle bisiklet ve elektrikli scuter kuralları güncellenmiştir:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Ayrı bisiklet yolu varsa taşıt yolunda sürmek yasak\n• Yaya yollarında sürmek yasak\n• İkiden fazla yan yana sürmek yasak\n• Dönüşlerde öncelik hakkı tanınması zorunlu"
+      },
+      {
+        "type": "subheading",
+        "text": "Tehlikeli Madde Taşıyan Araçlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel kurallar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düşük hız sınırları (30-70 km/h)\n• Özel park ve duraklama kuralları\n• Sürekli gözetim zorunluluğu\n• Ek güvenlik önlemleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Geçiş Üstünlüğü Detayları"
+      },
+      {
+        "type": "subheading",
+        "text": "Çakar lamba kullanımı:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sadece görev durumunda\n• Can ve mal güvenliğini tehlikeye sokmamak şartıyla\n• Yetkisiz kullanımına ağır cezalar"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural Trafik kurallarının temel amacı can ve mal güvenliğini korumaktır. Her kural bu amaç doğrultusunda şekillenmiştir."
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav İpuçları ve Hatırlatmalar"
+      },
+      {
+        "type": "subheading",
+        "text": "Önemli Rakamlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Mesafe kuralları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kavşaklar: 5m (şehir içi) / 100m (şehir dışı)\n• İşaret levhaları: 15m (şehir içi) / 100m (şehir dışı)\n• Otobüs durakları: 15m (her iki yön)\n• Yangın muslukları: 5m (her iki yön)"
+      },
+      {
+        "type": "subheading",
+        "text": "Hız sınırları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Şehir içi: 50 km/h (genel)\n• Şehirlerarası: 90 km/h (otomobil)\n• Otoyol: 130-140 km/h (otomobil)"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik Kurallar"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. CIPS kuralı: Cankurtaran → İtfaiye → Polis → Sivil Savunma\n2. Sağdaki soldan gelen araç: Eşdeğer yollarda geçiş hakkı\n3. Dönel kavşak: İçerideki araçların önceliği\n4. Sollama: Her zaman soldan, uygun koşullarda\n5. Işık kullanımı: Duruma göre doğru far seçimi"
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ve çevre bilgisi, güvenli sürücülük için gerekli olan temel bilgi birikimidir. Bu kılavuzda öğrendiğiniz kuralları sadece sınav için değil, yaşam boyu uygulamanız gereken prensipler olarak görmek önemlidir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unutmayın ki trafik kuralları can ve mal güvenliğini korumak için vardır. Her kuralın arkasında bir güvenlik nedeni bulunur. Sorumlu bir sürücü olmak, sadece kendimizi değil tüm yol kullanıcılarını korumak anlamına gelir."
+      },
+      {
+        "type": "subheading",
+        "text": "Başarılar dileriz ve güvenli yolculuklar!"
+      }
+    ]
+  },
+  {
+    "category": "Motor ve Araç Tekniği",
+    "title": "Motor ve Araç Tekniği",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de ehliyet sınavına hazırlanan öğrenciler için kapsamlı ve güncel teknolojiye dayanan bu çalışma kılavuzunda, motorun çalışma prensipleri, araç sistemleri ve temel bakım bilgilerini öğreneceksiniz. Bu bilgiler, güncel araç teknolojileri ve Türk mevzuatı temelinde hazırlanmıştır."
+      },
+      {
+        "type": "subheading",
+        "text": "Motorun Tanımı ve Temel Parçaları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motor, yakıttan elde ettiği ısı enerjisini mekanik enerjiye çeviren makinedir. Bu dönüştürme işlemi sayesinde araç hareket eder."
+      },
+      {
+        "type": "subheading",
+        "text": "Motorun Tanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motor, içten yanmalı bir makine olarak:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yakıtın kimyasal enerjisini önce ısı enerjisine dönüştürür\n• Isı enerjisini daha sonra mekanik enerjiye çevirir\n• Bu mekanik enerji tekerleklere aktarılarak araç hareket eder"
+      },
+      {
+        "type": "subheading",
+        "text": "Motor Türleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yakıt türüne göre motorlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Benzinli Motor: Yakıtı benzin olan motorlardır\n• Dizel Motor: Yakıtı motorin (mazot) olan motorlardır\n• LPG'li Motor: Yakıtı LPG gazı olan motorlardır\n• Hibrit Motor: İki farklı enerji kaynağını kullanan motorlardır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Çalışma zamanına göre motorlar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• İki zamanlı motorlar: Genellikle motosikletlerde kullanılır\n• Dört zamanlı motorlar: Otomobillerde kullanılır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Silindir diziliş şekline göre:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sıralı tip motorlar\n• V tip motorlar\n• Yıldız tip motorlar\n• Boksör tip motorlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Motorun Ana Parçaları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motorda bulunan temel parçalar ve görevleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Silindir: Pistonun hareket ettiği bölüm\n• Piston: Silindir içinde aşağı-yukarı hareket eden parça\n• Supap: Gaz giriş ve çıkışını kontrol eden parçalar\n• Emme supabı: Yakıt-hava karışımının girişini sağlar\n• Egzoz supabı: Yanmış gazların çıkışını sağlar\n• Krank mili: Pistonların doğrusal hareketini dairesel harekete çeviren mil\n• Kam mili: Supapların açılıp kapanmasını sağlar\n• Segman: Piston ile silindir arasında sızdırmazlık sağlar\n• Conta: Parçalar arası sızdırmazlık sağlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Dört Zamanlı Motorun Çalışma Prensibi"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/dort_zamanli_motor_dongusu.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Günümüz araçlarında kullanılan motorlar 4 zamanlı sistemle çalışır. Bu sistem, pistonun silindir içerisindeki her bir hareketine \"zaman\" denilmesinden kaynaklanır."
+      },
+      {
+        "type": "subheading",
+        "text": "1. Emme Zamanı (Intake Stroke)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Süreç:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Piston aşağı doğru hareket eder\n• Emme supabı açık, egzoz supabı kapalıdır\n• Silindir içerisindeki basınç düşer\n• Yakıt-hava karışımı silindir içine emilir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Benzinli motorlarda: Karbüratör veya enjektör tarafından hazırlanan yakıt-hava karışımı alınır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dizel motorlarda: Sadece temiz hava alınır, yakıt sonraki aşamada püskürtülür"
+      },
+      {
+        "type": "subheading",
+        "text": "2. Sıkıştırma Zamanı (Compression Stroke)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Süreç:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Piston yukarı doğru hareket eder\n• Her iki supap kapalıdır\n• Silindir içindeki karışım sıkıştırılır\n• Sıkıştırma sonucu basınç ve sıcaklık yükselir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Önemli: Sıkışan karışım yanmaya hazır hale gelir"
+      },
+      {
+        "type": "subheading",
+        "text": "3. Ateşleme Zamanı (Combustion/Power Stroke)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Süreç:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Benzinli motorlarda: Buji kıvılcım çıkartarak karışımı ateşler\n• Dizel motorlarda: Sıcak hava üzerine yakıt püskürtülür ve kendiliğinden tutuşur\n• Patlama sonucu piston aşağı doğru zorla itilir\n• Bu hareket krank milini döndürür ve güç üretilir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Not: Bu aşama motorun güç üretim zamanıdır"
+      },
+      {
+        "type": "subheading",
+        "text": "4. Egzoz Zamanı (Exhaust Stroke)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Süreç:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Piston yukarı doğru hareket eder\n• Egzoz supabı açık, emme supabı kapalıdır\n• Yanma sonucu oluşan gazlar dışarı atılır\n• Silindir bir sonraki döngüye hazır hale gelir"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Bilgi Bir çevrimin tamamlanması için krank mili iki kez döner (720°). Hareket halindeki araçlarda bu döngü dakikada ortalama 3.000-3.500 kez tekrarlanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Sistemleri ve Görevleri"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/otomotiv_ana_sistemleri.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern araçlarda motorun düzgün çalışması ve aracın güvenli kullanımı için birçok sistem bulunur."
+      },
+      {
+        "type": "subheading",
+        "text": "Ateşleme Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Benzinli motorlarda yakıt-hava karışımının ateşlenmesini sağlayan sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Akü: Elektrik enerjisi sağlar\n• Kontak anahtarı: Sistemi açıp kapatır\n• Ateşleme bobini: Voltajı yükseltir\n• Distribütör: Ateşleme sırasını ayarlar\n• Buji: Kıvılcım çıkartarak ateşleme yapar\n• Yüksek gerilim kabloları: Elektriği bujiye taşır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bujinin görevi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sıkıştırılmış yakıt-hava karışımını ateşlemek\n• Doğru zamanda kıvılcım çıkarmak\n• Düzenli yanma sağlamak"
+      },
+      {
+        "type": "subheading",
+        "text": "Yakıt Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motorun ihtiyaç duyduğu temiz yakıt ve hava karışımını sağlayan sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "Benzinli motorlarda:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yakıt deposu\n• Yakıt pompası\n• Yakıt filtresi\n• Karbüratör veya enjektör\n• Hava filtresi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dizel motorlarda:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yakıt deposu\n• Yakıt pompası (yüksek basınçlı)\n• Yakıt filtresi\n• Enjektörler\n• Hava filtresi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hava filtresinin görevi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motora giren havanın temizlenmesi\n• Toz ve kirletici maddelerin süzülmesi\n• Motor performansının korunması"
+      },
+      {
+        "type": "paragraph",
+        "text": "Filtre kirliliğinin etkileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor zengin karışımla çalışır\n• Yakıt tüketimi artar\n• Motor performansı düşer"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağlama Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motorun hareketli parçaları arasındaki sürtünmeyi azaltan ve motorun soğumasına yardımcı olan sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Motor yağının görevleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sürtünmeyi azaltma: Parçalar arası kaygan tabaka oluşturma\n• Aşınmayı önleme: Metal parçaları koruma\n• Soğutma: Isı transferine yardım etme\n• Temizlik: Motor içi tortuları uzaklaştırma\n• Sızdırmazlık: Piston segmanları ile çalışma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor yağı\n• Yağ pompası\n• Yağ filtresi\n• Yağ çubuğu (seviye ölçer)\n• Yağ deposu (karter)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motor yağı kontrolü:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Aracı düz zemine park edin\n2. Motor soğuyuncaya kadar bekleyin (10-15 dakika)\n3. Yağ çubuğunu çıkarın ve temizleyin\n4. Çubuğu tamamen yerine takıp çıkarın\n5. MIN ve MAX işaretleri arasında olup olmadığını kontrol edin"
+      },
+      {
+        "type": "key_info",
+        "text": "Kritik Uyarı Motor yağı seviyesi MIN seviyesinin altına düştüğünde motor ciddi hasar görebilir. Yağ lambası yanarsa hemen durdurun!"
+      },
+      {
+        "type": "subheading",
+        "text": "Soğutma Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motorun çalışma sıcaklığını optimal seviyede tutarak aşırı ısınmayı önleyen sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Radyatör: Soğutma suyunu soğutur\n• Su pompası: Soğutma suyunu dolaştırır\n• Termostat: Soğutma suyu sıcaklığını kontrol eder\n• Vantilatör: Radyatöre hava akışı sağlar\n• Soğutma suyu (Antifriz): Isı transferi sağlar, donmayı önler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Antifrizin önemi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kış aylarında donmayı önler\n• Yaz aylarında kaynamayı geciktirir\n• Korozyon oluşumunu engeller\n• Sistem parçalarını korur"
+      },
+      {
+        "type": "paragraph",
+        "text": "Soğutma sistemi arızası belirtileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hararet göstergesinin normalin üstüne çıkması\n• Soğutma suyu kaybı\n• Motor kapağından buhar çıkması\n• Radyatörden sızıntı"
+      },
+      {
+        "type": "subheading",
+        "text": "Şarj Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aracın elektrik ihtiyacını karşılayan ve aküyü şarj eden sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Alternatör: Mekanik enerjiyi elektrik enerjisine çevirir\n• Regülatör (Konjektör): Şarj voltajını düzenler\n• Akü: Elektrik enerjisini depolar\n• Şarj göstergesi: Sistemin durumunu gösterir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Alternatörün görevleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor çalışırken elektrikli alıcıları beslemek\n• Aküyü sürekli şarj etmek\n• 12,9-14,9 volt arası gerilim üretmek"
+      },
+      {
+        "type": "paragraph",
+        "text": "Şarj sistemi çalışma prensibi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor düşük devirde: Alternatör + akü birlikte çalışır\n• Motor yüksek devirde: Alternatör aküyü şarj eder\n• Motor durduğunda: Sadece akü elektrik verir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Şarj sistemi arızası belirtileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Gösterge panelinde akü lambası yanar\n• Elektriklerin zayıf çalışması\n• Farların sönükleşmesi\n• Akünün sürekli bitmesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Marş Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motorun ilk çalışma hareketini sağlayan sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistemin görevi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motora ilk dönme hareketi vermek\n• Krank milini çevirerek motoru çalıştırmak\n• Çalışma başladıktan sonra devreden çıkmak"
+      },
+      {
+        "type": "paragraph",
+        "text": "Parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Marş motoru\n• Marş rölesi\n• Kontak anahtarı\n• Marş bendix (kavrama)"
+      },
+      {
+        "type": "subheading",
+        "text": "Fren Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aracın güvenli şekilde yavaşlatılması ve durdurulmasını sağlayan sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Sistem parçaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Fren pedalı\n• Ana fren silindiri\n• Fren hidroliği\n• Fren kaliperleri\n• Fren balata/kampana\n• Fren diskleri/tambur"
+      },
+      {
+        "type": "paragraph",
+        "text": "ABS Sistemi (Anti-Lock Braking System):"
+      },
+      {
+        "type": "paragraph",
+        "text": "ABS'nin görevi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Frenlemede tekerleklerin kilitlenmesini önlemek\n• Direksiyon hakimiyetini korumak\n• Kaygan zeminde güvenli frenleme sağlamak"
+      },
+      {
+        "type": "paragraph",
+        "text": "ABS çalışma prensibi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Tekerlek hızı sensörleri sürekli kontrol yapar\n2. Tekerlek kilitlenme tehlikesi tespit edilir\n3. Sistem otomatik olarak fren basıncını azaltır\n4. Tekerlek normal hıza döndüğünde basınç artırılır\n5. Bu işlem saniyede 15-20 kez tekrarlanır"
+      },
+      {
+        "type": "paragraph",
+        "text": "ABS'nin avantajları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Fren mesafesini kısaltır (kaygan zeminde)\n• Direksiyon kontrolünü korur\n• Yan kaymaları önler\n• Güvenli yönlendirme imkânı sağlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Süspansiyon Sistemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aracın yol ile bağlantısını sağlayan ve sürüş konforunu artıran sistemdir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Amortisörlerin görevi:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yol düzensizliklerini absorbe etmek\n• Aracın salınımını kontrol etmek\n• Tekerlek tutunmasını artırmak\n• Sürüş konforunu sağlamak"
+      },
+      {
+        "type": "subheading",
+        "text": "Gösterge Paneli ve İkaz Işıkları"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/arac_uyari_lambalari.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araç gösterge panelindeki ışıklar, aracın durumu hakkında sürücüyü bilgilendiren kritik unsurlardır."
+      },
+      {
+        "type": "subheading",
+        "text": "İkaz Işıklarının Renk Kodları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kırmızı Işıklar: Ciddi sorun - Hemen durdurun"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Acil müdahale gerektirir\n• Can güvenliğini tehdit eder\n• Aracın kullanımını durdurmak gerekir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sarı/Turuncu Işıklar: Dikkat - Kontrol edin"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Bir sorun gelişmekte\n• İlk fırsatta servise götürün\n• Dikkatli sürüş yapın"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yeşil/Mavi Işıklar: Bilgilendirme - Normal çalışma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sistem aktif ve çalışıyor\n• Normal durum\n• Herhangi bir tehlike yok"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik İkaz Işıkları ve Anlamları"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağ Basıncı Lambası (Kırmızı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Motor yağ basıncı düşük\nYapılacak: Hemen durdurun, yağ seviyesini kontrol edin\nTehlike: Motor hasar görebilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Hararet Göstergesi (Kırmızı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Motor aşırı ısınıyor\nYapılacak: Hemen durdurun, soğumasını bekleyin\nTehlike: Motor başlığı çatlayabilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Akü/Şarj Lambası (Kırmızı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Şarj sistemi arızalı\nYapılacak: En yakın servise gidin\nTehlike: Elektrik kesilir, aracın durmasına neden olur"
+      },
+      {
+        "type": "subheading",
+        "text": "Fren Sistemi Uyarısı (Kırmızı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Fren sisteminde arıza\nYapılacak: Çok dikkatli sürün, hemen servise götürün\nTehlike: Frenler çalışmayabilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Motor Arıza Lambası (Sarı/Turuncu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Motor yönetim sisteminde sorun\nYapılacak: İlk fırsatta servise götürün\nTehlike: Performans kaybı, emisyon artışı"
+      },
+      {
+        "type": "subheading",
+        "text": "ABS Lambası (Sarı/Turuncu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: ABS sisteminde arıza\nYapılacak: Normal frenler çalışır, dikkatli sürün\nTehlike: Kaygan zeminde tekerlek kilitlenebilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Kızdırma Bujisi (Sarı) - Dizel Araçlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Dizel motor ısınıyor\nYapılacak: Sönmesini bekleyin, sonra çalıştırın\nTehlike: Soğuk havada çalışmama"
+      },
+      {
+        "type": "subheading",
+        "text": "Emniyet Kemeri (Kırmızı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Emniyet kemeri takılı değil\nYapılacak: Kemeri takın\nTehlike: Kaza anında yaralanma riski"
+      },
+      {
+        "type": "subheading",
+        "text": "Airbag Sistemi Uyarısı (Sarı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Hava yastığı sisteminde arıza\nYapılacak: Servise götürün\nTehlike: Kaza anında hava yastığı açılmayabilir"
+      },
+      {
+        "type": "subheading",
+        "text": "Yakıt Seviyesi (Sarı)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Yakıt azaldı\nYapılacak: İlk benzin istasyonunda doldurun\nTehlike: Yolda kalma riski"
+      },
+      {
+        "type": "subheading",
+        "text": "Bilgilendirici Işıklar"
+      },
+      {
+        "type": "subheading",
+        "text": "Sinyaller (Yeşil)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Dönüş sinyali çalışıyor\nNormal durum: Dönüş sonrası otomatik söner"
+      },
+      {
+        "type": "subheading",
+        "text": "Uzun Far (Mavi)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Uzun farlar açık\nDikkat: Karşılaşmalarda kapatın"
+      },
+      {
+        "type": "subheading",
+        "text": "Sis Lambaları (Yeşil)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anlamı: Sis farları açık\nDikkat: Sis yokken kapatın"
+      },
+      {
+        "type": "subheading",
+        "text": "Araç Bakımı ve Sürüş Öncesi Hazırlık"
+      },
+      {
+        "type": "paragraph",
+        "text": "Güvenli sürüş için aracın düzenli bakımı ve sürüş öncesi kontrolleri kritik önem taşır."
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş Öncesi Kontroller"
+      },
+      {
+        "type": "subheading",
+        "text": "Aracın Dış Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Araç kullanmaya başlamadan önce:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Aracın etrafında bir tur atarak görsel kontrol\n• Lastiklerin durumu (kesik, şişlik, hava basıncı)\n• Işıkların çalışması\n• Ayna pozisyonları\n• Cam temizliği"
+      },
+      {
+        "type": "subheading",
+        "text": "İç Kontroller"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Koltuk ayarı: Pedallara rahat erişim\n• Ayna ayarları: Kör nokta minimum\n• Emniyet kemeri: Doğru takılması\n• Gösterge paneli kontrolü: İkaz ışıkları"
+      },
+      {
+        "type": "subheading",
+        "text": "Lastik Bakımı ve Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Lastikler aracın yolla tek temas noktasıdır ve güvenlik için kritik önemdedir."
+      },
+      {
+        "type": "subheading",
+        "text": "Lastik Hava Basıncı Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kontrol zamanı: Lastikler soğukken (araç 3 saat hareketsiz)\nKontrol sıklığı: Ayda bir kez\nBasınç değerleri: Sürücü kapısı etiketi veya kullanım kılavuzunda"
+      },
+      {
+        "type": "paragraph",
+        "text": "Düşük basıncın etkileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Lastik aşınması artar\n• Yakıt tüketimi yükselir\n• Yol tutuşu azalır\n• Patlama riski artar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yüksek basıncın etkileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sürüş konforu azalır\n• Orta kısım fazla aşınır\n• Frenleme mesafesi uzar"
+      },
+      {
+        "type": "subheading",
+        "text": "Lastik Diş Derinliği Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Minimum derinlik: 1.6 mm (yasal limit)\nÖnerilen derinlik: 3-4 mm güvenli kullanım için\nKontrol yöntemi: Madeni para veya derinlik ölçer"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aşınma belirtileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Düzensiz aşınma deseni\n• Yan duvarlarda çatlaklar\n• Diş deseninde şişlik\n• İç kord tellerinin görünmesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Sıvı Seviyeleri Kontrolü"
+      },
+      {
+        "type": "subheading",
+        "text": "Motor Yağı Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kontrol zamanı: Motor soğukken, düz zeminde\nSeviye: MIN-MAX arası, tercihen MAX'a yakın\nKontrol sıklığı: 1000 km'de bir"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yağ değişim aralıkları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Mineral yağ: 5.000-7.000 km\n• Sentetik yağ: 10.000-15.000 km\n• Dizel araçlar: Daha sık değişim gerekir"
+      },
+      {
+        "type": "subheading",
+        "text": "Soğutma Suyu Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kontrol zamanı: Motor soğukken\nSeviye: MIN-MAX arası\nSıvı türü: Antifriz + distile su karışımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kontrol noktaları:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Genleşme deposu seviyesi\n• Radyatör kapatma kapağı\n• Hortum bağlantıları\n• Sızıntı kontrolü"
+      },
+      {
+        "type": "subheading",
+        "text": "Fren Hidroliği Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Kontrol: Ana silindir deposu seviyesi\nSeviye: MIN çizgisinin üzerinde\nSıvı türü: DOT 3, DOT 4 veya DOT 5.1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Önemli: Fren hidroliği azalması balata aşınması veya sızıntı belirtisidir"
+      },
+      {
+        "type": "subheading",
+        "text": "Cam Suyu Kontrolü"
+      },
+      {
+        "type": "paragraph",
+        "text": "İçerik: Su + cam temizleme sıvısı\nKış ayları: Dondurmaz sıvı eklemek\nKontrol: Deposu dolu tutmak"
+      },
+      {
+        "type": "subheading",
+        "text": "Işık ve Sinyal Kontrolü"
+      },
+      {
+        "type": "subheading",
+        "text": "Kontrol edilmesi gerekenler:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Farlar: Uzun/kısa far çalışması\n• Sinyaller: Sağ/sol dönüş ışıkları\n• Fren lambaları: Dur ışıkları\n• Geri vites lambası: Park sensörü çalışması\n• Plaka ışığı: Gece görünürlük\n• Dörtlü ikaz: Acil durum ışıkları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Arızalı lamba belirtileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Gösterge panelinde ampul uyarısı\n• Sinyal hızında değişiklik\n• Işık yoğunluğunda azalma"
+      },
+      {
+        "type": "subheading",
+        "text": "Akü Bakımı ve Kontrolü"
+      },
+      {
+        "type": "subheading",
+        "text": "Görsel Kontrol"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kutup başı korozyonu\n• Kablo bağlantıları\n• Akü gövde çatlakları\n• Elektrolit seviyesi (açık tip akülerde)"
+      },
+      {
+        "type": "subheading",
+        "text": "Akü Ömrü"
+      },
+      {
+        "type": "paragraph",
+        "text": "Normal ömür: 3-5 yıl\nDeğişim belirtileri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Zorla çalışma\n• Işıklarda sönüklük\n• Korozyon artışı\n• Sürekli şarj kaybı"
+      },
+      {
+        "type": "subheading",
+        "text": "Periyodik Bakım Programı"
+      },
+      {
+        "type": "subheading",
+        "text": "1.000 km'de Yapılacaklar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor yağı seviye kontrolü\n• Soğutma suyu kontrolü\n• Lastik basıncı kontrolü\n• Görsel kontroller"
+      },
+      {
+        "type": "subheading",
+        "text": "5.000-10.000 km'de Yapılacaklar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor yağı değişimi\n• Yağ filtresi değişimi\n• Hava filtresi kontrolü\n• Kapsamlı sistem kontrolü"
+      },
+      {
+        "type": "subheading",
+        "text": "15.000-20.000 km'de Yapılacaklar:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Kapsamlı periyodik bakım\n• Filtre değişimleri\n• Fren sistemi kontrolü\n• Süspansiyon kontrolü"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural Araç bakımını ihmal etmek, hem güvenlik riskini artırır hem de onarım maliyetlerini yükseltir. Düzenli bakım, aracın değerini korur ve ömrünü uzatır."
+      },
+      {
+        "type": "subheading",
+        "text": "Acil Durumlar ve Arıza Belirtileri"
+      },
+      {
+        "type": "subheading",
+        "text": "Motoru Hemen Durdurmanız Gereken Haller"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Yağ basınç lambası yanarsa\n2. Hararet göstergesi kırmızı alana geçerse\n3. Motor kapağından buhar çıkarsa\n4. Anormal motor sesleri duyulursa\n5. Fren pedalı dibe batarsa"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaygın Arıza Belirtileri ve Nedenleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Motor Titreme"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olası nedenleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Buji arızası\n• Yakıt sistemi sorunu\n• Motor ayar bozukluğu\n• Hava filtresi tıkanması"
+      },
+      {
+        "type": "subheading",
+        "text": "Aşırı Yakıt Tüketimi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olası nedenleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Hava filtresi kirli\n• Lastik basıncı düşük\n• Motor ayar bozukluğu\n• Sürüş alışkanlıkları"
+      },
+      {
+        "type": "subheading",
+        "text": "Çalışmama Sorunu"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olası nedenleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Akü boş\n• Buji arızası\n• Yakıt bitmiş\n• Marş motoru arızası"
+      },
+      {
+        "type": "subheading",
+        "text": "Aşırı Isınma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Olası nedenleri:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Soğutma suyu eksik\n• Termostat arızası\n• Su pompası arızası\n• Radyatör tıkanması"
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav İpuçları ve Önemli Notlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Sıkça Sorulan Konular"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. 4 zamanlı motor çalışma sırası: Emme → Sıkıştırma → Ateşleme → Egzoz\n2. Motor yağının görevleri: Sürtünme azaltma, soğutma, temizleme, koruma\n3. ABS'nin görevi: Tekerlek kilitlenmesini önlemek\n4. Alternatörün görevi: Elektrik üretmek ve aküyü şarj etmek\n5. Kırmızı ikaz ışıkları: Hemen durdurmayı gerektirir"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik Rakamlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Motor yağı kontrol sıklığı: 1000 km'de bir\n• Lastik minimum diş derinliği: 1.6 mm\n• Akü ömrü: 3-5 yıl\n• Normal motor sıcaklığı: 80-95°C\n• Şarj voltajı: 12.9-14.9 volt"
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav Stratejileri"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Görselleri iyi inceleyin: İkaz ışığı şekillerini ezberleyin\n2. Sistem işlevlerini anlayın: Sadece ezberlemeyin, mantığını kavrayın\n3. Arıza belirtilerini bileyin: Hangi belirti hangi sisteme ait\n4. Renk kodlarını unutmayın: Kırmızı=tehlike, sarı=dikkat, yeşil=bilgi\n5. Bakım aralıklarını bilin: Ne zaman hangi kontrol yapılır"
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "Motor ve araç tekniği bilgisi, güvenli sürücülük için temel gereksinimlerin başında gelir. Bu kılavuzda öğrendiğiniz bilgiler sadece sınav için değil, yaşam boyu araç kullanımınız için değerli kaynaklardır."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unutmayın ki modern araçlar karmaşık sistemlerden oluşur ve bu sistemlerin düzgün çalışması hem güvenliğiniz hem de araç ömrü için kritiktir. Düzenli bakım ve kontroller, aracınızın size yıllar boyunca güvenli hizmet vermesini sağlayacaktır."
+      },
+      {
+        "type": "paragraph",
+        "text": "Başarılı bir sınav ve güvenli sürüşler dileriz!"
+      }
+    ]
+  },
+  {
+    "category": "Trafik Adabı",
+    "title": "Trafik Adabı",
+    "content": [
+      {
+        "type": "subheading",
+        "text": "Trafik Adabı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de ehliyet sınavına hazırlanan öğrenciler için hazırlanan bu kapsamlı çalışma kılavuzunda, trafikte nasıl davranmanız gerektiğini, hangi değerlere sahip olmanız ve diğer yol kullanıcılarıyla nasıl etkileşim kurmanız gerektiğini öğreneceksiniz. Trafik adabı, sadece kuralları bilmekle kalmaz, aynı zamanda bu kuralları içselleştirerek uygulamayı gerektirir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabının Tanımı ve Önemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabı, yazılı olmayan kurallar sistemidir ve trafik içinde sorumluluk, yardımlaşma, hoşgörü, saygı, fedakârlık, sabır gibi değerlere sahip olabilme yetisi olarak tanımlanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabı Nedir?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türk Dil Kurumu, \"adap\" kelimesini \"yol, yordam\" olarak açıklamaktadır. Trafik adabı ise:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yazılı kuralları ceza korkusu olmadan içselleştirerek uygulama\n• Yazılı olmayan kuralları karşılıklı anlayış ve empati ile oluşturma\n• Trafik kültürünü bireysel ve toplumsal düzeyde geliştirme"
+      },
+      {
+        "type": "key_info",
+        "text": "Temel Prensibi\nTrafik adabı, denetim ve ceza korkusuyla değil, içselleştirilmiş bir sorumlulukla hareket etmektir. Bir toplumda kişiler birbirlerine nasıl davranıyorsa, trafik ortamında da aynı şekilde davranırlar."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabının Önemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Güvenlik açısından:\n• Trafik kazalarının azalması\n• Can ve mal güvenliğinin artması\n• Stresli durumların minimize edilmesi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Toplumsal açısından:\n• Trafik kültürünün gelişmesi\n• Karşılıklı saygı ve anlayışın artması\n• Sosyal uyumun güçlenmesi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Bireysel açısından:\n• Sürüş stresinin azalması\n• Daha huzurlu seyahat deneyimi\n• Örnek davranış sergileyerek gelecek nesillere model olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabı vs Trafik Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "- Yazılı ve zorunlu: Yazılı olmayan, gönüllü\n- Ceza tehdidi var: Ceza tehdidi yok\n- Ne yapılacağını belirler: Nasıl yapılacağını belirler\n- Evrensel standartlar: Kültürel ve toplumsal"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Temel Değerler"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/trafik_adabinin_temel_degerleri.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabının temeli, evrensel insani değerlerin trafik ortamında yaşatılmasıdır. Bu değerler hem sürüş güvenliğini artırır hem de toplumsal barışa katkıda bulunur."
+      },
+      {
+        "type": "subheading",
+        "text": "Sorumluluk"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sorumluluk, kişinin kendi davranışlarını veya kendi yetki alanına giren herhangi bir olayın sonuçlarını üstlenmesi anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sorumlu sürücünün özellikleri:\n• Sadece araç kullanmayı değil, kendine hâkim olmayı da öğrenir\n• Davranışlarının sonuçlarını önceden düşünerek hareket eder\n• Hem kendine hem de diğer yol kullanıcılarına karşı sorumluluk hisseder\n• Güvenli, dikkatli ve kurallara uygun sürüş yapar"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nBir sürücü kurallara uymayarak geçiş yapması sonucunda karşı yönden gelen araca çarparak kaza yapar. Sorumlu bir sürücü bu durumda hatanın kendisinde olduğunu kabul eder ve gerekli tüm yardımları yapar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sorumluluğa aykırı davranışlar:\n• Alkol/uyuşturucu etkisi altında araç kullanma\n• Aşırı hız yapma\n• Yorgunken ya da uykusuzken araç kullanma\n• Dikkat dağıtıcı unsurlarla (telefon vb.) ilgilenme"
+      },
+      {
+        "type": "subheading",
+        "text": "Yardımlaşma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yardımlaşma, karşılıklı yardımda bulunma anlamına gelmektedir. Trafik ortamı, birlikte yaşanan bir alandır ve yardımlaşma bu alanın güvenli olması için kritiktir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yardımlaşma örnekleri:\n• Acil durumlarda: Ambulans, itfaiye, polis araçlarına yol verme\n• Arıza durumunda: Yolda kalan araca yardım etme, üçgen reflektör koyma\n• Dezavantajlı gruplara: Yaşlı, engelli, çocuklu sürücülere anlayış gösterme\n• Trafik akışında: Şerit değiştirmek isteyen araca yol verme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nYoğun trafikte bir ambulans siren çalarak yaklaşır. Trafik adabına sahip sürücüler, mümkün olduğunca kenara çekilerek ambulansın geçişine yardımcı olurlar. Bu davranış hem \"yardımlaşma\" hem de \"sorumluluk\" değerlerini gösterir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yardımlaşmanın faydaları:\n• Toplumsal dayanışmanın artması\n• Acil durumların daha etkili yönetimi\n• Trafik akışının iyileşmesi\n• Güvenlik seviyesinin yükselmesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Hoşgörü ve Sabır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hoşgörü, ortaya çıkabilecek sorunları anlayışla karşılayarak, olabildiği kadar hoş görme durumu, müsamaha, tolerans anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Hoşgörü gerektiren durumlar:\n• Acemi sürücülerin yaptığı hatalar\n• Yaşlı sürücülerin yavaş sürüşü\n• Park manevrası yapan sürücülerin zaman alması\n• Yol tarifi alan sürücülerin kararsızlığı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sabır örnekleri:\n• Trafik ışığında beklerken sakin kalma\n• Yoğun trafikte öfkelenmeme\n• Yavaş ilerleyen araçlara tahammül gösterme\n• Acil durum araçlarını bekleyebilme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nPark halindeki araçlar arasından çıkmaya çalışan acemi bir sürücü birkaç manevradan sonra ancak çıkabilir. Sabırlı sürücüler bekler ve acemi sürücüye moral vererek yardımcı olurlar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sabırsızlığın zararları:\n• Stres seviyesinin artması\n• Hatalı karar verme riskinin yükselmesi\n• Agresif davranışlara yönelme\n• Kaza riskinin artması"
+      },
+      {
+        "type": "subheading",
+        "text": "Nezaket ve Saygı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Nezaket: Başkalarına karşı saygılı ve incelikle davranma\n• *Saygı: Değeri, üstünlüğü, yaşlılığı, yararlılığı dolayısıyla bir kimseye karşı dikkatli, özenli, ölçülü davranmaya sebep olan sevgi duygusu."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Nezaket örnekleri:\n• Selektör yaparak teşekkür etme\n• Hata yapan sürücüyü küfretmeden uyarma\n• Park alanını paylaşırken düşünceli davranma\n• Yayalara karşı sabırlı olma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Saygılı davranış örnekleri:\n• Yaşlı ve engelli sürücülere anlayış gösterme\n• Yaya öncelik haklarına riayet etme\n• Diğer sürücülerin mahremiyetine saygı gösterme\n• Korna ve farları taciz amacıyla kullanmama"
+      },
+      {
+        "type": "key_info",
+        "text": "Kaza Sonrası Davranış Örneği\nİki araç arasında hafif hasarlı bir kaza olur. Trafik adabına sahip sürücüler birbirlerine bağırmak yerine, sakin bir şekilde durumu değerlendirip, gerekiyorsa özür dilerek konuyu çözerler."
+      },
+      {
+        "type": "subheading",
+        "text": "Feragat ve Fedakarlık (Diğergamlık)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Feragat ve fedakarlık, bir amaç uğruna ya da gerçekleştirilmesi istenen herhangi bir şey için kendi yararlarından vazgeçme, hakkından kendi isteğiyle vazgeçme, özveri anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Feragat örnekleri:\n• Kavşakta geçiş hakkı kendinde olmasına rağmen karşı tarafa yol verme\n• Park alanında daha uygun yeri başkasına bırakma\n• Şerit değiştirmek isteyen araca yer açma\n• Acele eden sürücüye önden geçme imkânı tanıma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Fedakârlık örnekleri:\n• Ambulans için şerit tıkanıklığında bile kenara çekilme\n• Engelli aracı için park yerini boşaltma\n• Zor durumda olan sürücüye kendi zamanından vererek yardım etme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nTali yol-ana yol kesişmesinde geçiş hakkı ana yoldaki sürücüye aittir. Ancak ana yoldaki sürücü, tali yolda bekleyen aracın acele ettiğini fark edince kendi hakkından feragat ederek ona geçiş imkânı tanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Empati"
+      },
+      {
+        "type": "paragraph",
+        "text": "Empati, kişinin kendisini başka bir bilincin yerine koyarak söz konusu bilincin duygularını, isteklerini ve düşüncelerini, denemeksizin anlayabilmesi becerisi olarak tanımlanır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati kurma yolları:\n• \"Benim yerimde olsa ne hissederdi?\" sorusunu sorma\n• Diğer sürücünün durumunu anlayıp değerlendirme\n• Kendi hatalarını düşünerek anlayış gösterme\n• \"Herkes hata yapabilir\" anlayışını benimseme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati örnekleri:\n• Yağmurlu havada yayalara su sıçratmamaya dikkat etme\n• Çocuk arabasıyla geçiş yapan yayanın yavaşlığını anlama\n• Park manevrası yapan sürücının durumunu kavrama\n• Yaşlı sürücünün tepki süresinin farklı olduğunu bilme"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural\n\"Kendinize nasıl davranılmasını istiyorsanız başkalarına da o şekilde davranın.\" Bu empati kurmak için en temel kuraldır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte İletişim"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamında sürücüler sürekli iletişim halindedir. Bu iletişim bazen sesli (korna), bazen ışıklı (sinyal, selektör), bazen de beden dili ile gerçekleşir."
+      },
+      {
+        "type": "subheading",
+        "text": "Doğru İletişim Yöntemleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Sinyal Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Doğru sinyal kullanımı:\n• Zamanında verme: Manevra öncesinde yeterli süre bırakma\n• Açık mesaj: Niyetin net şekilde anlaşılmasını sağlama\n• Tutarlı olma: Verilen sinyalle uyumlu hareket etme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sinyal verme kuralları:\n• Şerit değiştirmeden önce\n• Dönüş manevrası öncesinde\n• Sollama yaparken\n• Park etmeye başlarken"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Not\n45 derece ve üzeri dönüşlerde sinyal kendiliğinden kapanır. Şerit değiştirme gibi küçük manevralar için manuel olarak kapatmak gerekir."
+      },
+      {
+        "type": "subheading",
+        "text": "Korna Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Korna ne zaman çalınır:\n• Görüş mesafesinin yetersiz olduğu yerlerde uyarı için\n• Tehlikeli davranış gösteren sürücü/yayayı uyarma için\n• Yamaç, dönemeç gibi riskli bölgelerde\n• Acil durumlarda dikkat çekmek için"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Korna ne zaman çalınmaz:\n• Çocuk, yaşlı ve engellilere karşı (algılama güçlükleri yaşayabilir)\n• Trafik ışığında yeşil yanar yanmaz\n• Öfke ifadesi olarak\n• Gürültü kirliliği yaratacak şekilde"
+      },
+      {
+        "type": "key_info",
+        "text": "Dikkat\nYaşlı, engelli ve çocuklar algılamada güçlük çekecekleri için korna ile uyarılmaktan uzak durulmalıdır."
+      },
+      {
+        "type": "subheading",
+        "text": "Selektör Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Selektör (uzun-kısa far geçişi) kullanım alanları:\n• Kavşak yaklaşımlarında uyarı\n• Tepe üstü ve dönemeçlerde\n• Sollama öncesi uyarı\n• Teşekkür ifadesi olarak"
+      },
+      {
+        "type": "subheading",
+        "text": "Agresif ve Taciz Edici Davranışlardan Kaçınma"
+      },
+      {
+        "type": "subheading",
+        "text": "Taciz Edici Davranışlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yapılmaması gerekenler:\n• Yakın takip: Güvenli takip mesafesini korumama\n• Sürekli korna: Sinir bozucu ve gereksiz korna çalma\n• Far tacizi: Uzun farları taciz amacıyla kullanma\n• Kesme: Kasıtlı olarak önüne geçme\n• Engelleme: Geçişi kasten engelleme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Bu davranışların zararları:\n• Trafik güvenliğini bozma\n• Stres seviyesini artırma\n• Agresif tepkilere neden olma\n• Kaza riskini yükseltme"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Hak İhlalleri ve Sonuçları"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/trafik_hak_ihlali_ciddiyet.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamında yapılan yanlış davranışlar sadece kuralları ihlal etmez, aynı zamanda çeşitli hak türlerini de çiğner. Bu haklar beş ana kategoride incelenir."
+      },
+      {
+        "type": "subheading",
+        "text": "Birey Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Diğer bireylere verilen zarardır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Örnek durumlar:\n• Engelli park yeri işgali: Engelli olmadığı halde engelli kişiler için ayrılmış yerlere park etmek\n• Ambulansa yol vermeme: Ambulansın geçişini engelleyerek hasta hayatını riske atmak\n• Aşırı hız: Diğer sürücülerin güvenliğini tehlikeye atmak\n• Yaya geçidi ihlali: Yayaların güvenli geçişini engellemek"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nSiren çalarak gelen bir ambulans vardır ancak bir sürücü yol vermiyor. Bu davranış ambulanstaki hastanın hayatını riske atarak \"birey hakkı\" ihlali yapmaktadır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Birey hakkı ihlalinin sonuçları:\n• Bireysel mağduriyetler\n• Can güvenliği riski\n• Maddi-manevi zararlar\n• Sosyal adaletsizlik"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplum Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Topluma verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Toplumsal zararlar:\n• Ailevi yıkım: Kazalar sonucu ailelerin parçalanması\n• Psikolojik etkiler: Kaza mağdurlarının uzun süreli travmaları\n• Sosyo-ekonomik kayıplar: Ailelerin gelir kaybı yaşaması\n• Toplumsal güvensizlik: Trafik güvenliğine olan inancın sarsılması"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Psikolojik ve sosyal etkiler:\n• Kaza geçiren kişiler uzun süre psikolojik destek ihtiyacı duyar\n• Aileler maddi ve manevi sıkıntılar yaşar\n• Toplumda güvensizlik ve korku artar\n• Sağlıksız toplum yapısı oluşur"
+      },
+      {
+        "type": "key_info",
+        "text": "Gerçek Etki\nBir trafik kazası sadece o anki kazada yaralananları etkilemez. Ailelerin dağılması, psikolojik travmalar ve ekonomik zorluklar nesillerce sürebilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Kamu Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Devlete verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Ekonomik boyut:\n• 2014 yılı verilerine göre trafik kazaları Türkiye ekonomisine 24 milyar TL zarar vermiştir\n• Bu tutar, yıllık yatırım bütçesinin yarısına denk gelmektedir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kamu hakkı ihlali örnekleri:\n• Trafik levhalarına zarar verme\n• Yol altyapısının erken aşınmasına neden olma\n• Yargı sisteminin iş yükünü artırma\n• Sağlık harcamalarının artması"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Uzun vadeli etkiler:\n• Ülke imajının zedelenmesi\n• Kalkınma projelerinin yavaşlaması\n• Üretkenlik kayıpları\n• Engelli nüfusunun artması"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşam Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Bireyin kendine verdiği zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Yaşam hakkı en temel haktır ve diğer tüm hakların kullanımı bu hakka bağlıdır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşam hakkını tehlikeye atan davranışlar:\n• Alkollü/uyuşturucu etkisi altında sürüş\n• Aşırı hız yapma\n• Emniyet kemeri takmama\n• Yorgun/uykusuz sürüş\n• Telefon kullanırken sürüş"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşam hakkının önemi:\n• Kişi maddi ve manevi birçok zorlukla yetişkin hale gelir\n• Birçok kişinin emeği vardır\n• Topluma karşı yaşama sorumluluğu bulunur\n• Kendine zarar verme hakkı yoktur"
+      },
+      {
+        "type": "key_info",
+        "text": "Felsefik Yaklaşım\n\"İnsan yaşamının değeri, sadece o kişiye değil tüm topluma aittir. Bu nedenle kimsenin kendi yaşamını riske atma hakkı yoktur.\""
+      },
+      {
+        "type": "subheading",
+        "text": "Çevre Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Çevre ve doğaya verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevresel zararlara örnekler:\n• Gereksiz emisyon: Boş yere motorunu çalıştırma\n• Gürültü kirliliği: Gereksiz korna kullanımı, modifiye egzoz\n• Hava kirliliği: Aşırı yakıt tüketimi\n• Görüntü kirliliği: Çevreye atık bırakma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevre dostu sürüş:\n• Toplu taşımayı tercih etme\n• Bisiklet ve yürüyüş alternatiflerini değerlendirme\n• Yakıt tasarruflu sürüş teknikleri\n• Gereksiz yere korna çalmama"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Yönetimi ve Stresle Başa Çıkma"
+      },
+      {
+        "type": "image",
+        "imageUrl": "assets/images/guides/ofke_kontrolu_teknikleri.png"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamı, stres ve öfkenin sıkça yaşandığı yerlerden biridir. Öfke kontrolü hem kişisel güvenlik hem de trafik güvenliği açısından kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Öfkeye Neden Olan Faktörler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kişisel faktörler:\n• Genel stres seviyesi yüksekliği\n• Kişilik özellikleri (sabırsızlık, agresiflik)\n• Yorgunluk ve uykusuzluk\n• Kişisel sorunlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Trafik kaynaklı faktörler:\n• Trafik yoğunluğu ve sıkışıklığı\n• Diğer sürücülerin hatalı davranışları\n• Yol koşullarının kötülüğü\n• Zaman baskısı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevresel faktörler:\n• Hava koşulları\n• Gürültü seviyesi\n• Araç içi sıcaklık\n• Görüş mesafesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Anında Yapılması Gerekenler"
+      },
+      {
+        "type": "subheading",
+        "text": "1. Derin Nefes Alma Tekniği"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *4-4-4 Tekniği:\n• 4 saniye burnundan nefes alın\n• 4 saniye nefesi tutun\n• 4 saniye ağızdan verin\n• En az 3-4 defa tekrarlayın"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Faydaları:\n• Kalp atış hızını düzenler\n• Kan basıncını düşürür\n• Zihinsel netliği artırır\n• Kas gerginliğini azaltır"
+      },
+      {
+        "type": "subheading",
+        "text": "2. Zihinsel Mesafe Alma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Dikkat dağıtma yöntemleri:\n• Müzik dinleme: Sakinleştirici müzik seçimi\n• Zihin egzersizi: Sayı saymak, şarkı söylemek\n• Manzara izleme: Çevredeki güzel manzaralara odaklanma\n• Hedef belirleme: Güvenli varış hedefini hatırlama"
+      },
+      {
+        "type": "subheading",
+        "text": "3. Pozitif İç Konuşma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sakinleştirici cümleler:\n• \"Sakin ol, bu da geçecek\"\n• \"Güvenli varış daha önemli\"\n• \"Bu durumda öfkelenmek mantıklı değil\"\n• \"Herkes hata yapabilir\"\n• \"Benim ailem beni bekliyor\""
+      },
+      {
+        "type": "subheading",
+        "text": "4. Fiziksel Gevşeme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kas gevşetme teknikleri:\n• Omuzları indirme\n• Çeneyi gevşetme\n• Elleri direksiyonda hafif tutma\n• Ayakları pedallarda rahat konumlandırma"
+      },
+      {
+        "type": "subheading",
+        "text": "5. Empati Kurma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Anlayışlı düşünce biçimleri:\n• \"O da acele ediyor olabilir\"\n• \"Belki fark etmedi\"\n• \"Önemli bir sorunu vardır\"\n• \"Ben de hata yaparım\""
+      },
+      {
+        "type": "subheading",
+        "text": "Stresle Başa Çıkma Stratejileri"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş Öncesi Hazırlık"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Zihinsel hazırlık:\n• Yeterli uyku alma\n• Sakin çıkma zamanı planlama\n• Rota önceden belirleme\n• Alternatif yolları düşünme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Fiziksel hazırlık:\n• Rahat kıyafet seçimi\n• Araç koltuğu ayarları\n• Ayna pozisyonları\n• Müzik/radyo ayarları"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş Sırasında"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Proaktif yaklaşım:\n• Trafik akışını önceden gözlemleme\n• Tehlikeli durumları öngörme\n• Güvenli takip mesafesi bırakma\n• Alternative route kullanma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Reaktif yaklaşım:\n• Hatalarına odaklanmak yerine çözüm arama\n• Diğer sürücülere anlayış gösterme\n• Kendi hatalarını kabul etme\n• Özür dileyebilme cesareti"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Kontrolü İçin Uzun Vadeli Stratejiler"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşam Tarzı Değişiklikleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Düzenli egzersiz:\n• Genel stres seviyesini düşürür\n• Öfke eşiğini yükseltir\n• Fiziksel sağlığı iyileştirir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sağlıklı beslenme:\n• Kan şekeri dengesi sağlar\n• Enerji seviyesini stabil tutar\n• Ruh halini iyileştirir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yeterli uyku:\n• Tolerans seviyesini artırır\n• Karar verme yeteneğini güçlendirir\n• Tepki sürelerini iyileştirir"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Psikolojisi Eğitimi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Profesyonel destek:\n• Öfke yönetimi kursları\n• Trafik psikolojisi seminerleri\n• Bireysel danışmanlık"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kendi kendine geliştirme:\n• Trafik adabı konusunda okuma\n• Deneyimli sürücülerden öğrenme\n• Kendi sürüş alışkanlıklarını gözlemleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Diğerlerinin Sürücü Davranışlarına Etkisi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamı sosyal bir alandır ve her sürücünün davranışı diğerlerini etkiler. Bu etki pozitif veya negatif yönde olabilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Pozitif Rol Model Olma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Örnek davranışlar:\n• Kurallara titizlikle uyma\n• Diğer sürücülere yardımcı olma\n• Sakin ve kontrollü sürüş\n• Nezaket ve saygı gösterme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Pozitif etkiler:\n• Diğer sürücülerin motivasyonunu artırma\n• Trafik kültürünün gelişmesine katkı\n• Gençlere iyi örnek olma\n• Toplumsal barışa katkı"
+      },
+      {
+        "type": "subheading",
+        "text": "Negatif Davranışların Yayılım Etkisi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kötü örnek davranışlar:\n• Agresif sürüş\n• Kural ihlalleri\n• Saygısız davranışlar\n• Öfkeli tepkiler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Negatif etkiler:\n• Trafik gerginliğinin artması\n• Kaza riskinin yükselmesi\n• Toplumsal huzursuzluk\n• Kötü alışkanlıkların yayılması"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplumsal Sorumluluk"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Her sürücünün görevi:\n• İyi örnek olmak\n• Hatalı davranışları nezaketle uyarmak\n• Trafik kültürüne katkı sağlamak\n• Gelecek nesilleri düşünmek"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Durumlar ve Uygulama Örnekleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Farklı Yol Kullanıcı Gruplarına Yaklaşım"
+      },
+      {
+        "type": "subheading",
+        "text": "Çocuklar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Özel dikkat gerektiren durumlar:\n• Okul girişi-çıkışı saatleri\n• Çocuk park alanları yakınları\n• Yaya geçitlerinde çocuk geçişi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Doğru yaklaşım:\n• Hız azaltma\n• Ekstra mesafe bırakma\n• Korna kullanımından kaçınma (korkutabilir)\n• Sabırlı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşlılar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşlı sürücü özellikleri:\n• Daha yavaş tepki süreleri\n• Görme ve işitme zorluklukları\n• Motor beceri kısıtlılıkları"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati kurmak:\n• Yavaş sürüşe anlayış gösterme\n• Manevralarda sabırla bekleme\n• Park etmeye çalışırken yardımcı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Engelli Sürücüler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Özel ihtiyaçlar:\n• Adapted araç kullanımı\n• Park maneuver zorluğu\n• Özel ekipman gereksinimleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Destekleyici davranışlar:\n• Engelli park yerlerini işgal etmeme\n• Gerektiğinde fiziksel yardım önerme\n• Anlayış ve sabır gösterme"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Hava Koşulları"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağışlı Hava"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Trafik adabı gerektiren durumlar:\n• Yayalara su sıçratmama\n• Daha mesafeli takip\n• Işıkları erken yakma\n• Daha kibar sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Sisli Hava"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Dikkat edilecek noktalar:\n• Diğer araçları gözden kaybetmeme\n• Güvenli mesafe bırakma\n• Işık kullanımında duyarlılık\n• Sabırlı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav Hazırlık İpuçları ve Önemli Notlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Sıkça Sorulan Konular"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Trafik adabının tanımı: \"Trafik içinde sorumluluk, yardımlaşma, hoşgörü, saygı, fedakârlık, sabır vb. değerlere sahip olabilme yetisi\"\n2. Hak ihlalleri türleri: Birey, Toplum, Kamu, Yaşam, Çevre\n3. Temel değerler: 6 ana değer ve uygulamaları\n4. Öfke yönetimi: Praktik sakinleşme teknikleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik Kavramlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati: Kendini başkasının yerine koyabilme\n• *Diğergamlık: Başkasının çıkarını gözetme\n• *Feragat: Kendi hakkından vazgeçme\n• *Sorumluluk: Davranışların sonucunu üstlenme"
+      },
+      {
+        "type": "subheading",
+        "text": "Örnek Soru Tipleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Senaryo tabanlı sorular: Verilen durumda hangi değerin uygulandığı\n• *Tanım soruları: Temel kavramların ne anlama geldiği\n• *Uygulama soruları: Belirli durumlarda nasıl davranılması gerektiği"
+      },
+      {
+        "type": "subheading",
+        "text": "Başarı için Öneriler"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Gerçek hayat örnekleri düşünün: Her konuyu günlük yaşamla ilişkilendirin\n2. Değerleri içselleştirin: Sadece ezberlemeyin, anlayın\n3. Empati kurun: Kendinizi başkalarının yerine koyun\n4. Pozitif düşünün: Trafik adabının faydalarına odaklanın"
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabı, sadece sınav konusu değil, yaşam felsefesidir. Bu değerleri benimseyen sürücüler hem kendi güvenliklerini sağlar hem de toplumsal barışa katkıda bulunurlar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unutmayın ki trafikte hiçbir zaman tek başınıza değilsiniz. Her davranışınız diğer yol kullanıcılarını etkiler. Bu nedenle:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sorumlu olun: Davranışlarınızın sonuçlarını üstlenin\n• Yardımcı olun: İhtiyacı olan sürücülere destek verin\n• Saygılı olun: Herkese eşit mesafede yaklaşın\n• Sabırlı olun: Acele ve öfke güvenliği tehdit eder\n• Empati kurun: Kendinizi başkalarının yerine koyun"
+      },
+      {
+        "type": "key_info",
+        "text": "Son Söz\nTrafik adabına sahip bir sürücü olmak, sadece iyi bir sürücü olmakla kalmaz, aynı zamanda iyi bir insan olmayı da gerektirir. Bu değerleri yaşamınızın her alanında uygulayarak hem kendinize hem de topluma fayda sağlarsınız."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *İyi şanslar ve güvenli yolculuklar!"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türkiye'de ehliyet sınavına hazırlanan öğrenciler için hazırlanan bu kapsamlı çalışma kılavuzunda, trafikte nasıl davranmanız gerektiğini, hangi değerlere sahip olmanız ve diğer yol kullanıcılarıyla nasıl etkileşim kurmanız gerektiğini öğreneceksiniz. Trafik adabı, sadece kuralları bilmekle kalmaz, aynı zamanda bu kuralları içselleştirerek uygulamayı gerektirir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabının Tanımı ve Önemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabı, yazılı olmayan kurallar sistemidir ve trafik içinde sorumluluk, yardımlaşma, hoşgörü, saygı, fedakârlık, sabır gibi değerlere sahip olabilme yetisi olarak tanımlanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabı Nedir?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Türk Dil Kurumu, \"adap\" kelimesini \"yol, yordam\" olarak açıklamaktadır. Trafik adabı ise:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Yazılı kuralları ceza korkusu olmadan içselleştirerek uygulama\n• Yazılı olmayan kuralları karşılıklı anlayış ve empati ile oluşturma\n• Trafik kültürünü bireysel ve toplumsal düzeyde geliştirme"
+      },
+      {
+        "type": "key_info",
+        "text": "Temel Prensibi\nTrafik adabı, denetim ve ceza korkusuyla değil, içselleştirilmiş bir sorumlulukla hareket etmektir. Bir toplumda kişiler birbirlerine nasıl davranıyorsa, trafik ortamında da aynı şekilde davranırlar."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabının Önemi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Güvenlik açısından:\n• Trafik kazalarının azalması\n• Can ve mal güvenliğinin artması\n• Stresli durumların minimize edilmesi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Toplumsal açısından:\n• Trafik kültürünün gelişmesi\n• Karşılıklı saygı ve anlayışın artması\n• Sosyal uyumun güçlenmesi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Bireysel açısından:\n• Sürüş stresinin azalması\n• Daha huzurlu seyahat deneyimi\n• Örnek davranış sergileyerek gelecek nesillere model olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Adabı vs Trafik Kuralları"
+      },
+      {
+        "type": "paragraph",
+        "text": "- Yazılı ve zorunlu: Yazılı olmayan, gönüllü\n- Ceza tehdidi var: Ceza tehdidi yok\n- Ne yapılacağını belirler: Nasıl yapılacağını belirler\n- Evrensel standartlar: Kültürel ve toplumsal"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Temel Değerler"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabının temeli, evrensel insani değerlerin trafik ortamında yaşatılmasıdır. Bu değerler hem sürüş güvenliğini artırır hem de toplumsal barışa katkıda bulunur."
+      },
+      {
+        "type": "subheading",
+        "text": "Sorumluluk"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sorumluluk, kişinin kendi davranışlarını veya kendi yetki alanına giren herhangi bir olayın sonuçlarını üstlenmesi anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sorumlu sürücünün özellikleri:\n• Sadece araç kullanmayı değil, kendine hâkim olmayı da öğrenir\n• Davranışlarının sonuçlarını önceden düşünerek hareket eder\n• Hem kendine hem de diğer yol kullanıcılarına karşı sorumluluk hisseder\n• Güvenli, dikkatli ve kurallara uygun sürüş yapar"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nBir sürücü kurallara uymayarak geçiş yapması sonucunda karşı yönden gelen araca çarparak kaza yapar. Sorumlu bir sürücü bu durumda hatanın kendisinde olduğunu kabul eder ve gerekli tüm yardımları yapar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sorumluluğa aykırı davranışlar:\n• Alkol/uyuşturucu etkisi altında araç kullanma\n• Aşırı hız yapma\n• Yorgunken ya da uykusuzken araç kullanma\n• Dikkat dağıtıcı unsurlarla (telefon vb.) ilgilenme"
+      },
+      {
+        "type": "subheading",
+        "text": "Yardımlaşma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yardımlaşma, karşılıklı yardımda bulunma anlamına gelmektedir. Trafik ortamı, birlikte yaşanan bir alandır ve yardımlaşma bu alanın güvenli olması için kritiktir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yardımlaşma örnekleri:\n• Acil durumlarda: Ambulans, itfaiye, polis araçlarına yol verme\n• Arıza durumunda: Yolda kalan araca yardım etme, üçgen reflektör koyma\n• Dezavantajlı gruplara: Yaşlı, engelli, çocuklu sürücülere anlayış gösterme\n• Trafik akışında: Şerit değiştirmek isteyen araca yol verme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nYoğun trafikte bir ambulans siren çalarak yaklaşır. Trafik adabına sahip sürücüler, mümkün olduğunca kenara çekilerek ambulansın geçişine yardımcı olurlar. Bu davranış hem \"yardımlaşma\" hem de \"sorumluluk\" değerlerini gösterir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yardımlaşmanın faydaları:\n• Toplumsal dayanışmanın artması\n• Acil durumların daha etkili yönetimi\n• Trafik akışının iyileşmesi\n• Güvenlik seviyesinin yükselmesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Hoşgörü ve Sabır"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hoşgörü, ortaya çıkabilecek sorunları anlayışla karşılayarak, olabildiği kadar hoş görme durumu, müsamaha, tolerans anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Hoşgörü gerektiren durumlar:\n• Acemi sürücülerin yaptığı hatalar\n• Yaşlı sürücülerin yavaş sürüşü\n• Park manevrası yapan sürücülerin zaman alması\n• Yol tarifi alan sürücülerin kararsızlığı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sabır örnekleri:\n• Trafik ışığında beklerken sakin kalma\n• Yoğun trafikte öfkelenmeme\n• Yavaş ilerleyen araçlara tahammül gösterme\n• Acil durum araçlarını bekleyebilme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nPark halindeki araçlar arasından çıkmaya çalışan acemi bir sürücü birkaç manevradan sonra ancak çıkabilir. Sabırlı sürücüler bekler ve acemi sürücüye moral vererek yardımcı olurlar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sabırsızlığın zararları:\n• Stres seviyesinin artması\n• Hatalı karar verme riskinin yükselmesi\n• Agresif davranışlara yönelme\n• Kaza riskinin artması"
+      },
+      {
+        "type": "subheading",
+        "text": "Nezaket ve Saygı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Nezaket: Başkalarına karşı saygılı ve incelikle davranma\n• *Saygı: Değeri, üstünlüğü, yaşlılığı, yararlılığı dolayısıyla bir kimseye karşı dikkatli, özenli, ölçülü davranmaya sebep olan sevgi duygusu."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Nezaket örnekleri:\n• Selektör yaparak teşekkür etme\n• Hata yapan sürücüyü küfretmeden uyarma\n• Park alanını paylaşırken düşünceli davranma\n• Yayalara karşı sabırlı olma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Saygılı davranış örnekleri:\n• Yaşlı ve engelli sürücülere anlayış gösterme\n• Yaya öncelik haklarına riayet etme\n• Diğer sürücülerin mahremiyetine saygı gösterme\n• Korna ve farları taciz amacıyla kullanmama"
+      },
+      {
+        "type": "key_info",
+        "text": "Kaza Sonrası Davranış Örneği\nİki araç arasında hafif hasarlı bir kaza olur. Trafik adabına sahip sürücüler birbirlerine bağırmak yerine, sakin bir şekilde durumu değerlendirip, gerekiyorsa özür dilerek konuyu çözerler."
+      },
+      {
+        "type": "subheading",
+        "text": "Feragat ve Fedakarlık (Diğergamlık)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Feragat ve fedakarlık, bir amaç uğruna ya da gerçekleştirilmesi istenen herhangi bir şey için kendi yararlarından vazgeçme, hakkından kendi isteğiyle vazgeçme, özveri anlamına gelmektedir."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Feragat örnekleri:\n• Kavşakta geçiş hakkı kendinde olmasına rağmen karşı tarafa yol verme\n• Park alanında daha uygun yeri başkasına bırakma\n• Şerit değiştirmek isteyen araca yer açma\n• Acele eden sürücüye önden geçme imkânı tanıma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Fedakârlık örnekleri:\n• Ambulans için şerit tıkanıklığında bile kenara çekilme\n• Engelli aracı için park yerini boşaltma\n• Zor durumda olan sürücüye kendi zamanından vererek yardım etme"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nTali yol-ana yol kesişmesinde geçiş hakkı ana yoldaki sürücüye aittir. Ancak ana yoldaki sürücü, tali yolda bekleyen aracın acele ettiğini fark edince kendi hakkından feragat ederek ona geçiş imkânı tanır."
+      },
+      {
+        "type": "subheading",
+        "text": "Empati"
+      },
+      {
+        "type": "paragraph",
+        "text": "Empati, kişinin kendisini başka bir bilincin yerine koyarak söz konusu bilincin duygularını, isteklerini ve düşüncelerini, denemeksizin anlayabilmesi becerisi olarak tanımlanır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati kurma yolları:\n• \"Benim yerimde olsa ne hissederdi?\" sorusunu sorma\n• Diğer sürücünün durumunu anlayıp değerlendirme\n• Kendi hatalarını düşünerek anlayış gösterme\n• \"Herkes hata yapabilir\" anlayışını benimseme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati örnekleri:\n• Yağmurlu havada yayalara su sıçratmamaya dikkat etme\n• Çocuk arabasıyla geçiş yapan yayanın yavaşlığını anlama\n• Park manevrası yapan sürücının durumunu kavrama\n• Yaşlı sürücünün tepki süresinin farklı olduğunu bilme"
+      },
+      {
+        "type": "key_info",
+        "text": "Altın Kural\n\"Kendinize nasıl davranılmasını istiyorsanız başkalarına da o şekilde davranın.\" Bu empati kurmak için en temel kuraldır."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte İletişim"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamında sürücüler sürekli iletişim halindedir. Bu iletişim bazen sesli (korna), bazen ışıklı (sinyal, selektör), bazen de beden dili ile gerçekleşir."
+      },
+      {
+        "type": "subheading",
+        "text": "Doğru İletişim Yöntemleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Sinyal Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Doğru sinyal kullanımı:\n• Zamanında verme: Manevra öncesinde yeterli süre bırakma\n• Açık mesaj: Niyetin net şekilde anlaşılmasını sağlama\n• Tutarlı olma: Verilen sinyalle uyumlu hareket etme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sinyal verme kuralları:\n• Şerit değiştirmeden önce\n• Dönüş manevrası öncesinde\n• Sollama yaparken\n• Park etmeye başlarken"
+      },
+      {
+        "type": "key_info",
+        "text": "Önemli Not\n45 derece ve üzeri dönüşlerde sinyal kendiliğinden kapanır. Şerit değiştirme gibi küçük manevralar için manuel olarak kapatmak gerekir."
+      },
+      {
+        "type": "subheading",
+        "text": "Korna Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Korna ne zaman çalınır:\n• Görüş mesafesinin yetersiz olduğu yerlerde uyarı için\n• Tehlikeli davranış gösteren sürücü/yayayı uyarma için\n• Yamaç, dönemeç gibi riskli bölgelerde\n• Acil durumlarda dikkat çekmek için"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Korna ne zaman çalınmaz:\n• Çocuk, yaşlı ve engellilere karşı (algılama güçlükleri yaşayabilir)\n• Trafik ışığında yeşil yanar yanmaz\n• Öfke ifadesi olarak\n• Gürültü kirliliği yaratacak şekilde"
+      },
+      {
+        "type": "key_info",
+        "text": "Dikkat\nYaşlı, engelli ve çocuklar algılamada güçlük çekecekleri için korna ile uyarılmaktan uzak durulmalıdır."
+      },
+      {
+        "type": "subheading",
+        "text": "Selektör Kullanımı"
+      },
+      {
+        "type": "paragraph",
+        "text": "Selektör (uzun-kısa far geçişi) kullanım alanları:\n• Kavşak yaklaşımlarında uyarı\n• Tepe üstü ve dönemeçlerde\n• Sollama öncesi uyarı\n• Teşekkür ifadesi olarak"
+      },
+      {
+        "type": "subheading",
+        "text": "Agresif ve Taciz Edici Davranışlardan Kaçınma"
+      },
+      {
+        "type": "subheading",
+        "text": "Taciz Edici Davranışlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yapılmaması gerekenler:\n• Yakın takip: Güvenli takip mesafesini korumama\n• Sürekli korna: Sinir bozucu ve gereksiz korna çalma\n• Far tacizi: Uzun farları taciz amacıyla kullanma\n• Kesme: Kasıtlı olarak önüne geçme\n• Engelleme: Geçişi kasten engelleme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Bu davranışların zararları:\n• Trafik güvenliğini bozma\n• Stres seviyesini artırma\n• Agresif tepkilere neden olma\n• Kaza riskini yükseltme"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Hak İhlalleri ve Sonuçları"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamında yapılan yanlış davranışlar sadece kuralları ihlal etmez, aynı zamanda çeşitli hak türlerini de çiğner. Bu haklar beş ana kategoride incelenir."
+      },
+      {
+        "type": "subheading",
+        "text": "Birey Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Diğer bireylere verilen zarardır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Örnek durumlar:\n• Engelli park yeri işgali: Engelli olmadığı halde engelli kişiler için ayrılmış yerlere park etmek\n• Ambulansa yol vermeme: Ambulansın geçişini engelleyerek hasta hayatını riske atmak\n• Aşırı hız: Diğer sürücülerin güvenliğini tehlikeye atmak\n• Yaya geçidi ihlali: Yayaların güvenli geçişini engellemek"
+      },
+      {
+        "type": "key_info",
+        "text": "Örnek Senaryo\nSiren çalarak gelen bir ambulans vardır ancak bir sürücü yol vermiyor. Bu davranış ambulanstaki hastanın hayatını riske atarak \"birey hakkı\" ihlali yapmaktadır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Birey hakkı ihlalinin sonuçları:\n• Bireysel mağduriyetler\n• Can güvenliği riski\n• Maddi-manevi zararlar\n• Sosyal adaletsizlik"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplum Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Topluma verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Toplumsal zararlar:\n• Ailevi yıkım: Kazalar sonucu ailelerin parçalanması\n• Psikolojik etkiler: Kaza mağdurlarının uzun süreli travmaları\n• Sosyo-ekonomik kayıplar: Ailelerin gelir kaybı yaşaması\n• Toplumsal güvensizlik: Trafik güvenliğine olan inancın sarsılması"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Psikolojik ve sosyal etkiler:\n• Kaza geçiren kişiler uzun süre psikolojik destek ihtiyacı duyar\n• Aileler maddi ve manevi sıkıntılar yaşar\n• Toplumda güvensizlik ve korku artar\n• Sağlıksız toplum yapısı oluşur"
+      },
+      {
+        "type": "key_info",
+        "text": "Gerçek Etki\nBir trafik kazası sadece o anki kazada yaralananları etkilemez. Ailelerin dağılması, psikolojik travmalar ve ekonomik zorluklar nesillerce sürebilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Kamu Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Devlete verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Ekonomik boyut:\n• 2014 yılı verilerine göre trafik kazaları Türkiye ekonomisine 24 milyar TL zarar vermiştir\n• Bu tutar, yıllık yatırım bütçesinin yarısına denk gelmektedir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kamu hakkı ihlali örnekleri:\n• Trafik levhalarına zarar verme\n• Yol altyapısının erken aşınmasına neden olma\n• Yargı sisteminin iş yükünü artırma\n• Sağlık harcamalarının artması"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Uzun vadeli etkiler:\n• Ülke imajının zedelenmesi\n• Kalkınma projelerinin yavaşlaması\n• Üretkenlik kayıpları\n• Engelli nüfusunun artması"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşam Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Bireyin kendine verdiği zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Yaşam hakkı en temel haktır ve diğer tüm hakların kullanımı bu hakka bağlıdır."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşam hakkını tehlikeye atan davranışlar:\n• Alkollü/uyuşturucu etkisi altında sürüş\n• Aşırı hız yapma\n• Emniyet kemeri takmama\n• Yorgun/uykusuz sürüş\n• Telefon kullanırken sürüş"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşam hakkının önemi:\n• Kişi maddi ve manevi birçok zorlukla yetişkin hale gelir\n• Birçok kişinin emeği vardır\n• Topluma karşı yaşama sorumluluğu bulunur\n• Kendine zarar verme hakkı yoktur"
+      },
+      {
+        "type": "key_info",
+        "text": "Felsefik Yaklaşım\n\"İnsan yaşamının değeri, sadece o kişiye değil tüm topluma aittir. Bu nedenle kimsenin kendi yaşamını riske atma hakkı yoktur.\""
+      },
+      {
+        "type": "subheading",
+        "text": "Çevre Hakkı İhlalleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Tanım: Çevre ve doğaya verilen zarar."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevresel zararlara örnekler:\n• Gereksiz emisyon: Boş yere motorunu çalıştırma\n• Gürültü kirliliği: Gereksiz korna kullanımı, modifiye egzoz\n• Hava kirliliği: Aşırı yakıt tüketimi\n• Görüntü kirliliği: Çevreye atık bırakma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevre dostu sürüş:\n• Toplu taşımayı tercih etme\n• Bisiklet ve yürüyüş alternatiflerini değerlendirme\n• Yakıt tasarruflu sürüş teknikleri\n• Gereksiz yere korna çalmama"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Yönetimi ve Stresle Başa Çıkma"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamı, stres ve öfkenin sıkça yaşandığı yerlerden biridir. Öfke kontrolü hem kişisel güvenlik hem de trafik güvenliği açısından kritiktir."
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Öfkeye Neden Olan Faktörler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kişisel faktörler:\n• Genel stres seviyesi yüksekliği\n• Kişilik özellikleri (sabırsızlık, agresiflik)\n• Yorgunluk ve uykusuzluk\n• Kişisel sorunlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Trafik kaynaklı faktörler:\n• Trafik yoğunluğu ve sıkışıklığı\n• Diğer sürücülerin hatalı davranışları\n• Yol koşullarının kötülüğü\n• Zaman baskısı"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Çevresel faktörler:\n• Hava koşulları\n• Gürültü seviyesi\n• Araç içi sıcaklık\n• Görüş mesafesi"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Anında Yapılması Gerekenler"
+      },
+      {
+        "type": "subheading",
+        "text": "1. Derin Nefes Alma Tekniği"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *4-4-4 Tekniği:\n• 4 saniye burnundan nefes alın\n• 4 saniye nefesi tutun\n• 4 saniye ağızdan verin\n• En az 3-4 defa tekrarlayın"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Faydaları:\n• Kalp atış hızını düzenler\n• Kan basıncını düşürür\n• Zihinsel netliği artırır\n• Kas gerginliğini azaltır"
+      },
+      {
+        "type": "subheading",
+        "text": "2. Zihinsel Mesafe Alma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Dikkat dağıtma yöntemleri:\n• Müzik dinleme: Sakinleştirici müzik seçimi\n• Zihin egzersizi: Sayı saymak, şarkı söylemek\n• Manzara izleme: Çevredeki güzel manzaralara odaklanma\n• Hedef belirleme: Güvenli varış hedefini hatırlama"
+      },
+      {
+        "type": "subheading",
+        "text": "3. Pozitif İç Konuşma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sakinleştirici cümleler:\n• \"Sakin ol, bu da geçecek\"\n• \"Güvenli varış daha önemli\"\n• \"Bu durumda öfkelenmek mantıklı değil\"\n• \"Herkes hata yapabilir\"\n• \"Benim ailem beni bekliyor\""
+      },
+      {
+        "type": "subheading",
+        "text": "4. Fiziksel Gevşeme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kas gevşetme teknikleri:\n• Omuzları indirme\n• Çeneyi gevşetme\n• Elleri direksiyonda hafif tutma\n• Ayakları pedallarda rahat konumlandırma"
+      },
+      {
+        "type": "subheading",
+        "text": "5. Empati Kurma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Anlayışlı düşünce biçimleri:\n• \"O da acele ediyor olabilir\"\n• \"Belki fark etmedi\"\n• \"Önemli bir sorunu vardır\"\n• \"Ben de hata yaparım\""
+      },
+      {
+        "type": "subheading",
+        "text": "Stresle Başa Çıkma Stratejileri"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş Öncesi Hazırlık"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Zihinsel hazırlık:\n• Yeterli uyku alma\n• Sakin çıkma zamanı planlama\n• Rota önceden belirleme\n• Alternatif yolları düşünme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Fiziksel hazırlık:\n• Rahat kıyafet seçimi\n• Araç koltuğu ayarları\n• Ayna pozisyonları\n• Müzik/radyo ayarları"
+      },
+      {
+        "type": "subheading",
+        "text": "Sürüş Sırasında"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Proaktif yaklaşım:\n• Trafik akışını önceden gözlemleme\n• Tehlikeli durumları öngörme\n• Güvenli takip mesafesi bırakma\n• Alternative route kullanma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Reaktif yaklaşım:\n• Hatalarına odaklanmak yerine çözüm arama\n• Diğer sürücülere anlayış gösterme\n• Kendi hatalarını kabul etme\n• Özür dileyebilme cesareti"
+      },
+      {
+        "type": "subheading",
+        "text": "Öfke Kontrolü İçin Uzun Vadeli Stratejiler"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşam Tarzı Değişiklikleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Düzenli egzersiz:\n• Genel stres seviyesini düşürür\n• Öfke eşiğini yükseltir\n• Fiziksel sağlığı iyileştirir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Sağlıklı beslenme:\n• Kan şekeri dengesi sağlar\n• Enerji seviyesini stabil tutar\n• Ruh halini iyileştirir"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yeterli uyku:\n• Tolerans seviyesini artırır\n• Karar verme yeteneğini güçlendirir\n• Tepki sürelerini iyileştirir"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafik Psikolojisi Eğitimi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Profesyonel destek:\n• Öfke yönetimi kursları\n• Trafik psikolojisi seminerleri\n• Bireysel danışmanlık"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kendi kendine geliştirme:\n• Trafik adabı konusunda okuma\n• Deneyimli sürücülerden öğrenme\n• Kendi sürüş alışkanlıklarını gözlemleme"
+      },
+      {
+        "type": "subheading",
+        "text": "Trafikte Diğerlerinin Sürücü Davranışlarına Etkisi"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik ortamı sosyal bir alandır ve her sürücünün davranışı diğerlerini etkiler. Bu etki pozitif veya negatif yönde olabilir."
+      },
+      {
+        "type": "subheading",
+        "text": "Pozitif Rol Model Olma"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Örnek davranışlar:\n• Kurallara titizlikle uyma\n• Diğer sürücülere yardımcı olma\n• Sakin ve kontrollü sürüş\n• Nezaket ve saygı gösterme"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Pozitif etkiler:\n• Diğer sürücülerin motivasyonunu artırma\n• Trafik kültürünün gelişmesine katkı\n• Gençlere iyi örnek olma\n• Toplumsal barışa katkı"
+      },
+      {
+        "type": "subheading",
+        "text": "Negatif Davranışların Yayılım Etkisi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Kötü örnek davranışlar:\n• Agresif sürüş\n• Kural ihlalleri\n• Saygısız davranışlar\n• Öfkeli tepkiler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Negatif etkiler:\n• Trafik gerginliğinin artması\n• Kaza riskinin yükselmesi\n• Toplumsal huzursuzluk\n• Kötü alışkanlıkların yayılması"
+      },
+      {
+        "type": "subheading",
+        "text": "Toplumsal Sorumluluk"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Her sürücünün görevi:\n• İyi örnek olmak\n• Hatalı davranışları nezaketle uyarmak\n• Trafik kültürüne katkı sağlamak\n• Gelecek nesilleri düşünmek"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Durumlar ve Uygulama Örnekleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Farklı Yol Kullanıcı Gruplarına Yaklaşım"
+      },
+      {
+        "type": "subheading",
+        "text": "Çocuklar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Özel dikkat gerektiren durumlar:\n• Okul girişi-çıkışı saatleri\n• Çocuk park alanları yakınları\n• Yaya geçitlerinde çocuk geçişi"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Doğru yaklaşım:\n• Hız azaltma\n• Ekstra mesafe bırakma\n• Korna kullanımından kaçınma (korkutabilir)\n• Sabırlı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Yaşlılar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Yaşlı sürücü özellikleri:\n• Daha yavaş tepki süreleri\n• Görme ve işitme zorluklukları\n• Motor beceri kısıtlılıkları"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati kurmak:\n• Yavaş sürüşe anlayış gösterme\n• Manevralarda sabırla bekleme\n• Park etmeye çalışırken yardımcı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Engelli Sürücüler"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Özel ihtiyaçlar:\n• Adapted araç kullanımı\n• Park maneuver zorluğu\n• Özel ekipman gereksinimleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Destekleyici davranışlar:\n• Engelli park yerlerini işgal etmeme\n• Gerektiğinde fiziksel yardım önerme\n• Anlayış ve sabır gösterme"
+      },
+      {
+        "type": "subheading",
+        "text": "Özel Hava Koşulları"
+      },
+      {
+        "type": "subheading",
+        "text": "Yağışlı Hava"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Trafik adabı gerektiren durumlar:\n• Yayalara su sıçratmama\n• Daha mesafeli takip\n• Işıkları erken yakma\n• Daha kibar sürüş"
+      },
+      {
+        "type": "subheading",
+        "text": "Sisli Hava"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Dikkat edilecek noktalar:\n• Diğer araçları gözden kaybetmeme\n• Güvenli mesafe bırakma\n• Işık kullanımında duyarlılık\n• Sabırlı olma"
+      },
+      {
+        "type": "subheading",
+        "text": "Sınav Hazırlık İpuçları ve Önemli Notlar"
+      },
+      {
+        "type": "subheading",
+        "text": "Sıkça Sorulan Konular"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Trafik adabının tanımı: \"Trafik içinde sorumluluk, yardımlaşma, hoşgörü, saygı, fedakârlık, sabır vb. değerlere sahip olabilme yetisi\"\n2. Hak ihlalleri türleri: Birey, Toplum, Kamu, Yaşam, Çevre\n3. Temel değerler: 6 ana değer ve uygulamaları\n4. Öfke yönetimi: Praktik sakinleşme teknikleri"
+      },
+      {
+        "type": "subheading",
+        "text": "Kritik Kavramlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Empati: Kendini başkasının yerine koyabilme\n• *Diğergamlık: Başkasının çıkarını gözetme\n• *Feragat: Kendi hakkından vazgeçme\n• *Sorumluluk: Davranışların sonucunu üstlenme"
+      },
+      {
+        "type": "subheading",
+        "text": "Örnek Soru Tipleri"
+      },
+      {
+        "type": "paragraph",
+        "text": "• *Senaryo tabanlı sorular: Verilen durumda hangi değerin uygulandığı\n• *Tanım soruları: Temel kavramların ne anlama geldiği\n• *Uygulama soruları: Belirli durumlarda nasıl davranılması gerektiği"
+      },
+      {
+        "type": "subheading",
+        "text": "Başarı için Öneriler"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Gerçek hayat örnekleri düşünün: Her konuyu günlük yaşamla ilişkilendirin\n2. Değerleri içselleştirin: Sadece ezberlemeyin, anlayın\n3. Empati kurun: Kendinizi başkalarının yerine koyun\n4. Pozitif düşünün: Trafik adabının faydalarına odaklanın"
+      },
+      {
+        "type": "subheading",
+        "text": "Sonuç"
+      },
+      {
+        "type": "paragraph",
+        "text": "Trafik adabı, sadece sınav konusu değil, yaşam felsefesidir. Bu değerleri benimseyen sürücüler hem kendi güvenliklerini sağlar hem de toplumsal barışa katkıda bulunurlar."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unutmayın ki trafikte hiçbir zaman tek başınıza değilsiniz. Her davranışınız diğer yol kullanıcılarını etkiler. Bu nedenle:"
+      },
+      {
+        "type": "paragraph",
+        "text": "• Sorumlu olun: Davranışlarınızın sonuçlarını üstlenin\n• Yardımcı olun: İhtiyacı olan sürücülere destek verin\n• Saygılı olun: Herkese eşit mesafede yaklaşın\n• Sabırlı olun: Acele ve öfke güvenliği tehdit eder\n• Empati kurun: Kendinizi başkalarının yerine koyun"
+      },
+      {
+        "type": "key_info",
+        "text": "Son Söz\nTrafik adabına sahip bir sürücü olmak, sadece iyi bir sürücü olmakla kalmaz, aynı zamanda iyi bir insan olmayı da gerektirir. Bu değerleri yaşamınızın her alanında uygulayarak hem kendinize hem de topluma fayda sağlarsınız."
+      },
+      {
+        "type": "paragraph",
+        "text": "• *İyi şanslar ve güvenli yolculuklar!"
+      }
+    ]
+  }
+]

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../models/question_model.dart';
 import '../models/exam_model.dart';
 import '../models/traffic_sign_model.dart';
+import '../models/study_guide_model.dart';
 
 /// Service responsible for loading quiz questions from local JSON file
 class QuizService {
@@ -56,6 +57,23 @@ class QuizService {
       throw Exception('Failed to parse traffic signs JSON: ${e.message}');
     } catch (e) {
       throw Exception('Unexpected error loading traffic signs: $e');
+    }
+  }
+
+  /// Load study guides from assets/data/study_guides.json
+  Future<List<StudyGuide>> loadStudyGuides() async {
+    try {
+      final String jsonString = await rootBundle.loadString('assets/data/study_guides.json');
+      final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
+      return jsonList
+          .map((e) => StudyGuide.fromJson(e as Map<String, dynamic>))
+          .toList(growable: false);
+    } on PlatformException catch (e) {
+      throw Exception('Failed to load study guides: ${e.message}');
+    } on FormatException catch (e) {
+      throw Exception('Failed to parse study guides JSON: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error loading study guides: $e');
     }
   }
 } 

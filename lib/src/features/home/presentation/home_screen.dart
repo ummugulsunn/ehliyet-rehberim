@@ -12,6 +12,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../exams/presentation/exam_selection_screen.dart';
 import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
+import '../../study_guides/presentation/study_guide_list_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -371,6 +372,19 @@ class HomeScreen extends ConsumerWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => const TrafficSignsScreen(),
+              ),
+            );
+          },
+        ),
+        _buildFeatureCard(
+          context,
+          icon: Icons.book,
+          title: 'Konu\nAnlatımları',
+          color: AppColors.info,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const StudyGuideListScreen(),
               ),
             );
           },
