@@ -344,7 +344,18 @@ class SettingsScreen extends ConsumerWidget {
             title: 'Gizlilik Politikası',
             subtitle: 'Verilerinizin güvenliği hakkında',
             iconColor: AppColors.secondary,
-            onTap: () => _openUrl(Uri.parse('https://ehliyetrehberim.app/privacy')),
+            onTap: () => _openUrl(Uri.parse('https://ummugulsun.me/ehliyet-rehberim/privacy-policy.html')),
+          ),
+          
+          _buildDivider(context),
+          
+          _buildActionTile(
+            context,
+            icon: Icons.description_outlined,
+            title: 'Kullanım Koşulları',
+            subtitle: 'Hizmet şartları ve koşulları',
+            iconColor: AppColors.info,
+            onTap: () => _openUrl(Uri.parse('https://ummugulsun.me/ehliyet-rehberim/terms-of-service.html')),
           ),
           
           _buildDivider(context),

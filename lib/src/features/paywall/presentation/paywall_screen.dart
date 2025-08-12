@@ -275,14 +275,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
   }
 
   void _launchPrivacyPolicy() async {
-    const url = 'https://your-app.com/privacy-policy'; // Replace with your actual URL
+    const url = 'https://ummugulsun.me/ehliyet-rehberim/privacy-policy.html';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     }
   }
 
   void _launchTermsOfService() async {
-    const url = 'https://your-app.com/terms-of-service'; // Replace with your actual URL
+    const url = 'https://ummugulsun.me/ehliyet-rehberim/terms-of-service.html';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     }
