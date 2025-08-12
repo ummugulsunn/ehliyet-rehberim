@@ -369,27 +369,27 @@
     "signs": [
       {
         "id": "TT-1",
-        "name": "DUR",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
-        "description": "Kavşak veya tehlikeli noktalarda durma mecburiyeti olduğunu bildirir. Tam durup güvenli geçişten sonra ilerleyin."
-      },
-      {
-        "id": "TT-2",
         "name": "Yol Ver",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/TT-1.jpg",
         "description": "Kavşakta ana yoldan gelen araçlara geçiş hakkı tanınması gerektiğini bildirir. Yavaşlayın ve gerekirse durun."
       },
       {
+        "id": "TT-2",
+        "name": "DUR",
+        "imageUrl": "assets/images/traffic_signs/TT-2.jpg",
+        "description": "Kavşak veya tehlikeli noktalarda durma mecburiyeti olduğunu bildirir. Tam durup güvenli geçişten sonra ilerleyin."
+      },
+      {
         "id": "TT-3",
-        "name": "Giriş Yasak",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
-        "description": "Bu yönden yola girişin yasak olduğunu bildirir. Alternatif güzergah kullanın."
+        "name": "Karşıdan Gelene Yol Ver",
+        "imageUrl": "assets/images/traffic_signs/TT-3.jpg",
+        "description": "Karşı yönden gelen araçlara geçiş hakkı tanınması gerektiğini bildirir. Yavaşlayın ve gerekirse durun."
       },
       {
         "id": "TT-4",
-        "name": "Motorlu Araç Giriş Yasak",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
-        "description": "Motorlu araçların girişi yasaktır. Sadece yayalar girebilir."
+        "name": "Girişi Olmayan Yol",
+        "imageUrl": "assets/images/traffic_signs/TT-4.jpg",
+        "description": "Bu yönden yola girişin yasak olduğunu bildirir. Alternatif güzergah kullanın."
       },
       {
         "id": "TT-20",
@@ -402,6 +402,438 @@
         "name": "Azami Hız",
         "imageUrl": "assets/images/traffic_signs/(T).jpg",
         "description": "Belirtilen hız sınırını aşmayın. Güvenli sürüş için uygun hızda gidin."
+      },
+      {
+        "id": "TT-23",
+        "name": "Dingil Başına ..... Tondan Fazla Yük Düşen Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-23.jpg",
+        "description": "Dingil başına belirtilen tondan fazla yük düşen taşıtların bu yola girmesi yasaktır. Ağır yük taşıyan araçlar alternatif güzergah kullanmalıdır."
+      },
+      {
+        "id": "TT-24",
+        "name": "Yük Ağırlığı ..... Tondan Fazla Olan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-24.jpg",
+        "description": "Yük ağırlığı belirtilen tondan fazla olan taşıtların bu yola girmesi yasaktır. Ağır yük taşıyan araçlar alternatif güzergah kullanmalıdır."
+      },
+      {
+        "id": "TT-25",
+        "name": "Öndeki Taşıt ..... Metreden Daha Yakın Takip Edilemez",
+        "imageUrl": "assets/images/traffic_signs/TT-25.jpg",
+        "description": "Öndeki taşıt belirtilen metreden daha yakın takip edilemez. Güvenli takip mesafesi korunmalıdır."
+      },
+      {
+        "id": "TT-26",
+        "name": "Dönüş Yasak",
+        "imageUrl": "assets/images/traffic_signs/TT-26a.jpg",
+        "description": "Bu kavşakta belirli dönüşler yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-26a",
+        "name": "Sağa Dönülmez",
+        "imageUrl": "assets/images/traffic_signs/TT-26a.jpg",
+        "description": "Bu kavşakta sağa dönüş yasaktır. Sadece düz gitmek veya sola dönmek mümkündür."
+      },
+      {
+        "id": "TT-26b",
+        "name": "Sola Dönülmez",
+        "imageUrl": "assets/images/traffic_signs/TT-26b.jpg",
+        "description": "Bu kavşakta sola dönüş yasaktır. Sadece düz gitmek veya sağa dönmek mümkündür."
+      },
+      {
+        "id": "TT-26c",
+        "name": "U Dönüşü Yapılamaz",
+        "imageUrl": "assets/images/traffic_signs/TT-26c.jpg",
+        "description": "Bu yolda U dönüşü yapılamaz. Alternatif güzergah kullanarak yön değiştirin."
+      },
+      {
+        "id": "TT-27",
+        "name": "Öndeki Taşıtı Geçmek Yasaktır",
+        "imageUrl": "assets/images/traffic_signs/TT-27.jpg",
+        "description": "Bu yolda öndeki taşıtı geçmek yasaktır. Güvenli takip mesafesi koruyarak ilerleyin."
+      },
+      {
+        "id": "TT-28",
+        "name": "Yük Taşıtlarının Öndeki Taşıtı Geçmesi Yasaktır",
+        "imageUrl": "assets/images/traffic_signs/TT-28.jpg",
+        "description": "Bu yolda yük taşıtlarının öndeki taşıtı geçmesi yasaktır. Sadece otomobil ve motosikletler geçebilir."
+      },
+      {
+        "id": "TT-29",
+        "name": "Azami Hız Sınırlaması",
+        "imageUrl": "assets/images/traffic_signs/TT-29.jpg",
+        "description": "Bu yolda belirtilen azami hız sınırını aşmayın. Güvenli sürüş için uygun hızda gidin."
+      },
+      {
+        "id": "TT-30",
+        "name": "Sesli İkaz Cihazlarının Kullanımı Yasaktır",
+        "imageUrl": "assets/images/traffic_signs/TT-30.jpg",
+        "description": "Bu yolda korna, siren veya diğer sesli ikaz cihazlarının kullanımı yasaktır. Sessiz sürüş yapın."
+      },
+      {
+        "id": "TT-31",
+        "name": "Gümrük - Durmadan Geçmek Yasaktır",
+        "imageUrl": "assets/images/traffic_signs/TT-31.jpg",
+        "description": "Gümrük kontrol noktasında durmanız gerekiyor. Durmadan geçmek yasaktır. Gümrük memurlarının talimatlarını bekleyin."
+      },
+      {
+        "id": "TT-32",
+        "name": "Bütün Yasaklama ve Kısıtlamaların Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-32.jpg",
+        "description": "Bu noktadan sonra tüm yasaklama ve kısıtlama işaretleri sona erer. Normal trafik kuralları geçerlidir."
+      },
+      {
+        "id": "TT-33",
+        "name": "Hız Sınırlaması Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-33.jpg",
+        "description": "Bu noktadan sonra hız sınırlaması sona erer. Genel hız kurallarına uygun olarak sürüş yapabilirsiniz."
+      },
+      {
+        "id": "TT-34",
+        "name": "Geçme Yasağı Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-34a.jpg",
+        "description": "Bu noktadan sonra geçme yasağı sona erer. Normal geçiş kuralları geçerlidir."
+      },
+      {
+        "id": "TT-34b",
+        "name": "Kamyonlar İçin Geçme Yasağı Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-34b.jpg",
+        "description": "Bu noktadan sonra kamyonlar için geçme yasağı sona erer. Kamyonlar normal şekilde geçiş yapabilir."
+      },
+      {
+        "id": "TT-35",
+        "name": "Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35a.jpg",
+        "description": "Bu kavşakta belirli yönlerde gitmeniz zorunludur. Alternatif yönler yasaktır."
+      },
+      {
+        "id": "TT-35a",
+        "name": "Sağa Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35a.jpg",
+        "description": "Bu kavşakta sağa dönmeniz zorunludur. Sola veya düz gitmek yasaktır."
+      },
+      {
+        "id": "TT-35b",
+        "name": "Sola Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35b.jpg",
+        "description": "Bu kavşakta sola dönmeniz zorunludur. Sağa veya düz gitmek yasaktır."
+      },
+      {
+        "id": "TT-35c",
+        "name": "İleri Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35c.jpg",
+        "description": "Bu kavşakta düz gitmeniz zorunludur. Sağa veya sola dönmek yasaktır."
+      },
+      {
+        "id": "TT-35d",
+        "name": "İleri ve Sağa Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35d.jpg",
+        "description": "Bu kavşakta düz gitmeniz veya sağa dönmeniz zorunludur. Sola dönmek yasaktır."
+      },
+      {
+        "id": "TT-35e",
+        "name": "İleri ve Sola Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35e.jpg",
+        "description": "Bu kavşakta düz gitmeniz veya sola dönmeniz zorunludur. Sağa dönmek yasaktır."
+      },
+      {
+        "id": "TT-35f",
+        "name": "İleri Sağa ve Sola Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35f.jpg",
+        "description": "Bu kavşakta düz gitmeniz, sağa veya sola dönmeniz zorunludur. U dönüşü yapmak yasaktır."
+      },
+      {
+        "id": "TT-35g",
+        "name": "İleride Sağa Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35g.jpg",
+        "description": "İleride bulunan kavşakta sağa dönmeniz zorunludur. Bu işaret sürücüyü önceden uyarır."
+      },
+      {
+        "id": "TT-35h",
+        "name": "İleride Sola Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-35h.jpg",
+        "description": "İleride bulunan kavşakta sola dönmeniz zorunludur. Bu işaret sürücüyü önceden uyarır."
+      },
+      {
+        "id": "TT-36",
+        "name": "Şerit Kullanımı",
+        "imageUrl": "assets/images/traffic_signs/TT-36a.jpg",
+        "description": "Bu yolda belirli şeritleri kullanmanız gerekmektedir. Şerit kullanım kurallarına uyun."
+      },
+      {
+        "id": "TT-36a",
+        "name": "Sağdan Gidiniz",
+        "imageUrl": "assets/images/traffic_signs/TT-36a.jpg",
+        "description": "Bu yolda sağ şeridi kullanarak ilerleyiniz. Sol şerit sadece geçiş için kullanılabilir."
+      },
+      {
+        "id": "TT-36b",
+        "name": "Soldan Gidiniz",
+        "imageUrl": "assets/images/traffic_signs/TT-36b.jpg",
+        "description": "Bu yolda sol şeridi kullanarak ilerleyiniz. Sağ şerit sadece geçiş için kullanılabilir."
+      },
+      {
+        "id": "TT-36c",
+        "name": "Her İki Yandan Gidiniz",
+        "imageUrl": "assets/images/traffic_signs/TT-36c.jpg",
+        "description": "Bu yolda her iki şeridi de kullanabilirsiniz. Şerit değiştirirken güvenliğe dikkat edin."
+      },
+      {
+        "id": "TT-37",
+        "name": "Ada Etrafında Dönünüz",
+        "imageUrl": "assets/images/traffic_signs/TT-37.jpg",
+        "description": "Bu kavşakta ada etrafında dönerek ilerleyiniz. Ada etrafındaki trafik akışına uygun olarak hareket edin."
+      },
+      {
+        "id": "TT-38",
+        "name": "Bisiklet Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-38a.jpg",
+        "description": "Bu yolda bisiklet kullanıcıları için özel yollar bulunmaktadır. Bisiklet yolu kurallarına uyun."
+      },
+      {
+        "id": "TT-38a",
+        "name": "Mecburi Bisiklet Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-38a.jpg",
+        "description": "Bu yolda bisiklet kullanıcıları için ayrılmış bisiklet yolunu kullanmanız zorunludur. Motorlu taşıtlar bu yolu kullanamaz."
+      },
+      {
+        "id": "TT-38b",
+        "name": "Mecburi Bisiklet Yolu Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-38b.jpg",
+        "description": "Bu noktadan sonra mecburi bisiklet yolu sona erer. Bisiklet kullanıcıları normal trafik kurallarına uygun olarak hareket edebilir."
+      },
+      {
+        "id": "TT-39",
+        "name": "Yaya Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-39a.jpg",
+        "description": "Bu yolda yayalar için özel yollar bulunmaktadır. Yaya yolu kurallarına uyun."
+      },
+      {
+        "id": "TT-39a",
+        "name": "Mecburi Yaya Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-39a.jpg",
+        "description": "Bu yolda yayalar için ayrılmış yaya yolunu kullanmanız zorunludur. Motorlu taşıtlar ve bisikletler bu yolu kullanamaz."
+      },
+      {
+        "id": "TT-39b",
+        "name": "Mecburi Yaya Yolu Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-39b.jpg",
+        "description": "Bu noktadan sonra mecburi yaya yolu sona erer. Yayalar normal trafik kurallarına uygun olarak hareket edebilir."
+      },
+      {
+        "id": "TT-40",
+        "name": "Atlı Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-40a.jpg",
+        "description": "Bu yolda atlılar için özel yollar bulunmaktadır. Atlı yolu kurallarına uyun."
+      },
+      {
+        "id": "TT-40a",
+        "name": "Mecburi Atlı Yolu",
+        "imageUrl": "assets/images/traffic_signs/TT-40a.jpg",
+        "description": "Bu yolda atlılar için ayrılmış atlı yolunu kullanmanız zorunludur. Motorlu taşıtlar, bisikletler ve yayalar bu yolu kullanamaz."
+      },
+      {
+        "id": "TT-40b",
+        "name": "Mecburi Atlı Yolu Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-40b.jpg",
+        "description": "Bu noktadan sonra mecburi atlı yolu sona erer. Atlılar normal trafik kurallarına uygun olarak hareket edebilir."
+      },
+      {
+        "id": "TT-41",
+        "name": "Hız Kontrolü",
+        "imageUrl": "assets/images/traffic_signs/TT-41a.jpg",
+        "description": "Bu yolda hız kontrolü yapılmaktadır. Belirtilen hız kurallarına uyun."
+      },
+      {
+        "id": "TT-41a",
+        "name": "Mecburi Asgari Hız",
+        "imageUrl": "assets/images/traffic_signs/TT-41a.jpg",
+        "description": "Bu yolda belirtilen asgari hızın altında sürüş yapmak yasaktır. Güvenli sürüş için uygun hızda gidin."
+      },
+      {
+        "id": "TT-41b",
+        "name": "Mecburi Asgari Hız Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-41b.jpg",
+        "description": "Bu noktadan sonra mecburi asgari hız kuralı sona erer. Sürücüler artık normal trafik kurallarına uygun olarak hız seçebilir."
+      },
+      {
+        "id": "TT-42",
+        "name": "Ekipman Gerekliliği",
+        "imageUrl": "assets/images/traffic_signs/TT-42a.jpg",
+        "description": "Bu yolda belirli ekipmanlar kullanmanız gerekmektedir. Güvenlik ekipmanlarına uyun."
+      },
+      {
+        "id": "TT-42a",
+        "name": "Zincir Takmak Mecburidir",
+        "imageUrl": "assets/images/traffic_signs/TT-42a.jpg",
+        "description": "Bu yolda araç tekerleklerine zincir takmak zorunludur. Güvenli sürüş için zincir takılmadan yola çıkılmamalıdır."
+      },
+      {
+        "id": "TT-42b",
+        "name": "Zincir Takma Mecburiyetinin Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-42b.jpg",
+        "description": "Bu noktadan sonra zincir takma mecburiyeti sona erer. Sürücüler artık normal trafik kurallarına uygun olarak hareket edebilir."
+      },
+      {
+        "id": "TT-43",
+        "name": "Tehlikeli Madde Taşıyan Taşıtlar",
+        "imageUrl": "assets/images/traffic_signs/TT-43a.jpg",
+        "description": "Bu yolda tehlikeli madde taşıyan taşıtlar için özel kurallar geçerlidir. Güvenlik kurallarına uyun."
+      },
+      {
+        "id": "TT-43a",
+        "name": "Tehlikeli Madde Taşıyan Taşıtlar İçin Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-43a.jpg",
+        "description": "Bu yolda tehlikeli madde taşıyan taşıtlar için belirtilen yön zorunludur. Güvenlik için belirtilen rota takip edilmelidir."
+      },
+      {
+        "id": "TT-43b",
+        "name": "Tehlikeli Madde Taşıyan Taşıtlar İçin Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-43b.jpg",
+        "description": "Bu yolda tehlikeli madde taşıyan taşıtlar için belirtilen yön zorunludur. Güvenlik için belirtilen rota takip edilmelidir."
+      },
+      {
+        "id": "TT-43c",
+        "name": "Tehlikeli Madde Taşıyan Taşıtlar İçin Mecburi Yön",
+        "imageUrl": "assets/images/traffic_signs/TT-43c.jpg",
+        "description": "Bu yolda tehlikeli madde taşıyan taşıtlar için belirtilen yön zorunludur. Güvenlik için belirtilen rota takip edilmelidir."
+      },
+      {
+        "id": "TT-5",
+        "name": "Taşıt Trafiğine Kapalı Yol",
+        "imageUrl": "assets/images/traffic_signs/TT-5.jpg",
+        "description": "Bu yol taşıt trafiğine kapalıdır. Sadece yayalar kullanabilir."
+      },
+      {
+        "id": "TT-6",
+        "name": "Motosiklet Hariç Motorlu Taşıt Trafiğine Kapalı Yol",
+        "imageUrl": "assets/images/traffic_signs/TT-6.jpg",
+        "description": "Bu yol motorlu taşıt trafiğine kapalıdır. Sadece motosikletler ve yayalar kullanabilir."
+      },
+      {
+        "id": "TT-7",
+        "name": "Motosiklet Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-7.jpg",
+        "description": "Motosikletlerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-8",
+        "name": "Bisiklet Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-8.jpg",
+        "description": "Bisikletlerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-9",
+        "name": "Mopet Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-9.jpg",
+        "description": "Mopetlerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-10",
+        "name": "Sağdan Gidiniz",
+        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "description": "Yolun sağ tarafından gitmek zorunludur."
+      },
+      {
+        "id": "TT-10a",
+        "name": "Kamyon Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-10a.jpg",
+        "description": "Kamyonların bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-10b",
+        "name": "Otobüs Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-10b.jpg",
+        "description": "Otobüslerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-11",
+        "name": "Treyler Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-11.jpg",
+        "description": "Treylerlerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-12",
+        "name": "Yaya Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-12.jpg",
+        "description": "Yayaların bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-13",
+        "name": "At Arabası Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-13.jpg",
+        "description": "At arabalarının bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-14",
+        "name": "El Arabası Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-14.jpg",
+        "description": "El arabalarının bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-15",
+        "name": "Traktör Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-15.jpg",
+        "description": "Traktörlerin bu yola girmesi yasaktır. Alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-16",
+        "name": "Tehlikeli Madde Taşıyan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-16a.jpg",
+        "description": "Tehlikeli madde taşıyan taşıtların bu yola girmesi yasaktır. Güvenlik nedeniyle alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-16a",
+        "name": "Belirli Miktarlardan Fazla Patlayıcı ve Parlayıcı Madde Taşıyan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-16a.jpg",
+        "description": "Belirli miktarlardan fazla patlayıcı ve parlayıcı madde taşıyan taşıtların bu yola girmesi yasaktır. Güvenlik nedeniyle alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-16b",
+        "name": "Tehlikeli Madde Taşıyan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-16b.jpg",
+        "description": "Tehlikeli madde taşıyan taşıtların bu yola girmesi yasaktır. Güvenlik nedeniyle alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-17",
+        "name": "Belirli Miktarlardan Fazla Su Kirletici Madde Taşıyan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-17.jpg",
+        "description": "Belirli miktarlardan fazla su kirletici madde taşıyan taşıtların bu yola girmesi yasaktır. Çevre koruması için alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-18",
+        "name": "Motorlu Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-18.jpg",
+        "description": "Motorlu taşıtların bu yola girmesi yasaktır. Sadece yayalar, bisikletler ve at arabaları kullanabilir."
+      },
+      {
+        "id": "TT-19",
+        "name": "Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-19.jpg",
+        "description": "Tüm taşıtların bu yola girmesi yasaktır. Sadece yayalar kullanabilir."
+      },
+      {
+        "id": "TT-20",
+        "name": "Genişliği ..... Metreden Fazla Olan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-20.jpg",
+        "description": "Genişliği belirtilen metreden fazla olan taşıtların bu yola girmesi yasaktır. Dar yollarda güvenlik için alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-21",
+        "name": "Yüksekliği ..... Metreden Fazla Olan Taşıt Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-21.jpg",
+        "description": "Yüksekliği belirtilen metreden fazla olan taşıtların bu yola girmesi yasaktır. Düşük tüneller ve köprülerde güvenlik için alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-22",
+        "name": "Uzunluğu ..... Metreden Fazla Olan Taşıt veya Katar Giremez",
+        "imageUrl": "assets/images/traffic_signs/TT-22.jpg",
+        "description": "Uzunluğu belirtilen metreden fazla olan taşıt veya katarın bu yola girmesi yasaktır. Dar yollarda ve keskin virajlarda güvenlik için alternatif güzergah kullanın."
+      },
+      {
+        "id": "TT-34a",
+        "name": "Geçme Yasağı Sonu",
+        "imageUrl": "assets/images/traffic_signs/TT-34a.jpg",
+        "description": "Geçme yasağının sona erdiğini bildirir. Artık sollama yapabilirsiniz."
       }
     ]
   },

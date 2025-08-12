@@ -21,19 +21,25 @@ class DynamicHeaderWidget extends ConsumerWidget {
     final streakText = ref.watch(streakTextProvider);
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        // Theme-adaptive card background for proper contrast in dark mode
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppColors.outline.withValues(alpha: 0.3),
-          width: 1,
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow.withValues(alpha: 0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.12),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
+          ),
+          BoxShadow(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+            blurRadius: 40,
+            offset: const Offset(0, 12),
           ),
         ],
       ),
@@ -54,40 +60,98 @@ class DynamicHeaderWidget extends ConsumerWidget {
                   _getGreetingText(),
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withValues(alpha: 0.95)
+                        : Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 
                 const SizedBox(height: 8),
                 
-                // Subtitle
-                Text(
-                  _getSubtitleText(),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w500,
+                // Daily Goal Progress Text
+                dailyProgressAsync.when(
+                  data: (progress) => Text(
+                    'Bugünkü Hedef: $progress/$dailyGoal',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? (progress >= dailyGoal ? AppColors.successLight : AppColors.primaryLight)
+                          : (progress >= dailyGoal ? AppColors.success : AppColors.primary),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  loading: () => Text(
+                    'Bugünkü Hedef: 0/$dailyGoal',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.8)
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  error: (_, __) => Text(
+                    'Bugünkü Hedef: 0/$dailyGoal',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.8)
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 
                 const SizedBox(height: 12),
                 
-                // Streak Display
+                // Enhanced Streak Display
                 if (streakText.isNotEmpty) ...[
-                  Row(
-                    children: [
-                      const Text(
-                        '🔥',
-                        style: TextStyle(fontSize: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                                    color: Theme.of(context).brightness == Brightness.dark 
+                  ? AppColors.warning.withValues(alpha: 0.2)
+                  : AppColors.warning.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? AppColors.warning.withValues(alpha: 0.4)
+                          : AppColors.warning.withValues(alpha: 0.3),
+                        width: 1,
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        streakText,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.warning,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.warning.withValues(alpha: 0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark 
+                              ? AppColors.warning.withValues(alpha: 0.3)
+                              : AppColors.warning.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Text(
+                            '🔥',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          streakText,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).brightness == Brightness.dark 
+                              ? AppColors.warning.withValues(alpha: 0.9)
+                              : AppColors.warning,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ],
@@ -108,49 +172,64 @@ class DynamicHeaderWidget extends ConsumerWidget {
       data: (progress) => Stack(
         alignment: Alignment.center,
         children: [
-          // Background circle
+          // Background circle with theme-adaptive color
           Container(
-            width: 80,
-            height: 80,
+            width: 110,
+            height: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.surfaceContainerHighest,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.6)
+                  : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.9),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
           ),
           
-          // Progress circle
+          // Progress circle with enhanced design
           SizedBox(
-            width: 80,
-            height: 80,
+            width: 110,
+            height: 110,
             child: CircularProgressIndicator(
               value: progressPercentage.clamp(0.0, 1.0),
               strokeWidth: 8,
-              backgroundColor: AppColors.surfaceContainerHighest,
+              backgroundColor: Colors.transparent,
               valueColor: AlwaysStoppedAnimation<Color>(
                 progressPercentage >= 1.0 ? AppColors.success : AppColors.primary,
               ),
+              strokeCap: StrokeCap.round,
             ),
           ),
           
           // User profile image or default icon
-          _buildUserProfileImage(),
+          _buildUserProfileImage(context),
           
-          // Progress text (only show if no profile image)
+          // Progress text overlay (only show if no profile image)
           if (!_hasProfileImage()) ...[
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   '$progress',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? (progressPercentage >= 1.0 ? AppColors.successLight : AppColors.primaryLight)
+                        : (progressPercentage >= 1.0 ? AppColors.success : AppColors.primary),
                   ),
                 ),
                 Text(
                   '/$dailyGoal',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withValues(alpha: 0.8)
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -161,30 +240,53 @@ class DynamicHeaderWidget extends ConsumerWidget {
       loading: () => Stack(
         alignment: Alignment.center,
         children: [
-          // Background circle
+          // Background circle with theme-adaptive color
           Container(
-            width: 80,
-            height: 80,
+            width: 110,
+            height: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.surfaceContainerHighest,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.6)
+                  : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.9),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
           ),
           
           // User profile image or default icon (no loading indicator)
-          _buildUserProfileImage(),
+          _buildUserProfileImage(context),
         ],
       ),
       error: (_, __) => Stack(
         alignment: Alignment.center,
         children: [
-          // Background circle
+          // Background circle with gradient
           Container(
-            width: 80,
-            height: 80,
+            width: 110,
+            height: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.surfaceContainerHighest,
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.surfaceContainerHighest,
+                  Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
           ),
           
@@ -196,13 +298,13 @@ class DynamicHeaderWidget extends ConsumerWidget {
           ),
           
           // User profile image or default icon (even during error)
-          _buildUserProfileImage(),
+          _buildUserProfileImage(context),
         ],
       ),
     );
   }
 
-  Widget _buildUserProfileImage() {
+  Widget _buildUserProfileImage(BuildContext context) {
     return authState.when(
       data: (user) {
         if (user == null) {
@@ -212,11 +314,11 @@ class DynamicHeaderWidget extends ConsumerWidget {
             height: 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.surfaceContainerHighest,
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
             ),
             child: Icon(
               Icons.account_circle_outlined,
-              color: AppColors.textSecondary,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               size: 40,
             ),
           );
@@ -236,7 +338,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.surfaceContainerHighest,
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     ),
                     child: Icon(
                       Icons.account_circle,
@@ -254,7 +356,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
               height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.surfaceContainerHighest,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
               ),
               child: Icon(
                 Icons.account_circle,
@@ -270,7 +372,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
         height: 40,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColors.surfaceContainerHighest,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
         ),
         child: Icon(
           Icons.account_circle_outlined,
@@ -283,7 +385,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
         height: 40,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColors.surfaceContainerHighest,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
         ),
         child: Icon(
           Icons.account_circle_outlined,
@@ -319,16 +421,5 @@ class DynamicHeaderWidget extends ConsumerWidget {
     );
   }
 
-  String _getSubtitleText() {
-    return authState.when(
-      data: (user) {
-        if (user == null) {
-          return 'Ehliyet sınavına hazırlanmaya başlayalım!';
-        }
-        return 'Bugünkü hedefine ulaşmaya hazır mısın?';
-      },
-      loading: () => 'Yükleniyor...',
-      error: (_, __) => 'Ehliyet sınavına hazırlanmaya başlayalım!',
-    );
-  }
+
 } 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ehliyet_rehberim/src/features/study_guides/application/study_guide_providers.dart';
 import 'package:ehliyet_rehberim/src/core/models/study_guide_model.dart';
-import 'package:ehliyet_rehberim/src/core/theme/app_colors.dart';
 import 'study_guide_detail_screen.dart';
 
 class StudyGuideListScreen extends ConsumerWidget {
@@ -13,15 +12,15 @@ class StudyGuideListScreen extends ConsumerWidget {
     final guidesAsync = ref.watch(studyGuidesProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
           'Konu Anlatımları',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
       ),
@@ -30,10 +29,9 @@ class StudyGuideListScreen extends ConsumerWidget {
         error: (e, st) => Center(
           child: Text(
             'Konu anlatımları yüklenemedi: $e',
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge
-                ?.copyWith(color: AppColors.error),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
           ),
         ),
         data: (guides) {
@@ -44,7 +42,7 @@ class StudyGuideListScreen extends ConsumerWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge
-                    ?.copyWith(color: AppColors.textSecondary),
+                     ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             );
           }
@@ -55,7 +53,7 @@ class StudyGuideListScreen extends ConsumerWidget {
             itemBuilder: (context, index) {
               final StudyGuide guide = guides[index];
               return Card(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 elevation: 1,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -68,14 +66,14 @@ class StudyGuideListScreen extends ConsumerWidget {
                         .titleMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                   ),
-                  subtitle: Text(
+                   subtitle: Text(
                     guide.category,
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall
-                        ?.copyWith(color: AppColors.textSecondary),
+                         ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                   ),
-                  trailing: Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                   trailing: Icon(Icons.chevron_right, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(

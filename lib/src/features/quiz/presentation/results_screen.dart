@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/quiz_providers.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/services/ad_service.dart';
+import '../../../core/widgets/banner_ad_widget.dart';
 
 class ResultsScreen extends ConsumerWidget {
   const ResultsScreen({super.key});
@@ -165,8 +167,18 @@ class ResultsScreen extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      // Mark completion and maybe show an interstitial for non-Pro users
+                      await AdService.markQuizCompleted();
+                      final isPro = ref.read(proStatusProvider).maybeWhen(
+                            data: (v) => v,
+                            orElse: () => false,
+                          );
+                      if (!isPro) {
+                        await AdService.showInterstitialIfEligible();
+                      }
                       // Navigate back to home screen
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
                     style: OutlinedButton.styleFrom(
@@ -189,6 +201,7 @@ class ResultsScreen extends ConsumerWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const BannerAdWidget(),
     );
   }
 

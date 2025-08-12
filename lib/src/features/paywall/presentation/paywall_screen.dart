@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/purchase_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../auth/application/auth_providers.dart';
@@ -13,16 +14,56 @@ class PaywallScreen extends ConsumerStatefulWidget {
   ConsumerState<PaywallScreen> createState() => _PaywallScreenState();
 }
 
-class _PaywallScreenState extends ConsumerState<PaywallScreen> {
+class _PaywallScreenState extends ConsumerState<PaywallScreen>
+    with TickerProviderStateMixin {
   final PurchaseService _purchaseService = PurchaseService();
   List<Offering> _offerings = [];
   bool _isLoading = true;
   bool _isPurchasing = false;
+  String? _selectedPackageId;
+  
+  late AnimationController _heroController;
+  late AnimationController _contentController;
+  late Animation<double> _heroAnimation;
+  late Animation<double> _contentAnimation;
 
   @override
   void initState() {
     super.initState();
+    _initializeAnimations();
     _loadOfferings();
+  }
+
+  void _initializeAnimations() {
+    _heroController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _contentController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    
+    _heroAnimation = CurvedAnimation(
+      parent: _heroController,
+      curve: Curves.easeOutCubic,
+    );
+    _contentAnimation = CurvedAnimation(
+      parent: _contentController,
+      curve: Curves.easeOutCubic,
+    );
+    
+    _heroController.forward();
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (mounted) _contentController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _heroController.dispose();
+    _contentController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadOfferings() async {
@@ -31,6 +72,16 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       setState(() {
         _offerings = offerings;
         _isLoading = false;
+        // Auto-select the monthly subscription as primary option
+        if (offerings.isNotEmpty) {
+          final packages = offerings.expand((o) => o.availablePackages).toList();
+          final monthlyPackage = packages.where((p) => 
+            p.identifier.contains('monthly') || p.identifier.contains('month')
+          ).firstOrNull;
+          _selectedPackageId = monthlyPackage?.identifier ?? 'monthly_subscription';
+        } else {
+          _selectedPackageId = 'monthly_subscription'; // Default fallback
+        }
       });
     } catch (e) {
       setState(() {
@@ -40,6 +91,34 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Paketler yüklenirken hata oluştu: $e')),
         );
+      }
+    }
+  }
+
+  Future<void> _purchaseSelectedPackage() async {
+    if (_selectedPackageId == null) return;
+    
+    // First try to find the package in offerings
+    final package = _offerings
+        .expand((o) => o.availablePackages)
+        .where((p) => p.identifier == _selectedPackageId)
+        .firstOrNull;
+    
+    if (package != null) {
+      await _purchasePackage(package);
+    } else if (_selectedPackageId == 'monthly_subscription') {
+      // Handle the custom monthly subscription (49.99 TRY)
+      // This would be handled by your app store configuration
+      // For now, show success message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Aylık abonelik başlatılıyor...'),
+            backgroundColor: AppColors.primary,
+          ),
+        );
+        // In real implementation, this would trigger the app store purchase
+        // Navigator.of(context).pop(true);
       }
     }
   }
@@ -121,7 +200,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             onPressed: () => Navigator.of(context).pop(false),
             child: Text(
               'İptal',
-              style: TextStyle(color: AppColors.textSecondary),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
           ElevatedButton(
@@ -195,225 +274,302 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     }
   }
 
+  void _launchPrivacyPolicy() async {
+    const url = 'https://your-app.com/privacy-policy'; // Replace with your actual URL
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _launchTermsOfService() async {
+    const url = 'https://your-app.com/terms-of-service'; // Replace with your actual URL
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pro Sürüme Geç'),
-                  backgroundColor: Theme.of(context).colorScheme.surface.withValues(alpha: 0),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: _isLoading
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            : Column(
                 children: [
-                  // Header Section
-                  Center(
+                  // Custom App Bar
+                  _buildCustomAppBar(),
+                  
+                  // Scrollable Content
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                AppColors.secondary,
-                                AppColors.secondaryDark,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.secondaryShadow,
-                                blurRadius: 20,
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.star,
-                            size: 60,
-                            color: Theme.of(context).colorScheme.onSecondary,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Text(
-                          'Pro Sürüme Geç',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Tüm özelliklerin kilidini açın',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  
-                  const SizedBox(height: 40),
-                  
-                  // Features Section
-                  Text(
-                    'Pro Özellikleri',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  _buildFeatureItem(
-                    icon: Icons.quiz,
-                    title: 'Tüm Sorulara Erişim',
-                    description: '1000+ soru ile sınırsız pratik yapın',
-                  ),
-                  _buildFeatureItem(
-                    icon: Icons.block,
-                    title: 'Reklamsız Deneyim',
-                    description: 'Kesintisiz çalışma deneyimi',
-                  ),
-                  _buildFeatureItem(
-                    icon: Icons.analytics,
-                    title: 'Detaylı İstatistikler',
-                    description: 'Gelişiminizi takip edin',
-                  ),
-                  _buildFeatureItem(
-                    icon: Icons.info_outline,
-                    title: 'Detaylı Açıklamalar',
-                    description: 'Her soru için kapsamlı açıklama',
-                  ),
-                  _buildFeatureItem(
-                    icon: Icons.topic,
-                    title: 'Konu Bazlı Çalışma',
-                    description: 'Zayıf olduğunuz konulara odaklanın',
-                  ),
-                  
-                  const SizedBox(height: 40),
-                  
-                  // Subscription Options
-                  if (_offerings.isNotEmpty) ...[
-                    Text(
-                      'Abonelik Seçenekleri',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    
-                    ..._offerings.expand((offering) => offering.availablePackages).map((package) {
-                      return _buildPackageCard(package);
-                    }),
-                  ] else ...[
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.error_outline,
-                            size: 48,
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Paketler Yüklenemedi',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
+                          // Hero Section
+                          _buildHeroSection(),
+                          
+                          // Features Section
+                          _buildFeaturesSection(),
+                          
+                          // Package Selection
+                          _buildPackageSelection(),
+                          
+                          // Primary CTA
+                          _buildPrimaryCTA(),
+                          
+                          // Trust Signals
+                          _buildTrustSignals(),
+                          
+                          const SizedBox(height: 32),
                         ],
                       ),
                     ),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+
+  Widget _buildCustomAppBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.of(context).pop(),
+            style: IconButton.styleFrom(
+              backgroundColor: AppColors.surface,
+              foregroundColor: AppColors.textPrimary,
+            ),
+          ),
+          const Spacer(),
+                    Text(
+            'Pro Sürüme Geç',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          const Spacer(),
+          const SizedBox(width: 48), // Balance the close button
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeroSection() {
+    return AnimatedBuilder(
+      animation: _heroAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 30 * (1 - _heroAnimation.value)),
+          child: Opacity(
+            opacity: _heroAnimation.value,
+            child: Container(
+                      width: double.infinity,
+              margin: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(32),
+                      decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.premiumDark,
+                    AppColors.premium,
+                    AppColors.premiumLight,
                   ],
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Restore Purchases Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: _isPurchasing ? null : _restorePurchases,
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.premiumShadow.withValues(alpha: 0.3),
+                    blurRadius: 30,
+                    offset: const Offset(0, 15),
+                    spreadRadius: 5,
+                  ),
+                ],
                       ),
-                      child: _isPurchasing
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Text('Satın Alımları Geri Yükle'),
+                      child: Column(
+                        children: [
+                  // Premium Icon
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.onPremium.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: AppColors.onPremium.withValues(alpha: 0.3),
+                        width: 2,
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.workspace_premium_rounded,
+                      size: 48,
+                      color: AppColors.onPremium,
                     ),
                   ),
                   
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   
-                  // Terms and Privacy
+                  // Hero Title
                   Text(
-                    'Aboneliğiniz otomatik olarak yenilenir. İstediğiniz zaman iptal edebilirsiniz.',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    'Ehliyet Rehberim Pro',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.onPremium,
+                      fontSize: 28,
+                      letterSpacing: 0.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  
+                  const SizedBox(height: 12),
+                  
+                  // Hero Subtitle
+                  Text(
+                    'Sınırsız erişim ile hedeflerinize\ndaha hızlı ulaşın',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: AppColors.onPremium.withValues(alpha: 0.9),
+                      fontSize: 16,
+                      height: 1.5,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildFeatureItem({
+  Widget _buildFeaturesSection() {
+    final features = [
+      {
+        'title': 'Daha Fazla Deneme Sınavına Erişim',
+        'description': '1000+ fazla soruya erişim kazanın',
+        'icon': Icons.quiz_rounded,
+      },
+      {
+        'title': 'Reklamsız Deneyim',
+        'description': 'Kesintisiz çalışma deneyimi',
+        'icon': Icons.block_rounded,
+      },
+      {
+        'title': 'Detaylı İstatistikler',
+        'description': 'Gelişiminizi takip edin ve analiz edin',
+        'icon': Icons.analytics_rounded,
+      },
+      {
+        'title': 'Konu Bazlı Çalışma',
+        'description': 'Zayıf olduğunuz konulara odaklanın',
+        'icon': Icons.topic_rounded,
+      },
+      {
+        'title': 'Detaylı Açıklamalar',
+        'description': 'Her soru için kapsamlı açıklama',
+        'icon': Icons.info_rounded,
+      },
+    ];
+
+    return AnimatedBuilder(
+      animation: _contentAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 20 * (1 - _contentAnimation.value)),
+          child: Opacity(
+            opacity: _contentAnimation.value,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pro Özellikleri',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ...features.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final feature = entry.value;
+                    return AnimatedContainer(
+                      duration: Duration(milliseconds: 300 + (index * 100)),
+                      child: _buildFeatureTile(
+                        icon: feature['icon'] as IconData,
+                        title: feature['title'] as String,
+                        description: feature['description'] as String,
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFeatureTile({
     required IconData icon,
     required String title,
     required String description,
   }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.outline.withValues(alpha: 0.1),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Row(
         children: [
+          // Checkmark Circle
           Container(
-            padding: const EdgeInsets.all(12),
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                colors: [AppColors.success, AppColors.successLight],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.success.withValues(alpha: 0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: Icon(
-              icon,
-              color: Theme.of(context).colorScheme.primary,
+              Icons.check_rounded,
+              color: AppColors.onSuccess,
               size: 24,
             ),
           ),
+          
           const SizedBox(width: 16),
+          
+          // Feature Content
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -422,16 +578,32 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: AppColors.textSecondary,
+                    height: 1.4,
                   ),
                 ),
               ],
+            ),
+          ),
+          
+          // Feature Icon
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.primaryContainer,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.primary,
+              size: 20,
             ),
           ),
         ],
@@ -439,115 +611,528 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     );
   }
 
-  Widget _buildPackageCard(Package package) {
-    final isPopular = package.identifier.contains('yearly') || package.identifier.contains('annual');
-    
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        gradient: isPopular
-            ? LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.primary,
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+  Widget _buildPackageSelection() {
+    return AnimatedBuilder(
+      animation: _contentAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 30 * (1 - _contentAnimation.value)),
+          child: Opacity(
+            opacity: _contentAnimation.value,
+            child: Container(
+              margin: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Abonelik Planı',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  
+                  // Primary Monthly Subscription Card
+                  _buildMainSubscriptionCard(),
+                  
+                  // Optional Annual Plan (if available)
+                  if (_offerings.isNotEmpty) ...[
+                    const SizedBox(height: 12),
+                    _buildOptionalAnnualCard(),
+                  ],
                 ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
+
+  Widget _buildMainSubscriptionCard() {
+    
+    return GestureDetector(
+      onTap: () {
+        // Set to monthly subscription
+        setState(() {
+          _selectedPackageId = 'monthly_subscription'; // Default ID for monthly
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.premium, AppColors.premiumLight],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColors.premium,
+            width: 2.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.premium.withValues(alpha: 0.3),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            // Free Trial Badge
+            Positioned(
+              top: -8,
+              right: -8,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColors.success, AppColors.successLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-              )
-            : null,
-        color: isPopular ? null : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(16),
-        border: isPopular
-            ? null
-            : Border.all(
-                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-              ),
-        boxShadow: isPopular
-            ? [
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
+                      color: AppColors.success.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-              ]
-            : null,
-      ),
-      child: Material(
-        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(16),
-          onTap: _isPurchasing ? null : () => _purchasePackage(package),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
+                child: Text(
+                  'İlk Gün Ücretsiz!',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11,
+                  ),
+                ),
+              ),
+            ),
+            
+            // Main Content
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    // Selection Indicator (always selected)
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.onPremium,
+                      ),
+                      child: Icon(
+                        Icons.check,
+                        size: 16,
+                        color: AppColors.premium,
+                      ),
+                    ),
+                    
+                    const SizedBox(width: 16),
+                    
+                    // Title
                 Expanded(
+                      child: Text(
+                        'Aylık Abonelik',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.onPremium,
+                        ),
+                      ),
+                    ),
+                    
+                    // Price
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '49.99 TL',
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.onPremium,
+                          ),
+                        ),
+                        Text(
+                          'ay',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.onPremium.withValues(alpha: 0.8),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // Description
+                Padding(
+                  padding: const EdgeInsets.only(left: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
                         children: [
                           Text(
-                            package.storeProduct.title,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: isPopular ? Theme.of(context).colorScheme.onPrimary : null,
-                            ),
-                          ),
-                          if (isPopular) ...[
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onPrimary.withValues(alpha: 51),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                'POPÜLER',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
+                        '1 gün ücretsiz deneme',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: AppColors.onPremium,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        package.storeProduct.description,
+                        'Deneme sonrası ayda 49.99 TL\nİstediğin zaman iptal et',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: isPopular ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 204) : Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: AppColors.onPremium.withValues(alpha: 0.85),
+                          height: 1.4,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOptionalAnnualCard() {
+    final packages = _offerings.expand((o) => o.availablePackages).toList();
+    final annualPackage = packages.where((p) => 
+      p.identifier.contains('yearly') || p.identifier.contains('annual')
+    ).firstOrNull;
+
+    if (annualPackage == null) return const SizedBox.shrink();
+
+    final isSelected = _selectedPackageId == annualPackage.identifier;
+    
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedPackageId = annualPackage.identifier;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? AppColors.primaryContainer
+              : AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected 
+                ? AppColors.primary 
+                : AppColors.outline.withValues(alpha: 0.2),
+            width: isSelected ? 2 : 1.5,
+          ),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: AppColors.primary.withValues(alpha: 0.2),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ] : null,
+        ),
+        child: Stack(
+          children: [
+            // Best Value Badge
+            Positioned(
+              top: -4,
+              right: -4,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColors.warning, AppColors.warningLight],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'En İyi Değer',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                  ),
+                ),
+              ),
+            ),
+            
+            // Card Content
+            Row(
+              children: [
+                // Selection Radio
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isSelected ? AppColors.primary : AppColors.outline,
+                      width: 2,
+                    ),
+                    color: isSelected ? AppColors.primary : Colors.transparent,
+                  ),
+                  child: isSelected
+                      ? Icon(
+                          Icons.check,
+                          size: 12,
+                          color: AppColors.onPrimary,
+                        )
+                      : null,
+                ),
+                
+                const SizedBox(width: 12),
+                
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      package.storeProduct.priceString,
-                                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        annualPackage.storeProduct.title,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: isPopular ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.primary,
+                          color: AppColors.textPrimary,
                         ),
                     ),
-                    if (package.storeProduct.introductoryPrice != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        '${package.storeProduct.introductoryPrice?.priceString ?? ''} ilk dönem',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: isPopular ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 204) : Theme.of(context).colorScheme.onSurfaceVariant,
+                        'Yıllık ödeme ile tasarruf edin',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textSecondary,
                         ),
                       ),
                     ],
-                  ],
+                  ),
+                ),
+                
+                Text(
+                  annualPackage.storeProduct.priceString,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+  Widget _buildPrimaryCTA() {
+    return AnimatedBuilder(
+      animation: _contentAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 40 * (1 - _contentAnimation.value)),
+          child: Opacity(
+            opacity: _contentAnimation.value,
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                onPressed: _isPurchasing || _selectedPackageId == null 
+                    ? null 
+                    : _purchaseSelectedPackage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: AppColors.onPremium,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: EdgeInsets.zero,
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.premium,
+                        AppColors.premiumLight,
+                        AppColors.premium,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.premiumShadow.withValues(alpha: 0.4),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: _isPurchasing
+                        ? SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(AppColors.onPremium),
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.stars_rounded,
+                                size: 24,
+                                color: AppColors.onPremium,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                '1 Gün Ücretsiz Dene',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.onPremium,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                    ),
+                  ),
+                    ),
+                  ),
+                  
+                  // Pricing Subtext
+                  const SizedBox(height: 12),
+                  
+                  Text(
+                    'Deneme sonrası ayda 49.99 TL. İstediğin zaman iptal et.',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontSize: 13,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
           ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTrustSignals() {
+    return AnimatedBuilder(
+      animation: _contentAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 20 * (1 - _contentAnimation.value)),
+          child: Opacity(
+            opacity: _contentAnimation.value * 0.8,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: [
+                  // Restore Purchases Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: _isPurchasing ? null : _restorePurchases,
+                      icon: Icon(
+                        Icons.restore_rounded,
+                        size: 20,
+                        color: AppColors.primary,
+                      ),
+                      label: Text(
+                        'Satın Alımları Geri Yükle',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        side: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
+                      ),
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 20),
+                  
+                  // Legal Links
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 20,
+                    children: [
+                      _buildLegalLink(
+                        'Gizlilik Politikası',
+                        _launchPrivacyPolicy,
+                      ),
+                      _buildLegalLink(
+                        'Kullanım Koşulları',
+                        _launchTermsOfService,
+                      ),
+                    ],
+                  ),
+                  
+                  const SizedBox(height: 16),
+                  
+                  // Auto-renewal Notice
+                  Text(
+                    'Aboneliğiniz otomatik olarak yenilenir. İstediğiniz zaman iptal edebilirsiniz.',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.textSecondary,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildLegalLink(String text, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: AppColors.primary,
+          decoration: TextDecoration.underline,
+          decorationColor: AppColors.primary.withValues(alpha: 0.5),
         ),
       ),
     );

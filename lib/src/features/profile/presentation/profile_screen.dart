@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/application/auth_providers.dart';
 import '../../auth/presentation/auth_screen.dart';
 import '../../../core/theme/app_colors.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -47,7 +48,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('İptal', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text('İptal', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
@@ -106,7 +107,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           child: Icon(
             Icons.person_outline,
             size: 64,
-            color: AppColors.textSecondary,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         
@@ -116,7 +117,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           'Misafir Kullanıcı',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         
@@ -125,7 +126,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         Text(
           'İlerlemenizi kaydetmek ve tüm cihazlarınızda\nsenkronize etmek için giriş yapın.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           textAlign: TextAlign.center,
         ),
@@ -180,7 +181,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           displayName ?? 'Kullanıcı',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -192,7 +193,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Text(
             email,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppColors.textSecondary,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             textAlign: TextAlign.center,
           ),
@@ -266,10 +267,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final photoURL = ref.watch(userPhotoURLProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Profil'),
-        backgroundColor: AppColors.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: authState.when(
@@ -292,7 +293,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Text(
                 error.toString(),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -301,9 +302,37 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         data: (user) => SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: user == null
-              ? _buildGuestProfile()
-              : _buildSignedInProfile(displayName, email, photoURL),
+          child: Column(
+            children: [
+              if (user == null)
+                _buildGuestProfile()
+              else
+                _buildSignedInProfile(displayName, email, photoURL),
+
+              const SizedBox(height: 24),
+
+              // Settings entry in profile
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(color: AppColors.shadow, blurRadius: 10, offset: const Offset(0, 3)),
+                  ],
+                ),
+                child: ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text('Uygulama Ayarları'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

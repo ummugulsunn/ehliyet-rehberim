@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ehliyet_rehberim/src/core/models/study_guide_model.dart';
 import 'package:ehliyet_rehberim/src/core/theme/app_colors.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class StudyGuideDetailScreen extends StatelessWidget {
   final StudyGuide guide;
@@ -9,19 +10,42 @@ class StudyGuideDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
           guide.title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
       ),
-      body: ListView.builder(
+      body: guide.markdown != null && guide.markdown!.trim().isNotEmpty
+          ? Markdown(
+              data: guide.markdown!,
+              padding: const EdgeInsets.all(16),
+               styleSheet: MarkdownStyleSheet(
+                h1: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                h2: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                p: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      height: 1.6,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                listBullet: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                blockSpacing: 12,
+              ),
+            )
+          : ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: guide.content.length,
         itemBuilder: (context, index) {
@@ -33,7 +57,7 @@ class StudyGuideDetailScreen extends StatelessWidget {
                 block.text,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
             );
@@ -44,7 +68,7 @@ class StudyGuideDetailScreen extends StatelessWidget {
                 block.text,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       height: 1.6,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
             );
@@ -59,17 +83,17 @@ class StudyGuideDetailScreen extends StatelessWidget {
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       height: 160,
-                      color: AppColors.surface,
+                      color: Theme.of(context).colorScheme.surface,
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.broken_image_outlined, color: AppColors.textSecondary),
+                           Icon(Icons.broken_image_outlined, color: Theme.of(context).colorScheme.onSurfaceVariant),
                           const SizedBox(width: 8),
                           Text(
                             'Görsel bulunamadı',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: AppColors.textSecondary,
+                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 ),
                           ),
                         ],
@@ -81,7 +105,7 @@ class StudyGuideDetailScreen extends StatelessWidget {
             );
           } else if (block is KeyInfoBlock) {
             return Card(
-              color: AppColors.info.withValues(alpha: 0.08),
+               color: AppColors.info.withValues(alpha: 0.08),
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -97,8 +121,8 @@ class StudyGuideDetailScreen extends StatelessWidget {
                     Expanded(
                       child: Text(
                         block.text,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: AppColors.textPrimary,
+                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                               color: Theme.of(context).colorScheme.onSurface,
                               height: 1.5,
                               fontWeight: FontWeight.w600,
                             ),

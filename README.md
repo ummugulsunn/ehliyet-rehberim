@@ -1,171 +1,200 @@
-# 🚗 Ehliyet Rehberim
+# 🚗 Ehliyet Rehberim (Turkish Driving License Prep)
 
-Türkiye'de ehliyet sınavına hazırlananlar için geliştirilmiş modern ve kullanıcı dostu bir Flutter uygulaması.
+A modern, user-friendly Flutter application designed for Turkish driving license exam preparation. Built with Material Design 3 and supporting both light and dark themes.
 
-## ✨ Özellikler
+## ✨ Features
 
-### 📚 Kapsamlı Soru Bankası
-- **100 soru** ile tam kapsamlı hazırlık
-- **5 kategori** ile organize edilmiş içerik:
-  - 🚑 İlk Yardım
-  - 🔧 Motor ve Araç Tekniği
-  - 🤝 Trafik Adabı
-  - 🛑 Trafik İşaretleri
-  - 🌍 Trafik ve Çevre Bilgisi
+### 📚 Comprehensive Question Bank
+- **20 practice exams** with complete coverage
+- **1000+ questions** organized across categories:
+  - 🚑 First Aid
+  - 🔧 Vehicle Mechanics & Technology
+  - 🤝 Traffic Ethics
+  - 🛑 Traffic Signs
+  - 🌍 Traffic & Environmental Knowledge
 
-### 🎯 Akıllı Öğrenme Sistemi
-- **Konu bazlı çalışma** - İstediğin konuyu seç ve çalış
-- **Sınav modu** - Gerçek sınav deneyimi
-- **Detaylı açıklamalar** - Her soru için kapsamlı açıklama
-- **Skor takibi** - İlerlemeni takip et
+### 🎯 Smart Learning System
+- **Topic-based study** - Choose and focus on specific subjects
+- **Exam mode** - Authentic exam experience with timer
+- **Detailed explanations** - Comprehensive answers for every question
+- **Progress tracking** - Monitor your improvement over time
+- **Adaptive learning** - Focus on weak areas automatically
 
-### 💎 Premium Özellikler
-- **Pro abonelik** - Tüm özelliklere sınırsız erişim
-- **Konu seçimi** - PRO kullanıcılar için
-- **Tam soru bankası** - 100 soruya erişim
-- **Reklamsız deneyim** - Kesintisiz çalışma
+### 💎 Premium Features
+- **Pro subscription** - Access to all features
+- **20 practice exams** - Complete exam simulation
+- **1000+ questions** - Full question database
+- **Ad-free experience** - Uninterrupted studying
+- **Advanced analytics** - Detailed performance insights
 
-## 🚀 Kurulum
+## 🚀 Installation
 
-### Gereksinimler
-- Flutter 3.29.3 veya üzeri
-- Dart 3.7.0 veya üzeri
+### Requirements
+- Flutter 3.29.3 or higher
+- Dart 3.7.0 or higher
 - Android Studio / VS Code
 - Android SDK (API 21+)
+- iOS 12.0+ (for iOS build)
 
-### Adımlar
+### Setup Steps
 
-1. **Projeyi klonlayın**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/yourusername/ehliyet-rehberim.git
 cd ehliyet-rehberim
 ```
 
-2. **Bağımlılıkları yükleyin**
+2. **Install dependencies**
 ```bash
 flutter pub get
 ```
 
-3. **Uygulamayı çalıştırın**
+3. **Run the application**
 ```bash
 flutter run
 ```
 
-## 📱 Ekran Görüntüleri
+## 📱 Screenshots
 
-### Ana Sayfa
-- Modern Material Design 3 arayüzü
-- Kolay navigasyon
-- Pro özellikler için özel butonlar
+### Home Screen
+- Modern Material Design 3 interface
+- Intuitive navigation
+- Dark/Light theme support
+- Progress tracking dashboard
 
-### Konu Seçimi
-- Kategorilere göre organize edilmiş sorular
-- Her kategori için soru sayısı gösterimi
-- Görsel ikonlar ile kolay tanımlama
+### Topic Selection
+- Categorized question organization
+- Visual icons for easy identification
+- Progress indicators per category
+- Smart recommendations
 
-### Sınav Ekranı
-- Temiz ve okunabilir arayüz
-- İlerleme göstergesi
-- Anında geri bildirim
+### Exam Interface
+- Clean, readable interface
+- Progress indicators
+- Real-time feedback
+- Timer and scoring system
 
-## 🏗️ Proje Yapısı
+## 🏗️ Project Structure
 
 ```
 lib/
 ├── src/
 │   ├── core/
 │   │   ├── models/
-│   │   │   └── question_model.dart
-│   │   └── services/
-│   │       ├── quiz_service.dart
-│   │       └── purchase_service.dart
+│   │   │   ├── exam_model.dart
+│   │   │   ├── question_model.dart
+│   │   │   └── study_guide_model.dart
+│   │   ├── services/
+│   │   │   ├── quiz_service.dart
+│   │   │   ├── purchase_service.dart
+│   │   │   └── user_progress_service.dart
+│   │   ├── theme/
+│   │   │   ├── app_colors.dart
+│   │   │   └── app_theme.dart
+│   │   └── widgets/
+│   │       └── enhanced_pro_banner.dart
 │   ├── features/
+│   │   ├── auth/
 │   │   ├── home/
-│   │   │   └── presentation/
-│   │   │       └── home_screen.dart
 │   │   ├── quiz/
-│   │   │   ├── application/
-│   │   │   │   ├── quiz_providers.dart
-│   │   │   │   └── quiz_state.dart
-│   │   │   └── presentation/
-│   │   │       └── quiz_screen.dart
-│   │   └── topics/
-│   │       └── presentation/
-│   │           └── topic_selection_screen.dart
+│   │   ├── exams/
+│   │   ├── topics/
+│   │   ├── stats/
+│   │   ├── paywall/
+│   │   └── profile/
 │   └── main.dart
 ├── assets/
-│   └── data/
-│       └── questions.json
+│   ├── data/
+│   │   ├── exams.json
+│   │   ├── traffic_signs.json
+│   │   └── study_guides.json
+│   └── images/
 └── test/
-    └── features/
-        └── quiz/
-            └── application/
-                └── quiz_providers_test.dart
 ```
 
-## 🧪 Test
+## 🧪 Testing
 
 ```bash
-# Tüm testleri çalıştır
+# Run all tests
 flutter test
 
-# Belirli bir test dosyasını çalıştır
+# Run specific test file
 flutter test test/features/quiz/application/quiz_providers_test.dart
+
+# Run with coverage
+flutter test --coverage
 ```
 
 ## 📦 Build
 
-### Android APK
+### Android
 ```bash
-# Release build
-flutter build apk
+# Debug build
+flutter build apk --debug
 
-# Split APK (farklı CPU mimarileri için)
+# Release build
+flutter build apk --release
+
+# Split APK for different architectures
 flutter build apk --release --split-per-abi
 ```
 
 ### iOS
 ```bash
 # iOS build
-flutter build ios
+flutter build ios --release
 ```
 
-## 🔧 Konfigürasyon
-
-### RevenueCat Entegrasyonu
-Pro özellikler için RevenueCat API key'lerini ekleyin:
-
-1. `lib/src/core/services/purchase_service.dart` dosyasını açın
-2. API key'leri güncelleyin:
-```dart
-static const String _appleApiKey = 'your_apple_api_key';
-static const String _googleApiKey = 'your_google_api_key';
+### Web
+```bash
+# Web build
+flutter build web --release
 ```
 
-## 🤝 Katkıda Bulunma
+## 🔧 Configuration
 
-1. Fork yapın
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
+### Dependencies
+Key dependencies used in this project:
+- `flutter_riverpod` - State management
+- `google_fonts` - Typography
+- `firebase_auth` - Authentication
+- `purchases_flutter` - In-app purchases
+- `shared_preferences` - Local storage
 
-## 📄 Lisans
+### Development Setup
+1. Ensure Flutter SDK is properly installed
+2. Configure Firebase project (optional)
+3. Set up RevenueCat for subscription management (optional)
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
+## 🤝 Contributing
 
-## 📞 İletişim
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- **Geliştirici**: [Your Name]
-- **Email**: [your.email@example.com]
-- **GitHub**: [@yourusername]
+## 📄 License
 
-## 🙏 Teşekkürler
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
-- Flutter ekibine harika framework için
-- Material Design ekibine güzel tasarım sistemi için
-- Tüm katkıda bulunanlara
+## 🛠️ Technical Stack
+
+- **Framework**: Flutter 3.29.3+
+- **Language**: Dart 3.7.0+
+- **State Management**: Riverpod
+- **Architecture**: Clean Architecture with Feature-first approach
+- **Design System**: Material Design 3
+- **Platforms**: Android, iOS, Web
+
+## 📈 Performance
+
+- Optimized for 60fps performance
+- Lazy loading for large datasets
+- Efficient memory management
+- Dark/Light theme switching
+- Responsive design for all screen sizes
 
 ---
 
-⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!
+⭐ If you found this project helpful, please consider giving it a star!

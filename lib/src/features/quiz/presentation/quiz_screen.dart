@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:confetti/confetti.dart';
 import '../application/quiz_providers.dart';
 import '../../../core/models/question_model.dart';
 import 'results_screen.dart';
@@ -19,6 +20,7 @@ class QuizScreen extends ConsumerStatefulWidget {
 
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   late PageController _pageController;
+  late ConfettiController _confettiController;
   bool _resultSaved = false;
 
   @override
@@ -27,11 +29,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     // Mevcut ilerlemeyi korumak için mevcut soru indexi ile başlat
     final initialIndex = ref.read(quizControllerProvider).questionIndex;
     _pageController = PageController(initialPage: initialIndex);
+    _confettiController = ConfettiController(duration: const Duration(seconds: 1));
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _confettiController.dispose();
     super.dispose();
   }
 
@@ -51,8 +55,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           final isCorrect = selected != null && selected == question.correctAnswerKey;
           final isAnswered = selected != null;
 
-          Color bg = AppColors.surfaceContainerHighest;
-          BorderSide border = BorderSide(color: AppColors.outline.withValues(alpha: 0.6));
+          Color bg = Theme.of(context).colorScheme.surfaceContainerHighest;
+          BorderSide border = BorderSide(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.6));
           Widget? icon;
 
           if (isCorrect) {
@@ -75,7 +79,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 width: isCurrent ? 32 : 26,
                 height: isCurrent ? 32 : 26,
                 decoration: BoxDecoration(
-                  color: (isCorrect || (isAnswered && !isCorrect)) ? bg : AppColors.surface,
+                  color: (isCorrect || (isAnswered && !isCorrect)) ? bg : Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: isCurrent ? AppColors.primary : border.color, width: isCurrent ? 2 : 1),
                 ),
@@ -84,7 +88,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     '${i + 1}',
                     style: TextStyle(
                       fontSize: isCurrent ? 12 : 11,
-                      color: isCurrent ? AppColors.primary : AppColors.textSecondary,
+                      color: isCurrent ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: isCurrent ? FontWeight.bold : FontWeight.w600,
                     ),
                   ),
@@ -205,18 +209,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             await _saveResult(isFinal: false);
           },
           child: Scaffold(
-            backgroundColor: AppColors.background,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
               title: Text(
                 widget.category ?? 'Karma Test',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              backgroundColor: AppColors.surface,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               elevation: 0,
-              foregroundColor: AppColors.textPrimary,
+              foregroundColor: Theme.of(context).colorScheme.onSurface,
               actions: [
                 // Display progress
                 Container(
@@ -251,7 +255,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                             'İlerleme',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                           Text(
@@ -268,7 +272,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
                           value: quizState.progressPercentage,
-                          backgroundColor: AppColors.surfaceContainerHighest,
+                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                           valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                           minHeight: 8,
                         ),
@@ -317,6 +321,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
                               onAnswerSelected: (answer) {
                                 ref.read(quizControllerProvider.notifier).answerQuestion(answer);
+                                // Trigger confetti animation for correct answers
+                                final currentQuestion = quizState.questions[index];
+                                if (answer == currentQuestion.correctAnswerKey) {
+                                  _confettiController.play();
+                                }
                               },
                                onNextQuestion: () {
                                 ref.read(quizControllerProvider.notifier).nextQuestion();
@@ -361,6 +370,26 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     right: 0,
                     child: _ComboToast(combo: ref.watch(quizControllerProvider).currentCombo),
                   ),
+                // Confetti animation for correct answers
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    shouldLoop: false,
+                    colors: [
+                      AppColors.success,
+                      AppColors.primary,
+                      AppColors.warning,
+                      const Color(0xFFFFD700), // Gold
+                      const Color(0xFFFF69B4), // Hot pink
+                    ],
+                    numberOfParticles: 20,
+                    gravity: 0.3,
+                  ),
+                ),
               ],
             ),
           ),
@@ -440,18 +469,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             await _saveResult(isFinal: false);
           },
           child: Scaffold(
-            backgroundColor: AppColors.background,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
               title: Text(
                 widget.category ?? 'Karma Test',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              backgroundColor: AppColors.surface,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               elevation: 0,
-              foregroundColor: AppColors.textPrimary,
+              foregroundColor: Theme.of(context).colorScheme.onSurface,
               actions: [
                 // Display progress
                 Container(
@@ -486,7 +515,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                             'İlerleme',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                           Text(
@@ -503,7 +532,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
                           value: quizState.progressPercentage,
-                          backgroundColor: AppColors.surfaceContainerHighest,
+                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                           valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                           minHeight: 8,
                         ),
@@ -552,6 +581,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
                               onAnswerSelected: (answer) {
                                 ref.read(quizControllerProvider.notifier).answerQuestion(answer);
+                                // Trigger confetti animation for correct answers
+                                final currentQuestion = quizState.questions[index];
+                                if (answer == currentQuestion.correctAnswerKey) {
+                                  _confettiController.play();
+                                }
                               },
                                onNextQuestion: () {
                                 ref.read(quizControllerProvider.notifier).nextQuestion();
@@ -595,6 +629,26 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     right: 0,
                     child: _ComboToast(combo: ref.watch(quizControllerProvider).currentCombo),
                   ),
+                // Confetti animation for correct answers
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    shouldLoop: false,
+                    colors: [
+                      AppColors.success,
+                      AppColors.primary,
+                      AppColors.warning,
+                      const Color(0xFFFFD700), // Gold
+                      const Color(0xFFFF69B4), // Hot pink
+                    ],
+                    numberOfParticles: 20,
+                    gravity: 0.3,
+                  ),
+                ),
               ],
             ),
           ),
@@ -634,20 +688,33 @@ class _QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16.0),
-      padding: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(28.0),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).colorScheme.surface,
+            Theme.of(context).colorScheme.surface.withValues(alpha: 0.95),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: AppColors.outline.withValues(alpha: 0.3),
-          width: 1,
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow.withValues(alpha: 0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: AppColors.shadow.withValues(alpha: 0.15),
+            blurRadius: 25,
+            offset: const Offset(0, 8),
+            spreadRadius: 2,
+          ),
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.03),
+            blurRadius: 50,
+            offset: const Offset(0, 15),
           ),
         ],
       ),
@@ -655,45 +722,89 @@ class _QuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Soru $questionNumber / $totalQuestions',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+          Container(
+            padding: const EdgeInsets.only(bottom: 24),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
+                  width: 1,
                 ),
               ),
-              if (isAnswered)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.primary.withValues(alpha: 0.12),
+                        AppColors.primary.withValues(alpha: 0.08),
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.4),
+                      color: AppColors.primary.withValues(alpha: 0.2),
+                      width: 1,
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        isCorrect ? Icons.check_circle : Icons.cancel,
-                        color: isCorrect ? AppColors.success : AppColors.error,
-                        size: 18,
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        isCorrect ? 'Doğru' : 'Yanlış',
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: isCorrect ? AppColors.success : AppColors.error,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    'Soru $questionNumber / $totalQuestions',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
-            ],
+                if (isAnswered)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.15),
+                          (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.08),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.3),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                          color: isCorrect ? AppColors.success : AppColors.error,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          isCorrect ? 'Doğru' : 'Yanlış',
+                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: isCorrect ? AppColors.success : AppColors.error,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
           const SizedBox(height: 16),
           if (question.imageUrl != null && !question.hasOptionImages) ...[
@@ -701,7 +812,7 @@ class _QuestionCard extends StatelessWidget {
               width: double.infinity,
               height: 150,
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: ClipRRect(
@@ -742,7 +853,7 @@ class _QuestionCard extends StatelessWidget {
             question.questionText,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 24),
@@ -759,28 +870,38 @@ class _QuestionCard extends StatelessWidget {
                 final isSelected = selectedAnswer == optionKey;
                 final isCorrectAnswer = optionKey == question.correctAnswerKey;
 
-                Color containerColor = AppColors.surface;
-                Color borderColor = AppColors.outline.withValues(alpha: 0.3);
+                Color containerColor = Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.3)
+                    : Theme.of(context).colorScheme.surface;
+                Color borderColor = Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(context).colorScheme.outline.withValues(alpha: 0.6)
+                    : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3);
                 Widget? trailingIcon;
-                Color letterBg = AppColors.surfaceContainerHighest;
-                Color letterFg = AppColors.onSurface;
+                Color letterBg = Theme.of(context).colorScheme.surfaceContainerHighest;
+                Color letterFg = Theme.of(context).colorScheme.onSurface;
 
                 if (!isAnswered && isSelected) {
-                  containerColor = AppColors.primaryContainer;
-                  borderColor = AppColors.primary.withValues(alpha: 0.5);
+                  containerColor = Theme.of(context).brightness == Brightness.dark
+                      ? AppColors.primaryContainer.withValues(alpha: 0.3)
+                      : AppColors.primaryContainer;
+                  borderColor = AppColors.primary.withValues(alpha: 0.8);
                   letterBg = AppColors.primary;
                   letterFg = AppColors.onPrimary;
                 }
 
                 if (isAnswered) {
                   if (isCorrectAnswer) {
-                    containerColor = AppColors.successContainer;
+                    containerColor = Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.successContainer.withValues(alpha: 0.3)
+                        : AppColors.successContainer;
                     borderColor = AppColors.success;
                     trailingIcon = Icon(Icons.check_circle, color: AppColors.success);
                     letterBg = AppColors.success;
                     letterFg = AppColors.onSuccess;
                   } else if (isSelected && !isCorrect) {
-                    containerColor = AppColors.errorContainer;
+                    containerColor = Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.errorContainer.withValues(alpha: 0.3)
+                        : AppColors.errorContainer;
                     borderColor = AppColors.error;
                     trailingIcon = Icon(Icons.cancel, color: AppColors.error);
                     letterBg = AppColors.error;
@@ -788,38 +909,75 @@ class _QuestionCard extends StatelessWidget {
                   }
                 }
 
-                return InkWell(
-                  onTap: isAnswered ? null : () => onAnswerSelected(optionKey),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: containerColor,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: borderColor, width: 1.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadow.withValues(alpha: 0.06),
-                          blurRadius: 8,
-                          offset: const Offset(0, 3),
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 4),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: isAnswered ? null : () => onAnswerSelected(optionKey),
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              containerColor,
+                              containerColor.withValues(alpha: 0.95),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: borderColor, width: isSelected || isAnswered ? 2 : 1.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(context).shadowColor.withValues(alpha: 0.08),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                              spreadRadius: 1,
+                            ),
+                            if (isSelected || isCorrectAnswer)
+                              BoxShadow(
+                                color: borderColor.withValues(alpha: 0.2),
+                                blurRadius: 20,
+                                offset: const Offset(0, 6),
+                              ),
+                          ],
                         ),
-                      ],
-                    ),
                     child: Row(
                       children: [
                         Container(
-                          width: 32,
-                          height: 32,
+                          width: 36,
+                          height: 36,
                           decoration: BoxDecoration(
-                            color: letterBg,
+                            gradient: LinearGradient(
+                              colors: [
+                                letterBg,
+                                letterBg.withValues(alpha: 0.85),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                             shape: BoxShape.circle,
+                            border: Border.all(
+                              color: letterFg.withValues(alpha: 0.2),
+                              width: 1,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: letterBg.withValues(alpha: 0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
                           child: Center(
                             child: Text(
                               optionKey,
                               style: TextStyle(
                                 color: letterFg,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
                               ),
                             ),
                           ),
@@ -832,8 +990,10 @@ class _QuestionCard extends StatelessWidget {
                               Text(
                             optionText,
                             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                              color: AppColors.textPrimary,
+                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.95)
+                                  : Theme.of(context).colorScheme.onSurface,
                             ),
                               ),
                               if (optionImageUrl != null) ...[
@@ -843,7 +1003,7 @@ class _QuestionCard extends StatelessWidget {
                                   height: 60,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: AppColors.outline.withValues(alpha: 0.3)),
+                                    border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
@@ -852,11 +1012,11 @@ class _QuestionCard extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       errorBuilder: (context, error, stackTrace) {
                                         return Container(
-                                          color: AppColors.surfaceContainerHighest,
+                                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
                                           child: Icon(
                                             Icons.image_not_supported,
                                             size: 24,
-                                            color: AppColors.onSurfaceVariant,
+                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                                           ),
                                         );
                                       },
@@ -869,6 +1029,8 @@ class _QuestionCard extends StatelessWidget {
                         ),
                         if (trailingIcon != null) trailingIcon,
                       ],
+                    ),
+                      ),
                     ),
                   ),
                 );
@@ -924,7 +1086,7 @@ class _QuestionCard extends StatelessWidget {
                 color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: AppColors.outline.withValues(alpha: 128),
+                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
                 ),
               ),
               child: Column(
@@ -934,7 +1096,7 @@ class _QuestionCard extends StatelessWidget {
                     'Açıklama',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -944,7 +1106,7 @@ class _QuestionCard extends StatelessWidget {
                         : 'Bu soru için açıklama mevcut değil.',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       height: 1.5,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -1076,7 +1238,7 @@ class _QuestionCard extends StatelessWidget {
                   'Açıklama',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -1094,14 +1256,14 @@ class _QuestionCard extends StatelessWidget {
                     color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: AppColors.outline.withValues(alpha: 128),
+                      color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
                     ),
                   ),
                   child: Text(
                     question.questionText,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -1151,7 +1313,7 @@ class _QuestionCard extends StatelessWidget {
                   'Açıklama:',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -1161,7 +1323,7 @@ class _QuestionCard extends StatelessWidget {
                       : 'Bu soru için açıklama mevcut değil.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     height: 1.5,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],

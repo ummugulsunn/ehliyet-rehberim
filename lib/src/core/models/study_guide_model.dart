@@ -71,19 +71,31 @@ class StudyGuide {
   final String category;
   final String title;
   final List<ContentBlock> content; // Structured content blocks
+  final String? markdown; // Optional Markdown content
 
   const StudyGuide({
     required this.category,
     required this.title,
     required this.content,
+    this.markdown,
   });
 
   factory StudyGuide.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> raw = json['content'] as List<dynamic>? ?? <dynamic>[];
+    final dynamic raw = json['content'];
+    if (raw is String) {
+      return StudyGuide(
+        category: json['category'] as String,
+        title: json['title'] as String,
+        content: const <ContentBlock>[],
+        markdown: raw,
+      );
+    }
+
+    final List<dynamic> listRaw = raw as List<dynamic>? ?? <dynamic>[];
     return StudyGuide(
       category: json['category'] as String,
       title: json['title'] as String,
-      content: raw
+      content: listRaw
           .map((e) => ContentBlock.fromJson(e as Map<String, dynamic>))
           .toList(growable: false),
     );
@@ -92,7 +104,7 @@ class StudyGuide {
   Map<String, dynamic> toJson() => {
         'category': category,
         'title': title,
-        'content': content.map((e) => e.toJson()).toList(growable: false),
+        'content': markdown ?? content.map((e) => e.toJson()).toList(growable: false),
       };
 }
 

@@ -8,8 +8,10 @@ import 'src/core/services/auth_service.dart';
 import 'src/features/auth/application/auth_providers.dart';
 import 'src/features/quiz/application/quiz_providers.dart';
 import 'src/core/theme/app_theme.dart';
+import 'src/features/profile/application/theme_mode_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   // Ensure Flutter bindings are initialized
@@ -63,6 +65,13 @@ void main() async {
     // Continue app initialization even if user progress service fails
   }
   
+  // Initialize Google Mobile Ads SDK
+  try {
+    await MobileAds.instance.initialize();
+  } catch (e) {
+    debugPrint('Failed to initialize Google Mobile Ads: $e');
+  }
+
   runApp(
     ProviderScope(
       overrides: [
@@ -80,11 +89,12 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
     return MaterialApp(
       title: 'Ehliyet Rehberim',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       home: const AuthGate(), // Use the new AuthGate widget
       debugShowCheckedModeBanner: false,
     );

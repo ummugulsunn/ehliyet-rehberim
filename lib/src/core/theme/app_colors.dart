@@ -198,4 +198,32 @@ class AppColors {
   
   /// General shadow color for neutral elevation
   static Color get shadow => const Color(0xFF000000).withValues(alpha: 26);
+
+  // ================================
+  // DARK THEME NEUTRAL COLORS
+  // ================================
+
+  /// Dark background color - Near-black with subtle blue hue for OLED friendliness
+  static const Color darkBackground = Color(0xFF0F172A); // slate-900
+
+  /// Dark surface color - Slightly lighter than background for elevation
+  static const Color darkSurface = Color(0xFF111827); // slate-800
+
+  /// Dark surface variant - For inputs and containers
+  static const Color darkSurfaceVariant = Color(0xFF1F2937); // slate-700
+
+  /// Highest elevated dark container surface
+  static const Color darkSurfaceContainerHighest = Color(0xFF273449); // custom
+
+  /// Primary text color on dark backgrounds
+  static const Color darkOnSurface = Color(0xFFE5E7EB); // slate-200
+
+  /// Secondary text color on dark backgrounds
+  static const Color darkOnSurfaceVariant = Color(0xFF9CA3AF); // slate-400
+
+  /// Outline/border color in dark theme
+  static const Color darkOutline = Color(0xFF334155); // slate-600
+
+  /// Outline variant in dark theme
+  static const Color darkOutlineVariant = Color(0xFF1F2937); // slate-700
 }

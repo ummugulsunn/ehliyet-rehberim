@@ -4142,5 +4142,10 @@
         "text": "• *İyi şanslar ve güvenli yolculuklar!"
       }
     ]
+  },
+  {
+    "category": "İlk Yardım Bilgisi",
+    "title": "İlk Yardım Temel Uygulamaları (Özet Markdown)",
+    "content": "# İlk Yardım Temel Uygulamaları\n\nBu bölümde **ilk yardım**ın temel prensipleri özetlenir.\n\n## KBK\n- Koruma\n- Bildirme\n- Kurtarma\n\n> Unutma: İlaç kullanılmaz."
   }
 ]

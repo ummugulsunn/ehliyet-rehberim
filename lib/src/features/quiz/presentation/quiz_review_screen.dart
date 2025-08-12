@@ -12,12 +12,12 @@ class QuizReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text('Cevap İncelemesi', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-        backgroundColor: AppColors.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
-        foregroundColor: AppColors.textPrimary,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
       ),
       body: PageView.builder(
         itemCount: questions.length,
@@ -30,9 +30,9 @@ class QuizReviewScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.outline.withValues(alpha: 0.3)),
+                border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
                 boxShadow: [
                   BoxShadow(color: AppColors.shadow.withValues(alpha: 0.08), blurRadius: 12, offset: const Offset(0, 4)),
                 ],
@@ -71,7 +71,7 @@ class QuizReviewScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                   ],
-                  Text(question.questionText, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                  Text(question.questionText, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface)),
                   const SizedBox(height: 16),
                   ...question.options.entries.map((entry) {
                     final key = entry.key;
@@ -79,8 +79,8 @@ class QuizReviewScreen extends StatelessWidget {
                     final bool isCorrectAnswer = key == question.correctAnswerKey;
                     final bool isUserSelected = key == selected;
 
-                    Color containerColor = AppColors.surface;
-                    Color borderColor = AppColors.outline.withValues(alpha: 0.3);
+                    Color containerColor = Theme.of(context).colorScheme.surface;
+                    Color borderColor = Theme.of(context).colorScheme.outline.withValues(alpha: 0.3);
                     if (isCorrectAnswer) {
                       containerColor = AppColors.successContainer;
                       borderColor = AppColors.success;
@@ -103,13 +103,13 @@ class QuizReviewScreen extends StatelessWidget {
                           Container(
                             width: 32,
                             height: 32,
-                            decoration: BoxDecoration(color: isCorrectAnswer ? AppColors.success : (isUserSelected ? AppColors.error : AppColors.surfaceContainerHighest), shape: BoxShape.circle),
+                            decoration: BoxDecoration(color: isCorrectAnswer ? AppColors.success : (isUserSelected ? AppColors.error : Theme.of(context).colorScheme.surfaceContainerHighest), shape: BoxShape.circle),
                             child: Center(
                               child: Text(key, style: TextStyle(color: isCorrectAnswer || isUserSelected ? Colors.white : AppColors.onSurface, fontWeight: FontWeight.bold)),
                             ),
                           ),
                           const SizedBox(width: 12),
-                          Expanded(child: Text(text, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.textPrimary))),
+                          Expanded(child: Text(text, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onSurface))),
                           if (isCorrectAnswer)
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 6.0),
@@ -135,7 +135,7 @@ class QuizReviewScreen extends StatelessWidget {
                     ),
                     child: Text(
                       'Açıklama: ${question.explanation.isNotEmpty ? question.explanation : 'Bu soru için açıklama mevcut değil.'}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textPrimary),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                 ],

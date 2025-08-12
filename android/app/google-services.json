@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "516693747698-s0h10pap4fgkmi3l9fsjfu8k23n36gun.apps.googleusercontent.com",
+          "client_id": "516693747698-ftdi5hithufq8u4djot61j4glli25tqb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ehliyetrehberim.app",
-            "certificate_hash": "5f8f858a76b307f5bf725313d2bfcc9587ce4672"
+            "certificate_hash": "624c519a3ddf2c1ccdab8eddecb423a20d928e6b"
           }
         },
         {

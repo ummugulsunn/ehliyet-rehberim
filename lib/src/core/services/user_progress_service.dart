@@ -28,7 +28,7 @@ class UserProgressService {
   static const String _wrongAnswerPairsKey = 'wrong_answer_pairs_v1'; // format: examId:questionId
 
   // Daily goal configuration
-  static const int _dailyGoal = 20; // Questions per day
+  static const int _dailyGoal = 50; // Questions per day
 
   /// Stream that emits the number of questions answered today
   Stream<int> get dailyProgressStream => _dailyProgressController.stream;

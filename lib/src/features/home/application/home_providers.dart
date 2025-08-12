@@ -22,7 +22,7 @@ final streakProvider = StreamProvider<int>((ref) {
 
 /// Provider that returns the daily goal (constant value)
 final dailyGoalProvider = Provider<int>((ref) {
-  return 20; // Daily goal of 20 questions
+  return 50; // Daily goal of 50 questions
 });
 
 /// Provider that returns the progress percentage for today
