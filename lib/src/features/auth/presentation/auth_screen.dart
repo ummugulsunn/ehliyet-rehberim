@@ -88,41 +88,41 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
-              const Spacer(flex: 2),
+              const SizedBox(height: 20),
               
               // App Logo and Title
               Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: AppColors.primaryContainer,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.school_outlined,
-                      size: 80,
+                      size: 60,
                       color: AppColors.primary,
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 24),
                   Text(
                     'Ehliyet Rehberim',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                       color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   Text(
                     'Sınav Soruları 2026',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                       color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -130,7 +130,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 ],
               ),
               
-              const Spacer(flex: 3),
+              const SizedBox(height: 40),
               
               // Welcome Message
               Column(
@@ -139,7 +139,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     'Hoş Geldiniz!',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                       color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -147,14 +147,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   Text(
                     'İlerlemenizi kaydetmek ve tüm cihazlarınızda senkronize etmek için giriş yapın.',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                       color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
               
-              const SizedBox(height: 48),
+              const SizedBox(height: 40),
               
               // Authentication Buttons
               Column(
@@ -166,9 +166,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     child: ElevatedButton.icon(
                       onPressed: _isGoogleLoading || _isAppleLoading ? null : _signInWithGoogle,
                       style: ElevatedButton.styleFrom(
-                         backgroundColor: Theme.of(context).colorScheme.surface,
-                         foregroundColor: Theme.of(context).colorScheme.onSurface,
-                         side: BorderSide(color: Theme.of(context).colorScheme.outline, width: 1),
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        foregroundColor: Theme.of(context).colorScheme.onSurface,
+                        side: BorderSide(color: Theme.of(context).colorScheme.outline, width: 1),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -186,7 +186,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                           : Icon(
                               Icons.login,
                               size: 20,
-                               color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                       label: Text(
                         _isGoogleLoading ? 'Giriş yapılıyor...' : 'Google ile Giriş Yap',
@@ -207,8 +207,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       child: ElevatedButton.icon(
                         onPressed: _isGoogleLoading || _isAppleLoading ? null : _signInWithApple,
                         style: ElevatedButton.styleFrom(
-                           backgroundColor: Theme.of(context).colorScheme.onSurface,
-                           foregroundColor: Theme.of(context).colorScheme.surface,
+                          backgroundColor: Theme.of(context).colorScheme.onSurface,
+                          foregroundColor: Theme.of(context).colorScheme.surface,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -220,19 +220,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                                 height: 20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                   valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.surface),
+                                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.surface),
                                 ),
                               )
                             : Icon(
                                 Icons.apple,
                                 size: 20,
-                                 color: Theme.of(context).colorScheme.surface,
+                                color: Theme.of(context).colorScheme.surface,
                               ),
                         label: Text(
                           _isAppleLoading ? 'Giriş yapılıyor...' : 'Apple ile Giriş Yap',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
-                             color: Theme.of(context).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                         ),
                       ),
@@ -242,7 +242,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 ],
               ),
               
-              const Spacer(flex: 2),
+              const SizedBox(height: 40),
               
               // Continue as Guest Button
               Container(
@@ -251,13 +251,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 child: TextButton(
                   onPressed: _isGoogleLoading || _isAppleLoading ? null : _continueAsGuest,
                   style: TextButton.styleFrom(
-                     foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                    foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
                     'Misafir olarak devam et',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                       color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -270,7 +270,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 child: Text(
                   'Giriş yaparak Kullanım Şartları ve Gizlilik Politikası\'nı kabul etmiş olursunuz.',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                     color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   textAlign: TextAlign.center,
                 ),

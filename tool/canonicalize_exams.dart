@@ -85,7 +85,7 @@ Future<void> main(List<String> args) async {
     for (final q in questions) {
       final text = (q['questionText'] ?? '').toString();
       final options = (q['options'] ?? {}) as Map<String, dynamic>;
-      final groupKey = normalize(text) + '||' + normalizeOptions(options);
+      final groupKey = '${normalize(text)}||${normalizeOptions(options)}';
       final enriched = Map<String, dynamic>.from(q);
       enriched['__examId'] = examId;
       grouped.putIfAbsent(groupKey, () => <Map<String, dynamic>>[]).add(enriched);
@@ -132,7 +132,7 @@ Future<void> main(List<String> args) async {
       final text = (q['questionText'] ?? '').toString();
       final options = (q['options'] ?? {}) as Map<String, dynamic>;
       final optionKeys = options.keys.map((e) => e.toString()).toSet();
-      final groupKey = normalize(text) + '||' + normalizeOptions(options);
+      final groupKey = '${normalize(text)}||${normalizeOptions(options)}';
       final canon = canonicalPerGroup[groupKey]!;
       final newKey = canon['correctAnswerKey'] ?? '';
       final newExp = canon['explanation'] ?? '';
@@ -179,7 +179,7 @@ Future<void> main(List<String> args) async {
   }
 
   // Backup original
-  final backupPath = examsPath + '.bak.' + DateTime.now().toIso8601String();
+  final backupPath = '$examsPath.bak.${DateTime.now().toIso8601String()}';
   await File(backupPath).writeAsString(raw);
   // Write updated
   final encoder = const JsonEncoder.withIndent('  ');
@@ -192,11 +192,11 @@ Future<void> main(List<String> args) async {
     'changes': changes,
     'skippedInvalidKeys': skippedInvalidKeys,
   };
-  await File(analysisDirPath + '/canonicalize_report.json')
+  await File('$analysisDirPath/canonicalize_report.json')
       .writeAsString(encoder.convert(report));
 
   stdout.writeln('Canonicalization complete. Changes: \'${changes.length}\'.');
-  stdout.writeln('Backup: ' + backupPath);
-  stdout.writeln('Report: ' + analysisDirPath + '/canonicalize_report.json');
+  stdout.writeln('Backup: $backupPath');
+  stdout.writeln('Report: $analysisDirPath/canonicalize_report.json');
 }
 

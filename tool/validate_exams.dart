@@ -67,7 +67,7 @@ Future<void> main(List<String> args) async {
     // Remove double spaces
     final single = lower.replaceAll(RegExp(r'\s+'), ' ');
     // Remove surrounding punctuation that may vary
-    return single.replaceAll(RegExp(r'["\' + "'" + r']'), '');
+    return single.replaceAll(RegExp(r'["\'']'), '');
   }
 
   bool textIndicatesVisual(String text) {
@@ -218,7 +218,7 @@ Future<void> main(List<String> args) async {
   csvBuffer.writeln(
       'examId,questionId,category,suggestedImageHint,questionText');
   for (final m in missingImage) {
-    String esc(String v) => '"' + v.replaceAll('"', '""') + '"';
+    String esc(String v) => '"${v.replaceAll('"', '""')}"';
     csvBuffer.writeln([
       esc(m['examId']?.toString() ?? ''),
       esc(m['id']?.toString() ?? ''),

@@ -7,7 +7,10 @@ class PurchaseService {
   // RevenueCat API keys - Replace with your actual keys from RevenueCat Dashboard
   // https://app.revenuecat.com/ -> API Keys section
   static const String _appleApiKey = 'appl_YOUR_APPLE_API_KEY_HERE'; // iOS API Key
-  static const String _googleApiKey = 'google_YOUR_GOOGLE_API_KEY_HERE'; // Android API Key
+  static const String _googleApiKey = 'goog_MyxwvgmwPQmkKzwjZlWlIunGURl'; // Android API Key
+  
+  // Google Play Store Product ID
+  static const String _monthlyProductId = 'premium_monthly_subscription:premium-monthly';
   
   static final PurchaseService _instance = PurchaseService._internal();
   factory PurchaseService() => _instance;
@@ -18,21 +21,9 @@ class PurchaseService {
   final StreamController<bool> _proStatusController = StreamController<bool>.broadcast();
 
   Stream<bool> get proStatusStream {
-    // --- START OF NEW CODE ---
-    // Developer Override: If in debug mode, return a stream that always says "Pro".
-    if (kDebugMode) {
-      return Stream<bool>.value(true);
-    }
-    // --- END OF NEW CODE ---
     return _proStatusController.stream;
   }
   bool get isPro {
-    // --- START OF NEW CODE ---
-    // Developer Override: If in debug mode, always return true for easy testing.
-    if (kDebugMode) {
-      return true;
-    }
-    // --- END OF NEW CODE ---
     try {
       return _isPro;
     } catch (e) {
@@ -46,6 +37,12 @@ class PurchaseService {
     if (_isInitialized) return;
 
     try {
+      // In debug builds, enable verbose logging to verify SDK connection
+      assert(() {
+        Purchases.setLogLevel(LogLevel.debug);
+        return true;
+      }());
+
       // Configure RevenueCat
       PurchasesConfiguration configuration;
       
@@ -60,14 +57,15 @@ class PurchaseService {
         }
         configuration = PurchasesConfiguration(_appleApiKey);
       } else if (Platform.isAndroid) {
-        if (_googleApiKey == 'google_YOUR_GOOGLE_API_KEY_HERE') {
+        if (_googleApiKey == 'goog_MyxwvgmwPQmkKzwjZlWlIunGURl') {
+          configuration = PurchasesConfiguration(_googleApiKey);
+        } else {
           debugPrint('Google API key not configured, skipping RevenueCat initialization');
           _isPro = false;
           _isInitialized = true;
           _proStatusController.add(false);
           return;
         }
-        configuration = PurchasesConfiguration(_googleApiKey);
       } else {
         throw UnsupportedError('Platform not supported');
       }
@@ -104,7 +102,22 @@ class PurchaseService {
   Future<List<Offering>> getOfferings() async {
     try {
       final offerings = await Purchases.getOfferings();
-      return offerings.all.values.toList();
+      
+      // Log available offerings for debugging
+      debugPrint('Available offerings: ${offerings.all.keys.join(', ')}');
+      
+      // Filter offerings to only include our configured products
+      final filteredOfferings = offerings.all.values.where((offering) {
+        final hasMonthly = offering.monthly?.storeProduct.identifier == _monthlyProductId;
+        return hasMonthly;
+      }).toList();
+      
+      if (filteredOfferings.isEmpty) {
+        debugPrint('No offerings found with configured product ID: $_monthlyProductId');
+        return offerings.all.values.toList(); // Return all if filtering fails
+      }
+      
+      return filteredOfferings;
     } catch (e) {
       debugPrint('Failed to fetch offerings: $e');
       return [];
@@ -114,15 +127,25 @@ class PurchaseService {
   /// Purchase a package
   Future<bool> purchasePackage(Package package) async {
     try {
+      // Validate package before purchase
+      final productId = package.storeProduct.identifier;
+      if (productId != _monthlyProductId) {
+        debugPrint('Invalid product ID: $productId. Expected: $_monthlyProductId');
+        return false;
+      }
+      
+      debugPrint('Purchasing package: ${package.identifier} with product: $productId');
       final purchaseResult = await Purchases.purchasePackage(package);
       
       // Check if purchase was successful
       if (purchaseResult.customerInfo.entitlements.active.containsKey('pro')) {
         _isPro = true;
         _proStatusController.add(true);
+        debugPrint('Purchase successful! User is now Pro');
         return true;
       }
       
+      debugPrint('Purchase completed but Pro status not activated');
       return false;
     } catch (e) {
       debugPrint('Failed to purchase package: $e');
@@ -150,6 +173,51 @@ class PurchaseService {
     } catch (e) {
       debugPrint('Failed to get customer info: $e');
       return null;
+    }
+  }
+
+  /// Get subscription status with detailed info
+  Future<Map<String, dynamic>> getSubscriptionStatus() async {
+    try {
+      final customerInfo = await Purchases.getCustomerInfo();
+      final isPro = customerInfo.entitlements.active.containsKey('pro');
+      
+      if (isPro) {
+        final entitlement = customerInfo.entitlements.active['pro']!;
+        final productId = entitlement.productIdentifier;
+        final isMonthly = productId == _monthlyProductId;
+        
+        return {
+          'isPro': true,
+          'expiresDate': entitlement.expirationDate?.toString(),
+          'productId': productId,
+          'productType': isMonthly ? 'monthly' : 'unknown',
+          'willRenew': entitlement.willRenew,
+          'isMonthly': isMonthly,
+          'isYearly': false,
+        };
+      }
+      
+      return {
+        'isPro': false,
+        'expiresDate': null,
+        'productId': null,
+        'productType': null,
+        'willRenew': false,
+        'isMonthly': false,
+        'isYearly': false,
+      };
+    } catch (e) {
+      debugPrint('Failed to get subscription status: $e');
+      return {
+        'isPro': false,
+        'expiresDate': null,
+        'productId': null,
+        'productType': null,
+        'willRenew': false,
+        'isMonthly': false,
+        'isYearly': false,
+      };
     }
   }
 

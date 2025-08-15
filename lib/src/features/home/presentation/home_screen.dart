@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart';
 import '../../quiz/presentation/quiz_screen.dart';
 import '../../quiz/application/quiz_providers.dart';
 import '../../paywall/presentation/paywall_screen.dart';
@@ -66,11 +65,11 @@ class HomeScreen extends ConsumerWidget {
                           return Container(
                             width: 24,
                             height: 24,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                               color: AppColors.surfaceContainerHighest,
-                            ),
-                            child: Icon(
+                        ),
+                        child: Icon(
                               Icons.account_circle,
                               color: AppColors.primary,
                               size: 24,
@@ -100,39 +99,39 @@ class HomeScreen extends ConsumerWidget {
                 color: AppColors.textSecondary,
               ),
             ),
-          ),
-        ],
-      ),
+                      ),
+                    ],
+                  ),
       body: SafeArea(
         child: authState.when(
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
           error: (error, stackTrace) => Center(
-            child: Column(
+                    child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
+                      children: [
+                        Icon(
                   Icons.error_outline,
                   size: 64,
                   color: AppColors.error,
-                ),
-                const SizedBox(height: 16),
-                Text(
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
                   'Bir hata oluştu',
                   style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 8),
-                Text(
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
                   error.toString(),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
           data: (user) => ListView(
             padding: const EdgeInsets.all(20.0),
             children: [
@@ -167,21 +166,21 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildPrimaryActionCard(BuildContext context) {
     return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
             AppColors.primaryDark,
             AppColors.primary,
             AppColors.primary.withValues(alpha: 0.9),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
           stops: const [0.0, 0.7, 1.0],
-        ),
+                          ),
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
+                          boxShadow: [
+                            BoxShadow(
             color: AppColors.primaryShadow.withValues(alpha: 0.4),
             blurRadius: 30,
             offset: const Offset(0, 12),
@@ -191,27 +190,27 @@ class HomeScreen extends ConsumerWidget {
             color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 60,
             offset: const Offset(0, 20),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
+                            ),
+                          ],
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
                 builder: (context) => const ExamSelectionScreen(),
-              ),
-            );
-          },
+                                ),
+                              );
+                            },
           borderRadius: BorderRadius.circular(24),
           child: Padding(
             padding: const EdgeInsets.all(36.0),
             child: Column(
-              children: [
-                Container(
+                                children: [
+                                  Container(
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                                    decoration: BoxDecoration(
                     color: AppColors.onPrimary.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -233,7 +232,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                Text(
+                                        Text(
                   'Karma Teste Başla',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
@@ -263,13 +262,13 @@ class HomeScreen extends ConsumerWidget {
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
     );
   }
 
@@ -287,13 +286,13 @@ class HomeScreen extends ConsumerWidget {
           icon: Icons.topic_outlined,
           title: 'Konu Konu\nÇalış',
           color: AppColors.info,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const TopicSelectionScreen(),
-              ),
-            );
-          },
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const TopicSelectionScreen(),
+                                ),
+                              );
+                            },
         ),
         _buildFeatureCard(
           context,
@@ -343,9 +342,9 @@ class HomeScreen extends ConsumerWidget {
               // If too many wrong answers (indicating a bug), clear them
               if (wrongCount > 50) {
                 await userProgress.clearAllWrongAnswerIds();
-                // ignore: use_build_context_synchronously
+                if (!context.mounted) return;
                 Navigator.of(context, rootNavigator: true).pop();
-                // ignore: use_build_context_synchronously
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Yanlış sorular listesi temizlendi. Lütfen yeni yanlışlar yapın.')),
                 );
@@ -355,11 +354,11 @@ class HomeScreen extends ConsumerWidget {
               // Always refresh to avoid serving cached empty data
               final wrongQuestions = await ref.refresh(wrongQuestionsProvider.future);
 
-              // ignore: use_build_context_synchronously
+              if (!context.mounted) return;
               Navigator.of(context, rootNavigator: true).pop();
 
               if (wrongQuestions.isEmpty) {
-                // ignore: use_build_context_synchronously
+                if (!context.mounted) return;
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
@@ -377,7 +376,7 @@ class HomeScreen extends ConsumerWidget {
               }
 
               // Navigate to QuizScreen with preloaded wrong questions
-              // ignore: use_build_context_synchronously
+              if (!context.mounted) return;
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => QuizScreen(
@@ -388,9 +387,9 @@ class HomeScreen extends ConsumerWidget {
                 ),
               );
             } catch (_) {
-              // ignore: use_build_context_synchronously
+              if (!context.mounted) return;
               Navigator.of(context, rootNavigator: true).pop();
-              // ignore: use_build_context_synchronously
+              if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Sorular yüklenemedi. Lütfen tekrar deneyin.')),
               );
@@ -415,32 +414,77 @@ class HomeScreen extends ConsumerWidget {
           icon: Icons.book,
           title: 'Konu\nAnlatımları',
           color: AppColors.info,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
                 builder: (_) => const StudyGuideListScreen(),
+                        ),
+                      );
+                    },
+        ),
+        _buildFeatureCard(
+          context,
+          icon: Icons.cleaning_services_outlined,
+          title: 'Yanlışları\nTemizle',
+          color: AppColors.error,
+          onTap: () async {
+            // Show confirmation dialog
+            final shouldClear = await showDialog<bool>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Yanlışları Temizle'),
+                content: const Text(
+                  'Tüm yanlış cevap geçmişiniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text('İptal'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.error,
+                    ),
+                    child: const Text('Temizle'),
+                  ),
+                ],
               ),
             );
-          },
-        ),
-        if (kDebugMode)
-          _buildFeatureCard(
-            context,
-            icon: Icons.clear_all,
-            title: 'Yanlışları\nTemizle',
-            color: AppColors.error,
-            onTap: () async {
-              // Debug: Clear all wrong answers
-              final userProgress = ref.read(userProgressServiceProvider);
-              await userProgress.clearAllWrongAnswerPairs();
-              await userProgress.clearAllWrongAnswerIds();
-              if (context.mounted) {
+
+            if (shouldClear == true) {
+              try {
+                final userProgress = ref.read(userProgressServiceProvider);
+                
+                // Get count before clearing for debug
+                final beforeCount = await userProgress.getWrongAnswerIdsCount();
+                
+                // Clear both old and new wrong answer systems
+                await userProgress.clearAllWrongAnswerIds();
+                await userProgress.clearAllWrongAnswerPairs();
+                
+                // Get count after clearing for debug
+                final afterCount = await userProgress.getWrongAnswerIdsCount();
+                
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tüm yanlış sorular temizlendi!')),
+                  SnackBar(
+                    content: Text('Yanlış cevap geçmişiniz temizlendi. (Önceki: $beforeCount, Sonraki: $afterCount)'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              } catch (e) {
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Hata oluştu. Lütfen tekrar deneyin.'),
+                    backgroundColor: Colors.red,
+                  ),
                 );
               }
-            },
-          ),
+            }
+          },
+        ),
       ],
     );
   }
@@ -533,11 +577,11 @@ class HomeScreen extends ConsumerWidget {
                         textAlign: TextAlign.center,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                  ),
-                ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
               ),
               if (isPro)
                 Positioned(
@@ -570,7 +614,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-            ],
+                ],
           ),
         ),
       ),

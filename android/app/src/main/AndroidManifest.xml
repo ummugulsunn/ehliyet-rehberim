@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- RevenueCat Billing Permission -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    
     <application
         android:label="Ehliyet Rehberim"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon"
+        android:roundIcon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,10 +35,20 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <!-- AdMob App ID (Sample for testing) -->
+        <!-- AdMob App ID (Production) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-2163842474515875~2558853684" />
+            
+        <!-- RevenueCat Configuration -->
+        <meta-data
+            android:name="com.revenuecat.purchases.API_KEY"
+            android:value="goog_MyxwvgmwPQmkKzwjZlWlIunGURl" />
+            
+        <!-- Google Sign-In Configuration -->
+        <meta-data
+            android:name="com.google.android.gms.auth.api.signin.GoogleSignIn"
+            android:value="true" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

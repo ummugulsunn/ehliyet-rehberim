@@ -26,10 +26,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    // Mevcut ilerlemeyi korumak için mevcut soru indexi ile başlat
-    final initialIndex = ref.read(quizControllerProvider).questionIndex;
-    _pageController = PageController(initialPage: initialIndex);
+    // Her kategori değişiminde sıfırdan başlat
+    _pageController = PageController(initialPage: 0);
     _confettiController = ConfettiController(duration: const Duration(seconds: 1));
+    
+    // Quiz state'i otomatik reset etme - sadece gerektiğinde reset et
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref.read(quizControllerProvider.notifier).reset();
+    // });
   }
 
   @override
@@ -177,15 +181,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       // When preloaded questions are provided, use them as-is without filtering by category
       final List<Question> questions = base;
 
-      final quizState = ref.watch(quizControllerProvider);
+    final quizState = ref.watch(quizControllerProvider);
       final bool examChanged = quizState.examId != widget.examId;
       final bool questionCountChanged = quizState.questions.length != questions.length;
       final bool questionsEmpty = quizState.questions.isEmpty;
-      
-      // Force re-initialization for preloaded questions or when anything changes
-      if ((questionsEmpty || questionCountChanged || examChanged) && questions.isNotEmpty) {
+
+      // Only initialize if quiz state is truly empty or exam changed
+      // Don't reinitialize if questions are already loaded and exam is the same
+      if (questionsEmpty && questions.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          // Force complete reset
+          ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+        });
+      } else if (examChanged && questions.isNotEmpty) {
+        // Only reinitialize if exam changed
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
         });
       }
@@ -309,7 +318,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         child: PageView.builder(
                           controller: _pageController,
                           itemCount: quizState.totalQuestions,
-                          onPageChanged: (index) {},
+                          onPageChanged: (index) {
+                            // PageView değiştiğinde quiz state'i sync et
+                            ref.read(quizControllerProvider.notifier).setQuestionIndex(index);
+                          },
                           itemBuilder: (context, index) {
                             final question = quizState.questions[index];
                             return _QuestionCard(
@@ -438,29 +450,34 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         
         final quizState = ref.watch(quizControllerProvider);
 
-        // Initialize or re-initialize quiz when questions are loaded, changed, or exam changed
+        // Initialize or re-initialize quiz only when necessary
         final bool examChanged = quizState.examId != widget.examId;
-        final bool questionCountChanged = quizState.questions.length != questions.length;
         final bool questionsEmpty = quizState.questions.isEmpty;
         
-        if ((questionsEmpty || questionCountChanged || examChanged) && questions.isNotEmpty) {
+        // Only initialize if quiz state is truly empty or exam changed
+        if (questionsEmpty && questions.isNotEmpty) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+          });
+        } else if (examChanged && questions.isNotEmpty) {
+          // Only reinitialize if exam changed
           WidgetsBinding.instance.addPostFrameCallback((_) {
             ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
           });
         }
 
-        // If questions are empty after loading, show a message
+    // If questions are empty after loading, show a message
         if (questions.isEmpty) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(widget.category ?? 'Ehliyet Rehberim'),
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            ),
-            body: const Center(
-              child: Text('Bu kategoride soru bulunamadı.'),
-            ),
-          );
-        }
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.category ?? 'Ehliyet Rehberim'),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
+        body: const Center(
+          child: Text('Bu kategoride soru bulunamadı.'),
+        ),
+      );
+    }
 
         return PopScope(
           canPop: true,
@@ -470,7 +487,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           },
           child: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            appBar: AppBar(
+          appBar: AppBar(
               title: Text(
                 widget.category ?? 'Karma Test',
                 style: TextStyle(
@@ -481,8 +498,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               elevation: 0,
               foregroundColor: Theme.of(context).colorScheme.onSurface,
-              actions: [
-                // Display progress
+            actions: [
+              // Display progress
                 Container(
                   margin: const EdgeInsets.only(right: 16.0),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -498,16 +515,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primary,
-                    ),
                   ),
                 ),
-              ],
+              ),
+            ],
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(110),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
                   child: Column(
-                    children: [
+            children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -531,7 +548,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
-                          value: quizState.progressPercentage,
+                value: quizState.progressPercentage,
                           backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                           valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                           minHeight: 8,
@@ -565,37 +582,40 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 Positioned.fill(
                   child: Column(
                     children: [
-                      Expanded(
-                        child: PageView.builder(
-                          controller: _pageController,
-                          itemCount: quizState.totalQuestions,
-                          onPageChanged: (index) {},
-                          itemBuilder: (context, index) {
-                            final question = quizState.questions[index];
-                            return _QuestionCard(
-                              question: question,
-                              questionNumber: index + 1,
-                              totalQuestions: quizState.totalQuestions,
-                              selectedAnswer: quizState.selectedAnswers[question.id],
-                              isAnswered: quizState.selectedAnswers.containsKey(question.id),
-                              isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
-                              onAnswerSelected: (answer) {
-                                ref.read(quizControllerProvider.notifier).answerQuestion(answer);
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: quizState.totalQuestions,
+                  onPageChanged: (index) {
+                            // PageView değiştiğinde quiz state'i sync et
+                            ref.read(quizControllerProvider.notifier).setQuestionIndex(index);
+                  },
+                  itemBuilder: (context, index) {
+                    final question = quizState.questions[index];
+                    return _QuestionCard(
+                      question: question,
+                      questionNumber: index + 1,
+                      totalQuestions: quizState.totalQuestions,
+                      selectedAnswer: quizState.selectedAnswers[question.id],
+                      isAnswered: quizState.selectedAnswers.containsKey(question.id),
+                      isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
+                      onAnswerSelected: (answer) {
+                        ref.read(quizControllerProvider.notifier).answerQuestion(answer);
                                 // Trigger confetti animation for correct answers
                                 final currentQuestion = quizState.questions[index];
                                 if (answer == currentQuestion.correctAnswerKey) {
                                   _confettiController.play();
                                 }
-                              },
-                               onNextQuestion: () {
-                                ref.read(quizControllerProvider.notifier).nextQuestion();
-                                if (index < quizState.totalQuestions - 1) {
-                                  _pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                              },
+                      },
+                      onNextQuestion: () {
+                        ref.read(quizControllerProvider.notifier).nextQuestion();
+                        if (index < quizState.totalQuestions - 1) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
                                onPreviousQuestion: () {
                                  if (index > 0) {
                                    ref.read(quizControllerProvider.notifier).previousQuestion();
@@ -615,11 +635,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                   navigator.pushReplacement(route);
                                 }
                               },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                    );
+                  },
+                ),
+              ),
+            ],
                   ),
                 ),
                 if (ref.watch(quizControllerProvider).currentCombo >= 3)
@@ -654,7 +674,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           ),
         );
       },
-    );
+        );
   }
 }
 
@@ -719,9 +739,9 @@ class _QuestionCard extends StatelessWidget {
         ],
       ),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Container(
             padding: const EdgeInsets.only(bottom: 24),
             decoration: BoxDecoration(
@@ -733,8 +753,8 @@ class _QuestionCard extends StatelessWidget {
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
@@ -753,14 +773,14 @@ class _QuestionCard extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Soru $questionNumber / $totalQuestions',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                'Soru $questionNumber / $totalQuestions',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: AppColors.primary,
                     ),
-                  ),
                 ),
-                if (isAnswered)
+              ),
+              if (isAnswered)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
@@ -787,7 +807,7 @@ class _QuestionCard extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                Icon(
                           isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
                           color: isCorrect ? AppColors.success : AppColors.error,
                           size: 20,
@@ -869,7 +889,7 @@ class _QuestionCard extends StatelessWidget {
                 final optionImageUrl = question.getOptionImageUrl(optionKey);
                 final isSelected = selectedAnswer == optionKey;
                 final isCorrectAnswer = optionKey == question.correctAnswerKey;
-
+                
                 Color containerColor = Theme.of(context).brightness == Brightness.dark
                     ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.3)
                     : Theme.of(context).colorScheme.surface;
@@ -943,13 +963,13 @@ class _QuestionCard extends StatelessWidget {
                                 offset: const Offset(0, 6),
                               ),
                           ],
-                        ),
-                    child: Row(
-                      children: [
-                        Container(
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
                           width: 36,
                           height: 36,
-                          decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
                                 letterBg,
@@ -958,7 +978,7 @@ class _QuestionCard extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            shape: BoxShape.circle,
+                              shape: BoxShape.circle,
                             border: Border.all(
                               color: letterFg.withValues(alpha: 0.2),
                               width: 1,
@@ -970,26 +990,26 @@ class _QuestionCard extends StatelessWidget {
                                 offset: const Offset(0, 2),
                               ),
                             ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              optionKey,
-                              style: TextStyle(
+                            ),
+                            child: Center(
+                              child: Text(
+                                optionKey,
+                                style: TextStyle(
                                 color: letterFg,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
+                          const SizedBox(width: 16),
+                          Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                            optionText,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              optionText,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                               color: Theme.of(context).brightness == Brightness.dark
                                   ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.95)
@@ -1169,18 +1189,18 @@ class _QuestionCard extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {
-                      if (questionNumber < totalQuestions) {
-                        onNextQuestion();
-                      } else {
+                onPressed: () {
+                  if (questionNumber < totalQuestions) {
+                    onNextQuestion();
+                  } else {
                         onFinishQuiz();
                       }
                     },
                     icon: Icon(questionNumber < totalQuestions ? Icons.arrow_forward : Icons.flag),
                     label: Text(questionNumber < totalQuestions ? 'Sonraki Soru' : 'Testi Bitir'),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Theme.of(context).colorScheme.onPrimary,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       elevation: 2,
@@ -1222,7 +1242,7 @@ class _QuestionCard extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           title: Row(
@@ -1239,10 +1259,10 @@ class _QuestionCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
-                  ),
                 ),
               ),
-            ],
+            ),
+        ],
           ),
           content: SingleChildScrollView(
             child: Column(

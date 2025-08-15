@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import '../utils/logger.dart';
 
 /// Service class for handling authentication operations
@@ -16,7 +17,12 @@ class AuthService {
   static AuthService get instance => _instance;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+    clientId: Platform.isAndroid 
+        ? null // Android uses google-services.json
+        : '516693747698-6qbfvl44bp1g3bdthvvf795klc4o9ofj.apps.googleusercontent.com', // iOS client ID
+  );
   bool _isInitialized = false;
 
   /// Initialize the AuthService
@@ -30,6 +36,16 @@ class AuthService {
       // Check if Firebase is initialized by trying to get current user
       _firebaseAuth.currentUser;
       
+      // If user is already signed in, attempt to log in to RevenueCat with the same user id
+      try {
+        final existingUser = _firebaseAuth.currentUser;
+        if (existingUser != null) {
+          await Purchases.logIn(existingUser.uid);
+        }
+      } catch (e) {
+        Logger.authError('RevenueCat logIn (initialize)', e.toString());
+      }
+
       _isInitialized = true;
     } catch (e) {
       Logger.error('AuthService: Failed to initialize', e);
@@ -77,7 +93,17 @@ class AuthService {
 
       // Sign in the user with Firebase
       final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential);
-      
+
+      // Link RevenueCat to the authenticated user
+      try {
+        final user = userCredential.user;
+        if (user != null) {
+          await Purchases.logIn(user.uid);
+        }
+      } catch (e) {
+        Logger.authError('RevenueCat logIn (Google)', e.toString());
+      }
+
       return userCredential.user;
     } catch (e) {
       // Log error in development
@@ -128,6 +154,15 @@ class AuthService {
         await user.updateDisplayName('${appleCredential.givenName} ${appleCredential.familyName ?? ''}');
       }
       
+      // Link RevenueCat to the authenticated user
+      try {
+        if (user != null) {
+          await Purchases.logIn(user.uid);
+        }
+      } catch (e) {
+        Logger.authError('RevenueCat logIn (Apple)', e.toString());
+      }
+
       return user;
     } catch (e) {
       // Log error in development
@@ -151,6 +186,13 @@ class AuthService {
       
       // Sign out from Firebase
       await _firebaseAuth.signOut();
+
+      // Also log out from RevenueCat to clear identified customer
+      try {
+        await Purchases.logOut();
+      } catch (e) {
+        Logger.authError('RevenueCat logOut', e.toString());
+      }
     } catch (e) {
       Logger.authError('Sign out', e.toString());
       // Even if there's an error, we should still try to sign out from Firebase

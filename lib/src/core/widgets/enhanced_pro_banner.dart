@@ -282,7 +282,7 @@ class _EnhancedProBannerState extends State<EnhancedProBanner>
           spacing: 12,
           runSpacing: 8,
           children: [
-            _buildBenefitItem(Icons.quiz_outlined, '20 Deneme'),
+            _buildBenefitItem(Icons.quiz_outlined, 'Ücretsiz Deneme'),
             _buildBenefitItem(Icons.block, 'Reklamsız'),
             _buildBenefitItem(Icons.insights, 'Detaylı analiz'),
           ],

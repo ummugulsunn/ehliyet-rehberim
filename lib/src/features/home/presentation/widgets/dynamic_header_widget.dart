@@ -43,119 +43,125 @@ class DynamicHeaderWidget extends ConsumerWidget {
           ),
         ],
       ),
-      child: Row(
+      child: Column(
         children: [
-          // Circular Progress Indicator
-          _buildProgressIndicator(context, dailyProgressAsync, dailyGoal, progressPercentage),
-          
-          const SizedBox(width: 20),
-          
-          // Greeting and Streak Info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Personalized Greeting
-                Text(
-                  _getGreetingText(),
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white.withValues(alpha: 0.95)
-                        : Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-                
-                const SizedBox(height: 8),
-                
-                // Daily Goal Progress Text
-                dailyProgressAsync.when(
-                  data: (progress) => Text(
-                    'Bugünkü Hedef: $progress/$dailyGoal',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? (progress >= dailyGoal ? AppColors.successLight : AppColors.primaryLight)
-                          : (progress >= dailyGoal ? AppColors.success : AppColors.primary),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  loading: () => Text(
-                    'Bugünkü Hedef: 0/$dailyGoal',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withValues(alpha: 0.8)
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  error: (_, __) => Text(
-                    'Bugünkü Hedef: 0/$dailyGoal',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withValues(alpha: 0.8)
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                
-                const SizedBox(height: 12),
-                
-                // Enhanced Streak Display
-                if (streakText.isNotEmpty) ...[
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness == Brightness.dark 
-                  ? AppColors.warning.withValues(alpha: 0.2)
-                  : AppColors.warning.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Theme.of(context).brightness == Brightness.dark 
-                          ? AppColors.warning.withValues(alpha: 0.4)
-                          : AppColors.warning.withValues(alpha: 0.3),
-                        width: 1,
+          // App Logo removed for cleaner design
+          // Main content row
+          Row(
+            children: [
+              // Circular Progress Indicator
+              _buildProgressIndicator(context, dailyProgressAsync, dailyGoal, progressPercentage),
+              
+              const SizedBox(width: 20),
+              
+              // Greeting and Streak Info
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Personalized Greeting
+                    Text(
+                      _getGreetingText(),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white.withValues(alpha: 0.95)
+                            : Theme.of(context).colorScheme.onSurface,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.warning.withValues(alpha: 0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                              ? AppColors.warning.withValues(alpha: 0.3)
-                              : AppColors.warning.withValues(alpha: 0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Text(
-                            '🔥',
-                            style: TextStyle(fontSize: 16),
-                          ),
+                    
+                    const SizedBox(height: 8),
+                    
+                    // Daily Goal Progress Text
+                    dailyProgressAsync.when(
+                      data: (progress) => Text(
+                        'Bugünkü Hedef: $progress/$dailyGoal',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? (progress >= dailyGoal ? AppColors.successLight : AppColors.primaryLight)
+                              : (progress >= dailyGoal ? AppColors.success : AppColors.primary),
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(width: 10),
-                        Text(
-                          streakText,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).brightness == Brightness.dark 
-                              ? AppColors.warning.withValues(alpha: 0.9)
-                              : AppColors.warning,
-                          ),
+                      ),
+                      loading: () => Text(
+                        'Bugünkü Hedef: 0/$dailyGoal',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.8)
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
+                      ),
+                      error: (_, __) => Text(
+                        'Bugünkü Hedef: 0/$dailyGoal',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.8)
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ],
-            ),
+                    
+                    const SizedBox(height: 12),
+                    
+                    // Enhanced Streak Display
+                    if (streakText.isNotEmpty) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).brightness == Brightness.dark 
+                              ? AppColors.warning.withValues(alpha: 0.2)
+                              : AppColors.warning.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Theme.of(context).brightness == Brightness.dark 
+                              ? AppColors.warning.withValues(alpha: 0.4)
+                              : AppColors.warning.withValues(alpha: 0.3),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.warning.withValues(alpha: 0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness == Brightness.dark 
+                                  ? AppColors.warning.withValues(alpha: 0.3)
+                                  : AppColors.warning.withValues(alpha: 0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Text(
+                                '🔥',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              streakText,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).brightness == Brightness.dark 
+                                  ? AppColors.warning.withValues(alpha: 0.9)
+                                  : AppColors.warning,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -211,28 +217,32 @@ class DynamicHeaderWidget extends ConsumerWidget {
           
           // Progress text overlay (only show if no profile image)
           if (!_hasProfileImage()) ...[
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '$progress',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? (progressPercentage >= 1.0 ? AppColors.successLight : AppColors.primaryLight)
-                        : (progressPercentage >= 1.0 ? AppColors.success : AppColors.primary),
+            Positioned(
+              bottom: -20,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$progress',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? (progressPercentage >= 1.0 ? AppColors.successLight : AppColors.primaryLight)
+                          : (progressPercentage >= 1.0 ? AppColors.success : AppColors.primary),
+                    ),
                   ),
-                ),
-                Text(
-                  '/$dailyGoal',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white.withValues(alpha: 0.8)
-                        : Theme.of(context).colorScheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    '/$dailyGoal',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.8)
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ],

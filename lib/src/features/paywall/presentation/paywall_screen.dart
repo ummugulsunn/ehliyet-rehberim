@@ -20,7 +20,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
   List<Offering> _offerings = [];
   bool _isLoading = true;
   bool _isPurchasing = false;
+  bool _isRestoring = false;
   String? _selectedPackageId;
+  Map<String, dynamic>? _subscriptionStatus;
   
   late AnimationController _heroController;
   late AnimationController _contentController;
@@ -32,6 +34,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
     super.initState();
     _initializeAnimations();
     _loadOfferings();
+    _loadSubscriptionStatus();
   }
 
   void _initializeAnimations() {
@@ -78,9 +81,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
           final monthlyPackage = packages.where((p) => 
             p.identifier.contains('monthly') || p.identifier.contains('month')
           ).firstOrNull;
-          _selectedPackageId = monthlyPackage?.identifier ?? 'monthly_subscription';
+          _selectedPackageId = monthlyPackage?.identifier ?? 'ehliyet_rehberim_pro_monthly';
         } else {
-          _selectedPackageId = 'monthly_subscription'; // Default fallback
+          _selectedPackageId = 'ehliyet_rehberim_pro_monthly'; // Default fallback
         }
       });
     } catch (e) {
@@ -95,8 +98,33 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
     }
   }
 
+  Future<void> _loadSubscriptionStatus() async {
+    try {
+      final status = await _purchaseService.getSubscriptionStatus();
+      setState(() {
+        _subscriptionStatus = status;
+      });
+    } catch (e) {
+      debugPrint('Failed to load subscription status: $e');
+    }
+  }
+
   Future<void> _purchaseSelectedPackage() async {
     if (_selectedPackageId == null) return;
+    
+    // Check if user is authenticated first
+    final authState = ref.read(authStateProvider);
+    final isSignedIn = authState.when(
+      data: (user) => user != null,
+      loading: () => false,
+      error: (_, __) => false,
+    );
+
+    // If not signed in, show auth dialog first
+    if (!isSignedIn) {
+      await _showAuthRequiredDialog();
+      return;
+    }
     
     // First try to find the package in offerings
     final package = _offerings
@@ -106,7 +134,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
     
     if (package != null) {
       await _purchasePackage(package);
-    } else if (_selectedPackageId == 'monthly_subscription') {
+    } else if (_selectedPackageId == 'ehliyet_rehberim_pro_monthly') {
       // Handle the custom monthly subscription (49.99 TRY)
       // This would be handled by your app store configuration
       // For now, show success message
@@ -186,28 +214,104 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        icon: Icon(
-          Icons.account_circle_outlined,
-          size: 48,
-          color: AppColors.primary,
+        icon: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.primaryContainer,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.lock_outline,
+            size: 48,
+            color: AppColors.primary,
+          ),
         ),
-        title: const Text('Giriş Yapın'),
-        content: const Text(
-          'Satın alımınızı tüm cihazlarınızda senkronize etmek ve kaybetmemek için lütfen giriş yapın veya hesap oluşturun.',
+        title: const Text(
+          '🔐 Giriş Yapmanız Gerekiyor',
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Pro sürüme geçmek için önce giriş yapmanız gerekiyor.',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle, color: AppColors.success, size: 20),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          '3 gün ücretsiz deneme',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle, color: AppColors.success, size: 20),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'Satın alımınızı kaybetmeyin',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle, color: AppColors.success, size: 20),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'Güvenli ödeme işlemi',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text(
-              'İptal',
-              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
+            child: const Text('Şimdilik İptal'),
           ),
-          ElevatedButton(
+          ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Giriş Yap'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.onPrimary,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            icon: const Icon(Icons.login, size: 20),
+            label: const Text('Giriş Yap / Kayıt Ol'),
           ),
         ],
+        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       ),
     );
 
@@ -218,14 +322,21 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
         ),
       );
       
-      // If user successfully signed in, show success message
+      // If user successfully signed in, show success message and continue with purchase
       if (result == true && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Başarıyla giriş yaptınız! Artık satın alma yapabilirsiniz.'),
+            content: const Text('✅ Başarıyla giriş yaptınız! Artık Pro sürüme geçebilirsiniz.'),
             backgroundColor: AppColors.success,
+            duration: const Duration(seconds: 3),
           ),
         );
+        
+        // Automatically retry the purchase after successful login
+        await Future.delayed(const Duration(seconds: 1));
+        if (mounted) {
+          _purchaseSelectedPackage();
+        }
       }
     }
   }
@@ -233,6 +344,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
   Future<void> _restorePurchases() async {
     setState(() {
       _isPurchasing = true;
+      _isRestoring = true;
     });
 
     try {
@@ -261,15 +373,16 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-              content: Text('Geri yükleme sırasında hata oluştu: $e'),
+          SnackBar(
+            content: Text('Geri yükleme sırasında hata oluştu: $e'),
               backgroundColor: AppColors.error,
-            ),
+          ),
         );
       }
     } finally {
       setState(() {
         _isPurchasing = false;
+        _isRestoring = false;
       });
     }
   }
@@ -372,26 +485,26 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                       width: double.infinity,
               margin: const EdgeInsets.all(24),
               padding: const EdgeInsets.all(32),
-                      decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
                     AppColors.premiumDark,
                     AppColors.premium,
                     AppColors.premiumLight,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
+                            boxShadow: [
+                              BoxShadow(
                     color: AppColors.premiumShadow.withValues(alpha: 0.3),
                     blurRadius: 30,
                     offset: const Offset(0, 15),
                     spreadRadius: 5,
-                  ),
-                ],
-                      ),
+                              ),
+                            ],
+                          ),
                       child: Column(
                         children: [
                   // Premium Icon
@@ -412,35 +525,35 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                     ),
                   ),
                   
-                  const SizedBox(height: 24),
+                        const SizedBox(height: 24),
                   
                   // Hero Title
-                  Text(
+                        Text(
                     'Ehliyet Rehberim Pro',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w800,
                       color: AppColors.onPremium,
                       fontSize: 28,
                       letterSpacing: 0.5,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                   
                   const SizedBox(height: 12),
                   
                   // Hero Subtitle
-                  Text(
+                        Text(
                     'Sınırsız erişim ile hedeflerinize\ndaha hızlı ulaşın',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: AppColors.onPremium.withValues(alpha: 0.9),
                       fontSize: 16,
                       height: 1.5,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ],
-              ),
-            ),
           ),
         );
       },
@@ -483,39 +596,108 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
           offset: Offset(0, 20 * (1 - _contentAnimation.value)),
           child: Opacity(
             opacity: _contentAnimation.value,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            child: Column(
+              children: [
+                // Current Subscription Status
+                if (_subscriptionStatus != null && _subscriptionStatus!['isPro'] == true)
+                  _buildCurrentSubscriptionCard(),
+                
+                const SizedBox(height: 24),
+                
+                // Features List
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                   Text(
                     'Pro Özellikleri',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ...features.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final feature = entry.value;
-                    return AnimatedContainer(
-                      duration: Duration(milliseconds: 300 + (index * 100)),
-                      child: _buildFeatureTile(
-                        icon: feature['icon'] as IconData,
-                        title: feature['title'] as String,
-                        description: feature['description'] as String,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
-                    );
-                  }),
-                ],
-              ),
+                      const SizedBox(height: 20),
+                      ...features.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final feature = entry.value;
+                        return AnimatedContainer(
+                          duration: Duration(milliseconds: 300 + (index * 100)),
+                          child: _buildFeatureTile(
+                            icon: feature['icon'] as IconData,
+                            title: feature['title'] as String,
+                            description: feature['description'] as String,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         );
       },
     );
   }
+
+  Widget _buildCurrentSubscriptionCard() {
+    final status = _subscriptionStatus!;
+    final expiresDate = status['expiresDate'] != null 
+        ? DateTime.tryParse(status['expiresDate']) 
+        : null;
+    
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.success.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.success.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.check_circle_rounded,
+                color: AppColors.success,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  'Aktif Pro Aboneliğiniz Var!',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.success,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (expiresDate != null) ...[
+            const SizedBox(height: 8),
+                    Text(
+              'Bitiş Tarihi: ${_formatDate(expiresDate)}',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
+  }
+
+
 
   Widget _buildFeatureTile({
     required IconData icon,
@@ -524,23 +706,23 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
+                        border: Border.all(
           color: AppColors.outline.withValues(alpha: 0.1),
-        ),
+                        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
-          ),
+                      ),
         ],
       ),
       child: Row(
-        children: [
+                        children: [
           // Checkmark Circle
           Container(
             width: 48,
@@ -574,32 +756,32 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                          Text(
                   title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
-                  ),
-                ),
+                            ),
+                          ),
                 const SizedBox(height: 4),
-                Text(
+                          Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondary,
                     height: 1.4,
                   ),
-                ),
-              ],
-            ),
-          ),
+                          ),
+                        ],
+                      ),
+                    ),
           
           // Feature Icon
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
-            ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
             child: Icon(
               icon,
               color: AppColors.primary,
@@ -658,7 +840,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
       onTap: () {
         // Set to monthly subscription
         setState(() {
-          _selectedPackageId = 'monthly_subscription'; // Default ID for monthly
+          _selectedPackageId = 'ehliyet_rehberim_pro_monthly'; // Default ID for monthly
         });
       },
       child: AnimatedContainer(
@@ -686,20 +868,20 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
           ],
         ),
         child: Stack(
-          children: [
+        children: [
             // Free Trial Badge
             Positioned(
               top: -8,
               right: -8,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
+            decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [AppColors.success, AppColors.successLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                 BoxShadow(
                       color: AppColors.success.withValues(alpha: 0.3),
@@ -732,18 +914,18 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: AppColors.onPremium,
-                      ),
-                      child: Icon(
+            ),
+            child: Icon(
                         Icons.check,
                         size: 16,
                         color: AppColors.premium,
                       ),
                     ),
                     
-                    const SizedBox(width: 16),
+          const SizedBox(width: 16),
                     
                     // Title
-                Expanded(
+          Expanded(
                       child: Text(
                         'Aylık Abonelik',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -781,28 +963,28 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                 // Description
                 Padding(
                   padding: const EdgeInsets.only(left: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                         '1 gün ücretsiz deneme',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: AppColors.onPremium,
                           fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
                         'Deneme sonrası ayda 49.99 TL\nİstediğin zaman iptal et',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.onPremium.withValues(alpha: 0.85),
                           height: 1.4,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
             ),
           ],
         ),
@@ -830,11 +1012,11 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
         duration: const Duration(milliseconds: 300),
         width: double.infinity,
         padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
+      decoration: BoxDecoration(
           color: isSelected 
               ? AppColors.primaryContainer
               : AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected 
                 ? AppColors.primary 
@@ -842,15 +1024,15 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
             width: isSelected ? 2 : 1.5,
           ),
           boxShadow: isSelected ? [
-            BoxShadow(
+                BoxShadow(
               color: AppColors.primary.withValues(alpha: 0.2),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
           ] : null,
         ),
         child: Stack(
-          children: [
+              children: [
             // Best Value Badge
             Positioned(
               top: -4,
@@ -905,13 +1087,13 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+                        children: [
+                          Text(
                         annualPackage.storeProduct.title,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
-                        ),
+                      ),
                     ),
                       const SizedBox(height: 4),
                       Text(
@@ -927,7 +1109,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                 Text(
                   annualPackage.storeProduct.priceString,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.bold,
                     color: AppColors.primary,
                   ),
                 ),
@@ -954,89 +1136,173 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
               margin: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                onPressed: _isPurchasing || _selectedPackageId == null 
-                    ? null 
-                    : _purchaseSelectedPackage,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: AppColors.onPremium,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: EdgeInsets.zero,
-                ),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.premium,
-                        AppColors.premiumLight,
-                        AppColors.premium,
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.premiumShadow.withValues(alpha: 0.4),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: _isPurchasing
-                        ? SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.5,
-                              valueColor: AlwaysStoppedAnimation<Color>(AppColors.onPremium),
+                  // Auth Required Notice
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final authState = ref.watch(authStateProvider);
+                      final isSignedIn = authState.when(
+                        data: (user) => user != null,
+                        loading: () => false,
+                        error: (_, __) => false,
+                      );
+                      
+                      if (!isSignedIn) {
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          margin: const EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryContainer.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: AppColors.primary.withValues(alpha: 0.3),
+                              width: 1,
                             ),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
+                          child: Row(
                             children: [
                               Icon(
-                                Icons.stars_rounded,
-                                size: 24,
-                                color: AppColors.onPremium,
+                                Icons.info_outline,
+                                color: AppColors.primary,
+                                size: 20,
                               ),
                               const SizedBox(width: 12),
-                              Text(
-                                '1 Gün Ücretsiz Dene',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.onPremium,
-                                  fontSize: 16,
+                              Expanded(
+                                child: Text(
+                                  'Pro sürüme geçmek için önce giriş yapmanız gerekiyor',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                    ),
+                        );
+                      }
+                      
+                      return const SizedBox.shrink();
+                    },
                   ),
+                  
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: _isPurchasing || _selectedPackageId == null 
+                          ? null 
+                          : _purchaseSelectedPackage,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        foregroundColor: AppColors.onPremium,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: EdgeInsets.zero,
+                      ),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              AppColors.premium,
+                              AppColors.premiumLight,
+                              AppColors.premium,
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.premiumShadow.withValues(alpha: 0.4),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: _isPurchasing
+                              ? SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2.5,
+                                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.onPremium),
+                                  ),
+                                )
+                              : Consumer(
+                                  builder: (context, ref, child) {
+                                    final authState = ref.watch(authStateProvider);
+                                    final isSignedIn = authState.when(
+                                      data: (user) => user != null,
+                                      loading: () => false,
+                                      error: (_, __) => false,
+                                    );
+                                    
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          isSignedIn ? Icons.stars_rounded : Icons.login,
+                                          size: 24,
+                                          color: AppColors.onPremium,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Text(
+                                          isSignedIn ? '3 Gün Ücretsiz Dene' : 'Giriş Yap ve Dene',
+                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.onPremium,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                        ),
+                      ),
                     ),
                   ),
                   
                   // Pricing Subtext
                   const SizedBox(height: 12),
                   
-                  Text(
-                    'Deneme sonrası ayda 49.99 TL. İstediğin zaman iptal et.',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
-                      fontSize: 13,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final authState = ref.watch(authStateProvider);
+                      final isSignedIn = authState.when(
+                        data: (user) => user != null,
+                        loading: () => false,
+                        error: (_, __) => false,
+                      );
+                      
+                      if (isSignedIn) {
+                        return Text(
+                          '3 gün ücretsiz deneme sonrası ayda 49.99 TL. İstediğin zaman iptal et.',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppColors.textSecondary,
+                            fontSize: 13,
+                            height: 1.4,
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      } else {
+                        return Text(
+                          'Giriş yaparak 3 gün ücretsiz deneyin',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppColors.textSecondary,
+                            fontSize: 13,
+                            height: 1.4,
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      }
+                    },
                   ),
                 ],
               ),
@@ -1063,7 +1329,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton.icon(
-                      onPressed: _isPurchasing ? null : _restorePurchases,
+                      onPressed: _isPurchasing || _isRestoring ? null : _restorePurchases,
                       icon: Icon(
                         Icons.restore_rounded,
                         size: 20,
@@ -1115,9 +1381,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
                     ),
                     textAlign: TextAlign.center,
                   ),
-                ],
-              ),
+              ],
             ),
+          ),
           ),
         );
       },

@@ -29,8 +29,22 @@ class QuizService {
     // Special handling for 'karma' examId - aggregate all questions from all exams
     if (examId == 'karma') {
       final List<Question> allQuestions = [];
+      int uniqueIdCounter = 1;
       for (final exam in exams) {
-        allQuestions.addAll(exam.questions.map((q) => q.withExamId(exam.examId)));
+        for (final question in exam.questions) {
+          // Create unique ID by combining with counter to avoid collisions
+          final uniqueQuestion = Question(
+            id: uniqueIdCounter++,
+            questionText: question.questionText,
+            imageUrl: question.imageUrl,
+            options: question.options,
+            correctAnswerKey: question.correctAnswerKey,
+            explanation: question.explanation,
+            category: question.category,
+            examId: exam.examId,
+          );
+          allQuestions.add(uniqueQuestion);
+        }
       }
       return allQuestions;
     }

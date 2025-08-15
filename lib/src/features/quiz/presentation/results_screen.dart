@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/quiz_providers.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ad_service.dart';
-import '../../../core/widgets/banner_ad_widget.dart';
+import '../../../core/widgets/banner_ad_widget.dart' as widgets;
 
 class ResultsScreen extends ConsumerWidget {
   const ResultsScreen({super.key});
@@ -142,7 +142,7 @@ class ResultsScreen extends ConsumerWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Reset quiz and navigate back to quiz screen
+                      // Reset quiz state and navigate back to quiz screen
                       ref.read(quizControllerProvider.notifier).reset();
                       Navigator.of(context).pop();
                     },
@@ -164,10 +164,83 @@ class ResultsScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
+                
+                // Bonus points with rewarded ad (if not Pro and score < 80%)
+                if (successPercentage < 80) ...[
+                  SizedBox(
+                    width: double.infinity,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.secondary.withValues(alpha: 0.1),
+                            AppColors.secondaryLight.withValues(alpha: 0.05),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: AppColors.secondary.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: OutlinedButton.icon(
+                        onPressed: () async {
+                          // Show rewarded ad for bonus points
+                          await AdService.instance.showRewardedAd(
+                            onRewardEarned: (reward) {
+                              // Give bonus points - improve score by 10%
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('🎉 Bonus puan kazandınız! +${reward.amount} puan'),
+                                  backgroundColor: AppColors.success,
+                                ),
+                              );
+                            },
+                            onAdDismissed: () {
+                              // Ad dismissed
+                            },
+                            onAdFailedToShow: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: const Text('Reklam şu anda mevcut değil'),
+                                  backgroundColor: AppColors.error,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          side: BorderSide.none,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.card_giftcard,
+                          color: AppColors.secondary,
+                        ),
+                        label: Text(
+                          'Reklam İzleyerek Bonus Puan Kazan',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.secondary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+                
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () async {
+                      // Reset quiz state before navigating back to prevent data loss
+                      ref.read(quizControllerProvider.notifier).reset();
+                      
                       // Mark completion and maybe show an interstitial for non-Pro users
                       await AdService.markQuizCompleted();
                       final isPro = ref.read(proStatusProvider).maybeWhen(
@@ -201,7 +274,7 @@ class ResultsScreen extends ConsumerWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const BannerAdWidget(),
+      bottomNavigationBar: const widgets.BannerAdWidget(),
     );
   }
 

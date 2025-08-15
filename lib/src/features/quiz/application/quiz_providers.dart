@@ -96,6 +96,8 @@ class QuizController extends Notifier<QuizState> {
     // Update selected answers
     final updatedSelectedAnswers = Map<int, String>.from(state.selectedAnswers);
     updatedSelectedAnswers[currentQuestion.id] = selectedOption;
+    
+    // Debug: Log answer selection (removed for production)
 
     // Update score and combo
     final newScore = isCorrect ? state.score + 1 : state.score;

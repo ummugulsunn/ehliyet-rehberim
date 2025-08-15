@@ -171,26 +171,26 @@ class TopicSelectionScreen extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  category.key,
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    category.key,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                         fontWeight: FontWeight.w700,
                                         color: Theme.of(context).colorScheme.onSurface,
-                                      ),
-                                ),
+                    ),
+                  ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  '${category.value} soru',
+                    '${category.value} soru',
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                      ),
-                                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
                               ],
                             ),
                           ),
                           const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16,
-                          ),
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                  ),
                         ],
                       ),
                       const SizedBox(height: 16),

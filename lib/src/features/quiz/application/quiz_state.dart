@@ -44,7 +44,7 @@ class QuizState {
   /// Get the current progress percentage
   double get progressPercentage {
     if (questions.isEmpty) return 0.0;
-    return (questionIndex + 1) / questions.length;
+    return selectedAnswers.length / questions.length;
   }
 
   Question? get currentQuestion {
