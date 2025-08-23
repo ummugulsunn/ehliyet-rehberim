@@ -22,6 +22,30 @@
           }
         },
         {
+          "client_id": "516693747698-80aqr4jbpkoe17c5l7u4mtc77dlqtq2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ehliyetrehberim.app",
+            "certificate_hash": "a46f40fbebc31162fbf645b200c74df06a266bb1"
+          }
+        },
+        {
+          "client_id": "516693747698-b1apoqseilutk3qhkm28q0vrmuqm0ncn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ehliyetrehberim.app",
+            "certificate_hash": "a35dbf79cbf5162d75f76b56dd57f4e9d2d74e01"
+          }
+        },
+        {
+          "client_id": "516693747698-u37ebh30ar7ac2kelu3pi7ved0hpphbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ehliyetrehberim.app",
+            "certificate_hash": "8fe02a6eb38a06e3e98f5da728b5a0119de9aae4"
+          }
+        },
+        {
           "client_id": "516693747698-7n46qvdqenrtmg5nqld9ssm6vttqoa53.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -6,6 +6,7 @@ import 'src/core/services/purchase_service.dart';
 import 'src/core/services/user_progress_service.dart';
 import 'src/core/services/auth_service.dart';
 import 'src/core/services/ad_service.dart';
+import 'src/core/services/notification_service.dart';
 import 'src/features/auth/application/auth_providers.dart';
 import 'src/features/quiz/application/quiz_providers.dart';
 import 'src/core/theme/app_theme.dart';
@@ -88,6 +89,16 @@ void main() async {
   } catch (e) {
     debugPrint('Failed to initialize UserProgressService: $e');
     // Continue app initialization even if user progress service fails
+  }
+  
+  // Initialize NotificationService
+  final notificationService = NotificationService.instance;
+  try {
+    await notificationService.initialize();
+    debugPrint('NotificationService initialized successfully');
+  } catch (e) {
+    debugPrint('Failed to initialize NotificationService: $e');
+    // Continue app initialization even if notification service fails
   }
   
   // Initialize Google Mobile Ads SDK and AdService

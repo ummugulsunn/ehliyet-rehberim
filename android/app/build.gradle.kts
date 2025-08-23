@@ -15,6 +15,8 @@ val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+} else {
+    println("Warning: key.properties file not found!")
 }
 
 android {
@@ -25,21 +27,32 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    // Auto versioning helpers
+    val autoVersionCode: Int = System.getenv("BUILD_NUMBER")?.toIntOrNull()
+        ?: (System.currentTimeMillis() / 1000L).toInt()
+    val autoVersionName: String = System.getenv("BUILD_NAME") ?: flutter.versionName
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.ehliyetrehberim.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23 // Updated to meet Firebase Auth requirements
+        // Use a conservative minSdk to maximize device support
+        minSdk = flutter.minSdkVersion
+        // Ensure both 32-bit and 64-bit ABIs are supported for wider device coverage
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        versionCode = autoVersionCode
+        versionName = autoVersionName
     }
     
     // Custom launcher icon configuration
@@ -51,10 +64,10 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String?
+            keyAlias = keystoreProperties["keyAlias"] as String? ?: "ehliyet-rehberim"
+            keyPassword = keystoreProperties["keyPassword"] as String? ?: "ehliyet123"
+            storeFile = keystoreProperties["storeFile"]?.let { file(it) } ?: file("ehliyet-rehberim-key.jks")
+            storePassword = keystoreProperties["storePassword"] as String? ?: "ehliyet123"
         }
     }
 
@@ -77,5 +90,8 @@ dependencies {
     
     // RevenueCat Android SDK
     implementation("com.revenuecat.purchases:purchases:6.12.0")
+    
+    // Core library desugaring for flutter_local_notifications
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
 
