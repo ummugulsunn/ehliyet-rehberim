@@ -1,0 +1,15 @@
+{
+  "targets": [
+    "deneme_sinavi_10",
+    "deneme_sinavi_7",
+    "deneme_sinavi_8",
+    "deneme_sinavi_9"
+  ],
+  "propagation_stats": {
+    "total_questions_updated": 0,
+    "main_images_added": 0,
+    "option_images_added": 0,
+    "exams_affected": [],
+    "detailed_updates": []
+  }
+}

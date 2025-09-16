@@ -1,0 +1,108 @@
+{
+  "propagation_stats": {
+    "total_questions_updated": 2,
+    "main_images_added": 2,
+    "option_images_added": 0,
+    "exams_affected": [
+      "deneme_sinavi_10",
+      "deneme_sinavi_12"
+    ],
+    "detailed_updates": [
+      {
+        "examId": "deneme_sinavi_10",
+        "questionId": 19,
+        "questionText": "Şekildeki tehlike uyarı işaretini gören sürücü aşağıdakilerden hangisini yapmalıdır?",
+        "updates": [
+          "Added main image: assets/images/deneme_sinavi_6_soru_27.png"
+        ]
+      },
+      {
+        "examId": "deneme_sinavi_12",
+        "questionId": 14,
+        "questionText": "B sınıfı sürücü belgesine sahip olan Mehmet, A2 sınıfı sürücü belgesi almak için başvuru yapıyor. Bu durumda Mehmet, aşağıda resimleri verilen araçlardan hangisini kullanmak istemektedir?",
+        "updates": [
+          "Added main image: assets/images/deneme_sinavi_6_soru_28.png"
+        ]
+      }
+    ]
+  },
+  "remaining_missing": {
+    "total_still_missing": 100,
+    "by_exam": {
+      "deneme_sinavi_1": 2,
+      "deneme_sinavi_5": 6,
+      "deneme_sinavi_6": 1,
+      "deneme_sinavi_7": 11,
+      "deneme_sinavi_8": 12,
+      "deneme_sinavi_9": 10,
+      "deneme_sinavi_10": 7,
+      "deneme_sinavi_11": 14,
+      "deneme_sinavi_12": 11,
+      "deneme_sinavi_13": 14,
+      "deneme_sinavi_14": 12
+    },
+    "sample_missing": [
+      {
+        "examId": "deneme_sinavi_1",
+        "questionId": 21,
+        "questionText": "Bir araç çevreyi rahatsız edecek şekilde duman ve gürültü çıkarıyorsa aşağıdakilerden hangisi uygulanır?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_1",
+        "questionId": 22,
+        "questionText": "Aksine bir işaret yoksa, dönüş yaparak doğrultu değiştirecek olan araç sürücülerinin aşağıdakilerden hangisini yapması yanlıştır?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 14,
+        "questionText": "• Görev hâlinde iken geçiş üstünlüğü hakkına sahiptir. • Görev hâli dışında geçiş üstünlüğü işaretini ve hakkını kullanması yasaktır. • Hizmetin yerine getirilmesini sağlamak amacına uygun olması şartıyla, Kara Yolları Trafik Kanunu ve bu Yönetmelikte gösterilen trafik kısıtlamalarına ve yasaklarına bağlı değildir. Buna göre aşağıdakilerden hangisi sürülmelerine ilişkin esas ve kuralları verilen araçlardandır?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 18,
+        "questionText": "Araç sürücülerinin duraklanan veya parkedilen yerden çıkarken; I. Işıkla veya kolla çıkış işareti vermeleri, II. Araçlarını ve araçların etrafını kontrol etmeleri, III. Yoldan geçen araçları ikaz ederek durdurmaları, IV. Görüş alanları dışında kalan yerler varsa gözcü bulundurmaları mecburidir. Verilen bilgilerden hangileri doğrudur?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 20,
+        "questionText": "Şekildeki otoyolda numaralanmış şeritlerden hangisi ayrılma (yavaşlama) şerididir?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 26,
+        "questionText": "Şekildeki trafik işaretinin anlamı nedir?",
+        "category": "Trafik İşaretleri"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 31,
+        "questionText": "Okul taşıtının arkasındaki DUR ışıklı işaretinin yandığını gören arkadan gelen sürücü nasıl hareket etmelidir?",
+        "category": "Trafik ve Çevre Bilgisi"
+      },
+      {
+        "examId": "deneme_sinavi_5",
+        "questionId": 38,
+        "questionText": "Dizel motorlu aracın gösterge panelinde bulunan şekildeki uyarı lambasının yanıyor olması neyi bildirir?",
+        "category": "Motor ve Araç Tekniği"
+      },
+      {
+        "examId": "deneme_sinavi_6",
+        "questionId": 45,
+        "questionText": "Ters yönden gelen bir sürücüye \"Bu sokak tek yönlü, herhalde siz girişteki levhayı görmediniz, lütfen daha dikkatli olun.\" diyen bir sürücü, trafikteki temel değerlerden hangisine uygun davranmıştır?",
+        "category": "Trafik Adabı"
+      },
+      {
+        "examId": "deneme_sinavi_7",
+        "questionId": 15,
+        "questionText": "Şekildeki gibi sola dönüş yapacak olan 2 numaralı araç sürücüsü aşağıdakilerden hangilerini yapmalıdır? I. Dar bir kavisle dönmeli II. Yayanın geçmesini beklemeli III. Sola dönüş lambasını yakmalı IV. İlk geçiş hakkını 1 numaralı araca vermeli",
+        "category": "Trafik ve Çevre Bilgisi"
+      }
+    ]
+  },
+  "source_questions": 55
+}
