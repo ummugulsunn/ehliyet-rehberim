@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../quiz/presentation/quiz_screen.dart';
 import '../../quiz/application/quiz_providers.dart';
-import '../../paywall/presentation/paywall_screen.dart';
+
 import '../../topics/presentation/topic_selection_screen.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../auth/application/auth_providers.dart';
@@ -12,8 +12,7 @@ import '../../exams/presentation/exam_selection_screen.dart';
 import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
-import '../../../core/widgets/banner_ad_widget.dart';
-import '../../../core/widgets/enhanced_pro_banner.dart';
+
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -152,15 +151,13 @@ class HomeScreen extends ConsumerWidget {
               
               const SizedBox(height: 32),
               
-              // Enhanced Pro Upgrade Banner
-              const EnhancedProBanner(),
+
               
               const SizedBox(height: 24),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const BannerAdWidget(),
     );
   }
 
@@ -312,8 +309,10 @@ class HomeScreen extends ConsumerWidget {
           icon: Icons.refresh_outlined,
           title: 'Yanlışlarım\nTesti',
           color: AppColors.warning,
-          isPro: true,
+          // isPro: true, // Removed for free version
           onTap: () async {
+            // Locked feature check removed - always allow access
+            /*
             final proStatusAsync = ref.read(proStatusProvider);
             final isPro = proStatusAsync.when(data: (v) => v, loading: () => false, error: (_, __) => false);
 
@@ -325,6 +324,7 @@ class HomeScreen extends ConsumerWidget {
               );
               return;
             }
+            */
 
             // Pro user: load wrong questions
             // Show loading dialog while waiting
@@ -565,59 +565,29 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Flexible(
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 13,
-                          height: 1.1,
+                      Flexible(
+                        child: Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontSize: 13,
+                                height: 1.1,
+                              ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-              ),
-              if (isPro)
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.premium, AppColors.premiumDark],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.premiumShadow,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Text(
-                      'PRO',
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: AppColors.onPremium,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
-                ],
+              ),
+            ],
           ),
         ),
       ),
     );
+
   }
 }

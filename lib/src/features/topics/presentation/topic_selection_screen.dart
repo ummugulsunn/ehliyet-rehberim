@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/widgets/banner_ad_widget.dart';
+
 import '../../quiz/application/quiz_providers.dart';
 import '../../quiz/presentation/quiz_screen.dart';
 import '../../../core/theme/app_colors.dart';
@@ -257,7 +257,6 @@ class TopicSelectionScreen extends ConsumerWidget {
           );
         },
       ),
-      bottomNavigationBar: const BannerAdWidget(),
     );
   }
 

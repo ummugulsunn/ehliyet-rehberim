@@ -85,12 +85,6 @@ flutter {
 }
 
 dependencies {
-    // RevenueCat Play Billing Library
-    implementation("com.android.billingclient:billing:6.1.0")
-    
-    // RevenueCat Android SDK
-    implementation("com.revenuecat.purchases:purchases:6.12.0")
-    
     // Core library desugaring for flutter_local_notifications
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

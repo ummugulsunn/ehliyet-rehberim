@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/models/traffic_sign_model.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../paywall/presentation/paywall_screen.dart';
+
 import '../application/traffic_signs_provider.dart';
 
 class TrafficSignsScreen extends ConsumerWidget {
@@ -192,54 +192,7 @@ class TrafficSignsScreen extends ConsumerWidget {
       itemCount: categories.length,
       itemBuilder: (context, index) {
         final category = categories[index];
-        final bool isProCategory =
-            category.categoryName == 'Bilgi İşaretleri' ||
-            category.categoryName == 'Durma ve Park Etme İşaretleri';
 
-        if (isProCategory) {
-          return ListTile(
-            leading: Icon(
-              Icons.lock,
-              color: AppColors.premium,
-            ),
-            title: Text(
-              category.categoryName,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text(
-              'Pro özelliği',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.premium.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: AppColors.premium.withValues(alpha: 0.3),
-                ),
-              ),
-              child: Text(
-                'PRO',
-                style: TextStyle(
-                  color: AppColors.premiumDark,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const PaywallScreen(),
-              ),
-            ),
-          );
-        }
 
         return ExpansionTile(
           title: Text(

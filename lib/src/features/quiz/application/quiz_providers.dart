@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:ehliyet_rehberim/src/core/models/question_model.dart';
 import 'package:ehliyet_rehberim/src/core/services/quiz_service.dart';
-import 'package:ehliyet_rehberim/src/core/services/purchase_service.dart';
+
 import 'package:ehliyet_rehberim/src/core/services/user_progress_service.dart';
 import 'package:ehliyet_rehberim/src/core/models/test_result_model.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/application/quiz_state.dart';
@@ -12,10 +12,7 @@ final quizServiceProvider = Provider<QuizService>((ref) {
   return QuizService();
 });
 
-/// Provider for the PurchaseService
-final purchaseServiceProvider = Provider<PurchaseService>((ref) {
-  return PurchaseService();
-});
+
 
 /// Provider for the UserProgressService
 final userProgressServiceProvider = Provider<UserProgressService>((ref) {
@@ -23,17 +20,9 @@ final userProgressServiceProvider = Provider<UserProgressService>((ref) {
 });
 
 /// Provider for pro status - properly handles initialization and streams
+/// Provider for pro status - always true now
 final proStatusProvider = StreamProvider<bool>((ref) async* {
-  final purchaseService = ref.read(purchaseServiceProvider);
-  
-  // First initialize the service
-  await purchaseService.init();
-  
-  // Then yield the initial status
-  yield purchaseService.isPro;
-  
-  // Finally, listen to the status stream for updates
-  yield* purchaseService.proStatusStream;
+  yield true;
 });
 
 /// Notifier for loading and caching all quiz questions
@@ -53,8 +42,7 @@ final questionsByCategoryProvider =
   // Return the filtered list when data is available
   return questionsAsync.when(
     data: (questions) {
-      // For now, always limit to 50 questions (non-pro behavior)
-      // TODO: Implement proper pro status check when RevenueCat is configured
+      // For now, always limit to 50 questions
       final limitedQuestions = questions.take(50).toList();
       return limitedQuestions
           .where((question) => question.category == category)
