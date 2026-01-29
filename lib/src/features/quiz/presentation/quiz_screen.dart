@@ -6,13 +6,22 @@ import '../domain/question_model.dart';
 import 'results_screen.dart';
 import '../../../core/theme/app_colors.dart';
 import '../domain/test_result_model.dart';
+import 'widgets/exam_timer_widget.dart';
+import '../../favorites/application/favorites_providers.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String examId;
   final String? category;
   final List<Question>? preloadedQuestions;
+  final bool isExamMode;
   
-  const QuizScreen({super.key, required this.examId, this.category, this.preloadedQuestions});
+  const QuizScreen({
+    super.key,
+    required this.examId,
+    this.category,
+    this.preloadedQuestions,
+    this.isExamMode = false,
+  });
 
   @override
   ConsumerState<QuizScreen> createState() => _QuizScreenState();
@@ -117,11 +126,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     final totalForThisAttempt = isFinal ? quizState.totalQuestions : answeredCount;
     final category = widget.category ?? 'Karma';
 
+    final timeTaken = widget.isExamMode 
+        ? ref.read(quizControllerProvider(widget.examId).notifier).getTimeTaken() 
+        : null;
+
     final result = TestResult(
       date: DateTime.now(),
       correctAnswers: correct,
       totalQuestions: totalForThisAttempt,
       category: category,
+      examId: widget.examId,
+      selectedAnswers: quizState.selectedAnswers,
+      isExamMode: widget.isExamMode,
+      timeTakenInSeconds: timeTaken?.inSeconds,
+      isPassed: widget.isExamMode ? (correct / totalForThisAttempt >= 0.7) : null,
     );
 
     // Persist test result
@@ -178,6 +196,91 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _resultSaved = true;
   }
 
+  Future<void> _confirmFinishExam(BuildContext context) async {
+    final quizState = ref.read(quizControllerProvider(widget.examId));
+    final answeredCount = quizState.selectedAnswers.length;
+    final totalCount = quizState.totalQuestions;
+    final unaskedCount = totalCount - answeredCount;
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Sınavı Bitir?'),
+        content: Text(
+          unaskedCount > 0
+              ? 'Henüz cevaplamadığınız $unaskedCount soru var. Sınavı bitirmek istediğinize emin misiniz?'
+              : 'Sınavı bitirmek ve sonuçları görmek istiyor musunuz?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Vazgeç'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.error,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Sınavı Bitir'),
+          ),
+        ],
+      ),
+    );
+
+    if (result == true && mounted) {
+      await _saveResult(isFinal: true);
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ResultsScreen(examId: widget.examId),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _showNoteDialog(BuildContext context, int questionId) async {
+    final currentNote = ref.read(questionNoteProvider(questionId));
+    final noteController = TextEditingController(text: currentNote);
+
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Not Ekle / Düzenle'),
+        content: TextField(
+          controller: noteController,
+          decoration: const InputDecoration(
+            hintText: 'Bu soru için notunuzu girin...',
+            border: OutlineInputBorder(),
+          ),
+          maxLines: 3,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('İptal'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(favoritesRepositoryProvider).saveNote(questionId, noteController.text);
+              Navigator.pop(context);
+              
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Not kaydedildi'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
+            child: const Text('Kaydet'),
+          ),
+        ],
+      ),
+    );
+    noteController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // If preloadedQuestions provided, bypass provider and use directly
@@ -195,12 +298,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       // Don't reinitialize if questions are already loaded and exam is the same
       if (questionsEmpty && questions.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
+          final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+          notifier.initializeQuiz(questions, examId: widget.examId);
+          if (widget.isExamMode) {
+            notifier.startExamMode();
+          }
         });
       } else if (examChanged && questions.isNotEmpty) {
         // Only reinitialize if exam changed
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
+          final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+          notifier.initializeQuiz(questions, examId: widget.examId);
+          if (widget.isExamMode) {
+            notifier.startExamMode();
+          }
         });
       }
 
@@ -336,12 +447,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               selectedAnswer: quizState.selectedAnswers[question.id],
                               isAnswered: quizState.selectedAnswers.containsKey(question.id),
                               isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
+                              isExamMode: widget.isExamMode,
                               onAnswerSelected: (answer) {
                                 ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
-                                // Trigger confetti animation for correct answers
-                                final currentQuestion = quizState.questions[index];
-                                if (answer == currentQuestion.correctAnswerKey) {
-                                  _confettiController.play();
+                                // Trigger confetti animation for correct answers only in normal mode
+                                if (!widget.isExamMode) {
+                                  final currentQuestion = quizState.questions[index];
+                                  if (answer == currentQuestion.correctAnswerKey) {
+                                    _confettiController.play();
+                                  }
                                 }
                               },
                                onNextQuestion: () {
@@ -361,15 +475,19 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                      curve: Curves.easeInOut,
                                    );
                                  }
-                               },
+                                },
                               onFinishQuiz: () async {
-                                final route = MaterialPageRoute(
-                                  builder: (context) => ResultsScreen(examId: widget.examId),
-                                );
-                                final navigator = Navigator.of(context);
-                                await _saveResult(isFinal: true);
-                                if (mounted) {
-                                  navigator.pushReplacement(route);
+                                if (widget.isExamMode) {
+                                  _confirmFinishExam(context);
+                                } else {
+                                  final route = MaterialPageRoute(
+                                    builder: (context) => ResultsScreen(examId: widget.examId),
+                                  );
+                                  final navigator = Navigator.of(context);
+                                  await _saveResult(isFinal: true);
+                                  if (mounted) {
+                                    navigator.pushReplacement(route);
+                                  }
                                 }
                               },
                                autoShowExplainOnWrong: widget.category == 'Yanlışlarım',
@@ -462,12 +580,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         // Only initialize if quiz state is truly empty or exam changed
         if (questionsEmpty && questions.isNotEmpty) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
+            final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+            notifier.initializeQuiz(questions, examId: widget.examId);
+            if (widget.isExamMode) {
+              notifier.startExamMode();
+            }
           });
         } else if (examChanged && questions.isNotEmpty) {
           // Only reinitialize if exam changed
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
+            final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+            notifier.initializeQuiz(questions, examId: widget.examId);
+            if (widget.isExamMode) {
+              notifier.startExamMode();
+            }
           });
         }
 
@@ -475,7 +601,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         if (questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(widget.category ?? 'Ehliyet Rehberim'),
+          title: Text(widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Ehliyet Rehberim')),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: const Center(
@@ -494,7 +620,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
               title: Text(
-                widget.category ?? 'Karma Test',
+                widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Karma Test'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onSurface,
@@ -504,6 +630,44 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               elevation: 0,
               foregroundColor: Theme.of(context).colorScheme.onSurface,
             actions: [
+              // Favorite Button
+              if (quizState.questions.isNotEmpty)
+                Consumer(
+                  builder: (context, ref, child) {
+                    final currentQ = quizState.questions[quizState.questionIndex];
+                    final isFav = ref.watch(isFavoriteProvider(currentQ.id));
+                    
+                    return IconButton(
+                      icon: Icon(
+                        isFav ? Icons.favorite : Icons.favorite_border,
+                        color: isFav ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      onPressed: () {
+                        ref.read(favoritesRepositoryProvider).toggleFavorite(currentQ.id);
+                      },
+                      onLongPress: () => _showNoteDialog(context, currentQ.id),
+                      tooltip: isFav ? 'Favorilerden Çıkar (Not için basılı tut)' : 'Favorilere Ekle (Not için basılı tut)',
+                    );
+                  },
+                ),
+              if (widget.isExamMode)
+                TextButton(
+                  onPressed: () => _confirmFinishExam(context),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppColors.error.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'Bitir',
+                      style: TextStyle(
+                        color: AppColors.error,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               // Display progress
                 Container(
                   margin: const EdgeInsets.only(right: 16.0),
@@ -525,11 +689,26 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               ),
             ],
               bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(110),
+                preferredSize: Size.fromHeight(widget.isExamMode ? 170 : 110),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
                   child: Column(
-            children: [
+                    children: [
+                      if (widget.isExamMode) ...[
+                        ExamTimerWidget(
+                          duration: quizState.examDuration,
+                          onTimeUp: () {
+                            ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
+                            // Navigate to results screen
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => ResultsScreen(examId: widget.examId),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -604,13 +783,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       selectedAnswer: quizState.selectedAnswers[question.id],
                       isAnswered: quizState.selectedAnswers.containsKey(question.id),
                       isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
+                      isExamMode: widget.isExamMode,
                       onAnswerSelected: (answer) {
                         ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
-                                // Trigger confetti animation for correct answers
-                                final currentQuestion = quizState.questions[index];
-                                if (answer == currentQuestion.correctAnswerKey) {
-                                  _confettiController.play();
-                                }
+                        // Trigger confetti animation for correct answers only in normal mode
+                        if (!widget.isExamMode) {
+                          final currentQuestion = quizState.questions[index];
+                          if (answer == currentQuestion.correctAnswerKey) {
+                            _confettiController.play();
+                          }
+                        }
                       },
                       onNextQuestion: () {
                         ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
@@ -695,6 +877,7 @@ class _QuestionCard extends StatelessWidget {
   final VoidCallback onPreviousQuestion;
   final VoidCallback onFinishQuiz;
   final bool autoShowExplainOnWrong;
+  final bool isExamMode;
 
   const _QuestionCard({
     required this.question,
@@ -708,6 +891,7 @@ class _QuestionCard extends StatelessWidget {
     required this.onPreviousQuestion,
     required this.onFinishQuiz,
     this.autoShowExplainOnWrong = false,
+    this.isExamMode = false,
   });
 
   @override
@@ -785,7 +969,7 @@ class _QuestionCard extends StatelessWidget {
                     ),
                 ),
               ),
-              if (isAnswered)
+              if (isAnswered && !isExamMode)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
@@ -905,16 +1089,7 @@ class _QuestionCard extends StatelessWidget {
                 Color letterBg = Theme.of(context).colorScheme.surfaceContainerHighest;
                 Color letterFg = Theme.of(context).colorScheme.onSurface;
 
-                if (!isAnswered && isSelected) {
-                  containerColor = Theme.of(context).brightness == Brightness.dark
-                      ? AppColors.primaryContainer.withValues(alpha: 0.3)
-                      : AppColors.primaryContainer;
-                  borderColor = AppColors.primary.withValues(alpha: 0.8);
-                  letterBg = AppColors.primary;
-                  letterFg = AppColors.onPrimary;
-                }
-
-                if (isAnswered) {
+                if (isAnswered && !isExamMode) {
                   if (isCorrectAnswer) {
                     containerColor = Theme.of(context).brightness == Brightness.dark
                         ? AppColors.successContainer.withValues(alpha: 0.3)
@@ -932,6 +1107,13 @@ class _QuestionCard extends StatelessWidget {
                     letterBg = AppColors.error;
                     letterFg = AppColors.onError;
                   }
+                } else if (isSelected) {
+                  containerColor = Theme.of(context).brightness == Brightness.dark
+                      ? AppColors.primaryContainer.withValues(alpha: 0.3)
+                      : AppColors.primaryContainer;
+                  borderColor = AppColors.primary.withValues(alpha: 0.8);
+                  letterBg = AppColors.primary;
+                  letterFg = AppColors.onPrimary;
                 }
 
                 return Container(
@@ -939,7 +1121,7 @@ class _QuestionCard extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: isAnswered ? null : () => onAnswerSelected(optionKey),
+                      onTap: (isAnswered && !isExamMode) ? null : () => onAnswerSelected(optionKey),
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
@@ -1140,11 +1322,11 @@ class _QuestionCard extends StatelessWidget {
           ],
           
           // Action buttons section (Explanation button and Prev/Next buttons)
-          if (isAnswered) ...[
+          if (isAnswered || isExamMode) ...[
             const SizedBox(height: 16),
             
-            // Explanation button (hide if already auto shown for wrong answer)
-            if (!(autoShowExplainOnWrong && !isCorrect))
+            // Explanation button (Only in normal mode when answered)
+            if (!isExamMode && isAnswered && !(autoShowExplainOnWrong && !isCorrect))
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
@@ -1215,7 +1397,7 @@ class _QuestionCard extends StatelessWidget {
               ],
             ),
           ]
-          else ...[
+          else if (!isExamMode) ...[
             const SizedBox(height: 16),
             Row(
               children: [

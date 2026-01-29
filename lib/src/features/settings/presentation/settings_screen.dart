@@ -5,6 +5,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../profile/application/theme_mode_provider.dart';
 import '../../auth/application/auth_providers.dart';
+import 'notification_settings_screen.dart';
+import '../../favorites/presentation/favorites_screen.dart';
+import '../../home/application/home_providers.dart';
+import 'widgets/theme_selector_widget.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -271,48 +275,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Widget _buildThemeSelector() {
-    final currentThemeMode = ref.watch(themeModeProvider);
-    
-    return _buildSettingsTile(
-      icon: currentThemeMode == ThemeMode.dark 
-          ? Icons.dark_mode 
-          : currentThemeMode == ThemeMode.light 
-              ? Icons.light_mode 
-              : Icons.brightness_auto,
-      title: 'Tema',
-      subtitle: currentThemeMode == ThemeMode.dark 
-          ? 'Koyu tema' 
-          : currentThemeMode == ThemeMode.light 
-              ? 'Açık tema' 
-              : 'Sistem teması',
-      iconColor: AppColors.warning,
-      trailing: DropdownButton<ThemeMode>(
-        value: currentThemeMode,
-        underline: const SizedBox.shrink(),
-        icon: const Icon(Icons.keyboard_arrow_down),
-        items: const [
-          DropdownMenuItem(
-            value: ThemeMode.system,
-            child: Text('Sistem'),
-          ),
-          DropdownMenuItem(
-            value: ThemeMode.light,
-            child: Text('Açık'),
-          ),
-          DropdownMenuItem(
-            value: ThemeMode.dark,
-            child: Text('Koyu'),
-          ),
-        ],
-        onChanged: (ThemeMode? mode) {
-          if (mode != null) {
-            ref.read(themeModeProvider.notifier).setThemeMode(mode);
-          }
-        },
-      ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +300,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               icon: Icons.palette,
               iconColor: AppColors.warning,
               children: [
-                _buildThemeSelector(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: ThemeSelectorWidget(),
+                ),
               ],
             ),
 
@@ -357,13 +323,87 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   iconColor: AppColors.primary,
                 ),
                 _buildSettingsTile(
+                  icon: Icons.favorite,
+                  title: 'Favori Sorularım',
+                  subtitle: 'Kaydettiğiniz sorular ve notlarınız',
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const FavoritesScreen(),
+                      ),
+                    );
+                  },
+                  iconColor: AppColors.error,
+                ),
+                _buildSettingsTile(
                   icon: Icons.notifications,
                   title: 'Bildirimler',
                   subtitle: 'Bildirim tercihlerinizi ayarlayın',
                   onTap: () {
-                    // Navigate to notifications settings
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationSettingsScreen(),
+                      ),
+                    );
                   },
                   iconColor: AppColors.info,
+                ),
+                _buildSettingsTile(
+                  icon: Icons.cleaning_services_outlined,
+                  title: 'Yanlışları Temizle',
+                  subtitle: 'Tüm yanlış cevap geçmişini sil',
+                  onTap: () async {
+                    // Show confirmation dialog
+                    final shouldClear = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Yanlışları Temizle'),
+                        content: const Text(
+                          'Tüm yanlış cevap geçmişiniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text('İptal'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            style: TextButton.styleFrom(
+                              foregroundColor: AppColors.error,
+                            ),
+                            child: const Text('Temizle'),
+                          ),
+                        ],
+                      ),
+                    );
+
+                    if (shouldClear == true && context.mounted) {
+                      try {
+                        final userProgress = ref.read(userProgressRepositoryProvider);
+                        
+                        // Clear both old and new wrong answer systems
+                        await userProgress.clearAllWrongAnswerIds();
+                        await userProgress.clearAllWrongAnswerPairs();
+                        
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Yanlış cevap geçmişiniz temizlendi.'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      } catch (e) {
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Hata oluştu. Lütfen tekrar deneyin.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  iconColor: AppColors.error,
                 ),
               ],
             ),

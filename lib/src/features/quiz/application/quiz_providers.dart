@@ -228,6 +228,67 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     final correctAnswer = getCurrentQuestionCorrectAnswer();
     return selectedAnswer == correctAnswer;
   }
+
+  /// Start exam mode
+  void startExamMode({Duration? duration}) {
+    state = state.copyWith(
+      isExamMode: true,
+      examStartTime: DateTime.now(),
+      examDuration: duration ?? const Duration(minutes: 30),
+      examTimeRemaining: duration ?? const Duration(minutes: 30),
+    );
+  }
+
+  /// Update exam timer (call this every second)
+  void updateExamTimer() {
+    if (!state.isExamMode || state.examStartTime == null || state.status == QuizStatus.complete) return;
+    
+    final elapsed = DateTime.now().difference(state.examStartTime!);
+    final remaining = state.examDuration - elapsed;
+    
+    if (remaining.inSeconds <= 0) {
+      // Time's up - auto finish exam
+      finishExam();
+    } else {
+      state = state.copyWith(examTimeRemaining: remaining);
+    }
+  }
+
+  /// Finish exam (either manually or when time runs out)
+  void finishExam() {
+    if (state.examStartTime == null) return;
+    
+    final finalElapsed = DateTime.now().difference(state.examStartTime!);
+    final finalRemaining = state.examDuration - finalElapsed;
+    
+    state = state.copyWith(
+      status: QuizStatus.complete,
+      examTimeRemaining: finalRemaining.inSeconds > 0 ? finalRemaining : Duration.zero,
+    );
+  }
+
+  /// Check if exam has passed (70% or more correct)
+  bool hasPassedExam() {
+    if (!state.isExamMode) return false;
+    final totalQuestions = state.questions.length;
+    if (totalQuestions == 0) return false;
+    
+    final percentage = (state.score / totalQuestions) * 100;
+    return percentage >= 70;
+  }
+
+  /// Get time taken for exam
+  Duration? getTimeTaken() {
+    if (!state.isExamMode || state.examStartTime == null) return null;
+    
+    if (state.status == QuizStatus.complete) {
+      // Exam completed
+      return state.examDuration - (state.examTimeRemaining ?? Duration.zero);
+    } else {
+      // Exam still in progress
+      return DateTime.now().difference(state.examStartTime!);
+    }
+  }
 }
 
 /// Provider for the QuizController with family support for multiple quiz instances

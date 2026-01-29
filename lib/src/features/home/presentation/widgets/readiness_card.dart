@@ -14,6 +14,7 @@ class ReadinessCard extends ConsumerWidget {
 
     return testResultsAsync.when(
       data: (results) {
+        final validResults = results.where((r) => r.category != 'Yanlışlarım' && r.totalQuestions >= 10).toList();
         final score = ref.read(userProgressRepositoryProvider).calculateReadinessScore();
         
         if (score == -1) {
@@ -22,7 +23,7 @@ class ReadinessCard extends ConsumerWidget {
             context,
             score: null,
             title: 'Sınav Hazırlık',
-            subtitle: 'Tahmin için ${5 - results.length} test daha çöz',
+            subtitle: 'Tahmin için ${5 - validResults.length} test daha çöz',
             color: Colors.grey,
             icon: Icons.hourglass_empty,
           );

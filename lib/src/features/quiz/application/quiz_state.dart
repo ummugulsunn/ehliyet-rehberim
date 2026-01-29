@@ -11,6 +11,12 @@ class QuizState {
   final int currentCombo;
   final int bestCombo;
   final String? examId;
+  
+  // Exam mode fields
+  final bool isExamMode;
+  final DateTime? examStartTime;
+  final Duration examDuration;
+  final Duration? examTimeRemaining;
 
   const QuizState({
     required this.questions,
@@ -21,6 +27,10 @@ class QuizState {
     required this.currentCombo,
     required this.bestCombo,
     this.examId,
+    this.isExamMode = false,
+    this.examStartTime,
+    this.examDuration = const Duration(minutes: 30),
+    this.examTimeRemaining,
   });
 
   factory QuizState.initial() {
@@ -63,6 +73,10 @@ class QuizState {
     int? currentCombo,
     int? bestCombo,
     String? examId,
+    bool? isExamMode,
+    DateTime? examStartTime,
+    Duration? examDuration,
+    Duration? examTimeRemaining,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
@@ -73,6 +87,10 @@ class QuizState {
       currentCombo: currentCombo ?? this.currentCombo,
       bestCombo: bestCombo ?? this.bestCombo,
       examId: examId ?? this.examId,
+      isExamMode: isExamMode ?? this.isExamMode,
+      examStartTime: examStartTime ?? this.examStartTime,
+      examDuration: examDuration ?? this.examDuration,
+      examTimeRemaining: examTimeRemaining ?? this.examTimeRemaining,
     );
   }
 }

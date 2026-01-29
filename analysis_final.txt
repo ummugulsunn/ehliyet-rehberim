@@ -2,13 +2,6 @@ Analyzing ehliyet-rehberim...
 
 warning • Unused import: 'package:flutter/services.dart' • lib/src/features/auth/data/auth_repository.dart:8:8 • unused_import
    info • Don't invoke 'print' in production code • lib/src/features/auth/presentation/auth_gate.dart:16:5 • avoid_print
-  error • Target of URI doesn't exist: '../../../../core/utils/logger.dart' • lib/src/features/favorites/data/favorites_repository.dart:3:8 • uri_does_not_exist
-  error • Undefined name 'Logger' • lib/src/features/favorites/data/favorites_repository.dart:40:7 • undefined_identifier
-  error • Undefined name 'Logger' • lib/src/features/favorites/data/favorites_repository.dart:42:7 • undefined_identifier
-  error • Undefined name 'Logger' • lib/src/features/favorites/data/favorites_repository.dart:121:7 • undefined_identifier
-  error • Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' • lib/src/features/favorites/presentation/favorites_screen.dart:3:8 • uri_does_not_exist
-  error • Invalid constant value • lib/src/features/favorites/presentation/favorites_screen.dart:117:71 • invalid_constant
-  error • Undefined name 'AppColors' • lib/src/features/favorites/presentation/favorites_screen.dart:117:71 • undefined_identifier
 warning • Unused import: 'dart:math' • lib/src/features/home/data/user_progress_repository.dart:2:8 • unused_import
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:194:37 • unnecessary_this
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:195:30 • unnecessary_this

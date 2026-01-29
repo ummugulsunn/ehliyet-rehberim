@@ -800,8 +800,8 @@ class UserProgressRepository {
            case AchievementType.questions:
              if (totalQs >= achievement.requirement) isUnlocked = true;
              break;
-           default:
-             break;
+            default:
+              break;
         }
         
         if (isUnlocked) {
@@ -809,14 +809,26 @@ class UserProgressRepository {
            newUnlock = true;
            Logger.info('Achievement Unlocked: ${achievement.title}');
         }
-     }
-     
-     if (newUnlock) {
-        await prefs.setStringList(_unlockedAchievementsKey, unlocked);
-        _achievementsController.add(unlocked);
-     }
+      }
+      
+      if (newUnlock) {
+         final List<String> toSave = unlocked.toSet().toList(); // Ensure unique
+         await prefs.setStringList(_unlockedAchievementsKey, toSave);
+         _achievementsController.add(toSave);
+      }
     } catch (e) {
       Logger.error('Failed to check achievements', e);
+    }
+  }
+
+  /// Get the list of unlocked achievements directly
+  Future<List<String>> getUnlockedAchievements() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getStringList(_unlockedAchievementsKey) ?? [];
+    } catch (e) {
+      Logger.error('Failed to get unlocked achievements', e);
+      return [];
     }
   }
 
@@ -938,8 +950,8 @@ class UserProgressRepository {
     // Sort by date descending (newest first)
     validResults.sort((a, b) => b.date.compareTo(a.date));
     
-    // Take last 10
-    final recentResults = validResults.take(10).toList();
+    // Take last 15 instead of 10 to have more data points if available
+    final recentResults = validResults.take(15).toList();
     
     double totalWeightedScore = 0;
     double totalWeight = 0;
@@ -948,10 +960,14 @@ class UserProgressRepository {
       final result = recentResults[i];
       final score = (result.correctAnswers / result.totalQuestions) * 100;
       
-      // Weight: Newest (index 0) gets 1.0, decreasing by 0.05
-      // e.g., 1.0, 0.95, 0.90 ...
+      // Base weight: Newest (index 0) gets 1.0, decreasing by 0.05
       double weight = 1.0 - (i * 0.05);
-      if (weight < 0.5) weight = 0.5; // Minimum weight
+      if (weight < 0.4) weight = 0.4; // Minimum recency weight
+      
+      // Bonus weight for EXAM simulations (1.5x)
+      if (result.isExamMode) {
+        weight *= 1.5;
+      }
       
       totalWeightedScore += score * weight;
       totalWeight += weight;
@@ -959,7 +975,7 @@ class UserProgressRepository {
     
     if (totalWeight == 0) return 0;
     
-    return (totalWeightedScore / totalWeight).round();
+    return (totalWeightedScore / totalWeight).round().clamp(0, 100);
   }
 } 
 /// Immutable state object for user progress

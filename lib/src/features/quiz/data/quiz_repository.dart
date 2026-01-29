@@ -26,13 +26,12 @@ class QuizRepository {
   Future<List<Question>> loadQuestionsForExam(String examId) async {
     final exams = await loadExams();
     
-    // Special handling for 'karma' examId - aggregate all questions from all exams
-    if (examId == 'karma') {
+    // Special handling for 'karma' or 'exam_simulation' - aggregate and randomize
+    if (examId == 'karma' || examId == 'exam_simulation') {
       final List<Question> allQuestions = [];
       int uniqueIdCounter = 1;
       for (final exam in exams) {
         for (final question in exam.questions) {
-          // Create unique ID by combining with counter to avoid collisions
           final uniqueQuestion = Question(
             id: uniqueIdCounter++,
             questionText: question.questionText,
@@ -46,6 +45,14 @@ class QuizRepository {
           allQuestions.add(uniqueQuestion);
         }
       }
+      
+      allQuestions.shuffle();
+      
+      // If exam_simulation, take exactly 50 questions
+      if (examId == 'exam_simulation') {
+        return allQuestions.take(50).toList();
+      }
+      
       return allQuestions;
     }
     

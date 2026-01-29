@@ -113,8 +113,9 @@ final levelTitleProvider = Provider<String>((ref) {
   );
 });
 
-/// StreamProvider that watches the unlocked achievements stream
-final achievementsProvider = StreamProvider<List<String>>((ref) {
+
+/// Provider that loads the unlocked achievements
+final achievementsProvider = FutureProvider<List<String>>((ref) async {
   final userProgressRepository = ref.read(userProgressRepositoryProvider);
-  return userProgressRepository.achievementsStream;
+  return await userProgressRepository.getUnlockedAchievements();
 });

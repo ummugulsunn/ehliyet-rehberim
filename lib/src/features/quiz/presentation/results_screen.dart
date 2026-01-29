@@ -11,6 +11,7 @@ class ResultsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quizState = ref.watch(quizControllerProvider(examId));
+    final isExamMode = quizState.isExamMode;
     
     // Calculate statistics
     final totalQuestions = quizState.totalQuestions;
@@ -19,10 +20,12 @@ class ResultsScreen extends ConsumerWidget {
     final successPercentage = totalQuestions > 0 
         ? (correctAnswers / totalQuestions * 100).round()
         : 0;
+    final isPassed = successPercentage >= 70;
+    final timeTaken = ref.read(quizControllerProvider(examId).notifier).getTimeTaken();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test Sonuçları'),
+        title: Text(isExamMode ? 'Sınav Sonuçları' : 'Test Sonuçları'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         automaticallyImplyLeading: false, // Disable back button
       ),
@@ -35,22 +38,39 @@ class ResultsScreen extends ConsumerWidget {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    // Congratulatory message
+                    // Congratulatory/Pass-Fail message
                     const SizedBox(height: 32),
-                    Icon(
-                      Icons.celebration,
-                      size: 80,
-                      color: AppColors.secondary,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Test Tamamlandı!',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
+                    if (isExamMode) ...[
+                      Icon(
+                        isPassed ? Icons.check_circle : Icons.cancel,
+                        size: 80,
+                        color: isPassed ? AppColors.success : AppColors.error,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                      const SizedBox(height: 16),
+                      Text(
+                        isPassed ? 'TEBRİKLER!\nSINAVI GEÇTİNİZ' : 'MAALESEF\nSINAVDAN KALDINIZ',
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: isPassed ? AppColors.success : AppColors.error,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ] else ...[
+                      Icon(
+                        Icons.celebration,
+                        size: 80,
+                        color: AppColors.secondary,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Test Tamamlandı!',
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                     const SizedBox(height: 32),
 
                     // Circular progress indicator with score
@@ -71,6 +91,7 @@ class ResultsScreen extends ConsumerWidget {
                             ),
                           ),
                           Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 '$correctAnswers/$totalQuestions',
@@ -104,7 +125,7 @@ class ResultsScreen extends ConsumerWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Theme.of(context).colorScheme.shadow,
+                            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -128,6 +149,18 @@ class ResultsScreen extends ConsumerWidget {
                             AppColors.error,
                           ),
                           const SizedBox(height: 16),
+                          if (isExamMode) ...[
+                            _buildResultRow(
+                              context,
+                              'Süre',
+                              timeTaken != null 
+                                ? '${timeTaken.inMinutes}:${(timeTaken.inSeconds % 60).toString().padLeft(2, '0')}'
+                                : '--:--',
+                              Icons.timer,
+                              AppColors.info,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
                           _buildResultRow(
                             context,
                             'Başarı Yüzdesi',
@@ -148,9 +181,17 @@ class ResultsScreen extends ConsumerWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Reset quiz state and navigate back to quiz screen
-                              ref.read(quizControllerProvider(examId).notifier).reset();
-                              Navigator.of(context).pop();
+                              final notifier = ref.read(quizControllerProvider(examId).notifier);
+                              notifier.reset();
+                              if (isExamMode) {
+                                // For exam mode, we might want to reload questions or just restart
+                                // Current implementation: reset and pop should return to HomeScreen 
+                                // but if we want to restart the exam immediately, we need a way.
+                                // For now, let's pop.
+                                Navigator.of(context).pop();
+                              } else {
+                                Navigator.of(context).pop();
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -175,10 +216,7 @@ class ResultsScreen extends ConsumerWidget {
                           width: double.infinity,
                           child: OutlinedButton(
                             onPressed: () async {
-                              // Reset quiz state before navigating back to prevent data loss
                               ref.read(quizControllerProvider(examId).notifier).reset();
-                              
-                              // Navigate back to home screen
                               if (context.mounted) {
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                               }
@@ -207,7 +245,6 @@ class ResultsScreen extends ConsumerWidget {
           );
         }
       ),
-
     );
   }
 
@@ -253,10 +290,10 @@ class ResultsScreen extends ConsumerWidget {
   }
 
   Color _getScoreColor(int percentage) {
-    if (percentage >= 80) {
+    if (percentage >= 70) {
       return AppColors.success;
-    } else if (percentage >= 60) {
-      return AppColors.secondary;
+    } else if (percentage >= 50) {
+      return AppColors.warning;
     } else {
       return AppColors.error;
     }

@@ -12,9 +12,11 @@ import '../../quiz/presentation/exam_selection_screen.dart';
 import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
+import '../../favorites/presentation/favorites_screen.dart';
 import 'widgets/achievements_widget.dart';
 import 'widgets/smart_review_card.dart';
 import 'widgets/readiness_card.dart';
+import 'widgets/exam_simulation_card.dart';
 
 
 class HomeScreen extends ConsumerWidget {
@@ -142,32 +144,68 @@ class HomeScreen extends ConsumerWidget {
               // Dynamic Header Section
               DynamicHeaderWidget(authState: authState),
               
-              
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Primary Action Card - Karma Test
               _buildPrimaryActionCard(context),
               
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
 
-              // Smart Review Card (Adaptive Learning)
-              const SmartReviewCard(),
-              
-              const SizedBox(height: 16),
-              
-              // Exam Readiness Prediction
-              const ReadinessCard(),
+              // Status & Preparation Section (Carousel)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hazırlık Durumu',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 180, // Fixed height for carousel cards
+                      child: PageView(
+                        controller: PageController(viewportFraction: 0.92),
+                        padEnds: false,
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: ReadinessCard(),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: SmartReviewCard(),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: ExamSimulationCard(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
               const SizedBox(height: 32),
+              
+              // Tool Grid Section
+              Text(
+                'Çalışma Alanı',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 16),
               
               // Secondary Action Grid
               _buildSecondaryActionGrid(context, ref),
               
               const SizedBox(height: 32),
-              
-
-              
-              const SizedBox(height: 24),
             ],
           ),
         ),
@@ -438,6 +476,19 @@ class HomeScreen extends ConsumerWidget {
         ),
         _buildFeatureCard(
           context,
+          icon: Icons.favorite_rounded,
+          title: 'Favorilerim',
+          color: AppColors.error,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const FavoritesScreen(),
+              ),
+            );
+          },
+        ),
+        _buildFeatureCard(
+          context,
           icon: Icons.traffic_outlined,
           title: 'Trafik\nİşaretleri',
           color: AppColors.secondary,
@@ -461,69 +512,6 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       );
                     },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.cleaning_services_outlined,
-          title: 'Yanlışları\nTemizle',
-          color: AppColors.error,
-          onTap: () async {
-            // Show confirmation dialog
-            final shouldClear = await showDialog<bool>(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Yanlışları Temizle'),
-                content: const Text(
-                  'Tüm yanlış cevap geçmişiniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text('İptal'),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.error,
-                    ),
-                    child: const Text('Temizle'),
-                  ),
-                ],
-              ),
-            );
-
-            if (shouldClear == true) {
-              try {
-                final userProgress = ref.read(userProgressRepositoryProvider);
-                
-                // Get count before clearing for debug
-                final beforeCount = await userProgress.getWrongAnswerIdsCount();
-                
-                // Clear both old and new wrong answer systems
-                await userProgress.clearAllWrongAnswerIds();
-                await userProgress.clearAllWrongAnswerPairs();
-                
-                // Get count after clearing for debug
-                final afterCount = await userProgress.getWrongAnswerIdsCount();
-                
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Yanlış cevap geçmişiniz temizlendi. (Önceki: $beforeCount, Sonraki: $afterCount)'),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-              } catch (e) {
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Hata oluştu. Lütfen tekrar deneyin.'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            }
-          },
         ),
       ],
     );

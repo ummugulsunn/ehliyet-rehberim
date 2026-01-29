@@ -1,11 +1,13 @@
-Analyzing lib...                                                
+
+┌─────────────────────────────────────────────────────────┐
+│ A new version of Flutter is available!                  │
+│                                                         │
+│ To update to the latest version, run "flutter upgrade". │
+└─────────────────────────────────────────────────────────┘
+Analyzing ehliyet-rehberim...                                   
 
 warning • Unused import: 'package:flutter/services.dart' • lib/src/features/auth/data/auth_repository.dart:8:8 • unused_import
    info • Don't invoke 'print' in production code • lib/src/features/auth/presentation/auth_gate.dart:16:5 • avoid_print
-  error • Target of URI doesn't exist: '../../data/user_progress_repository.dart' • lib/src/features/home/application/home_providers.dart:2:8 • uri_does_not_exist
-  error • The name 'UserProgressRepository' isn't a type, so it can't be used as a type argument • lib/src/features/home/application/home_providers.dart:5:49 • non_type_as_type_argument
-  error • Undefined name 'UserProgressRepository' • lib/src/features/home/application/home_providers.dart:6:10 • undefined_identifier
-  error • The name 'UserProgressState' isn't a type, so it can't be used as a type argument • lib/src/features/home/application/home_providers.dart:17:50 • non_type_as_type_argument
 warning • Unused import: 'dart:math' • lib/src/features/home/data/user_progress_repository.dart:2:8 • unused_import
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:194:37 • unnecessary_this
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:195:30 • unnecessary_this
@@ -15,25 +17,44 @@ warning • The declaration '_getYesterdayString' isn't referenced • lib/src/f
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:777:27 • unnecessary_this
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:778:23 • unnecessary_this
    info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:780:28 • unnecessary_this
-warning • A value for optional parameter 'isPro' isn't ever given • lib/src/features/home/presentation/home_screen.dart:538:10 • unused_element_parameter
+warning • A value for optional parameter 'isPro' isn't ever given • lib/src/features/home/presentation/home_screen.dart:544:10 • unused_element_parameter
 warning • Unused import: '../../data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:5:8 • unused_import
-  error • The property 'dailyProgress' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:47:39 • unchecked_use_of_nullable_value
-  error • The property 'level' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:49:31 • unchecked_use_of_nullable_value
-  error • The property 'xp' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:50:28 • unchecked_use_of_nullable_value
-  error • The property 'streak' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:51:32 • unchecked_use_of_nullable_value
    info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:61:26 • curly_braces_in_flow_control_structures
    info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:62:32 • curly_braces_in_flow_control_structures
    info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:63:32 • curly_braces_in_flow_control_structures
    info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:64:32 • curly_braces_in_flow_control_structures
    info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:65:16 • curly_braces_in_flow_control_structures
-  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:157:86 • unchecked_use_of_nullable_value
-  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:205:45 • unchecked_use_of_nullable_value
-  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:216:48 • unchecked_use_of_nullable_value
-   info • Don't use 'BuildContext's across async gaps • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:628:46 • use_build_context_synchronously
-warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/readiness_card.dart:3:8 • unused_import
-warning • Unused import: 'package:ehliyet_rehberim/src/core/theme/app_colors.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:3:8 • unused_import
-warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:4:8 • unused_import
-warning • Unused import: 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:9:8 • unused_import
-warning • Unused import: '../../home/data/user_progress_repository.dart' • lib/src/features/quiz/application/smart_quiz_provider.dart:3:8 • unused_import
-warning • The value of the local variable 'questionCountChanged' isn't used • lib/src/features/quiz/presentation/quiz_screen.dart:187:18 • unused_local_variable
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/profile/presentation/settings_screen.dart:357:19 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/profile/presentation/settings_screen.dart:425:19 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/profile/presentation/settings_screen.dart:491:19 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/profile/presentation/settings_screen.dart:531:19 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/settings/presentation/notification_settings_screen.dart:180:15 • deprecated_member_use
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/src/features/settings/presentation/notification_settings_screen.dart:262:11 • deprecated_member_use
+warning • Unused import: '../../home/data/user_progress_repository.dart' • lib/src/features/stats/presentation/detailed_stats_screen.dart:5:8 • unused_import
+  error • Target of URI doesn't exist: 'package:ehliyet_rehberim/src/core/services/quiz_service.dart' • test/core/services/quiz_service_test.dart:2:8 • uri_does_not_exist
+  error • The function 'QuizService' isn't defined • test/core/services/quiz_service_test.dart:8:25 • undefined_function
+  error • The function 'QuizService' isn't defined • test/core/services/quiz_service_test.dart:15:25 • undefined_function
+  error • Target of URI doesn't exist: 'package:ehliyet_rehberim/src/core/models/question_model.dart' • test/features/quiz/application/quiz_providers_test.dart:1:8 • uri_does_not_exist
+  error • The name 'Question' isn't a type, so it can't be used as a type argument • test/features/quiz/application/quiz_providers_test.dart:23:34 • non_type_as_type_argument
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:27:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:37:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:39:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:51:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:60:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:62:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:75:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:82:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:84:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:97:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:104:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:106:9 • undefined_function
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:114:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:128:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:134:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:136:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:150:36 • argument_type_not_assignable
+  error • The getter 'notifier' isn't defined for the type 'NotifierProviderFamily<QuizController, QuizState, String>' • test/features/quiz/application/quiz_providers_test.dart:157:68 • undefined_getter
+  error • The function 'Question' isn't defined • test/features/quiz/application/quiz_providers_test.dart:159:9 • undefined_function
+  error • The argument type 'NotifierProviderFamily<QuizController, QuizState, String>' can't be assigned to the parameter type 'ProviderListenable<dynamic>'.  • test/features/quiz/application/quiz_providers_test.dart:174:36 • argument_type_not_assignable
+   info • Invalid regular expression syntax • tool/validate_exams.dart:70:37 • valid_regexps
 

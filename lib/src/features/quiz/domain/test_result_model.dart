@@ -8,6 +8,9 @@ class TestResult {
   final String category; // e.g., "Karma" or specific topic
   final String? examId; // optional per exam result
   final Map<int, String>? selectedAnswers; // questionId -> selected option key
+  final bool isExamMode;
+  final int? timeTakenInSeconds;
+  final bool? isPassed;
 
   const TestResult({
     required this.date,
@@ -16,6 +19,9 @@ class TestResult {
     required this.category,
     this.examId,
     this.selectedAnswers,
+    this.isExamMode = false,
+    this.timeTakenInSeconds,
+    this.isPassed,
   });
 
   double get successRate => totalQuestions == 0
@@ -28,7 +34,10 @@ class TestResult {
         'totalQuestions': totalQuestions,
         'category': category,
         'examId': examId,
-        'selectedAnswers': selectedAnswers,
+        'selectedAnswers': selectedAnswers?.map((key, value) => MapEntry(key.toString(), value)),
+        'isExamMode': isExamMode,
+        'timeTakenInSeconds': timeTakenInSeconds,
+        'isPassed': isPassed,
       };
 
   factory TestResult.fromJson(Map<String, dynamic> json) => TestResult(
@@ -41,6 +50,9 @@ class TestResult {
             ? (json['selectedAnswers'] as Map)
                 .map((key, value) => MapEntry(int.parse(key.toString()), value.toString()))
             : null,
+        isExamMode: json['isExamMode'] as bool? ?? false,
+        timeTakenInSeconds: json['timeTakenInSeconds'] as int?,
+        isPassed: json['isPassed'] as bool?,
       );
 
   static String encodeList(List<TestResult> results) => jsonEncode(

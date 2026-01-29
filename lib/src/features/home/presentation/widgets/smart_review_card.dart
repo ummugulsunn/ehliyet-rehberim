@@ -22,66 +22,95 @@ class SmartReviewCard extends ConsumerWidget {
         final weakCategories = ref.read(userProgressRepositoryProvider).getWeakestCategories(limit: 1);
         final weakCategory = weakCategories.isNotEmpty ? weakCategories.first : 'Genel';
 
-        return Card(
-          elevation: isUnlocked ? 4 : 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          color: isUnlocked 
-              ? Theme.of(context).colorScheme.primaryContainer 
-              : Theme.of(context).colorScheme.surfaceContainerHighest,
-          child: InkWell(
-            onTap: isUnlocked ? () => _startSmartQuiz(context, ref) : null,
+        return Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isUnlocked ? Colors.white.withValues(alpha: 0.2) : Colors.grey.withValues(alpha: 0.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      isUnlocked ? Icons.auto_awesome : Icons.lock_outline,
-                      size: 28,
-                      color: isUnlocked ? Theme.of(context).colorScheme.onPrimaryContainer : Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Akıllı Tekrar',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: isUnlocked 
-                                ? Theme.of(context).colorScheme.onPrimaryContainer 
-                                : Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+            border: Border.all(
+              color: isUnlocked 
+                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
+                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              width: 2,
+            ),
+            boxShadow: isUnlocked ? [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ] : [],
+          ),
+          child: Card(
+            elevation: 0,
+            margin: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            color: isUnlocked 
+                ? Theme.of(context).colorScheme.primaryContainer 
+                : Theme.of(context).colorScheme.surfaceContainerHighest,
+            child: InkWell(
+              onTap: isUnlocked ? () => _startSmartQuiz(context, ref) : null,
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isUnlocked 
+                            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15)
+                            : Colors.grey.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isUnlocked 
+                              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
+                              : Colors.grey.withValues(alpha: 0.2),
+                          width: 1.5,
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          isUnlocked 
-                              ? 'Zayıf Noktan: $weakCategory'
-                              : 'Veri Toplanıyor (${results.length}/3 Test)',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: isUnlocked 
-                                ? Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8)
-                                : Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      child: Icon(
+                        isUnlocked ? Icons.auto_awesome : Icons.lock_outline,
+                        size: 28,
+                        color: isUnlocked 
+                            ? Theme.of(context).colorScheme.primary
+                            : Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Akıllı Tekrar',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: isUnlocked 
+                                  ? Theme.of(context).colorScheme.onPrimaryContainer 
+                                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          Text(
+                            isUnlocked 
+                                ? 'Zayıf Noktan: $weakCategory'
+                                : 'Veri Toplanıyor (${results.length}/3 Test)',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: isUnlocked 
+                                  ? Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8)
+                                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  if (isUnlocked)
-                    Icon(
-                      Icons.arrow_forward_ios, 
-                      size: 16, 
-                      color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.5)
-                    ),
-                ],
+                    if (isUnlocked)
+                      Icon(
+                        Icons.arrow_forward_ios, 
+                        size: 16, 
+                        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.6)
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

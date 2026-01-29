@@ -9,8 +9,10 @@ import 'src/features/auth/data/auth_repository.dart';
 
 import 'src/features/auth/application/auth_providers.dart';
 import 'src/features/quiz/application/quiz_providers.dart';
-import 'src/core/theme/app_theme.dart';
-import 'src/features/profile/application/theme_mode_provider.dart';
+import 'src/core/theme/app_theme_provider.dart';
+import 'src/core/theme/theme_model.dart';
+// import 'src/core/theme/app_theme.dart'; // Deprecated
+// import 'src/features/profile/application/theme_mode_provider.dart'; // Deprecated
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'src/core/services/notification_service.dart';
@@ -67,7 +69,9 @@ void main() async {
     // Continue app initialization even if user progress service fails
   }
   
-  // Initialize NotificationService
+  
+  // Initialize NotificationService (disabled due to build issues)
+  /*
   try {
     final notificationService = NotificationService.instance;
     await notificationService.initialize();
@@ -77,6 +81,8 @@ void main() async {
     debugPrint('Failed to initialize NotificationService: $e');
     // Continue app initialization even if notification service fails
   }
+  */
+  
   
 
   
@@ -99,16 +105,42 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+    // Watch the new theme provider
+    final themeStateAsync = ref.watch(appThemeProvider);
+    
+    // Default fallback values if loading
+    ThemeData lightTheme = ThemeData.light();
+    ThemeData darkTheme = ThemeData.dark();
+    ThemeMode themeMode = ThemeMode.system;
+
+    // Access the notifier to generate theme data
+    final notifier = ref.read(appThemeProvider.notifier);
+
+    if (themeStateAsync.hasValue) {
+      final state = themeStateAsync.value!;
+      lightTheme = notifier.getLightTheme();
+      darkTheme = notifier.getDarkTheme();
+      
+      switch (state.mode) {
+        case AppThemeMode.light:
+          themeMode = ThemeMode.light;
+          break;
+        case AppThemeMode.dark:
+          themeMode = ThemeMode.dark;
+          break;
+        case AppThemeMode.system:
+          themeMode = ThemeMode.system;
+          break;
+      }
+    }
+
     return MaterialApp(
       title: 'Ehliyet Rehberim',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: themeMode,
-      home: const AuthGate(), // Use the new AuthGate widget
+      home: const AuthGate(), 
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-
