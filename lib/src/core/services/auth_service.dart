@@ -55,10 +55,6 @@ class AuthService {
 
   /// Get stream of auth state changes
   Stream<User?> get authStateChanges {
-    if (!_isInitialized) {
-      return Stream.value(null);
-    }
-    
     try {
       return _firebaseAuth.authStateChanges();
     } catch (e) {
@@ -80,6 +76,14 @@ class AuthService {
       }
 
       Logger.info('Starting Google Sign-In process');
+
+      // Force clear previous session to ensure account picker appears
+      try {
+        // specific timeout for this cleanup step
+        await _googleSignIn.signOut().timeout(const Duration(seconds: 2));
+      } catch (e) {
+        Logger.info('Pre-signout failed (non-fatal): $e');
+      }
 
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -217,10 +221,26 @@ class AuthService {
       
       // Sign out from Google
       try {
-        await _googleSignIn.signOut();
+        // Check if signed in with a short timeout
+        final isSignedIn = await _googleSignIn.isSignedIn().timeout(
+          const Duration(seconds: 2),
+          onTimeout: () => false,
+        );
+        
+        if (isSignedIn) {
+          await _googleSignIn.disconnect().timeout(
+            const Duration(seconds: 2), 
+            onTimeout: () => null,
+          );
+        }
+        await _googleSignIn.signOut().timeout(
+          const Duration(seconds: 2),
+          onTimeout: () => null,
+        );
         Logger.info('Google sign out successful');
       } catch (e) {
         Logger.error('Failed to sign out from Google: $e');
+        // Continue to Firebase sign out even if Google fails
       }
       
       // Sign out from Firebase

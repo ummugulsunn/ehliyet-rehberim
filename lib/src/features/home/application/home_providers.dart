@@ -13,6 +13,12 @@ final dailyProgressProvider = StreamProvider<int>((ref) {
   return userProgressService.dailyProgressStream;
 });
 
+/// StreamProvider that watches the unified user progress state
+final userProgressStateProvider = StreamProvider<UserProgressState>((ref) {
+  final userProgressService = ref.read(userProgressServiceProvider);
+  return userProgressService.stateStream;
+});
+
 /// StreamProvider that watches the streak stream
 /// Returns the current streak count
 final streakProvider = StreamProvider<int>((ref) {
@@ -62,4 +68,33 @@ final streakTextProvider = Provider<String>((ref) {
     loading: () => '',
     error: (_, __) => '',
   );
-}); 
+});
+
+/// StreamProvider that watches the XP stream
+final xpProvider = StreamProvider<int>((ref) {
+  final userProgressService = ref.read(userProgressServiceProvider);
+  return userProgressService.xpStream;
+});
+
+/// StreamProvider that watches the level stream
+final levelProvider = StreamProvider<int>((ref) {
+  final userProgressService = ref.read(userProgressServiceProvider);
+  return userProgressService.levelStream;
+});
+
+/// Provider for Level Title (Rank)
+final levelTitleProvider = Provider<String>((ref) {
+  final levelAsync = ref.watch(levelProvider);
+  
+  return levelAsync.when(
+    data: (level) {
+      if (level < 5) return 'Acemi Sürücü';
+      if (level < 10) return 'Şehir İçi Uzmanı';
+      if (level < 20) return 'Otoyol Faresi';
+      if (level < 50) return 'Trafik Efsanesi';
+      return 'Ehliyet Kralı';
+    },
+    loading: () => 'Acemi Sürücü',
+    error: (_, __) => 'Acemi Sürücü',
+  );
+});

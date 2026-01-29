@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../application/home_providers.dart';
+import '../../../../core/services/user_progress_service.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Dynamic header widget that displays user progress and streak
@@ -15,10 +16,8 @@ class DynamicHeaderWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyProgressAsync = ref.watch(dailyProgressProvider);
+    final userProgressStateAsync = ref.watch(userProgressStateProvider);
     final dailyGoal = ref.watch(dailyGoalProvider);
-    final progressPercentage = ref.watch(dailyProgressPercentageProvider);
-    final streakText = ref.watch(streakTextProvider);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -43,127 +42,199 @@ class DynamicHeaderWidget extends ConsumerWidget {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          // App Logo removed for cleaner design
-          // Main content row
-          Row(
+      child: userProgressStateAsync.when(
+        data: (state) {
+          final dailyProgress = state.dailyProgress;
+          final progressPercentage = (dailyProgress / dailyGoal).clamp(0.0, 1.0);
+          final level = state.level;
+          final xp = state.xp;
+          final streak = state.streak;
+          
+          // Enhanced Streak Text Logic
+          String streakText = '';
+          if (streak > 0) {
+             streakText = streak == 1 ? '1 Günlük Seri!' : '$streak Günlük Seri!';
+          }
+
+          // Level Title Logic
+          String levelTitle = 'Acemi Sürücü';
+          if (level < 5) levelTitle = 'Acemi Sürücü';
+          else if (level < 10) levelTitle = 'Şehir İçi Uzmanı';
+          else if (level < 20) levelTitle = 'Otoyol Faresi';
+          else if (level < 50) levelTitle = 'Trafik Efsanesi';
+          else levelTitle = 'Ehliyet Kralı';
+
+          // XP Calculation
+          final userProgressService = ref.read(userProgressServiceProvider);
+          final currentLevelBaseXP = userProgressService.getXPForCurrentLevel(level);
+          final nextLevelBaseXP = userProgressService.getXPForNextLevel(level);
+          final levelRange = nextLevelBaseXP - currentLevelBaseXP;
+          final xpInLevel = xp - currentLevelBaseXP;
+          final xpProgress = levelRange > 0 ? (xpInLevel / levelRange).clamp(0.0, 1.0) : 1.0;
+
+          return Column(
             children: [
-              // Circular Progress Indicator
-              _buildProgressIndicator(context, dailyProgressAsync, dailyGoal, progressPercentage),
-              
-              const SizedBox(width: 20),
-              
-              // Greeting and Streak Info
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Personalized Greeting
-                    Text(
-                      _getGreetingText(),
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white.withValues(alpha: 0.95)
-                            : Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 8),
-                    
-                    // Daily Goal Progress Text
-                    dailyProgressAsync.when(
-                      data: (progress) => Text(
-                        'Bugünkü Hedef: $progress/$dailyGoal',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? (progress >= dailyGoal ? AppColors.successLight : AppColors.primaryLight)
-                              : (progress >= dailyGoal ? AppColors.success : AppColors.primary),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      loading: () => Text(
-                        'Bugünkü Hedef: 0/$dailyGoal',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white.withValues(alpha: 0.8)
-                              : Theme.of(context).colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      error: (_, __) => Text(
-                        'Bugünkü Hedef: 0/$dailyGoal',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white.withValues(alpha: 0.8)
-                              : Theme.of(context).colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 12),
-                    
-                    // Enhanced Streak Display
-                    if (streakText.isNotEmpty) ...[
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).brightness == Brightness.dark 
-                              ? AppColors.warning.withValues(alpha: 0.2)
-                              : AppColors.warning.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                              ? AppColors.warning.withValues(alpha: 0.4)
-                              : AppColors.warning.withValues(alpha: 0.3),
-                            width: 1,
+              // App Logo removed for cleaner design
+              // Main content row
+              Row(
+                children: [
+                  // Circular Progress Indicator
+                  _buildProgressIndicator(context, AsyncValue.data(dailyProgress), dailyGoal, progressPercentage),
+                  
+                  const SizedBox(width: 20),
+                  
+                  // Greeting and Streak Info
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Personalized Greeting
+                        Text(
+                          _getGreetingText(),
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white.withValues(alpha: 0.95)
+                                : Theme.of(context).colorScheme.onSurface,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.warning.withValues(alpha: 0.1),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                        
+                        const SizedBox(height: 8),
+                        
+                        // Level and Rank Display
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).brightness == Brightness.dark 
-                                  ? AppColors.warning.withValues(alpha: 0.3)
-                                  : AppColors.warning.withValues(alpha: 0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Text(
-                                '🔥',
-                                style: TextStyle(fontSize: 16),
+                            Text(
+                              '$levelTitle (Lvl $level)',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? AppColors.primaryLight 
+                                    : AppColors.primary,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Text(
-                              streakText,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).brightness == Brightness.dark 
-                                  ? AppColors.warning.withValues(alpha: 0.9)
-                                  : AppColors.warning,
-                              ),
+                            const SizedBox(height: 4),
+                            // XP Progress Bar
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: LinearProgressIndicator(
+                                    value: xpProgress,
+                                    minHeight: 6,
+                                    backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white.withValues(alpha: 0.1)
+                                        : Colors.grey.withValues(alpha: 0.2),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).brightness == Brightness.dark
+                                          ? AppColors.successLight
+                                          : AppColors.success,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  '${(xpProgress * 100).toInt()}% (Sonraki Seviye)',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontSize: 10,
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white.withValues(alpha: 0.6)
+                                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ],
-                ),
+                        
+                        const SizedBox(height: 12),
+                        
+                        // Enhanced Streak Display
+                        if (streakText.isNotEmpty) ...[
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark 
+                                  ? AppColors.warning.withValues(alpha: 0.2)
+                                  : AppColors.warning.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: Theme.of(context).brightness == Brightness.dark 
+                                  ? AppColors.warning.withValues(alpha: 0.4)
+                                  : AppColors.warning.withValues(alpha: 0.3),
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.warning.withValues(alpha: 0.1),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).brightness == Brightness.dark 
+                                      ? AppColors.warning.withValues(alpha: 0.3)
+                                      : AppColors.warning.withValues(alpha: 0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Text(
+                                    '🔥',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  streakText,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).brightness == Brightness.dark 
+                                      ? AppColors.warning.withValues(alpha: 0.9)
+                                      : AppColors.warning,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        },
+        loading: () => Column(
+          children: [
+             Row(
+                children: [
+                  _buildProgressIndicator(context, const AsyncValue.loading(), dailyGoal, 0.0),
+                   const SizedBox(width: 20),
+                   // Skeleton text or loading simplified
+                   const Expanded(child: Center(child: CircularProgressIndicator())),
+                ]
+             )
+          ]
+        ),
+        error: (_, __) => Column(
+          children: [
+             Row(
+                children: [
+                  _buildProgressIndicator(context, const AsyncValue.loading(), dailyGoal, 0.0),
+                   const SizedBox(width: 20),
+                   const Text('Bir hata oluştu'),
+                ]
+             )
+          ]
+        ),
       ),
     );
   }

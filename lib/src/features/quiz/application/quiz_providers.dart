@@ -104,17 +104,21 @@ class QuizController extends Notifier<QuizState> {
     );
 
     // Update user progress when a question is answered (regardless of correctness)
-    _updateUserProgress();
+    _updateUserProgress(isCorrect);
 
     // Note: Wrong answer persistence is now only done at the end of quiz
     // to avoid duplicates and ensure only final answers are recorded
   }
 
   /// Update user progress in the background
-  Future<void> _updateUserProgress() async {
+  Future<void> _updateUserProgress(bool isCorrect) async {
     try {
       final userProgressService = ref.read(userProgressServiceProvider);
       await userProgressService.completeQuestion();
+      
+      if (isCorrect) {
+        await userProgressService.addXP(UserProgressService.xpPerCorrectAnswer);
+      }
     } catch (e) {
       // Log error but don't fail the quiz
       // The progress update is not critical for quiz functionality

@@ -72,101 +72,93 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ],
       ),
       child: authState.when(
-        data: (user) => user != null
-            ? Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white.withValues(alpha: 0.2),
-                    child: user.photoURL != null
-                        ? ClipOval(
-                            child: Image.network(
-                              user.photoURL!,
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 30,
+        data: (user) {
+          if (user != null) {
+            return Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
+                  child: user.photoURL != null
+                      ? ClipOval(
+                          child: Image.network(
+                            user.photoURL!,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
                           ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          userDisplayName ?? 'Kullanıcı',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        )
+                      : const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 30,
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          userEmail ?? '',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
-                          ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        userDisplayName ?? 'Kullanıcı',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.premium,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      'Pro',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  ),
-                ],
-              )
-            : Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white.withValues(alpha: 0.2),
-                    child: Icon(
-                      Icons.person_outline,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Misafir Kullanıcı',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      const SizedBox(height: 4),
+                      Text(
+                        userEmail ?? '',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.9),
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Giriş yaparak daha fazla özellik keşfedin',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+                ),
+              ],
+            );
+          } else {
+            return Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
+                  child: const Icon(
+                    Icons.person_outline,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Misafir Kullanıcı',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Giriş yaparak daha fazla özellik keşfedin',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.9),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+        loading: () => const Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
         error: (_, __) => const SizedBox.shrink(),
       ),
     );

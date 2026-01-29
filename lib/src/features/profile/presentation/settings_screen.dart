@@ -85,12 +85,12 @@ class SettingsScreen extends ConsumerWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.premium.withValues(alpha: 0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     Icons.palette_rounded,
-                    color: AppColors.premium,
+                    color: AppColors.primary,
                     size: 24,
                   ),
                 ),

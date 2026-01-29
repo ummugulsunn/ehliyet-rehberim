@@ -1,21 +1,44 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/logger.dart';
 import '../models/test_result_model.dart';
+import '../models/achievement_model.dart';
 
 /// Service for managing user progress, daily goals, and streaks
 /// Uses SharedPreferences for local storage
 class UserProgressService {
   static final UserProgressService _instance = UserProgressService._internal();
   factory UserProgressService() => _instance;
-  UserProgressService._internal();
+  // Cached values for Stream replay
+  int _currentDailyProgress = 0;
+  int _currentStreak = 0;
+  int _currentXP = 0;
+  int _currentLevel = 1;
+
+  // Stream controllers with replay capability
+  late final StreamController<UserProgressState> _stateController;
+  final StreamController<List<TestResult>> _testResultsController = StreamController<List<TestResult>>.broadcast();
+
+  // Deprecated individual controllers - kept for backward compatibility if needed, 
+  // but we should migrate to stateController
+  late final StreamController<int> _dailyProgressController;
+  late final StreamController<int> _streakController;
+  late final StreamController<int> _xpController;
+  late final StreamController<int> _levelController;
+
+  UserProgressService._internal() {
+    _stateController = StreamController<UserProgressState>.broadcast();
+    _dailyProgressController = StreamController<int>.broadcast();
+    _streakController = StreamController<int>.broadcast();
+    _xpController = StreamController<int>.broadcast();
+    _levelController = StreamController<int>.broadcast();
+  }
 
   static UserProgressService get instance => _instance;
 
-  // Stream controllers for real-time updates
-  final StreamController<int> _dailyProgressController = StreamController<int>.broadcast();
-  final StreamController<int> _streakController = StreamController<int>.broadcast();
-  final StreamController<List<TestResult>> _testResultsController = StreamController<List<TestResult>>.broadcast();
+  // Achievement related fields
+  final StreamController<List<String>> _achievementsController = StreamController<List<String>>.broadcast();
 
   // SharedPreferences keys
   static const String _dailyQuestionsKey = 'daily_questions';
@@ -25,10 +48,20 @@ class UserProgressService {
   static const String _totalQuestionsKey = 'total_questions';
   static const String _testResultsKey = 'test_results_v1';
   static const String _wrongAnswerIdsKey = 'wrong_answer_ids_v1';
-  static const String _wrongAnswerPairsKey = 'wrong_answer_pairs_v1'; // format: examId:questionId
+  static const String _wrongAnswerPairsKey = 'wrong_answer_pairs_v1';
+  static const String _totalXPKey = 'total_xp_v1';
+  static const String _unlockedAchievementsKey = 'unlocked_achievements';
 
-  // Daily goal configuration
+  // Constants
   static const int _dailyGoal = 50; // Questions per day
+  static const int xpPerCorrectAnswer = 10;
+  static const int xpPerQuizComplete = 50;
+
+  /// Stream that emits the unified state
+  Stream<UserProgressState> get stateStream => _stateController.stream;
+
+  /// Stream that emits the list of unlocked achievement IDs
+  Stream<List<String>> get achievementsStream => _achievementsController.stream;
 
   /// Stream that emits the number of questions answered today
   Stream<int> get dailyProgressStream => _dailyProgressController.stream;
@@ -38,6 +71,12 @@ class UserProgressService {
 
   /// Stream that emits the current list of test results
   Stream<List<TestResult>> get resultsStream => _testResultsController.stream;
+  
+  /// Stream that emits the current XP total
+  Stream<int> get xpStream => _xpController.stream;
+  
+  /// Stream that emits the current Level
+  Stream<int> get levelStream => _levelController.stream;
 
   /// Get the current daily progress
   Future<int> get dailyProgress async {
@@ -57,6 +96,195 @@ class UserProgressService {
   Future<int> get currentStreak async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_currentStreakKey) ?? 0;
+  }
+  
+  /// Get the current total XP
+  Future<int> get totalXP async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_totalXPKey) ?? 0;
+  }
+  
+  /// Calculate level based on XP using simple thresholds
+  /// Level 1: 0-99 XP
+  /// Level 2: 100-249 XP
+  /// Level 3: 250-449 XP
+  /// Level 4: 450-699 XP
+  /// Level 5: 700-999 XP
+  /// Level 6: 1000-1399 XP
+  /// Level 7: 1400-1899 XP
+  /// Level 8: 1900-2499 XP
+  /// Level 9: 2500-3199 XP
+  /// Level 10+: 3200+ XP
+  int calculateLevel(int xp) {
+    if (xp < 100) return 1;
+    if (xp < 250) return 2;
+    if (xp < 450) return 3;
+    if (xp < 700) return 4;
+    if (xp < 1000) return 5;
+    if (xp < 1400) return 6;
+    if (xp < 1900) return 7;
+    if (xp < 2500) return 8;
+    if (xp < 3200) return 9;
+    return 10; // Max level
+  }
+  
+  /// Get XP required for next level
+  int getXPForNextLevel(int currentLevel) {
+    switch (currentLevel) {
+      case 1: return 100;
+      case 2: return 250;
+      case 3: return 450;
+      case 4: return 700;
+      case 5: return 1000;
+      case 6: return 1400;
+      case 7: return 1900;
+      case 8: return 2500;
+      case 9: return 3200;
+      default: return 3200; // Max level reached
+    }
+  }
+  
+  /// Get XP at start of current level
+  int getXPForCurrentLevel(int currentLevel) {
+    switch (currentLevel) {
+      case 1: return 0;
+      case 2: return 100;
+      case 3: return 250;
+      case 4: return 450;
+      case 5: return 700;
+      case 6: return 1000;
+      case 7: return 1400;
+      case 8: return 1900;
+      case 9: return 2500;
+      case 10: return 3200;
+      default: return 0;
+    }
+  }
+  
+  /// Initialize the service and load current values
+  Future<void> initialize() async {
+    if (_isInitialized) return; // Prevent double initialization
+    
+    try {
+      // Load current values
+      _currentDailyProgress = await this.dailyProgress;
+      _currentStreak = await this.currentStreak;
+      _currentXP = await this.totalXP;
+      _currentLevel = calculateLevel(_currentXP);
+      
+      _emitState();
+      
+      // Load test results and emit to stream
+      await _loadTestResults();
+      
+      _isInitialized = true;
+      Logger.info('UserProgressService initialized. State emitted.');
+    } catch (e) {
+      Logger.error('Failed to initialize UserProgressService', e);
+      _cachedResults = [];
+      _testResultsController.add([]);
+      _isInitialized = true;
+    }
+  }
+
+  /// Helper to emit current state to all streams
+  void _emitState() {
+    // Emit unified state
+    _stateController.add(UserProgressState(
+      dailyProgress: _currentDailyProgress,
+      streak: _currentStreak,
+      xp: _currentXP,
+      level: _currentLevel,
+    ));
+
+    // Emit individual streams (for backward compatibility)
+    _dailyProgressController.add(_currentDailyProgress);
+    _streakController.add(_currentStreak);
+    _xpController.add(_currentXP);
+    _levelController.add(_currentLevel);
+  }
+
+  /// Add XP and notify listeners if level changes
+  Future<void> addXP(int amount) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _currentXP = (prefs.getInt(_totalXPKey) ?? 0) + amount;
+      
+      await prefs.setInt(_totalXPKey, _currentXP);
+      
+      final oldLevel = _currentLevel;
+      _currentLevel = calculateLevel(_currentXP);
+      
+      _emitState();
+      
+      if (_currentLevel > oldLevel) {
+        Logger.info('Level Up! $oldLevel -> $_currentLevel (XP: $_currentXP)');
+      }
+      
+      Logger.info('Added $amount XP. Total: $_currentXP');
+    } catch (e) {
+      Logger.error('Failed to add XP', e);
+    }
+  }
+
+  /// Called when a user completes a question
+  Future<void> completeQuestion() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final today = _getTodayString();
+      final lastCompletedDate = prefs.getString(_lastCompletedDateKey);
+      
+      // Get current values
+      int dailyQuestions = prefs.getInt(_dailyQuestionsKey) ?? 0;
+      int currentStreak = prefs.getInt(_currentStreakKey) ?? 0;
+      int totalQuestions = prefs.getInt(_totalQuestionsKey) ?? 0;
+      
+      // Check if it's a new day
+      if (lastCompletedDate != today) {
+        // Check if yesterday was completed (for streak calculation)
+        final yesterday = _getYesterdayString();
+        if (lastCompletedDate == yesterday) {
+          // Continue streak
+          currentStreak++;
+        } else {
+          // Break in streak, reset to 1
+          currentStreak = 1;
+        }
+        
+        // Reset daily questions for new day
+        dailyQuestions = 0;
+      }
+      
+      // Increment counters
+      dailyQuestions++;
+      totalQuestions++;
+      
+      // Update longest streak if current streak is longer
+      final longestStreak = prefs.getInt(_longestStreakKey) ?? 0;
+      if (currentStreak > longestStreak) {
+        await prefs.setInt(_longestStreakKey, currentStreak);
+      }
+      
+      // Save updated values
+      await prefs.setInt(_dailyQuestionsKey, dailyQuestions);
+      await prefs.setString(_lastCompletedDateKey, today);
+      await prefs.setInt(_currentStreakKey, currentStreak);
+      await prefs.setInt(_totalQuestionsKey, totalQuestions);
+      
+      // Update cache
+      _currentDailyProgress = dailyQuestions;
+      _currentStreak = currentStreak;
+      
+      _emitState();
+      
+      Logger.info('Question completed. Daily: $dailyQuestions/$_dailyGoal, Streak: $currentStreak');
+      
+      // Check if daily goal is met
+      await _checkDailyGoal();
+      
+    } catch (e) {
+      Logger.error('Failed to complete question', e);
+    }
   }
 
   // ================================
@@ -199,63 +427,6 @@ class UserProgressService {
     return prefs.getInt(_totalQuestionsKey) ?? 0;
   }
 
-  /// Called when a user completes a question
-  Future<void> completeQuestion() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final today = _getTodayString();
-      final lastCompletedDate = prefs.getString(_lastCompletedDateKey);
-      
-      // Get current values
-      int dailyQuestions = prefs.getInt(_dailyQuestionsKey) ?? 0;
-      int currentStreak = prefs.getInt(_currentStreakKey) ?? 0;
-      int totalQuestions = prefs.getInt(_totalQuestionsKey) ?? 0;
-      
-      // Check if it's a new day
-      if (lastCompletedDate != today) {
-        // Check if yesterday was completed (for streak calculation)
-        final yesterday = _getYesterdayString();
-        if (lastCompletedDate == yesterday) {
-          // Continue streak
-          currentStreak++;
-        } else {
-          // Break in streak, reset to 1
-          currentStreak = 1;
-        }
-        
-        // Reset daily questions for new day
-        dailyQuestions = 0;
-      }
-      
-      // Increment counters
-      dailyQuestions++;
-      totalQuestions++;
-      
-      // Update longest streak if current streak is longer
-      final longestStreak = prefs.getInt(_longestStreakKey) ?? 0;
-      if (currentStreak > longestStreak) {
-        await prefs.setInt(_longestStreakKey, currentStreak);
-      }
-      
-      // Save updated values
-      await prefs.setInt(_dailyQuestionsKey, dailyQuestions);
-      await prefs.setString(_lastCompletedDateKey, today);
-      await prefs.setInt(_currentStreakKey, currentStreak);
-      await prefs.setInt(_totalQuestionsKey, totalQuestions);
-      
-      // Emit updated values
-      _dailyProgressController.add(dailyQuestions);
-      _streakController.add(currentStreak);
-      
-      Logger.info('Question completed. Daily: $dailyQuestions/$_dailyGoal, Streak: $currentStreak');
-      
-      // Check if daily goal is met
-      await _checkDailyGoal();
-      
-    } catch (e) {
-      Logger.error('Failed to complete question', e);
-    }
-  }
 
   /// Check if daily goal is met and update streak
   Future<void> _checkDailyGoal() async {
@@ -306,31 +477,6 @@ class UserProgressService {
     return '${yesterday.year}-${yesterday.month.toString().padLeft(2, '0')}-${yesterday.day.toString().padLeft(2, '0')}';
   }
 
-  /// Initialize the service and load current values
-  Future<void> initialize() async {
-    if (_isInitialized) return; // Prevent double initialization
-    
-    try {
-      // Load current values and emit them
-      final dailyProgress = await this.dailyProgress;
-      final currentStreak = await this.currentStreak;
-      
-      _dailyProgressController.add(dailyProgress);
-      _streakController.add(currentStreak);
-      
-      // Load test results and emit to stream
-      await _loadTestResults();
-      
-      _isInitialized = true;
-      Logger.info('UserProgressService initialized. Daily: $dailyProgress, Streak: $currentStreak, Results: ${_cachedResults.length}');
-    } catch (e) {
-      Logger.error('Failed to initialize UserProgressService', e);
-      // Even if there's an error, emit empty results to prevent infinite loading
-      _cachedResults = [];
-      _testResultsController.add([]);
-      _isInitialized = true; // Mark as initialized even if failed
-    }
-  }
 
   /// Check if service is already initialized
   bool _isInitialized = false;
@@ -345,9 +491,12 @@ class UserProgressService {
 
   /// Dispose the service and close streams
   void dispose() {
+    _stateController.close();
     _dailyProgressController.close();
     _streakController.close();
     _testResultsController.close();
+    _xpController.close();
+    _levelController.close();
   }
 
   // ================================
@@ -402,3 +551,33 @@ class UserProgressService {
     }
   }
 } 
+/// Immutable state object for user progress
+class UserProgressState {
+  final int dailyProgress;
+  final int streak;
+  final int xp;
+  final int level;
+
+  const UserProgressState({
+    required this.dailyProgress,
+    required this.streak,
+    required this.xp,
+    required this.level,
+  });
+  
+  @override
+  String toString() => 'UserProgressState(daily: $dailyProgress, streak: $streak, xp: $xp, level: $level)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is UserProgressState &&
+        other.dailyProgress == dailyProgress &&
+        other.streak == streak &&
+        other.xp == xp &&
+        other.level == level;
+  }
+  
+  @override
+  int get hashCode => Object.hash(dailyProgress, streak, xp, level);
+}

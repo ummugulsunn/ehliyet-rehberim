@@ -139,6 +139,7 @@ class HomeScreen extends ConsumerWidget {
               // Dynamic Header Section
               DynamicHeaderWidget(authState: authState),
               
+              
               const SizedBox(height: 32),
               
               // Primary Action Card - Karma Test

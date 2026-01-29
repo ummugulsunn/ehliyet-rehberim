@@ -45,6 +45,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       final success = await authController.signInWithGoogle();
       
       if (success) {
+        // Force refresh auth state to ensure Home Screen gets the user
+        ref.invalidate(authStateProvider);
+        
+        // Small delay to allow state to propagate
+        await Future.delayed(const Duration(milliseconds: 500));
+        
+        // Manually navigate to Home
         _navigateToHome();
       } else {
         _showErrorSnackBar('Google ile giriş yapılamadı. Lütfen tekrar deneyin.');
@@ -66,6 +73,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       final success = await authController.signInWithApple();
       
       if (success) {
+        ref.invalidate(authStateProvider);
+        await Future.delayed(const Duration(milliseconds: 500));
         _navigateToHome();
       } else {
         _showErrorSnackBar('Apple ile giriş yapılamadı. Lütfen tekrar deneyin.');
