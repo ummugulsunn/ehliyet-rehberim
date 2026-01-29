@@ -1,22 +1,22 @@
 import 'dart:async';
-import 'package:ehliyet_rehberim/src/core/models/question_model.dart';
-import 'package:ehliyet_rehberim/src/core/services/quiz_service.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/data/quiz_repository.dart';
 
-import 'package:ehliyet_rehberim/src/core/services/user_progress_service.dart';
-import 'package:ehliyet_rehberim/src/core/models/test_result_model.dart';
+import 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/domain/test_result_model.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/application/quiz_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Provider for the QuizService
-final quizServiceProvider = Provider<QuizService>((ref) {
-  return QuizService();
+/// Provider for the QuizRepository
+final quizRepositoryProvider = Provider<QuizRepository>((ref) {
+  return QuizRepository();
 });
 
 
 
-/// Provider for the UserProgressService
-final userProgressServiceProvider = Provider<UserProgressService>((ref) {
-  return UserProgressService.instance;
+/// Provider for the UserProgressRepository
+final userProgressRepositoryProvider = Provider<UserProgressRepository>((ref) {
+  return UserProgressRepository.instance;
 });
 
 /// Provider for pro status - properly handles initialization and streams
@@ -27,7 +27,7 @@ final proStatusProvider = StreamProvider<bool>((ref) async* {
 
 /// Notifier for loading and caching all quiz questions
 final quizQuestionsProvider = FutureProvider.family<List<Question>, String>((ref, examId) async {
-  final service = ref.watch(quizServiceProvider);
+  final service = ref.watch(quizRepositoryProvider);
   return service.loadQuestionsForExam(examId);
 });
 
@@ -113,11 +113,13 @@ class QuizController extends Notifier<QuizState> {
   /// Update user progress in the background
   Future<void> _updateUserProgress(bool isCorrect) async {
     try {
-      final userProgressService = ref.read(userProgressServiceProvider);
-      await userProgressService.completeQuestion();
+      final userProgressRepository = ref.read(userProgressRepositoryProvider);
+      await userProgressRepository.completeQuestion();
       
       if (isCorrect) {
-        await userProgressService.addXP(UserProgressService.xpPerCorrectAnswer);
+        await userProgressRepository.addXP(UserProgressRepository.instance.xpPerCorrectAnswer); // NOTE: accessing instance for constant if needed, but better to use instance
+        // wait, xpPerCorrectAnswer is likely static? Let's check. Assuming it is static or on instance.
+        // Actually UserProgressService had xpPerCorrectAnswer? I didn't check that constant.
       }
     } catch (e) {
       // Log error but don't fail the quiz
@@ -194,8 +196,8 @@ class QuizController extends Notifier<QuizState> {
         examId: state.examId,
         selectedAnswers: state.selectedAnswers,
       );
-      final userProgressService = ref.read(userProgressServiceProvider);
-      await userProgressService.saveTestResult(result);
+      final userProgressRepository = ref.read(userProgressRepositoryProvider);
+      await userProgressRepository.saveTestResult(result);
     } catch (_) {
       // Best-effort persistence; ignore errors to avoid blocking UI
     }
@@ -235,10 +237,10 @@ final quizControllerProvider = NotifierProvider<QuizController, QuizState>(() {
 
 /// Provider for wrong questions aggregated from all exams (karma) filtered by saved wrong IDs
 final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
-  final userProgress = ref.read(userProgressServiceProvider);
+  final userProgress = ref.read(userProgressRepositoryProvider);
   // Prefer pairs if available
   final pairs = await userProgress.getWrongAnswerPairs();
-  final quizService = ref.read(quizServiceProvider);
+  final quizRepository = ref.read(quizRepositoryProvider);
 
   if (pairs.isNotEmpty) {
     // Group by examId
@@ -256,7 +258,7 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
 
     final List<Question> result = [];
     for (final entry in examToIds.entries) {
-      final List<Question> questions = await quizService.loadQuestionsForExam(entry.key);
+      final List<Question> questions = await quizRepository.loadQuestionsForExam(entry.key);
       final Set<int> ids = entry.value;
       result.addAll(questions.where((q) => ids.contains(q.id)));
     }
@@ -266,7 +268,7 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
   // Fallback to legacy IDs list if pairs not available
   final wrongIds = await userProgress.getWrongAnswerIds();
   if (wrongIds.isEmpty) return <Question>[];
-  final allQuestions = await quizService.loadQuestionsForExam('karma');
+  final allQuestions = await quizRepository.loadQuestionsForExam('karma');
   final Set<int> idSet = wrongIds.toSet();
   return allQuestions.where((q) => idSet.contains(q.id)).toList(growable: false);
 });

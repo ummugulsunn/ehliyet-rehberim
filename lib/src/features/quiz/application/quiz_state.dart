@@ -1,4 +1,4 @@
-import 'package:ehliyet_rehberim/src/core/models/question_model.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart';
 
 enum QuizStatus { initial, correct, incorrect, complete }
 

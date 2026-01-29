@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../utils/logger.dart';
-import '../models/test_result_model.dart';
-import '../models/achievement_model.dart';
+import '../../../core/utils/logger.dart';
+import '../../quiz/domain/test_result_model.dart';
+import '../../home/domain/achievement_model.dart';
 
-/// Service for managing user progress, daily goals, and streaks
+/// Repository for managing user progress, daily goals, and streaks
 /// Uses SharedPreferences for local storage
-class UserProgressService {
-  static final UserProgressService _instance = UserProgressService._internal();
-  factory UserProgressService() => _instance;
+class UserProgressRepository {
+  static final UserProgressRepository _instance = UserProgressRepository._internal();
+  factory UserProgressRepository() => _instance;
   // Cached values for Stream replay
   int _currentDailyProgress = 0;
   int _currentStreak = 0;
@@ -27,15 +27,16 @@ class UserProgressService {
   late final StreamController<int> _xpController;
   late final StreamController<int> _levelController;
 
-  UserProgressService._internal() {
+  UserProgressRepository._internal() {
     _stateController = StreamController<UserProgressState>.broadcast();
     _dailyProgressController = StreamController<int>.broadcast();
     _streakController = StreamController<int>.broadcast();
     _xpController = StreamController<int>.broadcast();
     _levelController = StreamController<int>.broadcast();
+    _achievementsController = StreamController<List<String>>.broadcast();
   }
 
-  static UserProgressService get instance => _instance;
+  static UserProgressRepository get instance => _instance;
 
   // Achievement related fields
   final StreamController<List<String>> _achievementsController = StreamController<List<String>>.broadcast();
@@ -179,6 +180,10 @@ class UserProgressService {
       
       _isInitialized = true;
       Logger.info('UserProgressService initialized. State emitted.');
+
+      // Load achievements
+      final unlockedAchievements = prefs.getStringList(_unlockedAchievementsKey) ?? [];
+      _achievementsController.add(unlockedAchievements);
     } catch (e) {
       Logger.error('Failed to initialize UserProgressService', e);
       _cachedResults = [];
@@ -222,6 +227,9 @@ class UserProgressService {
       }
       
       Logger.info('Added $amount XP. Total: $_currentXP');
+      
+      // Check for achievements
+      await checkAchievements();
     } catch (e) {
       Logger.error('Failed to add XP', e);
     }
@@ -281,6 +289,9 @@ class UserProgressService {
       
       // Check if daily goal is met
       await _checkDailyGoal();
+      
+      // Check for achievements
+      await checkAchievements();
       
     } catch (e) {
       Logger.error('Failed to complete question', e);
@@ -489,9 +500,60 @@ class UserProgressService {
     await _loadTestResults();
   }
 
+  /// Check and unlock achievements
+  Future<void> checkAchievements() async {
+    try {
+     // Load current stats
+     final streak = await this.currentStreak;
+     final xp = await this.totalXP;
+     final level = calculateLevel(xp);
+     final totalQs = await this.totalQuestions;
+     
+     final prefs = await SharedPreferences.getInstance();
+     final unlocked = prefs.getStringList(_unlockedAchievementsKey) ?? [];
+     bool newUnlock = false;
+     
+     for (final achievement in Achievement.all) {
+        if (unlocked.contains(achievement.id)) continue;
+        
+        bool isUnlocked = false;
+        switch (achievement.type) {
+           case AchievementType.streak:
+             if (streak >= achievement.requirement) isUnlocked = true;
+             break;
+           case AchievementType.xp:
+             if (xp >= achievement.requirement) isUnlocked = true;
+             break;
+           case AchievementType.level:
+             if (level >= achievement.requirement) isUnlocked = true;
+             break;
+           case AchievementType.questions:
+             if (totalQs >= achievement.requirement) isUnlocked = true;
+             break;
+           default:
+             break;
+        }
+        
+        if (isUnlocked) {
+           unlocked.add(achievement.id);
+           newUnlock = true;
+           Logger.info('Achievement Unlocked: ${achievement.title}');
+        }
+     }
+     
+     if (newUnlock) {
+        await prefs.setStringList(_unlockedAchievementsKey, unlocked);
+        _achievementsController.add(unlocked);
+     }
+    } catch (e) {
+      Logger.error('Failed to check achievements', e);
+    }
+  }
+
   /// Dispose the service and close streams
   void dispose() {
     _stateController.close();
+    _achievementsController.close();
     _dailyProgressController.close();
     _streakController.close();
     _testResultsController.close();

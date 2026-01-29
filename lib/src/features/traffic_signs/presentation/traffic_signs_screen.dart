@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/models/traffic_sign_model.dart';
+import '../domain/traffic_sign_model.dart';
 import '../../../core/theme/app_colors.dart';
 
 import '../application/traffic_signs_provider.dart';

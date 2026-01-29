@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ehliyet_rehberim/src/features/study_guides/application/study_guide_providers.dart';
-import 'package:ehliyet_rehberim/src/core/models/study_guide_model.dart';
+import 'package:ehliyet_rehberim/src/features/study_guides/domain/study_guide_model.dart';
 import 'study_guide_detail_screen.dart';
 
 class StudyGuideListScreen extends ConsumerWidget {

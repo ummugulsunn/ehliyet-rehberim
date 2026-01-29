@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../application/home_providers.dart';
-import '../../../../core/services/user_progress_service.dart';
+import '../../../../home/data/user_progress_repository.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Dynamic header widget that displays user progress and streak
@@ -65,9 +65,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
           else levelTitle = 'Ehliyet Kralı';
 
           // XP Calculation
-          final userProgressService = ref.read(userProgressServiceProvider);
-          final currentLevelBaseXP = userProgressService.getXPForCurrentLevel(level);
-          final nextLevelBaseXP = userProgressService.getXPForNextLevel(level);
+          final userProgressRepository = ref.read(userProgressRepositoryProvider);
+          final currentLevelBaseXP = userProgressRepository.getXPForCurrentLevel(level);
+          final nextLevelBaseXP = userProgressRepository.getXPForNextLevel(level);
           final levelRange = nextLevelBaseXP - currentLevelBaseXP;
           final xpInLevel = xp - currentLevelBaseXP;
           final xpProgress = levelRange > 0 ? (xpInLevel / levelRange).clamp(0.0, 1.0) : 1.0;

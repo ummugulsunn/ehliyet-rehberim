@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../application/theme_mode_provider.dart';
-import '../../../core/services/user_progress_service.dart';
-import '../../../core/services/auth_service.dart';
+import '../../home/data/user_progress_repository.dart';
+import '../../auth/data/auth_repository.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -592,10 +592,10 @@ class SettingsScreen extends ConsumerWidget {
     );
     
     if (confirmed == true) {
-      await UserProgressService.instance.clearAllWrongAnswerIds();
-      await UserProgressService.instance.clearAllWrongAnswerPairs();
-      await UserProgressService.instance.resetDailyProgress();
-      await UserProgressService.instance.resetStreak();
+      await UserProgressRepository.instance.clearAllWrongAnswerIds();
+      await UserProgressRepository.instance.clearAllWrongAnswerPairs();
+      await UserProgressRepository.instance.resetDailyProgress();
+      await UserProgressRepository.instance.resetStreak();
       
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -643,7 +643,7 @@ class SettingsScreen extends ConsumerWidget {
     );
 
     if (confirmed == true) {
-      await AuthService.instance.signOut();
+      await AuthRepository.instance.signOut();
       if (context.mounted) {
         Navigator.of(context).pop();
       }

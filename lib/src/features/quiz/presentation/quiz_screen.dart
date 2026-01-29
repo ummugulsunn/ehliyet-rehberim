@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:confetti/confetti.dart';
 import '../application/quiz_providers.dart';
-import '../../../core/models/question_model.dart';
+import '../domain/question_model.dart';
 import 'results_screen.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/models/test_result_model.dart';
@@ -125,12 +125,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     );
 
     // Persist test result
-    await ref.read(userProgressServiceProvider).saveTestResult(result);
+    await ref.read(userProgressRepositoryProvider).saveTestResult(result);
 
     // Handle wrong answer IDs based on test type
     try {
       final questionsById = {for (final q in quizState.questions) q.id: q};
-      final ups = ref.read(userProgressServiceProvider);
+      final ups = ref.read(userProgressRepositoryProvider);
       
       if (widget.category == 'Yanlışlarım') {
         // In "Yanlışlarım" test: remove correctly answered questions from wrong list

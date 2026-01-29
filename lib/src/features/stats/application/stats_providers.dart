@@ -1,18 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/services/user_progress_service.dart';
+import '../../home/data/user_progress_repository.dart';
 import '../../../core/models/test_result_model.dart';
 
 final testResultsProvider = StreamProvider<List<TestResult>>((ref) {
-  final service = UserProgressService.instance;
+  final repository = UserProgressRepository.instance;
   
   Stream<List<TestResult>> stream() async* {
-    if (!service.isInitialized) {
-      await service.initialize();
+    if (!repository.isInitialized) {
+      await repository.initialize();
     }
     // Emit the current cached results immediately
-    yield service.getAllTestResults();
+    yield repository.getAllTestResults();
     // Then listen for future updates
-    yield* service.resultsStream;
+    yield* repository.resultsStream;
   }
   
   return stream();

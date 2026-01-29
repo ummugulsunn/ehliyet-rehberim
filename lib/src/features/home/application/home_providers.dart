@@ -1,29 +1,29 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/services/user_progress_service.dart';
+import '../../data/user_progress_repository.dart';
 
-/// Provider for the UserProgressService singleton instance
-final userProgressServiceProvider = Provider<UserProgressService>((ref) {
-  return UserProgressService.instance;
+/// Provider for the UserProgressRepository singleton instance
+final userProgressRepositoryProvider = Provider<UserProgressRepository>((ref) {
+  return UserProgressRepository.instance;
 });
 
 /// StreamProvider that watches the daily progress stream
 /// Returns the number of questions answered today
 final dailyProgressProvider = StreamProvider<int>((ref) {
-  final userProgressService = ref.read(userProgressServiceProvider);
-  return userProgressService.dailyProgressStream;
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.dailyProgressStream;
 });
 
 /// StreamProvider that watches the unified user progress state
 final userProgressStateProvider = StreamProvider<UserProgressState>((ref) {
-  final userProgressService = ref.read(userProgressServiceProvider);
-  return userProgressService.stateStream;
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.stateStream;
 });
 
 /// StreamProvider that watches the streak stream
 /// Returns the current streak count
 final streakProvider = StreamProvider<int>((ref) {
-  final userProgressService = ref.read(userProgressServiceProvider);
-  return userProgressService.streakStream;
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.streakStream;
 });
 
 /// Provider that returns the daily goal (constant value)
@@ -72,14 +72,14 @@ final streakTextProvider = Provider<String>((ref) {
 
 /// StreamProvider that watches the XP stream
 final xpProvider = StreamProvider<int>((ref) {
-  final userProgressService = ref.read(userProgressServiceProvider);
-  return userProgressService.xpStream;
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.xpStream;
 });
 
 /// StreamProvider that watches the level stream
 final levelProvider = StreamProvider<int>((ref) {
-  final userProgressService = ref.read(userProgressServiceProvider);
-  return userProgressService.levelStream;
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.levelStream;
 });
 
 /// Provider for Level Title (Rank)
@@ -97,4 +97,10 @@ final levelTitleProvider = Provider<String>((ref) {
     loading: () => 'Acemi Sürücü',
     error: (_, __) => 'Acemi Sürücü',
   );
+});
+
+/// StreamProvider that watches the unlocked achievements stream
+final achievementsProvider = StreamProvider<List<String>>((ref) {
+  final userProgressRepository = ref.read(userProgressRepositoryProvider);
+  return userProgressRepository.achievementsStream;
 });

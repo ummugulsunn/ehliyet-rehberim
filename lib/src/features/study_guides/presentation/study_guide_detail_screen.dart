@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ehliyet_rehberim/src/core/models/study_guide_model.dart';
+import 'package:ehliyet_rehberim/src/features/study_guides/domain/study_guide_model.dart';
 import 'package:ehliyet_rehberim/src/core/theme/app_colors.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 

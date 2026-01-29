@@ -12,12 +12,12 @@ import 'user_progress_service.dart';
 
 /// Service class for handling authentication operations
 /// Provides methods for Google Sign-In, Apple Sign-In, and Firebase Auth
-class AuthService {
-  static final AuthService _instance = AuthService._internal();
-  factory AuthService() => _instance;
-  AuthService._internal();
+class AuthRepository {
+  static final AuthRepository _instance = AuthRepository._internal();
+  factory AuthRepository() => _instance;
+  AuthRepository._internal();
 
-  static AuthService get instance => _instance;
+  static AuthRepository get instance => _instance;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(

@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/services/auth_service.dart';
+import '../../data/auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
-/// Provider for the AuthService singleton instance
+/// Provider for the AuthRepository singleton instance
 /// Use this to access authentication methods like signOut(), signInWithGoogle(), etc.
-final authServiceProvider = Provider<AuthService>((ref) {
-  return AuthService.instance;
+final authRepositoryProvider = Provider<AuthRepository>((ref) {
+  return AuthRepository.instance;
 });
 
 /// StreamProvider that watches Firebase authentication state changes
@@ -16,8 +16,8 @@ final authServiceProvider = Provider<AuthService>((ref) {
 /// - null when signed out
 /// - loading state during authentication operations
 final authStateProvider = StreamProvider<User?>((ref) {
-  final authService = ref.read(authServiceProvider);
-  return authService.authStateChanges;
+  final authRepository = ref.read(authRepositoryProvider);
+  return authRepository.authStateChanges;
 });
 
 /// Provider that returns whether the user is currently signed in
@@ -80,13 +80,13 @@ class AuthController {
   
   AuthController(this._ref);
   
-  AuthService get _authService => _ref.read(authServiceProvider);
+  AuthRepository get _authRepository => _ref.read(authRepositoryProvider);
 
   /// Sign in with Google
   /// Returns true if successful, false otherwise
   Future<bool> signInWithGoogle() async {
     try {
-      final user = await _authService.signInWithGoogle();
+      final user = await _authRepository.signInWithGoogle();
       return user != null;
     } catch (e) {
       Logger.authError('Google sign-in', e.toString());
@@ -98,7 +98,7 @@ class AuthController {
   /// Returns true if successful, false otherwise
   Future<bool> signInWithApple() async {
     try {
-      final user = await _authService.signInWithApple();
+      final user = await _authRepository.signInWithApple();
       return user != null;
     } catch (e) {
       Logger.authError('Apple sign-in', e.toString());
@@ -110,7 +110,7 @@ class AuthController {
   /// Returns true if successful, false otherwise
   Future<bool> signOut() async {
     try {
-      await _authService.signOut();
+      await _authRepository.signOut();
       return true;
     } catch (e) {
       Logger.authError('Sign out', e.toString());
@@ -122,7 +122,7 @@ class AuthController {
   /// Returns true if successful, false otherwise
   Future<bool> deleteAccount() async {
     try {
-      return await _authService.deleteAccount();
+      return await _authRepository.deleteAccount();
     } catch (e) {
       Logger.authError('Delete account', e.toString());
       return false;

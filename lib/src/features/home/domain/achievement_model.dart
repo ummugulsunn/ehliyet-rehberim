@@ -12,7 +12,7 @@ class Achievement {
   final String id;
   final String title;
   final String description;
-  final String iconPath; // Or IconData if using built-in icons
+  final IconData iconData; 
   final AchievementType type;
   final int requirement;
   final bool isSecret;
@@ -24,7 +24,7 @@ class Achievement {
     required this.id,
     required this.title,
     required this.description,
-    required this.iconPath,
+    required this.iconData,
     required this.type,
     required this.requirement,
     this.isSecret = false,
@@ -38,7 +38,7 @@ class Achievement {
       id: 'streak_3',
       title: 'İstikrarlı Başlangıç',
       description: '3 gün üst üste test çöz',
-      iconPath: 'assets/icons/streak_3.png',
+      iconData: Icons.local_fire_department,
       type: AchievementType.streak,
       requirement: 3,
       color: Colors.orange,
@@ -47,7 +47,7 @@ class Achievement {
       id: 'streak_7',
       title: 'Haftalık Seri',
       description: '7 gün üst üste test çöz',
-      iconPath: 'assets/icons/streak_7.png',
+      iconData: Icons.whatshot,
       type: AchievementType.streak,
       requirement: 7,
       color: Colors.deepOrange,
@@ -58,7 +58,7 @@ class Achievement {
       id: 'level_5',
       title: 'Şehir İçi Uzmanı',
       description: '5. seviyeye ulaş',
-      iconPath: 'assets/icons/level_5.png',
+      iconData: Icons.directions_car,
       type: AchievementType.level,
       requirement: 5,
       color: Colors.blue,
@@ -67,7 +67,7 @@ class Achievement {
       id: 'level_10',
       title: 'Otoyol Faresi',
       description: '10. seviyeye ulaş',
-      iconPath: 'assets/icons/level_10.png',
+      iconData: Icons.speed,
       type: AchievementType.level,
       requirement: 10,
       color: Colors.indigo,
@@ -78,7 +78,7 @@ class Achievement {
       id: 'questions_100',
       title: 'Çaylak Sürücü',
       description: 'Toplam 100 soru çöz',
-      iconPath: 'assets/icons/q_100.png',
+      iconData: Icons.checklist,
       type: AchievementType.questions,
       requirement: 100,
       color: Colors.green,
@@ -87,7 +87,7 @@ class Achievement {
       id: 'questions_500',
       title: 'Tecrübeli Sürücü',
       description: 'Toplam 500 soru çöz',
-      iconPath: 'assets/icons/q_500.png',
+      iconData: Icons.check_circle,
       type: AchievementType.questions,
       requirement: 500,
       color: Colors.teal,

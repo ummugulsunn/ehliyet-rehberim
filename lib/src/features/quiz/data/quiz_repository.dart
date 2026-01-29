@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../models/question_model.dart';
-import '../models/exam_model.dart';
-import '../models/traffic_sign_model.dart';
-import '../models/study_guide_model.dart';
+import '../domain/question_model.dart';
+import '../domain/exam_model.dart';
+import '../../traffic_signs/domain/traffic_sign_model.dart';
+import '../../study_guides/domain/study_guide_model.dart';
 
 /// Service responsible for loading quiz questions from local JSON file
-class QuizService {
+class QuizRepository {
   /// Load all exams from assets/data/exams.json
   Future<List<Exam>> loadExams() async {
     try {

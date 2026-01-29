@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import '../../../core/services/quiz_service.dart';
-import '../../quiz/application/quiz_providers.dart';
+import '../application/quiz_providers.dart';
 // ignore: unused_import
-import '../../../core/services/quiz_service.dart';
-import '../../../core/models/exam_model.dart';
-import '../../../core/services/user_progress_service.dart';
+import '../data/quiz_repository.dart';
+import '../domain/exam_model.dart';
+import '../../home/data/user_progress_repository.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../quiz/presentation/quiz_screen.dart';
-import '../../quiz/presentation/quiz_review_screen.dart';
+import 'quiz_screen.dart';
+import 'quiz_review_screen.dart';
 
 
 class ExamSelectionScreen extends ConsumerWidget {
@@ -16,8 +16,8 @@ class ExamSelectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizService = ref.read(quizServiceProvider);
-    final progressService = UserProgressService.instance;
+    final quizRepository = ref.read(quizRepositoryProvider);
+    final progressRepository = UserProgressRepository.instance;
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -28,7 +28,7 @@ class ExamSelectionScreen extends ConsumerWidget {
         foregroundColor: Theme.of(context).colorScheme.onSurface,
       ),
       body: FutureBuilder<List<Exam>>(
-        future: quizService.loadExams(),
+        future: quizRepository.loadExams(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -59,7 +59,7 @@ class ExamSelectionScreen extends ConsumerWidget {
             child: Column(
               children: [
                 // Messages list
-                ...exams.map((exam) => _buildExamCard(exam, progressService, context)),
+                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context)),
               ],
             ),
           );
@@ -68,8 +68,8 @@ class ExamSelectionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildExamCard(Exam exam, UserProgressService progressService, BuildContext context) {
-    final results = progressService.getAllTestResults(examId: exam.examId);
+  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context) {
+    final results = progressRepository.getAllTestResults(examId: exam.examId);
     final best = results.isEmpty ? null : results.map((r) => r.correctAnswers).reduce((a, b) => a > b ? a : b);
 
     return Container(
@@ -92,7 +92,7 @@ class ExamSelectionScreen extends ConsumerWidget {
           onPressed: () async {
             if (!context.mounted) return;
             // Check if there is a saved result for this exam
-            final results = progressService.getAllTestResults(examId: exam.examId);
+            final results = progressRepository.getAllTestResults(examId: exam.examId);
             if (results.isNotEmpty) {
               // Navigate to review screen with the most recent result
               results.sort((a, b) => b.date.compareTo(a.date));

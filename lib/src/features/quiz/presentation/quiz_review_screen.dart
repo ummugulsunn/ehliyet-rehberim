@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ehliyet_rehberim/src/core/models/test_result_model.dart';
-import 'package:ehliyet_rehberim/src/core/models/question_model.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart';
 import 'package:ehliyet_rehberim/src/core/theme/app_colors.dart';
 
 class QuizReviewScreen extends StatelessWidget {

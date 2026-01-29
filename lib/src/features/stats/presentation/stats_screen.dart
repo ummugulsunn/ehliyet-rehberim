@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../application/stats_providers.dart';
 import '../../../core/models/test_result_model.dart';
-import '../../../core/services/user_progress_service.dart';
+import '../../home/data/user_progress_repository.dart';
 import 'package:intl/intl.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
@@ -52,7 +52,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           IconButton(
             onPressed: () async {
               // Force refresh from the service
-              await UserProgressService.instance.refreshTestResults();
+              await UserProgressRepository.instance.refreshTestResults();
               // Then invalidate the provider
               ref.invalidate(testResultsProvider);
             },

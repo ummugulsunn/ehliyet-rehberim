@@ -3,15 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../quiz/presentation/quiz_screen.dart';
 import '../../quiz/application/quiz_providers.dart';
 
-import '../../topics/presentation/topic_selection_screen.dart';
+import '../../quiz/presentation/topic_selection_screen.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../auth/application/auth_providers.dart';
 import '../presentation/widgets/dynamic_header_widget.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../exams/presentation/exam_selection_screen.dart';
+import '../../quiz/presentation/exam_selection_screen.dart';
 import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
+import 'widgets/achievements_widget.dart';
 
 
 class HomeScreen extends ConsumerWidget {
@@ -301,6 +302,32 @@ class HomeScreen extends ConsumerWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const StatsScreen(),
+              ),
+            );
+          },
+        ),
+        _buildFeatureCard(
+          context,
+          icon: Icons.emoji_events_outlined,
+          title: 'Başarımlar',
+          color: Colors.orange,
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              builder: (context) => DraggableScrollableSheet(
+                initialChildSize: 0.7,
+                minChildSize: 0.5,
+                maxChildSize: 0.9,
+                expand: false,
+                builder: (context, scrollController) => SingleChildScrollView(
+                  controller: scrollController,
+                  child: const AchievementsWidget(),
+                ),
               ),
             );
           },

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'src/features/auth/presentation/auth_gate.dart';
 
-import 'src/core/services/user_progress_service.dart';
-import 'src/core/services/auth_service.dart';
+import 'src/features/home/data/user_progress_repository.dart';
+import 'src/features/auth/data/auth_repository.dart';
 
 
 import 'src/features/auth/application/auth_providers.dart';
@@ -44,25 +44,25 @@ void main() async {
     debugPrint('Failed to initialize intl date formatting: $e');
   }
   
-  // Initialize AuthService
-  final authService = AuthService.instance;
+  // Initialize AuthRepository
+  final authRepository = AuthRepository.instance;
   try {
-    await authService.initialize();
-    debugPrint('AuthService initialized successfully');
+    await authRepository.initialize();
+    debugPrint('AuthRepository initialized successfully');
   } catch (e) {
-    debugPrint('Failed to initialize AuthService: $e');
+    debugPrint('Failed to initialize AuthRepository: $e');
     // Continue app initialization even if auth service fails
   }
   
 
   
-  // Initialize UserProgressService
-  final userProgressService = UserProgressService.instance;
+  // Initialize UserProgressRepository
+  final userProgressRepository = UserProgressRepository.instance;
   try {
-    await userProgressService.initialize();
-    debugPrint('UserProgressService initialized successfully');
+    await userProgressRepository.initialize();
+    debugPrint('UserProgressRepository initialized successfully');
   } catch (e) {
-    debugPrint('Failed to initialize UserProgressService: $e');
+    debugPrint('Failed to initialize UserProgressRepository: $e');
     // Continue app initialization even if user progress service fails
   }
   
@@ -73,9 +73,9 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
-        authServiceProvider.overrideWithValue(authService),
+        authServiceProvider.overrideWithValue(authRepository),
 
-        userProgressServiceProvider.overrideWithValue(userProgressService),
+        userProgressRepositoryProvider.overrideWithValue(userProgressRepository),
       ],
       child: const MyApp(),
     ),
