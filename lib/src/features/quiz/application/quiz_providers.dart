@@ -54,10 +54,10 @@ final questionsByCategoryProvider =
 });
 
 /// Controller for managing quiz state
-class QuizController extends Notifier<QuizState> {
+class QuizController extends FamilyNotifier<QuizState, String> {
   @override
-  QuizState build() {
-    return QuizState.initial();
+  QuizState build(String arg) {
+    return QuizState.initial().copyWith(examId: arg);
   }
 
   /// Initialize the quiz with questions
@@ -117,7 +117,7 @@ class QuizController extends Notifier<QuizState> {
       await userProgressRepository.completeQuestion();
       
       if (isCorrect) {
-        await userProgressRepository.addXP(UserProgressRepository.instance.xpPerCorrectAnswer); // NOTE: accessing instance for constant if needed, but better to use instance
+        await userProgressRepository.addXP(UserProgressRepository.xpPerCorrectAnswer);
         // wait, xpPerCorrectAnswer is likely static? Let's check. Assuming it is static or on instance.
         // Actually UserProgressService had xpPerCorrectAnswer? I didn't check that constant.
       }
@@ -230,16 +230,16 @@ class QuizController extends Notifier<QuizState> {
   }
 }
 
-/// Provider for the QuizController
-final quizControllerProvider = NotifierProvider<QuizController, QuizState>(() {
+/// Provider for the QuizController with family support for multiple quiz instances
+final quizControllerProvider = NotifierProvider.family<QuizController, QuizState, String>(() {
   return QuizController();
 });
 
 /// Provider for wrong questions aggregated from all exams (karma) filtered by saved wrong IDs
 final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
   final userProgress = ref.read(userProgressRepositoryProvider);
-  // Prefer pairs if available
-  final pairs = await userProgress.getWrongAnswerPairs();
+  // Get ONLY items due for review
+  final pairs = await userProgress.getDueSRSItems();
   final quizRepository = ref.read(quizRepositoryProvider);
 
   if (pairs.isNotEmpty) {

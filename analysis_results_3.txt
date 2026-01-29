@@ -1,0 +1,28 @@
+Analyzing lib...                                                
+
+warning • Unused import: 'package:flutter/services.dart' • lib/src/features/auth/data/auth_repository.dart:8:8 • unused_import
+   info • Don't invoke 'print' in production code • lib/src/features/auth/presentation/auth_gate.dart:16:5 • avoid_print
+warning • Unused import: 'dart:math' • lib/src/features/home/data/user_progress_repository.dart:2:8 • unused_import
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:194:37 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:195:30 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:196:26 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:198:37 • unnecessary_this
+warning • The declaration '_getYesterdayString' isn't referenced • lib/src/features/home/data/user_progress_repository.dart:756:10 • unused_element
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:777:27 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:778:23 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:780:28 • unnecessary_this
+warning • A value for optional parameter 'isPro' isn't ever given • lib/src/features/home/presentation/home_screen.dart:538:10 • unused_element_parameter
+warning • Unused import: '../../data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:5:8 • unused_import
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:61:26 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:62:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:63:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:64:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:65:16 • curly_braces_in_flow_control_structures
+   info • Don't use 'BuildContext's across async gaps • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:628:46 • use_build_context_synchronously
+warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/readiness_card.dart:3:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/core/theme/app_colors.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:3:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:4:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:9:8 • unused_import
+warning • Unused import: '../../home/data/user_progress_repository.dart' • lib/src/features/quiz/application/smart_quiz_provider.dart:3:8 • unused_import
+warning • The value of the local variable 'questionCountChanged' isn't used • lib/src/features/quiz/presentation/quiz_screen.dart:187:18 • unused_local_variable
+

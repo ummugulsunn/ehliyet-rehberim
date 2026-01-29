@@ -13,6 +13,8 @@ import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
 import 'widgets/achievements_widget.dart';
+import 'widgets/smart_review_card.dart';
+import 'widgets/readiness_card.dart';
 
 
 class HomeScreen extends ConsumerWidget {
@@ -146,6 +148,16 @@ class HomeScreen extends ConsumerWidget {
               // Primary Action Card - Karma Test
               _buildPrimaryActionCard(context),
               
+              const SizedBox(height: 24),
+
+              // Smart Review Card (Adaptive Learning)
+              const SmartReviewCard(),
+              
+              const SizedBox(height: 16),
+              
+              // Exam Readiness Prediction
+              const ReadinessCard(),
+
               const SizedBox(height: 32),
               
               // Secondary Action Grid
@@ -364,7 +376,7 @@ class HomeScreen extends ConsumerWidget {
 
             try {
               // Debug: Check current wrong answer count
-              final userProgress = ref.read(userProgressServiceProvider);
+              final userProgress = ref.read(userProgressRepositoryProvider);
               final wrongCount = await userProgress.getWrongAnswerIdsCount();
               
               // If too many wrong answers (indicating a bug), clear them
@@ -482,7 +494,7 @@ class HomeScreen extends ConsumerWidget {
 
             if (shouldClear == true) {
               try {
-                final userProgress = ref.read(userProgressServiceProvider);
+                final userProgress = ref.read(userProgressRepositoryProvider);
                 
                 // Get count before clearing for debug
                 final beforeCount = await userProgress.getWrongAnswerIdsCount();

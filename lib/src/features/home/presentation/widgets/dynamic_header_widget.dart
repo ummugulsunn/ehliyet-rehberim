@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../application/home_providers.dart';
-import '../../../../home/data/user_progress_repository.dart';
+import '../../data/user_progress_repository.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Dynamic header widget that displays user progress and streak
@@ -153,54 +153,76 @@ class DynamicHeaderWidget extends ConsumerWidget {
                         
                         // Enhanced Streak Display
                         if (streakText.isNotEmpty) ...[
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).brightness == Brightness.dark 
-                                  ? AppColors.warning.withValues(alpha: 0.2)
-                                  : AppColors.warning.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
+                          GestureDetector(
+                            onTap: () => _showStreakShop(context, ref, streak, state.streakFreezes, xp),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              decoration: BoxDecoration(
                                 color: Theme.of(context).brightness == Brightness.dark 
-                                  ? AppColors.warning.withValues(alpha: 0.4)
-                                  : AppColors.warning.withValues(alpha: 0.3),
-                                width: 1,
+                                    ? AppColors.warning.withValues(alpha: 0.2)
+                                    : AppColors.warning.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Theme.of(context).brightness == Brightness.dark 
+                                    ? AppColors.warning.withValues(alpha: 0.4)
+                                    : AppColors.warning.withValues(alpha: 0.3),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.warning.withValues(alpha: 0.1),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.warning.withValues(alpha: 0.1),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness == Brightness.dark 
-                                      ? AppColors.warning.withValues(alpha: 0.3)
-                                      : AppColors.warning.withValues(alpha: 0.2),
-                                    shape: BoxShape.circle,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).brightness == Brightness.dark 
+                                        ? AppColors.warning.withValues(alpha: 0.3)
+                                        : AppColors.warning.withValues(alpha: 0.2),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Text(
+                                      '🔥',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
                                   ),
-                                  child: const Text(
-                                    '🔥',
-                                    style: TextStyle(fontSize: 16),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    streakText,
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).brightness == Brightness.dark 
+                                        ? AppColors.warning.withValues(alpha: 0.9)
+                                        : AppColors.warning,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  streakText,
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).brightness == Brightness.dark 
-                                      ? AppColors.warning.withValues(alpha: 0.9)
-                                      : AppColors.warning,
-                                  ),
-                                ),
-                              ],
+                                  if (state.streakFreezes > 0) ...[
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      width: 1, 
+                                      height: 16, 
+                                      color: Theme.of(context).dividerColor.withValues(alpha: 0.5)
+                                    ),
+                                    const SizedBox(width: 8),
+                                    const Text('❄️', style: TextStyle(fontSize: 14)),
+                                    const SizedBox(width: 2),
+                                    Text(
+                                      '${state.streakFreezes}',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue.shade300,
+                                      ),
+                                    ),
+                                  ]
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -499,6 +521,166 @@ class DynamicHeaderWidget extends ConsumerWidget {
       },
       loading: () => 'Merhaba!',
       error: (_, __) => 'Merhaba!',
+    );
+  }
+
+  void _showStreakShop(BuildContext context, WidgetRef ref, int currentStreak, int freezes, int currentXP) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('🔥', style: TextStyle(fontSize: 32)),
+                const SizedBox(width: 16),
+                Text(
+                  '$currentStreak Günlük Seri',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Serini korumak için dondurucu al!',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 32),
+            
+            // Streak Freeze Info Card
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blue.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Colors.blue.withValues(alpha: 0.3),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text('❄️', style: TextStyle(fontSize: 24)),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Seri Dondurucu',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Bir gün girmesen bile serin bozulmaz. (Stok: $freezes/2)',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // Buy Button
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: FilledButton(
+                onPressed: freezes >= 2 
+                  ? null 
+                  : (currentXP < 500 ? null : () async {
+                      Navigator.pop(context); // Close sheet first
+                      final success = await ref.read(userProgressRepositoryProvider).buyStreakFreeze();
+                      if (!context.mounted) return;
+                      if (success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('❄️ Seri Dondurucu alındı!'),
+                            backgroundColor: Colors.blue,
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      } else {
+                        // Error handling normally not needed due to button disable
+                      }
+                    }),
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  disabledBackgroundColor: Colors.grey.withValues(alpha: 0.2),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (freezes >= 2) ...[
+                      const Text('Maksimum Stok'),
+                    ] else ...[
+                      const Text('Satın Al'),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '500 XP',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: currentXP >= 500 ? Colors.white : Colors.red.shade200,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+            if (currentXP < 500 && freezes < 2) 
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  'Yetersiz XP (Mevcut: $currentXP)',
+                  style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+                ),
+              ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
     );
   }
 

@@ -13,6 +13,7 @@ import 'src/core/theme/app_theme.dart';
 import 'src/features/profile/application/theme_mode_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'src/core/services/notification_service.dart';
 
 import 'dart:async';
 
@@ -66,6 +67,17 @@ void main() async {
     // Continue app initialization even if user progress service fails
   }
   
+  // Initialize NotificationService
+  try {
+    final notificationService = NotificationService.instance;
+    await notificationService.initialize();
+    await notificationService.requestPermissions();
+    debugPrint('NotificationService initialized successfully');
+  } catch (e) {
+    debugPrint('Failed to initialize NotificationService: $e');
+    // Continue app initialization even if notification service fails
+  }
+  
 
   
 
@@ -73,7 +85,7 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
-        authServiceProvider.overrideWithValue(authRepository),
+        authRepositoryProvider.overrideWithValue(authRepository),
 
         userProgressRepositoryProvider.overrideWithValue(userProgressRepository),
       ],

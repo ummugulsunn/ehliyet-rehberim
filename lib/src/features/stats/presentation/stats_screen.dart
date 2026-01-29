@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../application/stats_providers.dart';
-import '../../../core/models/test_result_model.dart';
+import '../../quiz/domain/test_result_model.dart';
 import '../../home/data/user_progress_repository.dart';
 import 'package:intl/intl.dart';
+import 'detailed_stats_screen.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -49,6 +50,20 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.onSurface,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DetailedStatsScreen(),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.insights,
+              color: AppColors.primary,
+            ),
+            tooltip: 'Detaylı İstatistikler',
+          ),
           IconButton(
             onPressed: () async {
               // Force refresh from the service

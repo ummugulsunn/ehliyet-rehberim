@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data/auth_repository.dart';
+import '../data/auth_repository.dart';
 import '../../../core/utils/logger.dart';
 
 /// Provider for the AuthRepository singleton instance

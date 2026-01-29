@@ -3,7 +3,7 @@ import 'package:ehliyet_rehberim/src/features/study_guides/domain/study_guide_mo
 import 'package:ehliyet_rehberim/src/features/quiz/application/quiz_providers.dart';
 
 final studyGuidesProvider = FutureProvider<List<StudyGuide>>((ref) async {
-  final service = ref.watch(quizServiceProvider);
+  final service = ref.watch(quizRepositoryProvider);
   return service.loadStudyGuides();
 });
 

@@ -6,9 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter/services.dart';
-import '../utils/logger.dart';
-import 'connectivity_service.dart';
-import 'user_progress_service.dart';
+import '../../../core/utils/logger.dart';
+import '../../../core/services/connectivity_service.dart';
 
 /// Service class for handling authentication operations
 /// Provides methods for Google Sign-In, Apple Sign-In, and Firebase Auth

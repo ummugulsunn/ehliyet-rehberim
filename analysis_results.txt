@@ -1,0 +1,127 @@
+Analyzing lib...                                                
+
+  error • Undefined name 'authServiceProvider' • lib/main.dart:76:9 • undefined_identifier
+  error • Target of URI doesn't exist: '../../data/auth_repository.dart' • lib/src/features/auth/application/auth_providers.dart:3:8 • uri_does_not_exist
+  error • The name 'AuthRepository' isn't a type, so it can't be used as a type argument • lib/src/features/auth/application/auth_providers.dart:8:41 • non_type_as_type_argument
+  error • Undefined name 'AuthRepository' • lib/src/features/auth/application/auth_providers.dart:9:10 • undefined_identifier
+  error • Undefined class 'AuthRepository' • lib/src/features/auth/application/auth_providers.dart:83:3 • undefined_class
+  error • Target of URI doesn't exist: '../utils/logger.dart' • lib/src/features/auth/data/auth_repository.dart:9:8 • uri_does_not_exist
+  error • Target of URI doesn't exist: 'connectivity_service.dart' • lib/src/features/auth/data/auth_repository.dart:10:8 • uri_does_not_exist
+  error • Target of URI doesn't exist: 'user_progress_service.dart' • lib/src/features/auth/data/auth_repository.dart:11:8 • uri_does_not_exist
+  error • Undefined class 'ConnectivityService' • lib/src/features/auth/data/auth_repository.dart:29:9 • undefined_class
+  error • Undefined name 'ConnectivityService' • lib/src/features/auth/data/auth_repository.dart:29:52 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:38:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:46:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:48:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:61:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:74:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:78:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:85:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:93:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:97:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:103:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:113:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:121:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:129:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:142:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:148:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:155:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:159:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:170:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:174:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:182:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:190:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:197:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:199:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:209:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:220:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:240:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:242:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:249:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:251:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:260:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:263:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:276:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:280:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:284:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:290:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:295:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:297:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:303:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:307:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:332:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:340:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:346:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:357:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:363:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:367:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:374:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:378:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:384:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:394:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:401:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:402:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:409:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:414:11 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:426:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:429:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:433:11 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:437:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:441:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:452:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:458:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:464:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:471:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:475:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:486:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:490:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:498:7 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:505:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:506:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:513:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:515:13 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:524:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:529:11 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:542:11 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:545:11 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:549:9 • undefined_identifier
+  error • Undefined name 'Logger' • lib/src/features/auth/data/auth_repository.dart:553:7 • undefined_identifier
+   info • Don't invoke 'print' in production code • lib/src/features/auth/presentation/auth_gate.dart:16:5 • avoid_print
+  error • Target of URI doesn't exist: '../../data/user_progress_repository.dart' • lib/src/features/home/application/home_providers.dart:2:8 • uri_does_not_exist
+  error • The name 'UserProgressRepository' isn't a type, so it can't be used as a type argument • lib/src/features/home/application/home_providers.dart:5:49 • non_type_as_type_argument
+  error • Undefined name 'UserProgressRepository' • lib/src/features/home/application/home_providers.dart:6:10 • undefined_identifier
+  error • The name 'UserProgressState' isn't a type, so it can't be used as a type argument • lib/src/features/home/application/home_providers.dart:17:50 • non_type_as_type_argument
+  error • '_achievementsController' can't be used as a setter because it's final • lib/src/features/home/data/user_progress_repository.dart:51:5 • assignment_to_final
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:195:37 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:196:30 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:197:26 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:199:37 • unnecessary_this
+  error • Undefined name 'prefs' • lib/src/features/home/data/user_progress_repository.dart:210:36 • undefined_identifier
+warning • The declaration '_getYesterdayString' isn't referenced • lib/src/features/home/data/user_progress_repository.dart:756:10 • unused_element
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:777:27 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:778:23 • unnecessary_this
+   info • Unnecessary 'this.' qualifier • lib/src/features/home/data/user_progress_repository.dart:780:28 • unnecessary_this
+  error • Undefined name 'userProgressServiceProvider' • lib/src/features/home/presentation/home_screen.dart:379:45 • undefined_identifier
+  error • Undefined name 'userProgressServiceProvider' • lib/src/features/home/presentation/home_screen.dart:497:47 • undefined_identifier
+warning • A value for optional parameter 'isPro' isn't ever given • lib/src/features/home/presentation/home_screen.dart:538:10 • unused_element_parameter
+  error • Target of URI doesn't exist: '../../../../home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:5:8 • uri_does_not_exist
+  error • The property 'dailyProgress' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:47:39 • unchecked_use_of_nullable_value
+  error • The property 'level' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:49:31 • unchecked_use_of_nullable_value
+  error • The property 'xp' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:50:28 • unchecked_use_of_nullable_value
+  error • The property 'streak' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:51:32 • unchecked_use_of_nullable_value
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:61:26 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:62:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:63:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:64:32 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:65:16 • curly_braces_in_flow_control_structures
+  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:157:86 • unchecked_use_of_nullable_value
+  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:205:45 • unchecked_use_of_nullable_value
+  error • The property 'streakFreezes' can't be unconditionally accessed because the receiver can be 'null' • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:216:48 • unchecked_use_of_nullable_value
+   info • Don't use 'BuildContext's across async gaps • lib/src/features/home/presentation/widgets/dynamic_header_widget.dart:628:46 • use_build_context_synchronously
+warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/readiness_card.dart:3:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/core/theme/app_colors.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:3:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:4:8 • unused_import
+warning • Unused import: 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart' • lib/src/features/home/presentation/widgets/smart_review_card.dart:9:8 • unused_import
+warning • Unused import: '../../home/data/user_progress_repository.dart' • lib/src/features/quiz/application/smart_quiz_provider.dart:3:8 • unused_import
+warning • The value of the local variable 'questionCountChanged' isn't used • lib/src/features/quiz/presentation/quiz_screen.dart:187:18 • unused_local_variable
+

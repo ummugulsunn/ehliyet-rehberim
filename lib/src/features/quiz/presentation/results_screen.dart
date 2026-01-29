@@ -5,11 +5,12 @@ import '../../../core/theme/app_colors.dart';
 
 
 class ResultsScreen extends ConsumerWidget {
-  const ResultsScreen({super.key});
+  final String examId;
+  const ResultsScreen({super.key, required this.examId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizState = ref.watch(quizControllerProvider);
+    final quizState = ref.watch(quizControllerProvider(examId));
     
     // Calculate statistics
     final totalQuestions = quizState.totalQuestions;
@@ -25,189 +26,186 @@ class ResultsScreen extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         automaticallyImplyLeading: false, // Disable back button
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            // Congratulatory message
-            const SizedBox(height: 32),
-            Icon(
-              Icons.celebration,
-              size: 80,
-              color: AppColors.secondary,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Test Tamamlandı!',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-
-            // Circular progress indicator with score
-            Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: CircularProgressIndicator(
-                      value: successPercentage / 100,
-                      strokeWidth: 12,
-                      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        _getScoreColor(successPercentage),
-                      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight - 48),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    // Congratulatory message
+                    const SizedBox(height: 32),
+                    Icon(
+                      Icons.celebration,
+                      size: 80,
+                      color: AppColors.secondary,
                     ),
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '$correctAnswers/$totalQuestions',
-                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: _getScoreColor(successPercentage),
-                        ),
-                      ),
-                      Text(
-                        '%$successPercentage',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 48),
-
-            // Results summary
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).colorScheme.shadow,
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  _buildResultRow(
-                    context,
-                    'Doğru Sayısı',
-                    correctAnswers.toString(),
-                    Icons.check_circle,
-                    AppColors.success,
-                  ),
-                  const SizedBox(height: 16),
-                  _buildResultRow(
-                    context,
-                    'Yanlış Sayısı',
-                    incorrectAnswers.toString(),
-                    Icons.cancel,
-                    AppColors.error,
-                  ),
-                  const SizedBox(height: 16),
-                  _buildResultRow(
-                    context,
-                    'Başarı Yüzdesi',
-                    '%$successPercentage',
-                    Icons.percent,
-                    _getScoreColor(successPercentage),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-
-            // Action buttons
-            Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Reset quiz state and navigate back to quiz screen
-                      ref.read(quizControllerProvider.notifier).reset();
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      'Yeniden Başla',
-                      style: TextStyle(
-                        fontSize: 16,
+                    const SizedBox(height: 16),
+                    Text(
+                      'Test Tamamlandı!',
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                
+                    const SizedBox(height: 32),
 
-                
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      // Reset quiz state before navigating back to prevent data loss
-                      ref.read(quizControllerProvider.notifier).reset();
-                      
-                      // Mark completion and maybe show an interstitial for non-Pro users
-                      // Ads removed
-                      /*
-                      await AdService.markQuizCompleted();
-                      final isPro = ref.read(proStatusProvider).maybeWhen(
-                            data: (v) => v,
-                            orElse: () => false,
-                          );
-                      if (!isPro) {
-                        await AdService.showInterstitialIfEligible();
-                      }
-                      */
-                      // Navigate back to home screen
-                      // ignore: use_build_context_synchronously
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    },
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    // Circular progress indicator with score
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            width: 200,
+                            height: 200,
+                            child: CircularProgressIndicator(
+                              value: successPercentage / 100,
+                              strokeWidth: 12,
+                              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                _getScoreColor(successPercentage),
+                              ),
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                '$correctAnswers/$totalQuestions',
+                                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: _getScoreColor(successPercentage),
+                                ),
+                              ),
+                              Text(
+                                '%$successPercentage',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    child: const Text(
-                      'Ana Menüye Dön',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                    const SizedBox(height: 48),
+
+                    // Results summary
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Theme.of(context).colorScheme.shadow,
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          _buildResultRow(
+                            context,
+                            'Doğru Sayısı',
+                            correctAnswers.toString(),
+                            Icons.check_circle,
+                            AppColors.success,
+                          ),
+                          const SizedBox(height: 16),
+                          _buildResultRow(
+                            context,
+                            'Yanlış Sayısı',
+                            incorrectAnswers.toString(),
+                            Icons.cancel,
+                            AppColors.error,
+                          ),
+                          const SizedBox(height: 16),
+                          _buildResultRow(
+                            context,
+                            'Başarı Yüzdesi',
+                            '%$successPercentage',
+                            Icons.percent,
+                            _getScoreColor(successPercentage),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                    const Spacer(),
+                    const SizedBox(height: 32),
+
+                    // Action buttons
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Reset quiz state and navigate back to quiz screen
+                              ref.read(quizControllerProvider(examId).notifier).reset();
+                              Navigator.of(context).pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).colorScheme.primary,
+                              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text(
+                              'Yeniden Başla',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () async {
+                              // Reset quiz state before navigating back to prevent data loss
+                              ref.read(quizControllerProvider(examId).notifier).reset();
+                              
+                              // Navigate back to home screen
+                              if (context.mounted) {
+                                Navigator.of(context).popUntil((route) => route.isFirst);
+                              }
+                            },
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: const Text(
+                              'Ana Menüye Dön',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ],
-        ),
+          );
+        }
       ),
 
     );

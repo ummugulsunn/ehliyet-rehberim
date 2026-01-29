@@ -59,6 +59,12 @@ dependencies:
   
   # Confetti animations for quiz celebrations
   confetti: ^0.7.0
+  
+  # Charts for statistics visualization
+  fl_chart: ^0.69.0
+  
+  # Local notifications for reminders
+  flutter_local_notifications: ^17.0.0
 
   in_app_review: ^2.0.9
   url_launcher: ^6.3.0

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data/user_progress_repository.dart';
+import '../data/user_progress_repository.dart';
 
 /// Provider for the UserProgressRepository singleton instance
 final userProgressRepositoryProvider = Provider<UserProgressRepository>((ref) {
@@ -13,10 +13,24 @@ final dailyProgressProvider = StreamProvider<int>((ref) {
   return userProgressRepository.dailyProgressStream;
 });
 
-/// StreamProvider that watches the unified user progress state
-final userProgressStateProvider = StreamProvider<UserProgressState>((ref) {
+/// FutureProvider that gets the unified user progress state
+/// This ensures we wait for initialization before showing data
+final userProgressStateProvider = FutureProvider<UserProgressState>((ref) async {
   final userProgressRepository = ref.read(userProgressRepositoryProvider);
-  return userProgressRepository.stateStream;
+  
+  // Wait for initialization if not done yet
+  if (!userProgressRepository.isInitialized) {
+    await userProgressRepository.initialize();
+  }
+  
+  // Return current state
+  return UserProgressState(
+    dailyProgress: await userProgressRepository.dailyProgress,
+    streak: await userProgressRepository.currentStreak,
+    xp: await userProgressRepository.totalXP,
+    level: userProgressRepository.calculateLevel(await userProgressRepository.totalXP),
+    streakFreezes: await userProgressRepository.streakFreezes,
+  );
 });
 
 /// StreamProvider that watches the streak stream

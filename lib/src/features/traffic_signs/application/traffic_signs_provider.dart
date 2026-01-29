@@ -4,7 +4,7 @@ import '../../quiz/application/quiz_providers.dart';
 
 /// Future provider that loads traffic sign categories from assets
 final trafficSignsProvider = FutureProvider<List<TrafficSignCategory>>((ref) async {
-  final quizService = ref.read(quizServiceProvider);
+  final quizService = ref.read(quizRepositoryProvider);
   return quizService.loadTrafficSigns();
 });
 

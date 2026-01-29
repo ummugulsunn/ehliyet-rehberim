@@ -5,6 +5,20 @@ import '../../../core/utils/logger.dart';
 import '../../quiz/domain/test_result_model.dart';
 import '../../home/domain/achievement_model.dart';
 
+class _SRSItem {
+  final String examId;
+  final int questionId;
+  final int level;
+  final DateTime nextReview;
+
+  _SRSItem({
+    required this.examId,
+    required this.questionId,
+    required this.level,
+    required this.nextReview,
+  });
+}
+
 /// Repository for managing user progress, daily goals, and streaks
 /// Uses SharedPreferences for local storage
 class UserProgressRepository {
@@ -15,6 +29,7 @@ class UserProgressRepository {
   int _currentStreak = 0;
   int _currentXP = 0;
   int _currentLevel = 1;
+  int _currentStreakFreezes = 0;
 
   // Stream controllers with replay capability
   late final StreamController<UserProgressState> _stateController;
@@ -33,7 +48,6 @@ class UserProgressRepository {
     _streakController = StreamController<int>.broadcast();
     _xpController = StreamController<int>.broadcast();
     _levelController = StreamController<int>.broadcast();
-    _achievementsController = StreamController<List<String>>.broadcast();
   }
 
   static UserProgressRepository get instance => _instance;
@@ -52,11 +66,14 @@ class UserProgressRepository {
   static const String _wrongAnswerPairsKey = 'wrong_answer_pairs_v1';
   static const String _totalXPKey = 'total_xp_v1';
   static const String _unlockedAchievementsKey = 'unlocked_achievements';
+  static const String _streakFreezesKey = 'streak_freezes';
 
   // Constants
   static const int _dailyGoal = 50; // Questions per day
   static const int xpPerCorrectAnswer = 10;
   static const int xpPerQuizComplete = 50;
+  static const int streakFreezePrice = 500;
+  static const int maxStreakFreezes = 2;
 
   /// Stream that emits the unified state
   Stream<UserProgressState> get stateStream => _stateController.stream;
@@ -78,6 +95,12 @@ class UserProgressRepository {
   
   /// Stream that emits the current Level
   Stream<int> get levelStream => _levelController.stream;
+
+  /// Get current streak freezes count
+  Future<int> get streakFreezes async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_streakFreezesKey) ?? 0;
+  }
 
   /// Get the current daily progress
   Future<int> get dailyProgress async {
@@ -172,6 +195,7 @@ class UserProgressRepository {
       _currentStreak = await this.currentStreak;
       _currentXP = await this.totalXP;
       _currentLevel = calculateLevel(_currentXP);
+      _currentStreakFreezes = await this.streakFreezes;
       
       _emitState();
       
@@ -182,6 +206,7 @@ class UserProgressRepository {
       Logger.info('UserProgressService initialized. State emitted.');
 
       // Load achievements
+      final prefs = await SharedPreferences.getInstance();
       final unlockedAchievements = prefs.getStringList(_unlockedAchievementsKey) ?? [];
       _achievementsController.add(unlockedAchievements);
     } catch (e) {
@@ -200,6 +225,7 @@ class UserProgressRepository {
       streak: _currentStreak,
       xp: _currentXP,
       level: _currentLevel,
+      streakFreezes: _currentStreakFreezes,
     ));
 
     // Emit individual streams (for backward compatibility)
@@ -235,6 +261,38 @@ class UserProgressRepository {
     }
   }
 
+  /// Purchase a streak freeze using XP
+  Future<bool> buyStreakFreeze() async {
+    try {
+      if (_currentStreakFreezes >= maxStreakFreezes) {
+        Logger.info('Max streak freezes reached');
+        return false;
+      }
+
+      if (_currentXP < streakFreezePrice) {
+        Logger.info('Not enough XP to buy streak freeze');
+        return false;
+      }
+
+      final prefs = await SharedPreferences.getInstance();
+      
+      // Deduct XP
+      _currentXP -= streakFreezePrice;
+      await prefs.setInt(_totalXPKey, _currentXP);
+      
+      // Add Freeze
+      _currentStreakFreezes++;
+      await prefs.setInt(_streakFreezesKey, _currentStreakFreezes);
+      
+      _emitState();
+      Logger.info('Bought streak freeze. XP: $_currentXP, Freezes: $_currentStreakFreezes');
+      return true;
+    } catch (e) {
+      Logger.error('Failed to buy streak freeze', e);
+      return false;
+    }
+  }
+
   /// Called when a user completes a question
   Future<void> completeQuestion() async {
     try {
@@ -246,17 +304,46 @@ class UserProgressRepository {
       int dailyQuestions = prefs.getInt(_dailyQuestionsKey) ?? 0;
       int currentStreak = prefs.getInt(_currentStreakKey) ?? 0;
       int totalQuestions = prefs.getInt(_totalQuestionsKey) ?? 0;
+      int freezes = prefs.getInt(_streakFreezesKey) ?? 0;
       
       // Check if it's a new day
       if (lastCompletedDate != today) {
-        // Check if yesterday was completed (for streak calculation)
-        final yesterday = _getYesterdayString();
-        if (lastCompletedDate == yesterday) {
-          // Continue streak
-          currentStreak++;
+        // Check gap since last activity
+        if (lastCompletedDate != null) {
+          final lastDate = DateTime.parse(lastCompletedDate);
+          final now = DateTime.now();
+          // Calculate difference in days, ignoring time
+          final lastDateStart = DateTime(lastDate.year, lastDate.month, lastDate.day);
+          final todayStart = DateTime(now.year, now.month, now.day);
+          final difference = todayStart.difference(lastDateStart).inDays;
+          
+          if (difference == 1) {
+            // Continued perfectly (yesterday)
+            currentStreak++;
+          } else if (difference > 1) {
+            // Missed one or more days
+            int daysMissed = difference - 1;
+            
+            if (freezes >= daysMissed) {
+              // Streak Protected!
+              freezes -= daysMissed;
+              await prefs.setInt(_streakFreezesKey, freezes);
+              _currentStreakFreezes = freezes;
+              currentStreak++; // Continue streak
+              Logger.info('Streak preserved using $daysMissed freeze(s)!');
+            } else {
+              // Streak Broken
+              currentStreak = 1;
+              Logger.info('Streak broken. Missed $daysMissed days, only had $freezes freezes.');
+            }
+          } else {
+             // Should not happen if lastCompletedDate != today, unless clock changed backwards
+             // Treat as same streak or ignore
+             // currentStreak = currentStreak;
+          }
         } else {
-          // Break in streak, reset to 1
-          currentStreak = 1;
+           // First ever activity
+           currentStreak = 1;
         }
         
         // Reset daily questions for new day
@@ -407,9 +494,192 @@ class UserProgressRepository {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_wrongAnswerPairsKey);
-      Logger.info('Cleared all wrong answer pairs');
+      await prefs.remove(_wrongAnswerSRSKey); // Also clear SRS
+      Logger.info('Cleared all wrong answer pairs and SRS data');
     } catch (e) {
       Logger.error('Failed to clear wrong answer pairs', e);
+    }
+  }
+
+  // ================================
+  // Spaced Repetition System (SRS)
+  // ================================
+  static const String _wrongAnswerSRSKey = 'wrong_answer_srs_v1';
+
+  /// Add or Update SRS Status for a question
+  /// If wrong -> Reset level to 0, immediate review
+  /// If correct -> Increase level, schedule future review
+  Future<void> updateSRSStatus({
+    required String examId, 
+    required int questionId, 
+    required bool isCorrect
+  }) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final List<String> rawList = prefs.getStringList(_wrongAnswerSRSKey) ?? [];
+      
+      // Decode existing SRS items
+      // Format: "examId:questionId:level:nextReviewEpoch"
+      final Map<String, _SRSItem> items = {};
+      for (var s in rawList) {
+        final parts = s.split(':');
+        if (parts.length == 4) {
+          final key = '${parts[0]}:${parts[1]}';
+          items[key] = _SRSItem(
+            examId: parts[0],
+            questionId: int.parse(parts[1]),
+            level: int.parse(parts[2]),
+            nextReview: DateTime.fromMillisecondsSinceEpoch(int.parse(parts[3])),
+          );
+        }
+      }
+
+      final key = '$examId:$questionId';
+      final currentItem = items[key];
+
+      if (!isCorrect) {
+        // User answered WRONG (or added for first time)
+        // Reset/Init to Level 0, Due Now
+        items[key] = _SRSItem(
+          examId: examId,
+          questionId: questionId,
+          level: 0,
+          nextReview: DateTime.now(), // Due immediately
+        );
+      } else {
+        // User answered CORRECT
+        if (currentItem != null) {
+          final newLevel = currentItem.level + 1;
+          
+          if (newLevel > 4) {
+             // Graduated! Remove from SRS loop
+             items.remove(key);
+          } else {
+             // Schedule next review
+             // Intervals: 0->1d, 1->3d, 2->7d, 3->14d, 4->30d
+             int daysToAdd = 1;
+             if (newLevel == 1) daysToAdd = 3;
+             if (newLevel == 2) daysToAdd = 7;
+             if (newLevel == 3) daysToAdd = 14;
+             if (newLevel == 4) daysToAdd = 30;
+             
+             items[key] = _SRSItem(
+               examId: examId,
+               questionId: questionId,
+               level: newLevel,
+               nextReview: DateTime.now().add(Duration(days: daysToAdd)),
+             );
+          }
+        }
+        // If correct but not in SRS, ignore (shouldn't happen in wrong answers mode)
+      }
+
+      // Save back
+      final List<String> newRawList = items.values.map((i) => 
+        '${i.examId}:${i.questionId}:${i.level}:${i.nextReview.millisecondsSinceEpoch}'
+      ).toList();
+      
+      await prefs.setStringList(_wrongAnswerSRSKey, newRawList);
+      
+      // Also sync to legacy simple pair list for backward compatibility/check checks
+      // If in items map -> ensure in pairs list
+      // If removed from map -> remove from pairs list
+      final Set<String> activeKeys = items.keys.toSet();
+      final legacyList = prefs.getStringList(_wrongAnswerPairsKey) ?? [];
+      final legacySet = legacyList.toSet();
+      
+      // Add new
+      for (var k in activeKeys) {
+        if (!legacySet.contains(k)) legacySet.add(k);
+      }
+      
+      // Remove graduated
+      // Actually, be careful. SRS items map only contains "active" wrong answers.
+      // If we graduated (removed from items), we should also remove from legacy list.
+      // But legacy list usually tracked "ever wrong". 
+      // Let's assume strict sync: If it's not in SRS, it's not "Wrong" anymore.
+      // Wait, complex case: existing users have legacy list but no SRS data.
+      // We will handle migration in `getDueSRSItems`.
+      
+      // For now, simpler sync: remove ONLY specific key if graduated
+      if (isCorrect && !items.containsKey(key)) {
+        if (legacySet.contains(key)) legacySet.remove(key);
+      } else if (!isCorrect) {
+        if (!legacySet.contains(key)) legacySet.add(key);
+      }
+      
+      await prefs.setStringList(_wrongAnswerPairsKey, legacySet.toList());
+
+    } catch (e) {
+      Logger.error('Failed to update SRS', e);
+    }
+  }
+  
+  /// Get all items due for review (or new ones migrated)
+  /// Returns List of "examId:questionId" strings
+  Future<List<String>> getDueSRSItems() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      
+      // 1. Check/Migrate Legacy Data
+      final legacyPairs = prefs.getStringList(_wrongAnswerPairsKey) ?? [];
+      List<String> srsList = prefs.getStringList(_wrongAnswerSRSKey) ?? [];
+      
+      final Map<String, _SRSItem> srsMap = {};
+      
+      // Parse SRS
+      for (var s in srsList) {
+         final parts = s.split(':');
+         if (parts.length == 4) {
+           final key = '${parts[0]}:${parts[1]}';
+           srsMap[key] = _SRSItem(
+             examId: parts[0],
+             questionId: int.parse(parts[1]),
+             level: int.parse(parts[2]),
+             nextReview: DateTime.fromMillisecondsSinceEpoch(int.parse(parts[3])),
+           );
+         }
+      }
+      
+      // Sync: If in legacy but not in SRS, add as Level 0 (Due Now)
+      bool changed = false;
+      for (var pair in legacyPairs) {
+        if (!srsMap.containsKey(pair)) {
+           final parts = pair.split(':');
+           if (parts.length == 2) {
+             srsMap[pair] = _SRSItem(
+               examId: parts[0],
+               questionId: int.parse(parts[1]),
+               level: 0,
+               nextReview: DateTime.now(),
+             );
+             changed = true;
+           }
+        }
+      }
+      
+      if (changed) {
+         // Save updated SRS
+         final newList = srsMap.values.map((i) => 
+           '${i.examId}:${i.questionId}:${i.level}:${i.nextReview.millisecondsSinceEpoch}'
+         ).toList();
+         await prefs.setStringList(_wrongAnswerSRSKey, newList);
+      }
+      
+      // 2. Filter Due Items
+      final now = DateTime.now();
+      final List<String> duePairs = [];
+      
+      for (var item in srsMap.values) {
+        if (item.nextReview.isBefore(now)) {
+           duePairs.add('${item.examId}:${item.questionId}');
+        }
+      }
+      
+      return duePairs;
+    } catch (e) {
+      Logger.error('Failed to get SRS items', e);
+      return [];
     }
   }
 
@@ -612,6 +882,85 @@ class UserProgressRepository {
       _testResultsController.add([]);
     }
   }
+  /// Get statistics by category (Accuracy %)
+  /// Returns a map of Category Name -> Accuracy (0.0 - 1.0)
+  Map<String, double> getCategoryStats() {
+    final results = getAllTestResults();
+    if (results.isEmpty) return {};
+
+    final Map<String, List<TestResult>> byCategory = {};
+    for (final result in results) {
+      // Normalize category names if needed, or keep as is
+      final cat = result.category;
+      if (cat == 'Genel' || cat == 'Yanlışlarım' || cat == 'Deneme Sınavı') continue; // Skip generic exams
+      (byCategory[cat] ??= []).add(result);
+    }
+
+    final Map<String, double> stats = {};
+    byCategory.forEach((cat, list) {
+      if (list.isEmpty) return;
+      int totalCorrect = 0;
+      int totalQuestions = 0;
+      for (final r in list) {
+        totalCorrect += r.correctAnswers;
+        totalQuestions += r.totalQuestions;
+      }
+      if (totalQuestions > 0) {
+        stats[cat] = totalCorrect / totalQuestions;
+      } else {
+        stats[cat] = 0.0;
+      }
+    });
+
+    return stats;
+  }
+
+  /// Get weakest categories (sorted by accuracy ascending)
+  List<String> getWeakestCategories({int limit = 3}) {
+    final stats = getCategoryStats();
+    if (stats.isEmpty) return [];
+
+    final sortedEntries = stats.entries.toList()
+      ..sort((a, b) => a.value.compareTo(b.value));
+    
+    return sortedEntries.take(limit).map((e) => e.key).toList();
+  }
+
+  /// Calculate Exam Readiness Score (0-100)
+  /// Returns -1 if insufficient data (< 5 tests)
+  int calculateReadinessScore() {
+    final results = getAllTestResults();
+    // Filter out "Yanlışlarım" or very short tests if necessary
+    final validResults = results.where((r) => r.category != 'Yanlışlarım' && r.totalQuestions >= 10).toList();
+    
+    if (validResults.length < 5) return -1;
+
+    // Sort by date descending (newest first)
+    validResults.sort((a, b) => b.date.compareTo(a.date));
+    
+    // Take last 10
+    final recentResults = validResults.take(10).toList();
+    
+    double totalWeightedScore = 0;
+    double totalWeight = 0;
+    
+    for (int i = 0; i < recentResults.length; i++) {
+      final result = recentResults[i];
+      final score = (result.correctAnswers / result.totalQuestions) * 100;
+      
+      // Weight: Newest (index 0) gets 1.0, decreasing by 0.05
+      // e.g., 1.0, 0.95, 0.90 ...
+      double weight = 1.0 - (i * 0.05);
+      if (weight < 0.5) weight = 0.5; // Minimum weight
+      
+      totalWeightedScore += score * weight;
+      totalWeight += weight;
+    }
+    
+    if (totalWeight == 0) return 0;
+    
+    return (totalWeightedScore / totalWeight).round();
+  }
 } 
 /// Immutable state object for user progress
 class UserProgressState {
@@ -619,16 +968,18 @@ class UserProgressState {
   final int streak;
   final int xp;
   final int level;
+  final int streakFreezes;
 
   const UserProgressState({
     required this.dailyProgress,
     required this.streak,
     required this.xp,
     required this.level,
+    this.streakFreezes = 0,
   });
   
   @override
-  String toString() => 'UserProgressState(daily: $dailyProgress, streak: $streak, xp: $xp, level: $level)';
+  String toString() => 'UserProgressState(daily: $dailyProgress, streak: $streak, xp: $xp, level: $level, freezes: $streakFreezes)';
   
   @override
   bool operator ==(Object other) {
@@ -637,9 +988,10 @@ class UserProgressState {
         other.dailyProgress == dailyProgress &&
         other.streak == streak &&
         other.xp == xp &&
-        other.level == level;
+        other.level == level &&
+        other.streakFreezes == streakFreezes;
   }
   
   @override
-  int get hashCode => Object.hash(dailyProgress, streak, xp, level);
+  int get hashCode => Object.hash(dailyProgress, streak, xp, level, streakFreezes);
 }

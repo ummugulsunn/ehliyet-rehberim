@@ -5,7 +5,7 @@ import '../application/quiz_providers.dart';
 import '../domain/question_model.dart';
 import 'results_screen.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/models/test_result_model.dart';
+import '../domain/test_result_model.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String examId;
@@ -107,7 +107,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
   Future<void> _saveResult({required bool isFinal}) async {
     if (_resultSaved) return;
-    final quizState = ref.read(quizControllerProvider);
+    final quizState = ref.read(quizControllerProvider(widget.examId));
     if (quizState.questions.isEmpty) return;
 
     final correct = quizState.score;
@@ -133,37 +133,42 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       final ups = ref.read(userProgressRepositoryProvider);
       
       if (widget.category == 'Yanlışlarım') {
-        // In "Yanlışlarım" test: remove correctly answered questions from wrong list
-        final List<int> correctlyAnsweredIds = [];
-        quizState.selectedAnswers.forEach((questionId, selectedAnswer) {
-          final q = questionsById[questionId];
-          if (q != null && selectedAnswer == q.correctAnswerKey) {
-            correctlyAnsweredIds.add(questionId);
-          }
-        });
-        for (final id in correctlyAnsweredIds) {
-          final q = questionsById[id];
-          if (q?.examId != null) {
-            await ups.removeWrongAnswerPair(examId: q!.examId!, questionId: id);
-          } else {
-            await ups.removeWrongAnswerId(id); // legacy fallback
-          }
+        // In "Yanlışlarım" test: update SRS status for ALL answered questions
+        for (final entry in quizState.selectedAnswers.entries) {
+           final questionId = entry.key;
+           final selectedAnswer = entry.value;
+           final q = questionsById[questionId];
+           
+           if (q != null && q.examId != null) {
+              final isCorrect = selectedAnswer == q.correctAnswerKey;
+              // Updates SRS (promotes if correct, resets if wrong)
+              await ups.updateSRSStatus(
+                examId: q.examId!, 
+                questionId: questionId, 
+                isCorrect: isCorrect
+              );
+           }
         }
       } else {
-        // In regular tests: add wrong answers to the wrong list
-        final List<int> wrongIds = [];
-        quizState.selectedAnswers.forEach((questionId, selectedAnswer) {
+        // In regular tests: add wrong answers to the wrong list (SRS Level 0)
+        // In regular tests: add wrong answers to the wrong list (SRS Level 0)
+        for (final entry in quizState.selectedAnswers.entries) {
+          final questionId = entry.key;
+          final selectedAnswer = entry.value;
           final q = questionsById[questionId];
+          
           if (q != null && selectedAnswer != q.correctAnswerKey) {
-            wrongIds.add(questionId);
-          }
-        });
-        for (final id in wrongIds) {
-          final q = questionsById[id];
-          if (q?.examId != null) {
-            await ups.addWrongAnswerPair(examId: q!.examId!, questionId: id);
-          } else {
-            await ups.addWrongAnswerId(id); // legacy fallback
+             // WRONG Answer -> Add to SRS
+             if (q.examId != null) {
+               await ups.updateSRSStatus(
+                 examId: q.examId!, 
+                 questionId: questionId, 
+                 isCorrect: false
+               );
+             } else {
+               // Fallback for questions without examId
+               await ups.addWrongAnswerId(questionId); 
+             }
           }
         }
       }
@@ -181,21 +186,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       // When preloaded questions are provided, use them as-is without filtering by category
       final List<Question> questions = base;
 
-    final quizState = ref.watch(quizControllerProvider);
+    final quizState = ref.watch(quizControllerProvider(widget.examId));
       final bool examChanged = quizState.examId != widget.examId;
-      final bool questionCountChanged = quizState.questions.length != questions.length;
+      // final bool questionCountChanged = quizState.questions.length != questions.length;
       final bool questionsEmpty = quizState.questions.isEmpty;
 
       // Only initialize if quiz state is truly empty or exam changed
       // Don't reinitialize if questions are already loaded and exam is the same
       if (questionsEmpty && questions.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+          ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
         });
       } else if (examChanged && questions.isNotEmpty) {
         // Only reinitialize if exam changed
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+          ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
         });
       }
 
@@ -295,7 +300,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           selectedAnswers: quizState.selectedAnswers,
                           questions: quizState.questions,
                           onTap: (targetIndex) {
-                            ref.read(quizControllerProvider.notifier).setQuestionIndex(targetIndex);
+                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(targetIndex);
                             _pageController.animateToPage(
                               targetIndex,
                               duration: const Duration(milliseconds: 300),
@@ -320,7 +325,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           itemCount: quizState.totalQuestions,
                           onPageChanged: (index) {
                             // PageView değiştiğinde quiz state'i sync et
-                            ref.read(quizControllerProvider.notifier).setQuestionIndex(index);
+                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(index);
                           },
                           itemBuilder: (context, index) {
                             final question = quizState.questions[index];
@@ -332,7 +337,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               isAnswered: quizState.selectedAnswers.containsKey(question.id),
                               isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
                               onAnswerSelected: (answer) {
-                                ref.read(quizControllerProvider.notifier).answerQuestion(answer);
+                                ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
                                 // Trigger confetti animation for correct answers
                                 final currentQuestion = quizState.questions[index];
                                 if (answer == currentQuestion.correctAnswerKey) {
@@ -340,7 +345,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                 }
                               },
                                onNextQuestion: () {
-                                ref.read(quizControllerProvider.notifier).nextQuestion();
+                                ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
                                 if (index < quizState.totalQuestions - 1) {
                                   _pageController.nextPage(
                                     duration: const Duration(milliseconds: 300),
@@ -350,7 +355,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               },
                                onPreviousQuestion: () {
                                  if (index > 0) {
-                                   ref.read(quizControllerProvider.notifier).previousQuestion();
+                                   ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
                                    _pageController.previousPage(
                                      duration: const Duration(milliseconds: 300),
                                      curve: Curves.easeInOut,
@@ -359,7 +364,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                },
                               onFinishQuiz: () async {
                                 final route = MaterialPageRoute(
-                                  builder: (context) => const ResultsScreen(),
+                                  builder: (context) => ResultsScreen(examId: widget.examId),
                                 );
                                 final navigator = Navigator.of(context);
                                 await _saveResult(isFinal: true);
@@ -375,12 +380,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     ],
                   ),
                 ),
-                if (ref.watch(quizControllerProvider).currentCombo >= 3)
+                if (ref.watch(quizControllerProvider(widget.examId)).currentCombo >= 3)
                   Positioned(
                     top: 12,
                     left: 0,
                     right: 0,
-                    child: _ComboToast(combo: ref.watch(quizControllerProvider).currentCombo),
+                    child: _ComboToast(combo: ref.watch(quizControllerProvider(widget.examId)).currentCombo),
                   ),
                 // Confetti animation for correct answers
                 Positioned(
@@ -448,7 +453,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             ? allQuestions.where((q) => q.category == widget.category).toList()
             : allQuestions;
         
-        final quizState = ref.watch(quizControllerProvider);
+        final quizState = ref.watch(quizControllerProvider(widget.examId));
 
         // Initialize or re-initialize quiz only when necessary
         final bool examChanged = quizState.examId != widget.examId;
@@ -457,12 +462,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         // Only initialize if quiz state is truly empty or exam changed
         if (questionsEmpty && questions.isNotEmpty) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+            ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
           });
         } else if (examChanged && questions.isNotEmpty) {
           // Only reinitialize if exam changed
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ref.read(quizControllerProvider.notifier).initializeQuiz(questions, examId: widget.examId);
+            ref.read(quizControllerProvider(widget.examId).notifier).initializeQuiz(questions, examId: widget.examId);
           });
         }
 
@@ -563,7 +568,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           selectedAnswers: quizState.selectedAnswers,
                           questions: quizState.questions,
                           onTap: (targetIndex) {
-                            ref.read(quizControllerProvider.notifier).setQuestionIndex(targetIndex);
+                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(targetIndex);
                             _pageController.animateToPage(
                               targetIndex,
                               duration: const Duration(milliseconds: 300),
@@ -588,7 +593,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                   itemCount: quizState.totalQuestions,
                   onPageChanged: (index) {
                             // PageView değiştiğinde quiz state'i sync et
-                            ref.read(quizControllerProvider.notifier).setQuestionIndex(index);
+                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(index);
                   },
                   itemBuilder: (context, index) {
                     final question = quizState.questions[index];
@@ -600,7 +605,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       isAnswered: quizState.selectedAnswers.containsKey(question.id),
                       isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
                       onAnswerSelected: (answer) {
-                        ref.read(quizControllerProvider.notifier).answerQuestion(answer);
+                        ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
                                 // Trigger confetti animation for correct answers
                                 final currentQuestion = quizState.questions[index];
                                 if (answer == currentQuestion.correctAnswerKey) {
@@ -608,7 +613,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                 }
                       },
                       onNextQuestion: () {
-                        ref.read(quizControllerProvider.notifier).nextQuestion();
+                        ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
                         if (index < quizState.totalQuestions - 1) {
                           _pageController.nextPage(
                             duration: const Duration(milliseconds: 300),
@@ -618,7 +623,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       },
                                onPreviousQuestion: () {
                                  if (index > 0) {
-                                   ref.read(quizControllerProvider.notifier).previousQuestion();
+                                   ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
                                    _pageController.previousPage(
                                      duration: const Duration(milliseconds: 300),
                                      curve: Curves.easeInOut,
@@ -627,7 +632,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                },
                               onFinishQuiz: () async {
                                 final route = MaterialPageRoute(
-                                  builder: (context) => const ResultsScreen(),
+                                  builder: (context) => ResultsScreen(examId: widget.examId),
                                 );
                                 final navigator = Navigator.of(context);
                                 await _saveResult(isFinal: true);
@@ -642,12 +647,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             ],
                   ),
                 ),
-                if (ref.watch(quizControllerProvider).currentCombo >= 3)
+                if (ref.watch(quizControllerProvider(widget.examId)).currentCombo >= 3)
                   Positioned(
                     top: 12,
                     left: 0,
                     right: 0,
-                    child: _ComboToast(combo: ref.watch(quizControllerProvider).currentCombo),
+                    child: _ComboToast(combo: ref.watch(quizControllerProvider(widget.examId)).currentCombo),
                   ),
                 // Confetti animation for correct answers
                 Positioned(

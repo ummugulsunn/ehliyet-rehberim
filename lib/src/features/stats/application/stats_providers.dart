@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../home/data/user_progress_repository.dart';
-import '../../../core/models/test_result_model.dart';
+import '../../quiz/domain/test_result_model.dart';
 
 final testResultsProvider = StreamProvider<List<TestResult>>((ref) {
   final repository = UserProgressRepository.instance;
