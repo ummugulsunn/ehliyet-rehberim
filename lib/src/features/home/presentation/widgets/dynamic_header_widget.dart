@@ -59,10 +59,15 @@ class DynamicHeaderWidget extends ConsumerWidget {
           String levelTitle = 'Acemi Sürücü';
           if (level < 5) {
             levelTitle = 'Acemi Sürücü';
-          } else if (level < 10) levelTitle = 'Şehir İçi Uzmanı';
-          else if (level < 20) levelTitle = 'Otoyol Faresi';
-          else if (level < 50) levelTitle = 'Trafik Efsanesi';
-          else levelTitle = 'Ehliyet Kralı';
+          } else if (level < 10) {
+            levelTitle = 'Şehir İçi Uzmanı';
+          } else if (level < 20) {
+            levelTitle = 'Otoyol Faresi';
+          } else if (level < 50) {
+            levelTitle = 'Trafik Efsanesi';
+          } else {
+            levelTitle = 'Ehliyet Kralı';
+          }
 
           // XP Calculation
           final userProgressRepository = ref.read(userProgressRepositoryProvider);

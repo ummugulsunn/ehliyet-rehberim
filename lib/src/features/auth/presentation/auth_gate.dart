@@ -13,7 +13,7 @@ class AuthGate extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-    print('DEBUG: AuthGate state: $authState');
+    debugPrint('DEBUG: AuthGate state: $authState');
     
     return authState.when(
       // Loading state - show a full-page loading screen

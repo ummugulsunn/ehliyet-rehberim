@@ -55,7 +55,7 @@ class StatsRepository {
     return spots;
   }
 
-  /// Get topic performance as Map<TopicName, SuccessRate 0-1>.
+  /// Get topic performance as Map of TopicName to SuccessRate (0-1).
   Map<String, double> getTopicPerformance() {
     return _progressRepository.getCategoryStats();
   }

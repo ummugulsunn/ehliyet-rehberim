@@ -31,7 +31,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
   @override
   Widget build(BuildContext context) {
     final currentUser = AuthRepository.instance.currentUser;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -205,7 +205,7 @@ class _LeaderboardTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isMe 
-            ? theme.colorScheme.primaryContainer.withOpacity(0.3)
+            ? theme.colorScheme.primaryContainer.withValues(alpha: 0.3)
             : theme.cardColor,
         borderRadius: BorderRadius.circular(12),
         border: isMe 
@@ -214,7 +214,7 @@ class _LeaderboardTile extends StatelessWidget {
         boxShadow: [
           if (!isDark)
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -247,7 +247,7 @@ class _LeaderboardTile extends StatelessWidget {
               backgroundImage: entry.photoUrl != null
                   ? NetworkImage(entry.photoUrl!)
                   : null,
-              backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
+              backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
               child: entry.photoUrl == null
                   ? Text(
                       entry.displayName.isNotEmpty ? entry.displayName[0].toUpperCase() : '?',

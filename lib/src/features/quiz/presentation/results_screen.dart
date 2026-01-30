@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:confetti/confetti.dart';
 import '../application/quiz_providers.dart';
 import '../../../core/theme/app_colors.dart';
 
 import '../domain/test_result_model.dart';
 
 
-class ResultsScreen extends ConsumerWidget {
+class ResultsScreen extends ConsumerStatefulWidget {
   final String examId;
   final TestResult? result;
 
@@ -17,29 +18,62 @@ class ResultsScreen extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final quizState = ref.watch(quizControllerProvider(examId));
+  ConsumerState<ResultsScreen> createState() => _ResultsScreenState();
+}
+
+class _ResultsScreenState extends ConsumerState<ResultsScreen> {
+  late ConfettiController _confettiController;
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    
+    // Play confetti after a short delay for passing scores
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final quizState = ref.read(quizControllerProvider(widget.examId));
+      final totalQuestions = widget.result?.totalQuestions ?? quizState.totalQuestions;
+      final correctAnswers = widget.result?.correctAnswers ?? quizState.score;
+      final successPercentage = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).round() : 0;
+      
+      if (successPercentage >= 70) {
+        _confettiController.play();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final quizState = ref.watch(quizControllerProvider(widget.examId));
     final isExamMode = quizState.isExamMode;
     
     // Calculate statistics
     // Calculate statistics
-    final totalQuestions = result?.totalQuestions ?? quizState.totalQuestions;
-    final correctAnswers = result?.correctAnswers ?? quizState.score;
+    final totalQuestions = widget.result?.totalQuestions ?? quizState.totalQuestions;
+    final correctAnswers = widget.result?.correctAnswers ?? quizState.score;
     final incorrectAnswers = totalQuestions - correctAnswers;
     // For result object, we calculate success percentage directly
-    final successPercentage = result != null 
+    final successPercentage = widget.result != null 
         ? (totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).round() : 0)
         : (totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).round() : 0);
         
     final isPassed = successPercentage >= 70;
     
     // Time taken: use result if available, otherwise provider
-    final timeTakenDuration = result?.timeTakenInSeconds != null 
-        ? Duration(seconds: result!.timeTakenInSeconds!)
-        : ref.read(quizControllerProvider(examId).notifier).getTimeTaken();
+    final timeTakenDuration = widget.result?.timeTakenInSeconds != null 
+        ? Duration(seconds: widget.result!.timeTakenInSeconds!)
+        : ref.read(quizControllerProvider(widget.examId).notifier).getTimeTaken();
 
 
-    return Scaffold(
+    return Stack(
+      children: [
+        Scaffold(
       appBar: AppBar(
         title: Text(isExamMode ? 'Sınav Sonuçları' : 'Test Sonuçları'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -197,7 +231,7 @@ class ResultsScreen extends ConsumerWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              final notifier = ref.read(quizControllerProvider(examId).notifier);
+                              final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
                               notifier.reset();
                               if (isExamMode) {
                                 // For exam mode, we might want to reload questions or just restart
@@ -232,7 +266,7 @@ class ResultsScreen extends ConsumerWidget {
                           width: double.infinity,
                           child: OutlinedButton(
                             onPressed: () async {
-                              ref.read(quizControllerProvider(examId).notifier).reset();
+                              ref.read(quizControllerProvider(widget.examId).notifier).reset();
                               if (context.mounted) {
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                               }
@@ -261,6 +295,28 @@ class ResultsScreen extends ConsumerWidget {
           );
         }
       ),
+    ),
+    // Confetti widget overlay
+    Align(
+      alignment: Alignment.topCenter,
+      child: ConfettiWidget(
+        confettiController: _confettiController,
+        blastDirectionality: BlastDirectionality.explosive,
+        shouldLoop: false,
+        colors: const [
+          Colors.green,
+          Colors.blue,
+          Colors.pink,
+          Colors.orange,
+          Colors.purple,
+          Colors.yellow,
+        ],
+        numberOfParticles: 30,
+        emissionFrequency: 0.05,
+        gravity: 0.1,
+      ),
+    ),
+    ],
     );
   }
 

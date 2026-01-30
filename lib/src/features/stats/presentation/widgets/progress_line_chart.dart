@@ -50,13 +50,13 @@ class ProgressLineChart extends StatelessWidget {
         verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.2),
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.2),
             strokeWidth: 1,
           );
         },
@@ -88,7 +88,7 @@ class ProgressLineChart extends StatelessWidget {
       ),
       borderData: FlBorderData(
         show: true,
-        border: Border.all(color: const Color(0xff37434d).withOpacity(0.1)),
+        border: Border.all(color: const Color(0xff37434d).withValues(alpha: 0.1)),
       ),
       minX: 0,
       maxX: (days - 1).toDouble(),
@@ -112,8 +112,8 @@ class ProgressLineChart extends StatelessWidget {
             show: true,
             gradient: LinearGradient(
               colors: [
-                primaryColor.withOpacity(0.3),
-                secondaryColor.withOpacity(0.0),
+                primaryColor.withValues(alpha: 0.3),
+                secondaryColor.withValues(alpha: 0.0),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

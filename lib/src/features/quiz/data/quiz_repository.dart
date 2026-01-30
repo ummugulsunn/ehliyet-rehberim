@@ -6,13 +6,25 @@ import '../../traffic_signs/domain/traffic_sign_model.dart';
 import '../../study_guides/domain/study_guide_model.dart';
 
 /// Service responsible for loading quiz questions from local JSON file
+/// Uses in-memory caching to avoid repeated JSON parsing
 class QuizRepository {
-  /// Load all exams from assets/data/exams.json
+  // In-memory cache for loaded data
+  static List<Exam>? _examsCache;
+  static List<TrafficSignCategory>? _signsCache;
+  static List<StudyGuide>? _guidesCache;
+
+  /// Load all exams from assets/data/exams.json with caching
   Future<List<Exam>> loadExams() async {
+    // Return cached data if available
+    if (_examsCache != null) {
+      return _examsCache!;
+    }
+
     try {
       final String jsonString = await rootBundle.loadString('assets/data/exams.json');
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-      return jsonList.map((e) => Exam.fromJson(e as Map<String, dynamic>)).toList();
+      _examsCache = jsonList.map((e) => Exam.fromJson(e as Map<String, dynamic>)).toList();
+      return _examsCache!;
     } on PlatformException catch (e) {
       throw Exception('Failed to load exams: ${e.message}');
     } on FormatException catch (e) {
@@ -59,14 +71,20 @@ class QuizRepository {
     return exam.questions.map((q) => q.withExamId(exam.examId)).toList();
   }
 
-  /// Load traffic signs categories from assets/data/traffic_signs.json
+  /// Load traffic signs categories from assets/data/traffic_signs.json with caching
   Future<List<TrafficSignCategory>> loadTrafficSigns() async {
+    // Return cached data if available
+    if (_signsCache != null) {
+      return _signsCache!;
+    }
+
     try {
       final String jsonString = await rootBundle.loadString('assets/data/traffic_signs.json');
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-      return jsonList
+      _signsCache = jsonList
           .map((e) => TrafficSignCategory.fromJson(e as Map<String, dynamic>))
           .toList(growable: false);
+      return _signsCache!;
     } on PlatformException catch (e) {
       throw Exception('Failed to load traffic signs: ${e.message}');
     } on FormatException catch (e) {
@@ -76,14 +94,20 @@ class QuizRepository {
     }
   }
 
-  /// Load study guides from assets/data/study_guides.json
+  /// Load study guides from assets/data/study_guides.json with caching
   Future<List<StudyGuide>> loadStudyGuides() async {
+    // Return cached data if available
+    if (_guidesCache != null) {
+      return _guidesCache!;
+    }
+
     try {
       final String jsonString = await rootBundle.loadString('assets/data/study_guides.json');
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-      return jsonList
+      _guidesCache = jsonList
           .map((e) => StudyGuide.fromJson(e as Map<String, dynamic>))
           .toList(growable: false);
+      return _guidesCache!;
     } on PlatformException catch (e) {
       throw Exception('Failed to load study guides: ${e.message}');
     } on FormatException catch (e) {
@@ -91,5 +115,12 @@ class QuizRepository {
     } catch (e) {
       throw Exception('Unexpected error loading study guides: $e');
     }
+  }
+
+  /// Clear all cached data (useful for testing or forced refresh)
+  static void clearCache() {
+    _examsCache = null;
+    _signsCache = null;
+    _guidesCache = null;
   }
 } 

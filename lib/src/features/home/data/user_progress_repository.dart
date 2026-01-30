@@ -325,7 +325,7 @@ class UserProgressRepository {
     // Simple ISO week calculation (may vary but consistent for app usage)
     final currentWeek = int.parse(DateFormat('w').format(now));
     final currentMonth = now.month;
-    final currentYear = now.year; // Important for month crossing year
+    final _ = now.year; // Important for month crossing year
 
     final lastWeek = prefs.getInt(_lastWeekKey) ?? currentWeek;
     final lastMonth = prefs.getInt(_lastMonthKey) ?? currentMonth;
@@ -859,12 +859,6 @@ class UserProgressRepository {
   String _getTodayString() {
     final now = DateTime.now();
     return '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-  }
-
-  /// Get yesterday's date as a string (YYYY-MM-DD format)
-  String _getYesterdayString() {
-    final yesterday = DateTime.now().subtract(const Duration(days: 1));
-    return '${yesterday.year}-${yesterday.month.toString().padLeft(2, '0')}-${yesterday.day.toString().padLeft(2, '0')}';
   }
 
 
