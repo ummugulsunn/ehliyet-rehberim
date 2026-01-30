@@ -177,7 +177,7 @@ class NotificationSettingsScreen extends ConsumerWidget {
             trailing: Switch(
               value: enabled,
               onChanged: onToggle,
-              activeColor: iconColor,
+              activeThumbColor: iconColor,
             ),
           ),
           if (enabled) ...[
@@ -259,7 +259,7 @@ class NotificationSettingsScreen extends ConsumerWidget {
         trailing: Switch(
           value: enabled,
           onChanged: onToggle,
-          activeColor: iconColor,
+          activeThumbColor: iconColor,
         ),
       ),
     );

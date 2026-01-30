@@ -32,16 +32,11 @@ class QuizRepository {
       int uniqueIdCounter = 1;
       for (final exam in exams) {
         for (final question in exam.questions) {
-          final uniqueQuestion = Question(
-            id: uniqueIdCounter++,
-            questionText: question.questionText,
-            imageUrl: question.imageUrl,
-            options: question.options,
-            correctAnswerKey: question.correctAnswerKey,
-            explanation: question.explanation,
-            category: question.category,
-            examId: exam.examId,
-          );
+          // First add examId, then assign new unique ID (which preserves original ID)
+          final uniqueQuestion = question
+              .withExamId(exam.examId)
+              .withNewId(uniqueIdCounter++);
+              
           allQuestions.add(uniqueQuestion);
         }
       }

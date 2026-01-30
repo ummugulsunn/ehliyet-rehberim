@@ -3,10 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../application/quiz_providers.dart';
 import '../../../core/theme/app_colors.dart';
 
+import '../domain/test_result_model.dart';
+
 
 class ResultsScreen extends ConsumerWidget {
   final String examId;
-  const ResultsScreen({super.key, required this.examId});
+  final TestResult? result;
+
+  const ResultsScreen({
+    super.key,
+    required this.examId,
+    this.result,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,14 +22,22 @@ class ResultsScreen extends ConsumerWidget {
     final isExamMode = quizState.isExamMode;
     
     // Calculate statistics
-    final totalQuestions = quizState.totalQuestions;
-    final correctAnswers = quizState.score;
+    // Calculate statistics
+    final totalQuestions = result?.totalQuestions ?? quizState.totalQuestions;
+    final correctAnswers = result?.correctAnswers ?? quizState.score;
     final incorrectAnswers = totalQuestions - correctAnswers;
-    final successPercentage = totalQuestions > 0 
-        ? (correctAnswers / totalQuestions * 100).round()
-        : 0;
+    // For result object, we calculate success percentage directly
+    final successPercentage = result != null 
+        ? (totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).round() : 0)
+        : (totalQuestions > 0 ? (correctAnswers / totalQuestions * 100).round() : 0);
+        
     final isPassed = successPercentage >= 70;
-    final timeTaken = ref.read(quizControllerProvider(examId).notifier).getTimeTaken();
+    
+    // Time taken: use result if available, otherwise provider
+    final timeTakenDuration = result?.timeTakenInSeconds != null 
+        ? Duration(seconds: result!.timeTakenInSeconds!)
+        : ref.read(quizControllerProvider(examId).notifier).getTimeTaken();
+
 
     return Scaffold(
       appBar: AppBar(
@@ -153,8 +169,8 @@ class ResultsScreen extends ConsumerWidget {
                             _buildResultRow(
                               context,
                               'Süre',
-                              timeTaken != null 
-                                ? '${timeTaken.inMinutes}:${(timeTaken.inSeconds % 60).toString().padLeft(2, '0')}'
+                              timeTakenDuration != null 
+                                ? '${timeTakenDuration.inMinutes}:${(timeTakenDuration.inSeconds % 60).toString().padLeft(2, '0')}'
                                 : '--:--',
                               Icons.timer,
                               AppColors.info,

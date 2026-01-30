@@ -1,4 +1,4 @@
-import 'package:ehliyet_rehberim/src/core/models/question_model.dart';
+import 'package:ehliyet_rehberim/src/features/quiz/domain/question_model.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/application/quiz_providers.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/application/quiz_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +24,7 @@ void main() {
     });
 
     test('QuizController should initialize with empty state', () {
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
 
       expect(state.questions, isEmpty);
       expect(state.questionIndex, 0);
@@ -34,7 +34,7 @@ void main() {
     });
 
     test('QuizController should initialize quiz with questions', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -48,7 +48,7 @@ void main() {
 
       quizController.initializeQuiz(questions, examId: 'karma');
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.questions, questions);
       expect(state.questionIndex, 0);
       expect(state.selectedAnswers, isEmpty);
@@ -57,7 +57,7 @@ void main() {
     });
 
     test('QuizController should handle correct answer', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -72,14 +72,14 @@ void main() {
       quizController.initializeQuiz(questions, examId: 'karma');
       quizController.answerQuestion('A');
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.score, 1);
       expect(state.status, QuizStatus.correct);
       expect(state.selectedAnswers[1], 'A');
     });
 
     test('QuizController should handle incorrect answer', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -94,14 +94,14 @@ void main() {
       quizController.initializeQuiz(questions, examId: 'karma');
       quizController.answerQuestion('B');
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.score, 0);
       expect(state.status, QuizStatus.incorrect);
       expect(state.selectedAnswers[1], 'B');
     });
 
     test('QuizController should move to next question', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -125,13 +125,13 @@ void main() {
       quizController.answerQuestion('A');
       quizController.nextQuestion();
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.questionIndex, 1);
       expect(state.status, QuizStatus.initial);
     });
 
     test('QuizController should complete quiz', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -147,14 +147,14 @@ void main() {
       quizController.answerQuestion('A');
       quizController.nextQuestion();
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.questionIndex, 1);
       expect(state.status, QuizStatus.complete);
       expect(state.isComplete, true);
     });
 
     test('QuizController should reset quiz', () {
-      final quizController = container.read(quizControllerProvider.notifier);
+      final quizController = container.read(quizControllerProvider('karma').notifier);
       final questions = [
         Question(
           id: 1,
@@ -171,7 +171,7 @@ void main() {
       quizController.nextQuestion();
       quizController.reset();
 
-      final state = container.read(quizControllerProvider);
+      final state = container.read(quizControllerProvider('karma'));
       expect(state.questionIndex, 0);
       expect(state.selectedAnswers, isEmpty);
       expect(state.score, 0);

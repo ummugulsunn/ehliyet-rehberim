@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'dart:io';
 import '../../../core/theme/app_colors.dart';
-import '../../profile/application/theme_mode_provider.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../auth/application/auth_providers.dart';
 import 'notification_settings_screen.dart';
 import '../../favorites/presentation/favorites_screen.dart';
 import '../../home/application/home_providers.dart';
 import 'widgets/theme_selector_widget.dart';
+import 'free_app_info_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -46,6 +48,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             backgroundColor: AppColors.error,
           ),
         );
+      }
+    }
+  }
+
+  Future<void> _rateApp() async {
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      await inAppReview.requestReview();
+    } else {
+      // Fallback logic
+      try {
+        // App Store ID: 6739002862
+        // Application ID: com.ehliyetrehberim.app
+        if (Platform.isAndroid) {
+          await inAppReview.openStoreListing(appStoreId: 'com.ehliyetrehberim.app');
+        } else if (Platform.isIOS) {
+          await inAppReview.openStoreListing(appStoreId: '6739002862');
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Mağaza sayfası açılamadı')),
+          );
+        }
       }
     }
   }
@@ -460,7 +487,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: Icons.star,
                   title: 'Uygulamayı Değerlendir',
                   subtitle: 'App Store\'da puan verin',
-                  onTap: () => _launchURL('https://apps.apple.com/us/app/ehliyet-rehberim/id6739002862'),
+                  onTap: _rateApp,
                   iconColor: AppColors.warning,
                 ),
               ],
@@ -472,6 +499,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               icon: Icons.info,
               iconColor: AppColors.textSecondary,
               children: [
+                _buildSettingsTile(
+                  icon: Icons.favorite_border,
+                  title: 'Neden Ücretsiz?',
+                  subtitle: 'Misyonumuz ve amacımız',
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const FreeAppInfoScreen()),
+                  ),
+                  iconColor: AppColors.primary,
+                ),
                 _buildSettingsTile(
                   icon: Icons.info_outline,
                   title: 'Uygulama Versiyonu',

@@ -109,7 +109,7 @@ class _TopicPieChartState extends State<TopicPieChart> {
   }
 
   Color _getColor(int index) {
-    constcolors = [
+    const colors = [
       Color(0xFF0293ee),
       Color(0xFFf8b250),
       Color(0xFF845bef),
@@ -118,7 +118,7 @@ class _TopicPieChartState extends State<TopicPieChart> {
       Color(0xFF795548),
       Color(0xFF9c27b0),
     ];
-    return constcolors[index % constcolors.length];
+    return colors[index % colors.length];
   }
 }
 

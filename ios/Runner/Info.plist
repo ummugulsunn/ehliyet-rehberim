@@ -45,6 +45,14 @@
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<!-- App Transport Security for WebView -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+			<key>NSAllowsArbitraryLoadsInWebContent</key>
+			<true/>
+		</dict>
 		<!-- AdMob App ID (Production) -->
 		<key>GADApplicationIdentifier</key>
 		<string>ca-app-pub-2163842474515875~2558853684</string>

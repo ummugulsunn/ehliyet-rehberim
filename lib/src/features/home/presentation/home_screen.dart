@@ -13,10 +13,10 @@ import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
 import '../../favorites/presentation/favorites_screen.dart';
-import 'widgets/achievements_widget.dart';
 import 'widgets/smart_review_card.dart';
 import 'widgets/readiness_card.dart';
 import 'widgets/exam_simulation_card.dart';
+import 'widgets/daily_tip_card.dart';
 import '../../leaderboard/presentation/leaderboard_screen.dart';
 
 
@@ -30,6 +30,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        // ... AppBar remains same ...
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
@@ -51,151 +52,70 @@ class HomeScreen extends ConsumerWidget {
             icon: authState.when(
               data: (user) {
                 if (user == null) {
-                  // Misafir kullanıcı - default icon
-                  return Icon(
-                    Icons.account_circle_outlined,
-                    color: AppColors.textSecondary,
+                  return Icon(Icons.account_circle_outlined, color: AppColors.textSecondary);
+                } else if (user.photoURL != null && user.photoURL!.isNotEmpty) {
+                  return ClipOval(
+                    child: Image.network(user.photoURL!, width: 24, height: 24, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Icon(Icons.account_circle, color: AppColors.primary)),
                   );
                 } else {
-                  // Giriş yapmış kullanıcı - profil resmi veya default icon
-                  if (user.photoURL != null && user.photoURL!.isNotEmpty) {
-                    // Kullanıcının profil resmi varsa
-                    return ClipOval(
-                      child: Image.network(
-                        user.photoURL!,
-                        width: 24,
-                        height: 24,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            width: 24,
-                            height: 24,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                              color: AppColors.surfaceContainerHighest,
-                        ),
-                        child: Icon(
-                              Icons.account_circle,
-                              color: AppColors.primary,
-                              size: 24,
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  } else {
-                    // Profil resmi yoksa default icon
-                    return Icon(
-                      Icons.account_circle,
-                      color: AppColors.primary,
-                    );
-                  }
+                  return Icon(Icons.account_circle, color: AppColors.primary);
                 }
               },
-              loading: () => const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                ),
-              ),
-              error: (_, __) => Icon(
-                Icons.account_circle_outlined,
-                color: AppColors.textSecondary,
-              ),
+              loading: () => const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+              error: (_, __) => Icon(Icons.account_circle_outlined, color: AppColors.textSecondary),
             ),
-                      ),
-                    ],
-                  ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: authState.when(
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-                    child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: AppColors.error,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                  'Bir hata oluştu',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                  error.toString(),
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, stackTrace) => Center(child: Text('Hata: $error')),
           data: (user) => ListView(
             padding: const EdgeInsets.all(20.0),
             children: [
-              const SizedBox(height: 8),
-              
-              // Dynamic Header Section
+              // Dynamic Header
               DynamicHeaderWidget(authState: authState),
+              
+              const SizedBox(height: 16),
+              
+              // NEW: Daily Tip Card
+              const DailyTipCard(),
               
               const SizedBox(height: 24),
               
-              // Primary Action Card - Karma Test
+              // Primary Action (Karma Test)
               _buildPrimaryActionCard(context),
               
               const SizedBox(height: 32),
 
-              // Status & Preparation Section (Carousel)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hazırlık Durumu',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      height: 180, // Fixed height for carousel cards
-                      child: PageView(
-                        controller: PageController(viewportFraction: 0.92),
-                        padEnds: false,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(right: 12),
-                            child: ReadinessCard(),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 12),
-                            child: SmartReviewCard(),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 12),
-                            child: ExamSimulationCard(),
-                          ),
-                        ],
-                      ),
-                    ),
+              // Status Section
+              Text(
+                'Hazırlık Durumu',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 180,
+                child: PageView(
+                  controller: PageController(viewportFraction: 0.92),
+                  padEnds: false,
+                  children: const [
+                    Padding(padding: EdgeInsets.only(right: 12), child: ReadinessCard()),
+                    Padding(padding: EdgeInsets.only(right: 12), child: SmartReviewCard()),
+                    Padding(padding: EdgeInsets.only(right: 12), child: ExamSimulationCard()),
                   ],
                 ),
               ),
 
               const SizedBox(height: 32),
               
-              // Tool Grid Section
+              // Tools Section (Redesigned as List)
               Text(
-                'Çalışma Alanı',
+                'Çalışma Araçları',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onSurface,
@@ -203,8 +123,7 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               
-              // Secondary Action Grid
-              _buildSecondaryActionGrid(context, ref),
+              _buildFeatureList(context, ref),
               
               const SizedBox(height: 32),
             ],
@@ -214,350 +133,216 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
+  // ... _buildPrimaryActionCard remains same ...
   Widget _buildPrimaryActionCard(BuildContext context) {
     return Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
             AppColors.primaryDark,
             AppColors.primary,
             AppColors.primary.withValues(alpha: 0.9),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
           stops: const [0.0, 0.7, 1.0],
-                          ),
+        ),
         borderRadius: BorderRadius.circular(24),
-                          boxShadow: [
-                            BoxShadow(
+        boxShadow: [
+          BoxShadow(
             color: AppColors.primaryShadow.withValues(alpha: 0.4),
             blurRadius: 30,
             offset: const Offset(0, 12),
             spreadRadius: 2,
           ),
-          BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.3),
-            blurRadius: 60,
-            offset: const Offset(0, 20),
-                            ),
-                          ],
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
                 builder: (context) => const ExamSelectionScreen(),
-                                ),
-                              );
-                            },
+              ),
+            );
+          },
           borderRadius: BorderRadius.circular(24),
           child: Padding(
             padding: const EdgeInsets.all(36.0),
             child: Column(
-                                children: [
-                                  Container(
+              children: [
+                Container(
                   padding: const EdgeInsets.all(20),
-                                    decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                     color: AppColors.onPrimary.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.onPrimary.withValues(alpha: 0.4),
-                      width: 3,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.onPrimary.withValues(alpha: 0.2),
-                        blurRadius: 15,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                    border: Border.all(color: AppColors.onPrimary.withValues(alpha: 0.4), width: 3),
                   ),
-                  child: Icon(
-                    Icons.play_arrow_rounded,
-                    size: 56,
-                    color: AppColors.onPrimary,
-                  ),
+                  child: Icon(Icons.play_arrow_rounded, size: 56, color: AppColors.onPrimary),
                 ),
                 const SizedBox(height: 24),
-                                        Text(
+                Text(
                   'Karma Teste Başla',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: AppColors.onPrimary,
                     fontSize: 28,
-                    letterSpacing: 0.5,
-                    height: 1.2,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.onPrimary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: AppColors.onPrimary.withValues(alpha: 0.2),
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    'Tüm konulardan rastgele bir test çöz',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.onPrimary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _buildSecondaryActionGrid(BuildContext context, WidgetRef ref) {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      childAspectRatio: 0.65, // Aggressively reduced to prevent overflow
+  Widget _buildFeatureList(BuildContext context, WidgetRef ref) {
+    return Column(
       children: [
-        _buildFeatureCard(
-          context,
-          icon: Icons.topic_outlined,
-          title: 'Konu Konu\nÇalış',
-          color: AppColors.info,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const TopicSelectionScreen(),
-                                ),
-                              );
-                            },
+        Row(
+          children: [
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.topic_outlined,
+                title: 'Konu Listesi',
+                subtitle: 'Eksiklerini tamamla',
+                color: AppColors.info,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TopicSelectionScreen())),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.book,
+                title: 'Konu Anlatımı',
+                subtitle: 'Ders notları',
+                color: AppColors.secondary,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StudyGuideListScreen())),
+              ),
+            ),
+          ],
         ),
-        _buildFeatureCard(
+        const SizedBox(height: 12),
+         Row(
+          children: [
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.traffic_outlined,
+                title: 'Trafik İşaretleri',
+                subtitle: 'Görsel hafıza',
+                color: Colors.orange,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TrafficSignsScreen())),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.refresh_outlined,
+                title: 'Yanlışlarım',
+                subtitle: 'Hatalarını çöz',
+                color: AppColors.error,
+                onTap: () async {
+                   // Yanlışlarım logic (Keeping existing logic)
+                   final userProgress = ref.read(userProgressRepositoryProvider);
+                   final wrongCount = await userProgress.getWrongAnswerIdsCount();
+                   
+                   if (wrongCount == 0) {
+                      if(!context.mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hiç yanlışın yok! Harika gidiyorsun.')));
+                      return;
+                   }
+
+                   final wrongQuestions = await ref.refresh(wrongQuestionsProvider.future);
+                   if(!context.mounted) return;
+                   
+                   if (wrongQuestions.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yüklenecek yanlış soru bulunamadı.')));
+                      return;
+                   }
+                   
+                   Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => QuizScreen(
+                        examId: 'yanliş_sorular',
+                        preloadedQuestions: wrongQuestions,
+                        category: 'Yanlışlarım',
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        _buildFeatureTile(
           context,
           icon: Icons.analytics_outlined,
-          title: 'İstatistiklerim',
+          title: 'İstatistikler & Başarımlar',
+          subtitle: 'Gelişimini takip et',
           color: AppColors.success,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const StatsScreen(),
-              ),
-            );
-          },
+          isHorizontal: true,
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StatsScreen())),
         ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.emoji_events_outlined,
-          title: 'Başarımlar',
-          color: Colors.orange,
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.favorite_rounded,
+                title: 'Favorilerim',
+                subtitle: 'Kaydettiğin sorular',
+                color: Colors.pink,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FavoritesScreen())),
               ),
-              builder: (context) => DraggableScrollableSheet(
-                initialChildSize: 0.7,
-                minChildSize: 0.5,
-                maxChildSize: 0.9,
-                expand: false,
-                builder: (context, scrollController) => SingleChildScrollView(
-                  controller: scrollController,
-                  child: const AchievementsWidget(),
-                ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildFeatureTile(
+                context,
+                icon: Icons.emoji_events_rounded,
+                title: 'Liderlik Tablosu',
+                subtitle: 'Sıralamanı gör',
+                color: Colors.deepPurple,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LeaderboardScreen())),
               ),
-            );
-          },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.leaderboard_outlined,
-          title: 'Liderlik\nTablosu',
-          color: Colors.purple,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const LeaderboardScreen(),
-              ),
-            );
-          },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.refresh_outlined,
-          title: 'Yanlışlarım\nTesti',
-          color: AppColors.warning,
-          // isPro: true, // Removed for free version
-          onTap: () async {
-            // Locked feature check removed - always allow access
-            /*
-            final proStatusAsync = ref.read(proStatusProvider);
-            final isPro = proStatusAsync.when(data: (v) => v, loading: () => false, error: (_, __) => false);
-
-            if (!isPro) {
-              // Navigate to paywall
-              // ignore: use_build_context_synchronously
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PaywallScreen()),
-              );
-              return;
-            }
-            */
-
-            // Pro user: load wrong questions
-            // Show loading dialog while waiting
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (_) => const Center(child: CircularProgressIndicator()),
-            );
-
-            try {
-              // Debug: Check current wrong answer count
-              final userProgress = ref.read(userProgressRepositoryProvider);
-              final wrongCount = await userProgress.getWrongAnswerIdsCount();
-              
-              // If too many wrong answers (indicating a bug), clear them
-              if (wrongCount > 50) {
-                await userProgress.clearAllWrongAnswerIds();
-                if (!context.mounted) return;
-                Navigator.of(context, rootNavigator: true).pop();
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Yanlış sorular listesi temizlendi. Lütfen yeni yanlışlar yapın.')),
-                );
-                return;
-              }
-              
-              // Always refresh to avoid serving cached empty data
-              final wrongQuestions = await ref.refresh(wrongQuestionsProvider.future);
-
-              if (!context.mounted) return;
-              Navigator.of(context, rootNavigator: true).pop();
-
-              if (wrongQuestions.isEmpty) {
-                if (!context.mounted) return;
-                showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    title: const Text('Harika!'),
-                    content: const Text('Tekrar etmen gereken bir yanlışın bulunmuyor.'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Tamam'),
-                      ),
-                    ],
-                  ),
-                );
-                return;
-              }
-
-              // Navigate to QuizScreen with preloaded wrong questions
-              if (!context.mounted) return;
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => QuizScreen(
-                    examId: 'yanliş_sorular', // Unique exam ID for wrong questions
-                    preloadedQuestions: wrongQuestions,
-                    category: 'Yanlışlarım',
-                  ),
-                ),
-              );
-            } catch (_) {
-              if (!context.mounted) return;
-              Navigator.of(context, rootNavigator: true).pop();
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Sorular yüklenemedi. Lütfen tekrar deneyin.')),
-              );
-            }
-          },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.favorite_rounded,
-          title: 'Favorilerim',
-          color: AppColors.error,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const FavoritesScreen(),
-              ),
-            );
-          },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.traffic_outlined,
-          title: 'Trafik\nİşaretleri',
-          color: AppColors.secondary,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const TrafficSignsScreen(),
-              ),
-            );
-          },
-        ),
-        _buildFeatureCard(
-          context,
-          icon: Icons.book,
-          title: 'Konu\nAnlatımları',
-          color: AppColors.info,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                builder: (_) => const StudyGuideListScreen(),
-                        ),
-                      );
-                    },
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _buildFeatureCard(
+  Widget _buildFeatureTile(
     BuildContext context, {
     required IconData icon,
     required String title,
+    required String subtitle,
     required Color color,
     required VoidCallback onTap,
-    bool isPro = false,
+    bool isHorizontal = false,
   }) {
     return Container(
+      height: isHorizontal ? 80 : 160,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-          width: 1.5,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor.withValues(alpha: 0.12),
-            blurRadius: 20,
-            offset: const Offset(0, 6),
-            spreadRadius: 1,
-          ),
-          BoxShadow(
-            color: color.withValues(alpha: 0.05),
-            blurRadius: 30,
-            offset: const Offset(0, 10),
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -566,70 +351,47 @@ class HomeScreen extends ConsumerWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            color.withValues(alpha: 0.15),
-                            color.withValues(alpha: 0.08),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(
-                          color: color.withValues(alpha: 0.3),
-                          width: 1.5,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: color.withValues(alpha: 0.1),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Icon(
-                        icon,
-                        size: 28,
-                        color: color,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                      Flexible(
-                        child: Text(
-                          title,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontSize: 13,
-                                height: 1.1,
-                              ),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: isHorizontal 
+            ? Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
+                    child: Icon(icon, color: color, size: 24),
                   ),
-                ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                        Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary)),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right, color: AppColors.textSecondary.withValues(alpha: 0.5)),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
+                    child: Icon(icon, color: color, size: 32),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                  const SizedBox(height: 4),
+                  Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+                ],
               ),
-            ],
           ),
         ),
       ),
     );
-
   }
 }

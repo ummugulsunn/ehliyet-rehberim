@@ -354,7 +354,7 @@ class SettingsScreen extends ConsumerWidget {
                     ref.read(notificationSettingsProvider.notifier)
                         .setDailyReminderEnabled(value);
                   },
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                 ),
               ],
             ),
@@ -422,7 +422,7 @@ class SettingsScreen extends ConsumerWidget {
                     ref.read(notificationSettingsProvider.notifier)
                         .setStreakWarningEnabled(value);
                   },
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                 ),
               ],
             ),
@@ -488,7 +488,7 @@ class SettingsScreen extends ConsumerWidget {
                     ref.read(notificationSettingsProvider.notifier)
                         .setAchievementNotificationsEnabled(value);
                   },
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                 ),
               ],
             ),
@@ -528,7 +528,7 @@ class SettingsScreen extends ConsumerWidget {
                     ref.read(notificationSettingsProvider.notifier)
                         .setGoalCompletedNotificationsEnabled(value);
                   },
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                 ),
               ],
             ),

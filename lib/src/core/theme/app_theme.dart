@@ -298,8 +298,22 @@ class AppTheme {
         size: 24,
       ),
 
+      
+      // ================================
+      // PAGE TRANSITIONS
+      // ================================
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
+
       // ================================
       // VISUAL DENSITY
+      // ================================
+      // ================================
+      // PAGE TRANSITIONS
       // ================================
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
@@ -558,6 +572,17 @@ class AppTheme {
       primaryIconTheme: const IconThemeData(
         color: AppColors.onPrimary,
         size: 24,
+      ),
+
+      
+      // ================================
+      // PAGE TRANSITIONS
+      // ================================
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
       ),
 
       visualDensity: VisualDensity.adaptivePlatformDensity,

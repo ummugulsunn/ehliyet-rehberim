@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/utils/logger.dart';
 import '../../quiz/domain/test_result_model.dart';
@@ -211,11 +210,11 @@ class UserProgressRepository {
       final prefs = await SharedPreferences.getInstance();
 
       // Load current values
-      _currentDailyProgress = await this.dailyProgress;
-      _currentStreak = await this.currentStreak;
-      _currentXP = await this.totalXP;
+      _currentDailyProgress = await dailyProgress;
+      _currentStreak = await currentStreak;
+      _currentXP = await totalXP;
       _currentLevel = calculateLevel(_currentXP);
-      _currentStreakFreezes = await this.streakFreezes;
+      _currentStreakFreezes = await streakFreezes;
       
       // Load and check leaderboard stats
       await _checkPeriodReset(prefs);
@@ -777,10 +776,29 @@ class UserProgressRepository {
   /// Debug: Get count of stored wrong IDs
   Future<int> getWrongAnswerIdsCount() async {
     try {
-      final ids = await getWrongAnswerIds();
-      final pairs = await getWrongAnswerPairs();
-      Logger.info('Current wrong answer IDs count: ${ids.length}, Pairs count: ${pairs.length}');
-      return pairs.isNotEmpty ? pairs.length : ids.length;
+      // 1. Get SRS items
+      final srsItems = await getDueSRSItems();
+      
+      // 2. Get Legacy IDs
+      final legacyIds = await getWrongAnswerIds();
+      
+      if (legacyIds.isEmpty) {
+        return srsItems.length;
+      }
+
+      // 3. Merge counts (avoid double counting)
+      // Extract IDs from SRS items "examId:questionId"
+      final srsIds = srsItems.map((s) {
+        final parts = s.split(':');
+        return parts.length > 1 ? int.tryParse(parts[1]) : null;
+      }).whereType<int>().toSet();
+      
+      // Count legacy IDs that are NOT in SRS
+      final uniqueLegacyCount = legacyIds.where((id) => !srsIds.contains(id)).length;
+      
+      final total = srsItems.length + uniqueLegacyCount;
+      Logger.info('Wrong answer count: $total (SRS: ${srsItems.length}, Legacy: $uniqueLegacyCount)');
+      return total;
     } catch (e) {
       Logger.error('Failed to get wrong answer ids count', e);
       return 0;
@@ -865,10 +883,10 @@ class UserProgressRepository {
   Future<void> checkAchievements() async {
     try {
      // Load current stats
-     final streak = await this.currentStreak;
-     final xp = await this.totalXP;
+     final streak = await currentStreak;
+     final xp = await totalXP;
      final level = calculateLevel(xp);
-     final totalQs = await this.totalQuestions;
+     final totalQs = await totalQuestions;
      
      final prefs = await SharedPreferences.getInstance();
      final unlocked = prefs.getStringList(_unlockedAchievementsKey) ?? [];

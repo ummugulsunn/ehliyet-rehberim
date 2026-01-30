@@ -59,7 +59,7 @@ class ExamSelectionScreen extends ConsumerWidget {
             child: Column(
               children: [
                 // Messages list
-                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context)),
+                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context, ref)),
               ],
             ),
           );
@@ -68,7 +68,7 @@ class ExamSelectionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context) {
+  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context, WidgetRef ref) {
     final results = progressRepository.getAllTestResults(examId: exam.examId);
     final best = results.isEmpty ? null : results.map((r) => r.correctAnswers).reduce((a, b) => a > b ? a : b);
 
@@ -93,16 +93,59 @@ class ExamSelectionScreen extends ConsumerWidget {
             if (!context.mounted) return;
             // Check if there is a saved result for this exam
             final results = progressRepository.getAllTestResults(examId: exam.examId);
+            
             if (results.isNotEmpty) {
-              // Navigate to review screen with the most recent result
+              // Get the most recent result
               results.sort((a, b) => b.date.compareTo(a.date));
-              final last = results.first;
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => QuizReviewScreen(result: last, questions: exam.questions),
+              final lastResult = results.first;
+
+              // Ask user: Review or Restart?
+              final choice = await showDialog<String>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Sınav Durumu'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Bu sınavı daha önce çözdünüz.'),
+                      const SizedBox(height: 8),
+                      Text('Son Sonuç: ${lastResult.correctAnswers}/${lastResult.totalQuestions} Doğru'),
+                      const SizedBox(height: 16),
+                      const Text('Ne yapmak istersiniz?'),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'review'),
+                      child: const Text('Sonucu İncele'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context, 'restart'),
+                      child: const Text('Yeniden Başla'),
+                    ),
+                  ],
                 ),
               );
+
+              if (choice == 'review' && context.mounted) {
+                 Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => QuizReviewScreen(result: lastResult, questions: exam.questions),
+                  ),
+                );
+              } else if (choice == 'restart' && context.mounted) {
+                // Reset quiz state to ensure a fresh start
+                ref.read(quizControllerProvider(exam.examId).notifier).reset();
+                
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => QuizScreen(examId: exam.examId),
+                  ),
+                );
+              }
             } else {
+              // No previous result, start directly
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => QuizScreen(examId: exam.examId),
@@ -111,7 +154,7 @@ class ExamSelectionScreen extends ConsumerWidget {
             }
           },
           style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: AppColors.onPrimary),
-          child: Text(best != null ? 'İncele' : 'Başla'),
+          child: Text(best != null ? 'Tekrarla / İncele' : 'Başla'),
         ),
       ),
     );

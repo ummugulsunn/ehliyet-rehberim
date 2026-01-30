@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme_provider.dart';
 import '../../../../core/theme/theme_model.dart';
-import '../../../../core/theme/app_colors.dart';
 
 class ThemeSelectorWidget extends ConsumerWidget {
   const ThemeSelectorWidget({super.key});

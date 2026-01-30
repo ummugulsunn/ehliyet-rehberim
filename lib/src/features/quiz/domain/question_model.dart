@@ -10,6 +10,8 @@ class Question {
   final String category;
   /// The source examId that this question belongs to. This is populated by the loader.
   final String? examId;
+  /// The original question ID before any ephemeral ID assignment (used for karma/simulations)
+  final int? originalQuestionId;
 
   const Question({
     required this.id,
@@ -20,6 +22,7 @@ class Question {
     required this.explanation,
     required this.category,
     this.examId,
+    this.originalQuestionId,
   });
 
   /// Factory constructor to create a Question from JSON
@@ -34,6 +37,7 @@ class Question {
       category: json['category'] as String,
       // examId is intentionally not read from JSON; it is set by the loader
       examId: json['examId'] as String?,
+      originalQuestionId: json['originalQuestionId'] as int?,
     );
   }
 
@@ -48,6 +52,7 @@ class Question {
       'explanation': explanation,
       'category': category,
       if (examId != null) 'examId': examId,
+      if (originalQuestionId != null) 'originalQuestionId': originalQuestionId,
     };
   }
 
@@ -55,6 +60,22 @@ class Question {
   Question withExamId(String examId) {
     return Question(
       id: id,
+      questionText: questionText,
+      imageUrl: imageUrl,
+      options: options,
+      correctAnswerKey: correctAnswerKey,
+      explanation: explanation,
+      category: category,
+      examId: examId,
+      originalQuestionId: originalQuestionId,
+    );
+  }
+
+  /// Helper method to create copy with new ID but preserving original
+  Question withNewId(int newId) {
+     return Question(
+      id: newId,
+      originalQuestionId: originalQuestionId ?? id, // If not already set, current ID is original
       questionText: questionText,
       imageUrl: imageUrl,
       options: options,
@@ -101,7 +122,8 @@ class Question {
         other.correctAnswerKey == correctAnswerKey &&
         other.explanation == explanation &&
         other.category == category &&
-        other.examId == examId;
+        other.examId == examId && 
+        other.originalQuestionId == originalQuestionId;
   }
 
   @override
@@ -115,6 +137,7 @@ class Question {
       explanation,
       category,
       examId,
+      originalQuestionId,
     );
   }
 

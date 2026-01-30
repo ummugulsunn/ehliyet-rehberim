@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+  
+  <link rel="canonical" href="https://player.vimeo.com/video/1024686171">
+  <meta name="googlebot" content="noindex,indexifembedded">
+  
+  
+  <title>Animasyonlu soru on Vimeo</title>
+  <style>
+      body, html, .player, .fallback {
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+      }
+      .fallback {
+          
+              background-color: transparent;
+          
+      }
+      .player.loading { opacity: 0; }
+      .fallback iframe {
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+      }
+  </style>
+  <link rel="modulepreload" href="https://f.vimeocdn.com/p/4.46.25/js/player.module.js" crossorigin="anonymous">
+  <link rel="modulepreload" href="https://f.vimeocdn.com/p/4.46.25/js/vendor.module.js" crossorigin="anonymous">
+  <link rel="preload" href="https://f.vimeocdn.com/p/4.46.25/css/player.css" as="style">
+</head>
+
+<body>
+
+
+<div class="vp-placeholder">
+    <style>
+        .vp-placeholder,
+        .vp-placeholder-thumb,
+        .vp-placeholder-thumb::before,
+        .vp-placeholder-thumb::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .vp-placeholder {
+            visibility: hidden;
+            width: 100%;
+            max-height: 100%;
+            height: calc(1080 / 1920 * 100vw);
+            max-width: calc(1920 / 1080 * 100vh);
+            margin: auto;
+        }
+        .vp-placeholder-carousel {
+            display: none;
+            background-color: #000;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -60px;
+            height: 60px;
+        }
+    </style>
+
+    
+
+    
+        <style>
+            .vp-placeholder-thumb {
+                overflow: hidden;
+                width: 100%;
+                max-height: 100%;
+                margin: auto;
+            }
+            .vp-placeholder-thumb::before,
+            .vp-placeholder-thumb::after {
+                content: "";
+                display: block;
+                filter: blur(7px);
+                margin: 0;
+                background: url(https://i.vimeocdn.com/video/1944081628-21a18172a06f353507dc2533378ca3be412e91d5d944277754913198def47963-d?mw=80&q=85) 50% 50% / contain no-repeat;
+            }
+            .vp-placeholder-thumb::before {
+                 
+                margin: -30px;
+            }
+        </style>
+    
+
+    <div class="vp-placeholder-thumb"></div>
+    <div class="vp-placeholder-carousel"></div>
+    <script>function placeholderInit(t,h,d,s,n,o){var i=t.querySelector(".vp-placeholder"),v=t.querySelector(".vp-placeholder-thumb");if(h){var p=function(){try{return window.self!==window.top}catch(a){return!0}}(),w=200,y=415,r=60;if(!p&&window.innerWidth>=w&&window.innerWidth<y){i.style.bottom=r+"px",i.style.maxHeight="calc(100vh - "+r+"px)",i.style.maxWidth="calc("+n+" / "+o+" * (100vh - "+r+"px))";var f=t.querySelector(".vp-placeholder-carousel");f.style.display="block"}}if(d){var e=new Image;e.onload=function(){var a=n/o,c=e.width/e.height;if(c<=.95*a||c>=1.05*a){var l=i.getBoundingClientRect(),g=l.right-l.left,b=l.bottom-l.top,m=window.innerWidth/g*100,x=window.innerHeight/b*100;v.style.height="calc("+e.height+" / "+e.width+" * "+m+"vw)",v.style.maxWidth="calc("+e.width+" / "+e.height+" * "+x+"vh)"}i.style.visibility="visible"},e.src=s}else i.style.visibility="visible"}
+</script>
+    <script>placeholderInit(document,  false ,  true , "https://i.vimeocdn.com/video/1944081628-21a18172a06f353507dc2533378ca3be412e91d5d944277754913198def47963-d?mw=80\u0026q=85",  1920 ,  1080 );</script>
+</div>
+
+<div id="player" class="player"></div>
+<script>window.playerConfig = {"cdn_url":"https://f.vimeocdn.com","vimeo_api_url":"api.vimeo.com","request":{"files":{"dash":{"cdns":{"akfire_interconnect_quic":{"avc_url":"https://vod-adaptive-ak.vimeocdn.com/exp=1769817251~acl=%2F40fe666c-a809-4ba8-af01-d77a1116af1e%2Fpsid%3Da50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6%2F%2A~hmac=011ff0ba3fa3af0cfd0c9ca6ed10a732be13cf7a5cfda1d4bfcd0ca8e0bd45c7/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.json?omit=av1-hevc\u0026pathsig=8c953e4f~TwtpR3R61eiSzmmoJiR619q0dJkm7ceo3h_-MUyW_9Q\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O","origin":"gcs","url":"https://vod-adaptive-ak.vimeocdn.com/exp=1769817251~acl=%2F40fe666c-a809-4ba8-af01-d77a1116af1e%2Fpsid%3Da50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6%2F%2A~hmac=011ff0ba3fa3af0cfd0c9ca6ed10a732be13cf7a5cfda1d4bfcd0ca8e0bd45c7/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.json?pathsig=8c953e4f~TwtpR3R61eiSzmmoJiR619q0dJkm7ceo3h_-MUyW_9Q\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O"},"fastly_skyfire":{"avc_url":"https://skyfire.vimeocdn.com/1769817251-0x500afea9c5b3d3b26d120c62ac73de9f6503ecf1/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.json?omit=av1-hevc\u0026pathsig=8c953e4f~TwtpR3R61eiSzmmoJiR619q0dJkm7ceo3h_-MUyW_9Q\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O","origin":"gcs","url":"https://skyfire.vimeocdn.com/1769817251-0x500afea9c5b3d3b26d120c62ac73de9f6503ecf1/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.json?pathsig=8c953e4f~TwtpR3R61eiSzmmoJiR619q0dJkm7ceo3h_-MUyW_9Q\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O"}},"default_cdn":"akfire_interconnect_quic","separate_av":true,"streams":[{"profile":"d0b41bac-2bf2-4310-8113-df764d486192","id":"9f44c347-fa06-4292-98fe-af10e574a48c","fps":30,"quality":"240p"},{"profile":"5ff7441f-4973-4241-8c2e-976ef4a572b0","id":"bffc0cea-97f2-4503-95a3-10a547d3ab23","fps":30,"quality":"1080p"},{"profile":"f9e4a5d7-8043-4af3-b231-641ca735a130","id":"d33a59b3-b611-4a04-9d33-3dc7f775ac1a","fps":30,"quality":"540p"},{"profile":"f3f6f5f0-2e6b-4e90-994e-842d1feeabc0","id":"ee6c0d5d-21ef-493b-a92e-31ed8ddeaecb","fps":30,"quality":"720p"},{"profile":"c3347cdf-6c91-4ab3-8d56-737128e7a65f","id":"3cdc1740-2229-4d19-987b-7aee55f4d52a","fps":30,"quality":"360p"}],"streams_avc":[{"profile":"f3f6f5f0-2e6b-4e90-994e-842d1feeabc0","id":"ee6c0d5d-21ef-493b-a92e-31ed8ddeaecb","fps":30,"quality":"720p"},{"profile":"c3347cdf-6c91-4ab3-8d56-737128e7a65f","id":"3cdc1740-2229-4d19-987b-7aee55f4d52a","fps":30,"quality":"360p"},{"profile":"d0b41bac-2bf2-4310-8113-df764d486192","id":"9f44c347-fa06-4292-98fe-af10e574a48c","fps":30,"quality":"240p"},{"profile":"5ff7441f-4973-4241-8c2e-976ef4a572b0","id":"bffc0cea-97f2-4503-95a3-10a547d3ab23","fps":30,"quality":"1080p"},{"profile":"f9e4a5d7-8043-4af3-b231-641ca735a130","id":"d33a59b3-b611-4a04-9d33-3dc7f775ac1a","fps":30,"quality":"540p"}]},"hls":{"cdns":{"akfire_interconnect_quic":{"avc_url":"https://vod-adaptive-ak.vimeocdn.com/exp=1769817251~acl=%2F40fe666c-a809-4ba8-af01-d77a1116af1e%2Fpsid%3Da50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6%2F%2A~hmac=011ff0ba3fa3af0cfd0c9ca6ed10a732be13cf7a5cfda1d4bfcd0ca8e0bd45c7/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.m3u8?locale=tr\u0026omit=av1-hevc-opus\u0026pathsig=8c953e4f~l6QyqCTZZZ3d8stU6VoBc3S7FYsq4M3-LcYJY4Gq5V4\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O\u0026sf=ts","origin":"gcs","url":"https://vod-adaptive-ak.vimeocdn.com/exp=1769817251~acl=%2F40fe666c-a809-4ba8-af01-d77a1116af1e%2Fpsid%3Da50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6%2F%2A~hmac=011ff0ba3fa3af0cfd0c9ca6ed10a732be13cf7a5cfda1d4bfcd0ca8e0bd45c7/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.m3u8?locale=tr\u0026omit=av1-hevc-opus\u0026pathsig=8c953e4f~l6QyqCTZZZ3d8stU6VoBc3S7FYsq4M3-LcYJY4Gq5V4\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O\u0026sf=ts"},"fastly_skyfire":{"avc_url":"https://skyfire.vimeocdn.com/1769817251-0x500afea9c5b3d3b26d120c62ac73de9f6503ecf1/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.m3u8?locale=tr\u0026omit=av1-hevc-opus\u0026pathsig=8c953e4f~l6QyqCTZZZ3d8stU6VoBc3S7FYsq4M3-LcYJY4Gq5V4\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O\u0026sf=ts","origin":"gcs","url":"https://skyfire.vimeocdn.com/1769817251-0x500afea9c5b3d3b26d120c62ac73de9f6503ecf1/40fe666c-a809-4ba8-af01-d77a1116af1e/psid=a50b52126c1491bd7f676b28f6ae74c6cb210274bd910bc50c48f97705d9d8b6/v2/playlist/av/primary/prot/cXNyPTE/playlist.m3u8?locale=tr\u0026omit=av1-hevc-opus\u0026pathsig=8c953e4f~l6QyqCTZZZ3d8stU6VoBc3S7FYsq4M3-LcYJY4Gq5V4\u0026qsr=1\u0026r=dXM%3D\u0026rh=1ATk2O\u0026sf=ts"}},"default_cdn":"akfire_interconnect_quic","separate_av":true}},"file_codecs":{"av1":[],"avc":["ee6c0d5d-21ef-493b-a92e-31ed8ddeaecb","3cdc1740-2229-4d19-987b-7aee55f4d52a","9f44c347-fa06-4292-98fe-af10e574a48c","bffc0cea-97f2-4503-95a3-10a547d3ab23","d33a59b3-b611-4a04-9d33-3dc7f775ac1a"],"hevc":{"dvh1":[],"hdr":[],"sdr":[]}},"lang":"en","referrer":null,"cookie_domain":".vimeo.com","signature":"4d94e205cfee65d6bb01555cccdf416a","timestamp":1769813651,"expires":3600,"thumb_preview":{"url":"https://videoapi-sprites.vimeocdn.com/video-sprites/image/e5dc2b87-bb6e-4054-882a-b398504a4e76.0.jpeg?ClientID=sulu\u0026Expires=1769817250\u0026Signature=3512bcd364e9f7c88350c76257ff7e23d360a7e9","height":2640,"width":4686,"frame_height":240,"frame_width":426,"columns":11,"frames":120},"currency":"TRY","session":"0d85f02aebca17fc90e864e5f217bb017d34606e1769813651","cookie":{"volume":1,"quality":null,"hd":0,"captions":null,"transcript":null,"captions_styles":{"color":null,"fontSize":null,"fontFamily":null,"fontOpacity":null,"bgOpacity":null,"windowColor":null,"windowOpacity":null,"bgColor":null,"edgeStyle":null},"audio_language":null,"audio_kind":null,"qoe_survey_vote":0},"build":{"backend":"31e9776","js":"4.46.25"},"urls":{"js":"https://f.vimeocdn.com/p/4.46.25/js/player.js","js_base":"https://f.vimeocdn.com/p/4.46.25/js","js_module":"https://f.vimeocdn.com/p/4.46.25/js/player.module.js","js_vendor_module":"https://f.vimeocdn.com/p/4.46.25/js/vendor.module.js","locales_js":{"de-DE":"https://f.vimeocdn.com/p/4.46.25/js/player.de-DE.js","en":"https://f.vimeocdn.com/p/4.46.25/js/player.js","es":"https://f.vimeocdn.com/p/4.46.25/js/player.es.js","fr-FR":"https://f.vimeocdn.com/p/4.46.25/js/player.fr-FR.js","ja-JP":"https://f.vimeocdn.com/p/4.46.25/js/player.ja-JP.js","ko-KR":"https://f.vimeocdn.com/p/4.46.25/js/player.ko-KR.js","pt-BR":"https://f.vimeocdn.com/p/4.46.25/js/player.pt-BR.js","zh-CN":"https://f.vimeocdn.com/p/4.46.25/js/player.zh-CN.js"},"ambisonics_js":"https://f.vimeocdn.com/p/external/ambisonics.min.js","barebone_js":"https://f.vimeocdn.com/p/4.46.25/js/barebone.js","chromeless_js":"https://f.vimeocdn.com/p/4.46.25/js/chromeless.js","three_js":"https://f.vimeocdn.com/p/external/three.rvimeo.min.js","vuid_js":"https://f.vimeocdn.com/js_opt/modules/utils/vuid.min.js","hive_sdk":"https://f.vimeocdn.com/p/external/hive-sdk.js","hive_interceptor":"https://f.vimeocdn.com/p/external/hive-interceptor.js","proxy":"https://player.vimeo.com/static/proxy.html","css":"https://f.vimeocdn.com/p/4.46.25/css/player.css","chromeless_css":"https://f.vimeocdn.com/p/4.46.25/css/chromeless.css","fresnel":"https://arclight.vimeo.com/add/player-stats","player_telemetry_url":"https://arclight.vimeo.com/player-events","telemetry_base":"https://lensflare.vimeo.com"},"flags":{"plays":1,"dnt":0,"autohide_controls":0,"preload_video":"metadata_on_hover","qoe_survey_forced":0,"ai_widget":0,"ecdn_delta_updates":0,"disable_mms":0,"check_clip_skipping_forward":0},"country":"TR","client":{"ip":"88.254.10.198"},"ab_tests":{"cross_origin_texttracks":{"group":"variant","track":false,"data":null}},"atid":"1661539093.1769813651","ai_widget_signature":"99348a32fa8f650d35e1d662d71c5059ef1a95134ab97603184969b292b9c03e_1769817251","config_refresh_url":"https://player.vimeo.com/video/1024686171/config/request?atid=1661539093.1769813651\u0026expires=3600\u0026referrer=\u0026session=0d85f02aebca17fc90e864e5f217bb017d34606e1769813651\u0026signature=4d94e205cfee65d6bb01555cccdf416a\u0026time=1769813651\u0026v=1"},"player_url":"player.vimeo.com","video":{"id":1024686171,"title":"Animasyonlu soru","width":1920,"height":1080,"duration":9,"url":"https://vimeo.com/1024686171","share_url":"https://vimeo.com/1024686171","embed_code":"\u003ciframe title=\"vimeo-player\" src=\"https://player.vimeo.com/video/1024686171?h=b039924ced\" width=\"640\" height=\"360\" frameborder=\"0\" referrerpolicy=\"strict-origin-when-cross-origin\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\"   allowfullscreen\u003e\u003c/iframe\u003e","default_to_hd":0,"privacy":"anybody","embed_permission":"public","thumbnail_url":"https://i.vimeocdn.com/video/1944081628-21a18172a06f353507dc2533378ca3be412e91d5d944277754913198def47963-d","owner":{"id":163107627,"name":"Ehliyet","img":"https://i.vimeocdn.com/portrait/65141650_60x60?sig=19e3f834d94012c839c3f76cc425f3ba1dbb1fbac160bf85fb4eb9618fec367b\u0026v=1\u0026region=us","img_2x":"https://i.vimeocdn.com/portrait/65141650_60x60?sig=19e3f834d94012c839c3f76cc425f3ba1dbb1fbac160bf85fb4eb9618fec367b\u0026v=1\u0026region=us","url":"https://vimeo.com/ehliyetsinavsorulari","account_type":"plus"},"spatial":0,"live_event":null,"version":{"current":null,"available":[{"id":957521460,"file_id":3836391165,"is_current":true}]},"unlisted_hash":null,"rating":{"id":3},"fps":30,"channel_layout":"stereo","ai":0,"locale":"tr"},"user":{"id":0,"team_id":0,"team_origin_user_id":0,"account_type":"none","liked":0,"watch_later":0,"owner":0,"mod":0,"logged_in":0,"private_mode_enabled":0,"vimeo_api_client_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoiMGQ4NWYwMmFlYmNhMTdmYzkwZTg2NGU1ZjIxN2JiMDE3ZDM0NjA2ZTE3Njk4MTM2NTEiLCJleHAiOjE3Njk4MTcyNTEsImFwcF9pZCI6MTE4MzU5LCJzY29wZXMiOiJwdWJsaWMgc3RhdHMifQ.Lz-t8hG--WSnCXR0dzX837h1wrpydV63WODk1VpfZsg"},"view":1,"vimeo_url":"vimeo.com","embed":{"audio_track":"","autoplay":0,"autopause":1,"dnt":0,"editor":0,"keyboard":1,"log_plays":1,"loop":0,"muted":0,"on_site":0,"texttrack":"","transparent":1,"outro":"nothing","playsinline":1,"quality":null,"player_id":"","api":null,"app_id":"","color":"00adef","color_one":"000000","color_two":"00adef","color_three":"ffffff","color_four":"000000","context":"embed.main","settings":{"auto_pip":1,"badge":0,"byline":0,"collections":0,"color":0,"force_color_one":0,"force_color_two":0,"force_color_three":0,"force_color_four":0,"embed":0,"fullscreen":1,"like":0,"logo":0,"playbar":1,"portrait":0,"pip":0,"share":0,"spatial_compass":0,"spatial_label":0,"speed":0,"title":0,"volume":0,"watch_later":0,"watch_full_video":1,"controls":1,"airplay":0,"audio_tracks":0,"chapters":0,"chromecast":0,"cc":0,"transcript":0,"quality":0,"play_button_position":0,"ask_ai":0,"skipping_forward":1,"debug_payload_collection_policy":"default"},"create_interactive":{"has_create_interactive":false,"viddata_url":""},"min_quality":null,"max_quality":null,"initial_quality":null,"prefer_mms":1}}</script>
+<script>const fullscreenSupported="exitFullscreen"in document||"webkitExitFullscreen"in document||"webkitCancelFullScreen"in document||"mozCancelFullScreen"in document||"msExitFullscreen"in document||"webkitEnterFullScreen"in document.createElement("video");var isIE=checkIE(window.navigator.userAgent),incompatibleBrowser=!fullscreenSupported||isIE;window.noModuleLoading=!1,window.dynamicImportSupported=!1,window.cssLayersSupported=typeof CSSLayerBlockRule<"u",window.isInIFrame=function(){try{return window.self!==window.top}catch(e){return!0}}(),!window.isInIFrame&&/twitter/i.test(navigator.userAgent)&&window.playerConfig.video.url&&(window.location=window.playerConfig.video.url),window.playerConfig.request.lang&&document.documentElement.setAttribute("lang",window.playerConfig.request.lang),window.loadScript=function(e){var n=document.getElementsByTagName("script")[0];n&&n.parentNode?n.parentNode.insertBefore(e,n):document.head.appendChild(e)},window.loadVUID=function(){if(!window.playerConfig.request.flags.dnt&&!window.playerConfig.embed.dnt){window._vuid=[["pid",window.playerConfig.request.session]];var e=document.createElement("script");e.async=!0,e.src=window.playerConfig.request.urls.vuid_js,window.loadScript(e)}},window.loadCSS=function(e,n){var i={cssDone:!1,startTime:new Date().getTime(),link:e.createElement("link")};return i.link.rel="stylesheet",i.link.href=n,e.getElementsByTagName("head")[0].appendChild(i.link),i.link.onload=function(){i.cssDone=!0},i},window.loadLegacyJS=function(e,n){if(incompatibleBrowser){var i=e.querySelector(".vp-placeholder");i&&i.parentNode&&i.parentNode.removeChild(i);let a=`/video/${window.playerConfig.video.id}/fallback`;window.playerConfig.request.referrer&&(a+=`?referrer=${window.playerConfig.request.referrer}`),n.innerHTML=`<div class="fallback"><iframe title="unsupported message" src="${a}" frameborder="0"></iframe></div>`}else{n.className="player loading";var t=window.loadCSS(e,window.playerConfig.request.urls.css),r=e.createElement("script"),o=!1;r.src=window.playerConfig.request.urls.js,window.loadScript(r),r["onreadystatechange"in r?"onreadystatechange":"onload"]=function(){!o&&(!this.readyState||this.readyState==="loaded"||this.readyState==="complete")&&(o=!0,playerObject=new VimeoPlayer(n,window.playerConfig,t.cssDone||{link:t.link,startTime:t.startTime}))},window.loadVUID()}};function checkIE(e){e=e&&e.toLowerCase?e.toLowerCase():"";function n(r){return r=r.toLowerCase(),new RegExp(r).test(e);return browserRegEx}var i=n("msie")?parseFloat(e.replace(/^.*msie (\d+).*$/,"$1")):!1,t=n("trident")?parseFloat(e.replace(/^.*trident\/(\d+)\.(\d+).*$/,"$1.$2"))+4:!1;return i||t}
+</script>
+<script nomodule>
+  window.noModuleLoading = true;
+  var playerEl = document.getElementById('player');
+  window.loadLegacyJS(document, playerEl);
+</script>
+<script type="module">try{import("").catch(()=>{})}catch(t){}window.dynamicImportSupported=!0;
+</script>
+<script type="module">if(!window.dynamicImportSupported||!window.cssLayersSupported){if(!window.noModuleLoading){window.noModuleLoading=!0;var playerEl=document.getElementById("player");window.loadLegacyJS(document,playerEl)}var moduleScriptLoader=document.getElementById("js-module-block");moduleScriptLoader&&moduleScriptLoader.parentElement.removeChild(moduleScriptLoader)}
+</script>
+<script type="module" id="js-module-block">if(!window.noModuleLoading&&window.dynamicImportSupported&&window.cssLayersSupported){const n=document.getElementById("player"),e=window.loadCSS(document,window.playerConfig.request.urls.css);import(window.playerConfig.request.urls.js_module).then(function(o){new o.VimeoPlayer(n,window.playerConfig,e.cssDone||{link:e.link,startTime:e.startTime}),window.loadVUID()}).catch(function(o){throw/TypeError:[A-z ]+import[A-z ]+module/gi.test(o)&&window.loadLegacyJS(document,n),o})}
+</script>
+
+<script type="application/ld+json">{"embedUrl":"https://player.vimeo.com/video/1024686171?h=b039924ced","thumbnailUrl":"https://i.vimeocdn.com/video/1944081628-21a18172a06f353507dc2533378ca3be412e91d5d944277754913198def47963-d?f=webp","name":"Animasyonlu soru","description":"This is \"Animasyonlu soru\" by \"Ehliyet\" on Vimeo, the home for high quality videos and the people who love them.","duration":"PT9S","uploadDate":"2024-10-30T06:28:17-04:00","@context":"https://schema.org/","@type":"VideoObject"}</script>
+
+</body>
+</html>

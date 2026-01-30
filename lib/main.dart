@@ -15,7 +15,6 @@ import 'src/core/theme/theme_model.dart';
 // import 'src/features/profile/application/theme_mode_provider.dart'; // Deprecated
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'src/core/services/notification_service.dart';
 
 import 'dart:async';
 

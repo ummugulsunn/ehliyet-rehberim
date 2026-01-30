@@ -1,0 +1,652 @@
+[
+    {
+        "id": 1,
+        "questionText": "I. Araç sahipleri zorunlu mali sorumluluk sigortası yaptırmak zorundadır.\nII. Sürücüler, yetkililerin istemesi hâlinde zorunlu mali sorumluluk sigorta poliçelerini göstermek zorundadır.\nYukarıdaki bilgiler için hangisi söylenebilir?",
+        "options": {
+            "A": "I. doğru, II. yanlış",
+            "B": "Her ikisi de yanlış",
+            "C": "I. yanlış, II. doğru",
+            "D": "Her ikisi de doğru"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 2,
+        "questionText": "Karşıdan gelen araçla karşılaşıldığında uzağı gösteren ışıkların yerine hangisi yakılmalıdır?",
+        "options": {
+            "A": "Yakını gösteren ışıklar",
+            "B": "Acil uyarı ışıkları",
+            "C": "Dönüş ışıkları",
+            "D": "Park ışıkları"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 3,
+        "questionText": "Yaralıyı araçtan çıkarırken aşağıdakilerden hangisine dikkat edilmelidir?",
+        "options": {
+            "A": "Baş tarafından çekilerek çıkarılmasına",
+            "B": "Baş - boyun - gövde hizasının bozulmamasına",
+            "C": "Kollarının baş hizasında durmasına",
+            "D": "Ayak tarafından çekilerek çıkarılmasına"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 4,
+        "questionText": "Aşağıdakilerden hangisinde ilk yardım çantası, bulundurulması mecburi değildir?",
+        "options": {
+            "A": "Otobüs – Çekici",
+            "B": "Minibüs – Kamyonet",
+            "C": "Otomobil – Taksi otomobil",
+            "D": "Motosiklet – Motorlu bisiklet"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 5,
+        "questionText": "Aksine bir işaret yoksa yerleşim yeri dışındaki bölünmüş kara yolunda, şekildeki 1 numaralı aracın azami (en yüksek) hızı saatte kaç kilometredir?",
+        "options": {
+            "A": "50",
+            "B": "70",
+            "C": "90",
+            "D": "110"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/17aralik2016/22.gif",
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 6,
+        "questionText": "Egzoz gası zehirlenmelerinde hangisini etkisi daha büyüktür?",
+        "options": {
+            "A": "Kükürt",
+            "B": "Karbonmonoksit",
+            "C": "Kurşun",
+            "D": "Karbondioksit"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 7,
+        "questionText": "Suni solunum işlemleri öncesinde ilk olarak yapılması gereken aşağıdakilerden hangisidir?",
+        "options": {
+            "A": "Ağız içinin temizlenerek hava yolu açıklığının sağlanması",
+            "B": "Solunumu uyarmak için göğüs bölgesine yumruk atılması",
+            "C": "Suni solunuma başlamadan 5 dakika beklenilmesi",
+            "D": "Hastanın ayaklarının yükseltilmesi"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 8,
+        "questionText": "Su soğutmalı motorun soğutma sisteminde aşağıdakilerden hangisi kullanılır?",
+        "options": {
+            "A": "Antifriz",
+            "B": "Benzin",
+            "C": "Asitli su",
+            "D": "Motorin"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 9,
+        "questionText": "Aşağıdakilerden hangisi yakıt sisteminin parçası değildir?",
+        "options": {
+            "A": "Yakıt pompası",
+            "B": "Enjektörler",
+            "C": "Endüksiyon bobini",
+            "D": "Hava filtresi"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 10,
+        "questionText": "Aşağıdakilerden hangisi şok belirtilerinden biri değildir?",
+        "options": {
+            "A": "Huzursuzluk",
+            "B": "Baş dönmesi",
+            "C": "Dudak çevresinde morarma",
+            "D": "Ciltte ısı artışı, kızarıklık ve kuruluk"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 11,
+        "questionText": "Araç ilk yardım çantasında bulunması gereken malzemenin miktarını etkileyen, aşağıdakilerden hangisidir?",
+        "options": {
+            "A": "Sürücünün isteği",
+            "B": "Aracın büyüklüğü",
+            "C": "Taşınan yolcu sayısı",
+            "D": "Aracın yeniliği"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 12,
+        "questionText": "Aşağıdakilerden hangisi gözlük veya lens kullanarak görme yeterliliğine sahip olan sürücüler için doğrudur?",
+        "options": {
+            "A": "Araç kullanırken gözlük veya lenslerini kullanmak zorundadırlar.",
+            "B": "Yalnızca şehir dışı yollarda gözlük veya lens kullanmak zorundadırlar.",
+            "C": "Yalnızca gece araç kullanırken gözlük veya lens kullanmak zorundadırlar.",
+            "D": "Bu tür adaylara sürücü belgesi verilmez."
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 13,
+        "questionText": "Aşağıdakilerden hangisi yakıt tüketiminin artmasına neden olmaz?",
+        "options": {
+            "A": "Debriyaj balatasının eskimesi",
+            "B": "Lastik hava basıncının düşmesi",
+            "C": "Depodaki yakıt seviyesinin azalması",
+            "D": "Aracın uygun olmayan devirde kullanılması"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 14,
+        "questionText": "Hangi parçanın düzgün çalışmaması, şarj ikaz lambasının yanmasına sebep olur?",
+        "options": {
+            "A": "V kayışının",
+            "B": "Triger kayışının",
+            "C": "Marş motorunun",
+            "D": "Radyatörün"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 15,
+        "questionText": "Ülkemizde uzun süreli tatil öncesi ve sonrasında trafik kazalarında artış gözlenir. Bu duruma aşağıdakilerden hangisi kesinlikle sebep olur?",
+        "options": {
+            "A": "Yayaların otoyola çıkması",
+            "B": "Araç sayısının fazla olması",
+            "C": "Araçlardaki yolcu sayısının artması",
+            "D": "Sürücülerin aceleci ve dikkatsiz davranması"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 16,
+        "questionText": "Seyahate başlamadan önce koltuk ve ayna ayarlarının yapılmasının sebebi aşağıdakilerden hangisidir?",
+        "options": {
+            "A": "Sürüş konforu ve güvenliğini sağlamak",
+            "B": "Aracın ivmelenme süresini artırmak",
+            "C": "Lastiklerin ömrünü uzatmak",
+            "D": "Yakıt tüketimini azaltmak"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 17,
+        "questionText": "Kalp masajı uygulaması, aşağıdaki durumların hangisinde sonlandırılır?",
+        "options": {
+            "A": "Kalp çalıştığında",
+            "B": "112'ye haber verildiğinde",
+            "C": "Kazazedenin akrabaları geldiğinde",
+            "D": "Kazazedenin cildinde kızarıklıklar gözlemlendiğinde"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 18,
+        "questionText": "Videodaki tehlikeli durum, sürücülerin hangi kuralı ihlal etmeleri sonucunda oluşmuştur?",
+        "options": {
+            "A": "Takip mesafesi kuralını",
+            "B": "Geçme kuralını",
+            "C": "Kavşaklarda ilk geçiş hakkı kuralını",
+            "D": "Şerit takip kuralını"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": "https://player.vimeo.com/video/1024686171",
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 19,
+        "questionText": "Aşağıdaki organlardan hangisinin yaralanması durumunda öksürme ile ağızdan köpüklü kan gelir?",
+        "options": {
+            "A": "Mide",
+            "B": "Dalak",
+            "C": "Akciğer",
+            "D": "Karaciğer"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 20,
+        "questionText": "Aracın lastikleri ne zaman kontrol edilir?",
+        "options": {
+            "A": "Günde bir",
+            "B": "Haftada bir",
+            "C": "Altı ayda bir",
+            "D": "Araca binileceği zaman"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 21,
+        "questionText": "Aracın gösterge panelinde bulunan şekildeki gösterge sürücüye neyi bildirir?",
+        "options": {
+            "A": "Karterdeki yağ miktarını",
+            "B": "Depodaki yakıt miktarını",
+            "C": "Soğutma suyu sıcaklığını",
+            "D": "Radyatördeki su seviyesini"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/sorular/13aralik2014ehliyetsorulari/soru43.jpg",
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 22,
+        "questionText": "Şekildeki trafik kazası, aşağıdakilerden hangisine uyulmaması sonucu meydana gelmiş olabilir?",
+        "options": {
+            "A": "Takip mesafesine",
+            "B": "Kavşaklarda geçiş hakkına",
+            "C": "Öndeki aracı geçme kuralına",
+            "D": "Farların kullanılacağı yer ve hâllere"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/sorular/27-agustos-2016/35en.gif",
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 23,
+        "questionText": "Bir kaza anında, yapılan ilk yardım uygulamaları ile ilgili olarak aşağıdakilerden hangisi doğru değildir?",
+        "options": {
+            "A": "Mevcut araç-gereçlerle yapılması",
+            "B": "Hayat kurtarıcı uygulamalar olması",
+            "C": "Olay yerinde bulunan kişiler tarafından yapılması",
+            "D": "Müdahale için doktor ya da sağlık personelinin beklenmesi"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 24,
+        "questionText": "Aksine bir işaret bulunmadıkça aşağıdaki araçlardan hangisinin yerleşim yeri dışındaki bölünmüş yollarda azami hızı saatte 85 kilometredir?",
+        "options": {
+            "A": "Otomobil",
+            "B": "Motosiklet",
+            "C": "Kamyon",
+            "D": "Otobüs"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 25,
+        "questionText": "Akünün kutup başları oksitlenmişse (beyaz tortu oluşmuşsa) araçta nasıl bir sorun gözlemlenir?",
+        "options": {
+            "A": "Farlar daha parlak yanar.",
+            "B": "Marş motoru yavaş döner veya hiç dönmez.",
+            "C": "Silecekler çalışmaz.",
+            "D": "Motor yüksek devirde çalışır."
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 26,
+        "questionText": "Şekildeki trafik işareti neyi bildirir?",
+        "options": {
+            "A": "Kaygan yola yaklaşıldığını",
+            "B": "Sola dönmenin yasaklandığını",
+            "C": "Sola tehlikeli viraja yaklaşıldığını",
+            "D": "Sol taraftan tek yönlü yola girileceğini"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/10sinav9/soru39s.gif",
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 27,
+        "questionText": "I. Yeteri kadar aydınlatılmış yollara girdiğimizde\nII. Yayalarla aynı yönde ilerliyorsak\nIII. Demiryolu geçidine geldiğimizde\nIV. Geceleyin önümüzdeki aracı geçeceğimiz zaman\nUzun hüzmeli far açıkken, numaralanmış durumlardan hangileri olursa kısa hüzmeli farı kullanmalıyız?",
+        "options": {
+            "A": "I ve II",
+            "B": "I ve IV",
+            "C": "II ve II",
+            "D": "I, III ve IV"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 28,
+        "questionText": "Bebeklerde uygulanan dış kalp masajında göğüs kemiğine dakikada kaç kez bası yapılmalıdır?",
+        "options": {
+            "A": "40",
+            "B": "60",
+            "C": "80",
+            "D": "100"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 29,
+        "questionText": "Aşağıdakilerden hangisi kara yolu güvenliğinin planlanması ve koordinasyonundan sorumlu üst kuruldur?",
+        "options": {
+            "A": "Karayolu Trafik Güvenliği Stratejisi ve Eylem Planı Kurulu",
+            "B": "İl ve İlçe Trafik Komisyonları",
+            "C": "Karayolları Genel Müdürlüğü",
+            "D": "Emniyet Genel Müdürlüğü"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 30,
+        "questionText": "Şekle göre, geçme işlemi yapan 1 numaralı aracın sürücüsü için aşağıdakilerden hangileri söylenebilir?\nI- Geçiş kurallarına uyduğu\nII- Karşı yönden gelen aracın hızını dikkate almadığı\nIII- Geçilen araçtan yeterince uzaklaşmadan sağ şeride geçtiği",
+        "options": {
+            "A": "Yalnız I",
+            "B": "I ve II",
+            "C": "II ve III",
+            "D": "I, II ve III"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/sorular/14haziran2014ehliyetsorulari/soru29.jpg",
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 31,
+        "questionText": "Aksine bir işaret yoksa, şekildeki aracın yerleşim yeri içindeki azami hızı saatte kaç kilometredir?",
+        "options": {
+            "A": "30",
+            "B": "50",
+            "C": "70",
+            "D": "80"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/sorular/27haziran/soru27.jpg",
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 32,
+        "questionText": "Vantilatör kayışı aşağıdakilerden hangisine hareket iletir?",
+        "options": {
+            "A": "Alternatöre",
+            "B": "Marş motoruna",
+            "C": "Yağ pompasına",
+            "D": "Silecek motoruna"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 33,
+        "questionText": "Aşağıdakilerden hangisi, kazalardaki ölümler ve sakat kalmaların en büyük nedenlerindendir?",
+        "options": {
+            "A": "Tekrar kaza olma riskinin ortadan kaldırılması",
+            "B": "İlk yardımın zamanında ve tekniğine uygun yapılmaması",
+            "C": "Hayati tehlike oluşturabilecek müdahalelerden kaçınılması",
+            "D": "İlk yardım uygulayacak olan kişilerin bu konuda eğitim almış olması"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Trafik ve Çevre Bilgisi"
+    },
+    {
+        "id": 34,
+        "questionText": "Çok sayıda yaralının olduğu kazalarda, kimin öncelikle tedavi edileceğinin belirlenmesine ne denir? (Triyaj)",
+        "options": {
+            "A": "Hasta taşıma.",
+            "B": "Önceliklendirme (Ayıklama).",
+            "C": "Tedavi etme.",
+            "D": "Kayıt tutma."
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 35,
+        "questionText": "Aşağıdakilerden hangisi aydınlatma sisteminin parçasıdır?",
+        "options": {
+            "A": "Buji",
+            "B": "Vantilatör",
+            "C": "Sigorta",
+            "D": "Alternatör"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 36,
+        "questionText": "Trafik için kamunun yararlanmasına açık olan arazi şeridi, köprüler ve alanlara ne ad verilir?",
+        "options": {
+            "A": "Geçiş yolu",
+            "B": "Kara yolu",
+            "C": "Bağlantı yolu",
+            "D": "Şerit"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 37,
+        "questionText": "Şekildeki araçlardan hangileri beklemelidir?",
+        "options": {
+            "A": "Yalnız 1",
+            "B": "Yalnız 2",
+            "C": "1 ve 3",
+            "D": "2 ve 4"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/sorular/2kasim2013ehliyetsorulari/soru21.jpg",
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 38,
+        "questionText": "İlk yardımcı, başını kazazedenin göğsüne bakacak şekilde yan çevirerek yüzünü kazazedenin ağzına yaklaştırır, - - - - ile solunum yapıp yapmadığını 10 saniye süreyle değerlendirir. Bu ifadede boş bırakılan yere aşağıdakilerden hangisi yazılmalıdır?",
+        "options": {
+            "A": "bak-dinle-hisset yöntemi",
+            "B": "Heimlich manevrası",
+            "C": "turnike uygulaması",
+            "D": "şok pozisyonu"
+        },
+        "correctAnswerKey": "A",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 39,
+        "questionText": "Elektrik çarpmasında ilk ne yapılır?",
+        "options": {
+            "A": "Hastaya dokunulur.",
+            "B": "Su dökülür.",
+            "C": "Sigorta/Akım kesilir.",
+            "D": "Kalp masajı yapılır."
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 40,
+        "questionText": "Yakıtı doğrudan doğruya silindirler içersinde yakan ve üretilen ısı enerjisini piston-biyel mekanizması ile krank miline ileten motorlara ne ad verilir?",
+        "options": {
+            "A": "Marş motoru",
+            "B": "Elektrik motoru",
+            "C": "İçten yanmalı motor",
+            "D": "Dıştan yanmalı motor"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 41,
+        "questionText": "Bebeklerde soluk yoluna herhangi bir cismin kaçması hâlinde çıkartmak için ilk yardım olarak aşağıdakilerden hangisi yapılmalıdır?",
+        "options": {
+            "A": "Şekerli su içirilmeli",
+            "B": "Sırtüstü yatırılıp ayakları yükseltilmeli",
+            "C": "Sert bir yere sırtüstü yatırılıp boyun üzerine baskı yapılmalı",
+            "D": "Yüz aşağıda olacak şekilde kol üzerine yatırılıp kürek kemiklerinin arasına vurulmalı"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 42,
+        "questionText": "Aşağıdakilerden hangisi araçlarda kaza anında ölüm ve yaralanmaları en aza indirmek amacıyla geliştirilen sistemlerdendir?",
+        "options": {
+            "A": "Alaşımlı jant",
+            "B": "Hava yastığı",
+            "C": "Açılabilir tavan",
+            "D": "Elektrikli koltuk"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 43,
+        "questionText": "Yağ pompasının pompaladığı yağı süzerek, içindeki yabancı maddeleri temizleyen yağlama sistemi parçası aşağıdakilerden hangisidir?",
+        "options": {
+            "A": "Enjektör",
+            "B": "Hava filtresi",
+            "C": "Yağ filtresi",
+            "D": "Yakıt filtresi"
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 44,
+        "questionText": "Aşağıdaki durumların hangisinde aracın kurallara uygun olarak durdurulması ve kontağın kapatılması gerekir?",
+        "options": {
+            "A": "Gösterge panelinde cam rezistans lambasının yanması",
+            "B": "Araçtan yanık kablo kokusunun gelmesi",
+            "C": "Klimanın yeteri kadar serinletmemesi",
+            "D": "Araç yakıtının azalması"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 45,
+        "questionText": "Radyatör hortumlarında çatlaklar varsa ne yapılır?",
+        "options": {
+            "A": "Bantlanır.",
+            "B": "Yapıştırılır.",
+            "C": "Değiştirilir.",
+            "D": "İple sarılır."
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 46,
+        "questionText": "Aşağıdakilerden hangisi kara yolunda bozulup kalan araçların, tehlikeye meydan vermemesi için yapılması gereken işlemlerden biridir?",
+        "options": {
+            "A": "Vitesin boşa alınması",
+            "B": "Araçta gözcü bulundurulması",
+            "C": "Aracın kapılarının açık tutulması",
+            "D": "Aracın ön ve arkasına birer kırmızı yansıtıcı konulması"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 47,
+        "questionText": "Motorun çalışma sıcaklığına çok geç ulaşması, aşağıdakilerden hangisinin arızalı olduğunu gösterir?",
+        "options": {
+            "A": "Radyatör",
+            "B": "Termostat",
+            "C": "Yağ filtresi",
+            "D": "Devridaim pompası"
+        },
+        "correctAnswerKey": "B",
+        "imageUrl": null,
+        "category": "Motor ve Araç Tekniği"
+    },
+    {
+        "id": 48,
+        "questionText": "Şekilde görülen geçiş üstünlüğüne sahip araçların görev hâlinde karşılaşmaları durumunda ilk geçiş hakkı hangisine aittir?",
+        "options": {
+            "A": "İtfaiye aracı",
+            "B": "Polis aracı",
+            "C": "İş makinesi",
+            "D": "Ambulans"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": "https://ehliyetsinavihazirlik.com/images/10sinav10/soru62.gif",
+        "category": "İlk Yardım"
+    },
+    {
+        "id": 49,
+        "questionText": "Belirli araçların, can ve mal güvenliğini tehlikeye sokmamak şartıyla, görev sırasında trafik kısıtlama veya yasaklarına bağlı olmamaları durumuna ne denir?",
+        "options": {
+            "A": "Gabari",
+            "B": "Geçiş hakkı",
+            "C": "Geçiş kolaylığı",
+            "D": "Geçiş üstünlüğü"
+        },
+        "correctAnswerKey": "D",
+        "imageUrl": null,
+        "category": "Trafik İşaretleri"
+    },
+    {
+        "id": 50,
+        "questionText": "I. Ambulansa eskortluk yapmak\nII. Taşıt yolu üzerinde yer açmak\nIII. Bir kavşakta ise kavşağı derhal boşaltmak\nGeçiş üstünlüğü bulunan bir aracın duyulur veya görülür işaretini alan araç sürücüsü, yukarıda verilenlerden hangilerini yapmak zorundadır?",
+        "options": {
+            "A": "Yalnız I",
+            "B": "I ve II.",
+            "C": "II ve III.",
+            "D": "I, II ve III."
+        },
+        "correctAnswerKey": "C",
+        "imageUrl": null,
+        "category": "İlk Yardım"
+    }
+]

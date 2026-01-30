@@ -1,9 +1,6 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import '../../home/data/user_progress_repository.dart';
-import '../../quiz/domain/test_result_model.dart';
-import 'package:intl/intl.dart';
-import 'dart:math';
 
 class StatsRepository {
   final UserProgressRepository _progressRepository;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../application/stats_providers.dart';
-import '../../home/data/user_progress_repository.dart';
 import 'widgets/category_pie_chart.dart';
 import 'widgets/daily_progress_line_chart.dart';
 import 'widgets/weekly_performance_bar_chart.dart';

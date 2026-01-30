@@ -67,7 +67,7 @@ Future<void> main(List<String> args) async {
     // Remove double spaces
     final single = lower.replaceAll(RegExp(r'\s+'), ' ');
     // Remove surrounding punctuation that may vary
-    return single.replaceAll(RegExp(r'["\'']'), '');
+    return single.replaceAll(RegExp(r'''['"]'''), '');
   }
 
   bool textIndicatesVisual(String text) {

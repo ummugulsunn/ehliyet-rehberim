@@ -8,6 +8,10 @@ import '../../../core/theme/app_colors.dart';
 import '../domain/test_result_model.dart';
 import 'widgets/exam_timer_widget.dart';
 import '../../favorites/application/favorites_providers.dart';
+import 'widgets/vimeo_player_widget.dart';
+import '../domain/unfinished_exam.dart';
+import '../data/exam_storage_service.dart';
+import '../application/quiz_state.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String examId;
@@ -39,10 +43,168 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _pageController = PageController(initialPage: 0);
     _confettiController = ConfettiController(duration: const Duration(seconds: 1));
     
-    // Quiz state'i otomatik reset etme - sadece gerektiğinde reset et
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   ref.read(quizControllerProvider.notifier).reset();
-    // });
+    // Check for unfinished exam only in Exam Mode
+    if (widget.isExamMode) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _checkForUnfinishedExam();
+      });
+    }
+  }
+
+  Future<void> _checkForUnfinishedExam() async {
+    final storage = ref.read(examStorageServiceProvider);
+    final unfinished = await storage.getUnfinishedExam(widget.examId);
+    
+    if (unfinished != null && mounted) {
+      // Show dialog asking to resume
+      final shouldResume = await showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          title: const Text('Yarım Kalan Sınav'),
+          content: Text(
+            'Bu sınavda daha önce ${unfinished.currentQuestionIndex + 1}. soruda kalmıştınız.\n\nKaldığınız yerden devam etmek ister misiniz?'
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Delete saved data and start fresh
+                storage.deleteUnfinishedExam(widget.examId);
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('Hayır, Baştan Başla'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Evet, Devam Et'),
+            ),
+          ],
+        ),
+      );
+      
+      if (shouldResume == true && mounted) {
+        // Restore state
+        final controller = ref.read(quizControllerProvider(widget.examId).notifier);
+        
+        // Convert Map<String, String> to Map<int, String>
+        final Map<int, String> answers = {};
+        unfinished.answers.forEach((key, value) {
+          final intKey = int.tryParse(key);
+          if (intKey != null) {
+            answers[intKey] = value;
+          }
+        });
+        
+        controller.restoreState(
+          index: unfinished.currentQuestionIndex,
+          answers: answers,
+          remainingSeconds: unfinished.remainingSeconds,
+        );
+        
+        // Jump to page
+        _pageController.jumpToPage(unfinished.currentQuestionIndex);
+      } else {
+        // Ensure old data is cleared if they chose to restart
+         await storage.deleteUnfinishedExam(widget.examId);
+      }
+    }
+  }
+
+  Future<void> _onExitPressed() async {
+     // If not in exam mode or result already saved/finished, just pop
+    final state = ref.read(quizControllerProvider(widget.examId));
+    
+    // For non-exam mode (Karma, Wrong Answers, etc.), we MUST save before exiting
+    // to ensure wrong answers (or corrections) are persisted.
+    if (!widget.isExamMode) {
+      if (!_resultSaved && state.status != QuizStatus.complete && state.selectedAnswers.isNotEmpty) {
+        // Save partial result logic
+        await _saveResult(isFinal: false);
+      }
+      if (mounted) Navigator.of(context).pop();
+      return;
+    }
+
+    if (_resultSaved || state.status == QuizStatus.complete) {
+      Navigator.of(context).pop();
+      return;
+    }
+    
+    final action = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Sınavdan Çıkılıyor'),
+        content: const Text('Ne yapmak istersiniz?'),
+        actionsAlignment: MainAxisAlignment.spaceBetween,
+        actions: [
+          TextButton(
+             onPressed: () => Navigator.of(context).pop('cancel'),
+             child: const Text('İptal'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop('finish'),
+             child: const Text('Bitir'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop('save'),
+            child: const Text('Kaydet ve Çık'),
+          ),
+        ],
+      ),
+    );
+    
+    if (!mounted) return;
+    
+    if (action == 'save') {
+       await _saveAndExit();
+    } else if (action == 'finish') {
+       // Finish exam logic
+       ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
+       await _saveResult(isFinal: true);
+       if (mounted) {
+         Navigator.of(context).pushReplacement(
+           MaterialPageRoute(
+              builder: (_) => ResultsScreen(
+                examId: widget.examId,
+                result: TestResult(
+                  date: DateTime.now(), 
+                  correctAnswers: state.score, 
+                  totalQuestions: state.totalQuestions, 
+                  category: widget.category ?? 'Genel', 
+                  examId: widget.examId, 
+                  selectedAnswers: state.selectedAnswers,
+                  isExamMode: true,
+                  isPassed: state.score >= 35, // Approx 70% of 50
+                ),
+              ),
+           ),
+         );
+       }
+    }
+  }
+
+  Future<void> _saveAndExit() async {
+    final state = ref.read(quizControllerProvider(widget.examId));
+    final storage = ref.read(examStorageServiceProvider);
+    
+    // Map<int, String> to Map<String, String>
+    final answers = state.selectedAnswers.map((k, v) => MapEntry(k.toString(), v));
+    
+    final unfinished = UnfinishedExam(
+      examId: widget.examId,
+      currentQuestionIndex: state.questionIndex,
+      remainingSeconds: state.examTimeRemaining?.inSeconds ?? 0,
+      answers: answers,
+      savedAt: DateTime.now(),
+    );
+    
+    await storage.saveExam(unfinished);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sınav kaydedildi. Daha sonra devam edebilirsiniz.')),
+      );
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -150,7 +312,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       final questionsById = {for (final q in quizState.questions) q.id: q};
       final ups = ref.read(userProgressRepositoryProvider);
       
-      if (widget.category == 'Yanlışlarım') {
+        if (widget.category == 'Yanlışlarım') {
         // In "Yanlışlarım" test: update SRS status for ALL answered questions
         for (final entry in quizState.selectedAnswers.entries) {
            final questionId = entry.key;
@@ -162,13 +324,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               // Updates SRS (promotes if correct, resets if wrong)
               await ups.updateSRSStatus(
                 examId: q.examId!, 
-                questionId: questionId, 
+                questionId: q.originalQuestionId ?? questionId, // Use original ID if available
                 isCorrect: isCorrect
               );
            }
         }
       } else {
-        // In regular tests: add wrong answers to the wrong list (SRS Level 0)
         // In regular tests: add wrong answers to the wrong list (SRS Level 0)
         for (final entry in quizState.selectedAnswers.entries) {
           final questionId = entry.key;
@@ -180,12 +341,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
              if (q.examId != null) {
                await ups.updateSRSStatus(
                  examId: q.examId!, 
-                 questionId: questionId, 
+                 questionId: q.originalQuestionId ?? questionId, // Use original ID if available 
                  isCorrect: false
                );
              } else {
                // Fallback for questions without examId
-               await ups.addWrongAnswerId(questionId); 
+               await ups.addWrongAnswerId(q.originalQuestionId ?? questionId); 
              }
           }
         }
@@ -328,10 +489,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       }
 
       return PopScope(
-          canPop: true,
+          canPop: false,
           onPopInvokedWithResult: (didPop, result) async {
-            if (!didPop) return;
-            await _saveResult(isFinal: false);
+            if (didPop) return;
+            await _onExitPressed();
           },
           child: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -346,6 +507,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               elevation: 0,
               foregroundColor: Theme.of(context).colorScheme.onSurface,
+              leading: widget.isExamMode
+                ? IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: _onExitPressed,
+                  )
+                : const BackButton(),
               actions: [
                 // Display progress
                 Container(
@@ -611,10 +778,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     }
 
         return PopScope(
-          canPop: true,
+          canPop: false,
           onPopInvokedWithResult: (didPop, result) async {
-            if (!didPop) return;
-            await _saveResult(isFinal: false);
+            if (didPop) return;
+            await _onExitPressed();
           },
           child: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -629,6 +796,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               elevation: 0,
               foregroundColor: Theme.of(context).colorScheme.onSurface,
+              leading: widget.isExamMode
+                ? IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: _onExitPressed,
+                  )
+                : const BackButton(),
             actions: [
               // Favorite Button
               if (quizState.questions.isNotEmpty)
@@ -696,7 +869,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     children: [
                       if (widget.isExamMode) ...[
                         ExamTimerWidget(
-                          duration: quizState.examDuration,
+                          // Key ensures widget is rebuilt when exam session changes or is restored
+                          key: ValueKey(quizState.examStartTime),
+                          duration: quizState.examTimeRemaining ?? const Duration(minutes: 30),
                           onTimeUp: () {
                             ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
                             // Navigate to results screen
@@ -1017,45 +1192,84 @@ class _QuestionCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           if (question.imageUrl != null && !question.hasOptionImages) ...[
-            Container(
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  question.imageUrl ?? '',
-                  width: double.infinity,
-                  height: 150,
-                  fit: BoxFit.contain,
-                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                    if (wasSynchronouslyLoaded) return child;
-                    if (frame == null) {
-                      return Center(
-                        child: SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      );
-                    }
-                    return child;
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Center(
-                      child: Icon(
-                        Icons.image_not_supported,
-                        size: 40,
-                        color: AppColors.onSurfaceVariant,
-                      ),
-                    );
-                  },
+            // Check if it's a video URL
+            if (isVideoUrl(question.imageUrl))
+              VimeoPlayerWidget(
+                videoUrl: question.imageUrl!,
+                height: 200,
+              )
+            else
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: question.imageUrl!.startsWith('http')
+                        ? Image.network(
+                            question.imageUrl!,
+                            width: double.infinity,
+                            height: 150,
+                            fit: BoxFit.contain,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Center(
+                                child: Icon(
+                                  Icons.broken_image,
+                                  size: 40,
+                                  color: AppColors.onSurfaceVariant,
+                                ),
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            question.imageUrl!,
+                            width: double.infinity,
+                            height: 150,
+                            fit: BoxFit.contain,
+                            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                              if (wasSynchronouslyLoaded) return child;
+                              if (frame == null) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  ),
+                                );
+                              }
+                              return child;
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Center(
+                                child: Icon(
+                                  Icons.image_not_supported,
+                                  size: 40,
+                                  color: AppColors.onSurfaceVariant,
+                                ),
+                              );
+                            },
+                          ),
                 ),
               ),
-            ),
             const SizedBox(height: 16),
           ],
           Text(
@@ -1214,20 +1428,35 @@ class _QuestionCard extends StatelessWidget {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      optionImageUrl,
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Container(
-                                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                                          child: Icon(
-                                            Icons.image_not_supported,
-                                            size: 24,
-                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                    child: optionImageUrl.startsWith('http')
+                                        ? Image.network(
+                                            optionImageUrl,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              return Container(
+                                                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                                child: Icon(
+                                                  Icons.broken_image,
+                                                  size: 24,
+                                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                                ),
+                                              );
+                                            },
+                                          )
+                                        : Image.asset(
+                                            optionImageUrl,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              return Container(
+                                                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                                child: Icon(
+                                                  Icons.image_not_supported,
+                                                  size: 24,
+                                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                                ),
+                                              );
+                                            },
                                           ),
-                                        );
-                                      },
-                                    ),
                                   ),
                                 ),
                               ],

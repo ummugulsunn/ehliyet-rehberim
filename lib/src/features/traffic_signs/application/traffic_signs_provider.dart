@@ -2,6 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/traffic_sign_model.dart';
 import '../../quiz/application/quiz_providers.dart';
 
+enum TrafficSignViewMode { list, grid }
+
+/// State provider for the view mode (List vs Grid)
+final trafficSignViewModeProvider = StateProvider<TrafficSignViewMode>((ref) => TrafficSignViewMode.list);
+
 /// Future provider that loads traffic sign categories from assets
 final trafficSignsProvider = FutureProvider<List<TrafficSignCategory>>((ref) async {
   final quizService = ref.read(quizRepositoryProvider);
@@ -53,5 +58,3 @@ final filteredTrafficSignsProvider = FutureProvider<List<TrafficSignCategory>>((
   
   return filteredCategories;
 });
-
-

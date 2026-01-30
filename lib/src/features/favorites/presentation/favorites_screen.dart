@@ -26,12 +26,32 @@ class FavoritesScreen extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite_border, size: 64, color: Colors.grey[400]),
-                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.favorite_border,
+                      size: 64,
+                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
                   Text(
                     'Henüz favori soru eklemediniz.',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.grey[600],
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Soruları çözerken ❤️ ikonuna basarak\nburaya ekleyebilirsiniz.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -66,91 +86,129 @@ class FavoritesScreen extends ConsumerWidget {
                     return const SizedBox.shrink(); 
                   }
 
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(16),
-                      title: Text(
-                        question.questionText,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.w600),
+                  return Dismissible(
+                    key: Key('fav_${favItem.questionId}'),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: AppColors.error,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 8),
-                          if (favItem.note != null && favItem.note!.isNotEmpty)
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.amber.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.sticky_note_2, size: 16, color: Colors.amber),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      favItem.note!,
-                                      style: Theme.of(context).textTheme.bodySmall,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 24),
+                      child: const Icon(Icons.delete_outline, color: Colors.white, size: 28),
+                    ),
+                    onDismissed: (_) {
+                       ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
+                       ScaffoldMessenger.of(context).clearSnackBars();
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                           content: const Text('Favorilerden kaldırıldı'),
+                           action: SnackBarAction(
+                             label: 'Geri Al',
+                             onPressed: () {
+                               ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
+                             },
+                           ),
+                           duration: const Duration(seconds: 2),
+                         ),
+                       );
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.all(16),
+                        title: Text(
+                          question.questionText,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 8),
+                            if (favItem.note != null && favItem.note!.isNotEmpty)
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Colors.amber.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.sticky_note_2, size: 16, color: Colors.amber),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        favItem.note!,
+                                        style: Theme.of(context).textTheme.bodySmall,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Kategori: ${question.category}',
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Colors.grey[600],
                               ),
                             ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Kategori: ${question.category}',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey[600],
+                          ],
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                          onPressed: () {
+                            // Manual delete also triggers same action, but Dismissible is primary now
+                            // We can keep it or remove it. Keeping it for accessibility.
+                             ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
+                             ScaffoldMessenger.of(context).clearSnackBars();
+                             ScaffoldMessenger.of(context).showSnackBar(
+                               const SnackBar(
+                                 content: Text('Favorilerden kaldırıldı'),
+                                 duration: Duration(seconds: 2),
+                               ),
+                             );
+                          },
+                        ),
+                        onTap: () {
+                          // Show edit note dialog
+                           final noteController = TextEditingController(text: favItem.note);
+                           showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Not Düzenle'),
+                              content: TextField(
+                                controller: noteController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Notunuz...',
+                                  border: OutlineInputBorder(),
+                                ),
+                                maxLines: 3,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('İptal'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    ref.read(favoritesRepositoryProvider).saveNote(favItem.questionId, noteController.text);
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Kaydet'),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete_outline, color: AppColors.error),
-                        onPressed: () {
-                          ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
+                          );
                         },
                       ),
-                      onTap: () {
-                        // Show edit note dialog
-                        // Reusing a simplified version of the logic from QuizScreen
-                         final noteController = TextEditingController(text: favItem.note);
-                         showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Not Düzenle'),
-                            content: TextField(
-                              controller: noteController,
-                              decoration: const InputDecoration(
-                                hintText: 'Notunuz...',
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: 3,
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('İptal'),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  ref.read(favoritesRepositoryProvider).saveNote(favItem.questionId, noteController.text);
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Kaydet'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
                     ),
                   );
                 },

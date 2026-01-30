@@ -182,6 +182,46 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     );
   }
 
+  /// Restore quiz state from saved data
+  void restoreState({
+    required int index,
+    required Map<int, String> answers,
+    required int remainingSeconds,
+  }) {
+    // Recalculate score based on restored answers
+    int restoredScore = 0;
+    
+    // Filter answers to ensure they belong to current questions
+    final Map<int, String> validAnswers = {};
+    
+    for (var entry in answers.entries) {
+       // Find question by ID
+       final question = state.questions.firstWhere(
+         (q) => q.id == entry.key, 
+         orElse: () => const Question(id: -1, questionText: '', options: {}, correctAnswerKey: '', explanation: '', category: '', examId: ''),
+       );
+       
+       if (question.id != -1) {
+         validAnswers[entry.key] = entry.value;
+         if (question.correctAnswerKey == entry.value) {
+           restoredScore++;
+         }
+       }
+    }
+
+    state = state.copyWith(
+      questionIndex: index,
+      selectedAnswers: validAnswers,
+      score: restoredScore,
+      status: QuizStatus.initial,
+    );
+    
+    // Convert remaining seconds to Duration
+    if (remainingSeconds > 0) {
+      startExamMode(remainingTime: Duration(seconds: remainingSeconds));
+    }
+  }
+
   /// Persist the current quiz result
   Future<void> saveCurrentResult({required String category}) async {
     try {
@@ -230,12 +270,21 @@ class QuizController extends FamilyNotifier<QuizState, String> {
   }
 
   /// Start exam mode
-  void startExamMode({Duration? duration}) {
+  void startExamMode({Duration? duration, Duration? remainingTime}) {
+    final totalDuration = duration ?? const Duration(minutes: 30);
+    DateTime? startTime = DateTime.now();
+    
+    // Adjust start time if resuming
+    if (remainingTime != null) {
+      final elapsed = totalDuration - remainingTime;
+      startTime = DateTime.now().subtract(elapsed);
+    }
+
     state = state.copyWith(
       isExamMode: true,
-      examStartTime: DateTime.now(),
-      examDuration: duration ?? const Duration(minutes: 30),
-      examTimeRemaining: duration ?? const Duration(minutes: 30),
+      examStartTime: startTime,
+      examDuration: totalDuration,
+      examTimeRemaining: remainingTime ?? totalDuration,
     );
   }
 
@@ -299,14 +348,18 @@ final quizControllerProvider = NotifierProvider.family<QuizController, QuizState
 /// Provider for wrong questions aggregated from all exams (karma) filtered by saved wrong IDs
 final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
   final userProgress = ref.read(userProgressRepositoryProvider);
-  // Get ONLY items due for review
-  final pairs = await userProgress.getDueSRSItems();
+  // 1. Get both sources of wrong answers
+  final srsPairs = await userProgress.getDueSRSItems();
+  final legacyIds = await userProgress.getWrongAnswerIds();
+  
+  final Set<Question> combinedQuestions = {};
   final quizRepository = ref.read(quizRepositoryProvider);
 
-  if (pairs.isNotEmpty) {
+  // 2. Process SRS Pairs (High accuracy, has ExamID)
+  if (srsPairs.isNotEmpty) {
     // Group by examId
     final Map<String, Set<int>> examToIds = {};
-    for (final pair in pairs) {
+    for (final pair in srsPairs) {
       final parts = pair.split(':');
       if (parts.length == 2) {
         final examId = parts[0];
@@ -317,19 +370,26 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
       }
     }
 
-    final List<Question> result = [];
     for (final entry in examToIds.entries) {
       final List<Question> questions = await quizRepository.loadQuestionsForExam(entry.key);
       final Set<int> ids = entry.value;
-      result.addAll(questions.where((q) => ids.contains(q.id)));
+      combinedQuestions.addAll(questions.where((q) => ids.contains(q.id)));
     }
-    return result;
   }
 
-  // Fallback to legacy IDs list if pairs not available
-  final wrongIds = await userProgress.getWrongAnswerIds();
-  if (wrongIds.isEmpty) return <Question>[];
-  final allQuestions = await quizRepository.loadQuestionsForExam('karma');
-  final Set<int> idSet = wrongIds.toSet();
-  return allQuestions.where((q) => idSet.contains(q.id)).toList(growable: false);
+  // 3. Process Legacy/Fallback IDs (Low accuracy, scan 'karma' pool)
+  if (legacyIds.isNotEmpty) {
+     // Optimization: filter out IDs we already found via SRS to avoid double fetching
+     final loadedIds = combinedQuestions.map((q) => q.id).toSet();
+     final missingIds = legacyIds.where((id) => !loadedIds.contains(id)).toSet();
+     
+     if (missingIds.isNotEmpty) {
+        final allQuestions = await quizRepository.loadQuestionsForExam('karma');
+        combinedQuestions.addAll(
+            allQuestions.where((q) => missingIds.contains(q.id))
+        );
+     }
+  }
+
+  return combinedQuestions.toList();
 });

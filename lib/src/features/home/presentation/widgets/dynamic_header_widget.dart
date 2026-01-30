@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../application/home_providers.dart';
-import '../../data/user_progress_repository.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Dynamic header widget that displays user progress and streak
@@ -58,8 +57,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
 
           // Level Title Logic
           String levelTitle = 'Acemi Sürücü';
-          if (level < 5) levelTitle = 'Acemi Sürücü';
-          else if (level < 10) levelTitle = 'Şehir İçi Uzmanı';
+          if (level < 5) {
+            levelTitle = 'Acemi Sürücü';
+          } else if (level < 10) levelTitle = 'Şehir İçi Uzmanı';
           else if (level < 20) levelTitle = 'Otoyol Faresi';
           else if (level < 50) levelTitle = 'Trafik Efsanesi';
           else levelTitle = 'Ehliyet Kralı';
