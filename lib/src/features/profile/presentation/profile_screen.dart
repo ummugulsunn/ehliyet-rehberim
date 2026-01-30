@@ -86,6 +86,51 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
+  Future<void> _showEditProfileDialog(String? currentName) async {
+    final nameController = TextEditingController(text: currentName);
+    
+    final shouldSave = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Profili Düzenle'),
+        content: TextField(
+          controller: nameController,
+          decoration: const InputDecoration(
+            labelText: 'Ad Soyad',
+            prefixIcon: Icon(Icons.person),
+          ),
+          textCapitalization: TextCapitalization.words,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('İptal'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Kaydet'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldSave == true && nameController.text.trim().isNotEmpty) {
+      final newName = nameController.text.trim();
+      if (newName == currentName) return;
+
+      try {
+        final success = await ref.read(authControllerProvider).updateDisplayName(newName);
+        if (success) {
+          _showSuccessSnackBar('Profil güncellendi');
+        } else {
+          _showErrorSnackBar('Güncelleme başarısız oldu');
+        }
+      } catch (e) {
+        _showErrorSnackBar('Bir hata oluştu: $e');
+      }
+    }
+  }
+
   void _navigateToAuth() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => const AuthScreen()),
@@ -176,14 +221,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         
         const SizedBox(height: 24),
         
-        // User Name
-        Text(
-          displayName ?? 'Kullanıcı',
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-          textAlign: TextAlign.center,
+        // User Name with Edit Icon
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              displayName ?? 'Kullanıcı',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            IconButton(
+              onPressed: () => _showEditProfileDialog(displayName),
+              icon: Icon(Icons.edit, size: 20, color: AppColors.primary),
+              tooltip: 'Adı Düzenle',
+            ),
+          ],
         ),
         
         const SizedBox(height: 8),

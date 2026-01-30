@@ -4,6 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/utils/logger.dart';
 import '../../quiz/domain/test_result_model.dart';
 import '../../home/domain/achievement_model.dart';
+import '../../leaderboard/data/leaderboard_repository.dart';
+import '../../leaderboard/domain/leaderboard_entry.dart';
+import '../../auth/data/auth_repository.dart';
+import 'package:intl/intl.dart';
 
 class _SRSItem {
   final String examId;
@@ -30,6 +34,9 @@ class UserProgressRepository {
   int _currentXP = 0;
   int _currentLevel = 1;
   int _currentStreakFreezes = 0;
+  // Leaderboard specific stats
+  int _currentWeeklyXP = 0;
+  int _currentMonthlyXP = 0;
 
   // Stream controllers with replay capability
   late final StreamController<UserProgressState> _stateController;
@@ -67,6 +74,11 @@ class UserProgressRepository {
   static const String _totalXPKey = 'total_xp_v1';
   static const String _unlockedAchievementsKey = 'unlocked_achievements';
   static const String _streakFreezesKey = 'streak_freezes';
+  // Leaderboard keys
+  static const String _weeklyXPKey = 'weekly_xp_v1';
+  static const String _monthlyXPKey = 'monthly_xp_v1';
+  static const String _lastWeekKey = 'last_week_v1';
+  static const String _lastMonthKey = 'last_month_v1';
 
   // Constants
   static const int _dailyGoal = 50; // Questions per day
@@ -138,7 +150,13 @@ class UserProgressRepository {
   /// Level 7: 1400-1899 XP
   /// Level 8: 1900-2499 XP
   /// Level 9: 2500-3199 XP
+  /// Level 9: 2500-3199 XP
   /// Level 10+: 3200+ XP
+  
+  // Getters for leaderboard stats
+  int get currentWeeklyXP => _currentWeeklyXP;
+  int get currentMonthlyXP => _currentMonthlyXP;
+
   int calculateLevel(int xp) {
     if (xp < 100) return 1;
     if (xp < 250) return 2;
@@ -190,6 +208,8 @@ class UserProgressRepository {
     if (_isInitialized) return; // Prevent double initialization
     
     try {
+      final prefs = await SharedPreferences.getInstance();
+
       // Load current values
       _currentDailyProgress = await this.dailyProgress;
       _currentStreak = await this.currentStreak;
@@ -197,16 +217,23 @@ class UserProgressRepository {
       _currentLevel = calculateLevel(_currentXP);
       _currentStreakFreezes = await this.streakFreezes;
       
+      // Load and check leaderboard stats
+      await _checkPeriodReset(prefs);
+      _currentWeeklyXP = prefs.getInt(_weeklyXPKey) ?? 0;
+      _currentMonthlyXP = prefs.getInt(_monthlyXPKey) ?? 0;
+
       _emitState();
       
       // Load test results and emit to stream
       await _loadTestResults();
+
+      // Ensure user is in leaderboard (auto-sync on startup)
+      await _syncToLeaderboard();
       
       _isInitialized = true;
       Logger.info('UserProgressService initialized. State emitted.');
 
       // Load achievements
-      final prefs = await SharedPreferences.getInstance();
       final unlockedAchievements = prefs.getStringList(_unlockedAchievementsKey) ?? [];
       _achievementsController.add(unlockedAchievements);
     } catch (e) {
@@ -241,7 +268,17 @@ class UserProgressRepository {
       final prefs = await SharedPreferences.getInstance();
       _currentXP = (prefs.getInt(_totalXPKey) ?? 0) + amount;
       
+      
       await prefs.setInt(_totalXPKey, _currentXP);
+      
+      // Update period stats
+      _currentWeeklyXP += amount;
+      _currentMonthlyXP += amount;
+      await prefs.setInt(_weeklyXPKey, _currentWeeklyXP);
+      await prefs.setInt(_monthlyXPKey, _currentMonthlyXP);
+      
+      // Sync to Firestore
+      _syncToLeaderboard();
       
       final oldLevel = _currentLevel;
       _currentLevel = calculateLevel(_currentXP);
@@ -259,6 +296,60 @@ class UserProgressRepository {
     } catch (e) {
       Logger.error('Failed to add XP', e);
     }
+  }
+
+  /// Sync current progress to Leaderboard
+  Future<void> _syncToLeaderboard() async {
+    try {
+      final user = AuthRepository.instance.currentUser;
+      if (user != null) {
+        final entry = LeaderboardEntry(
+          uid: user.uid,
+          displayName: AuthRepository.instance.userDisplayName ?? 'İsimsiz Kullanıcı',
+          photoUrl: AuthRepository.instance.userPhotoURL,
+          xp: _currentXP,
+          weeklyXp: _currentWeeklyXP,
+          monthlyXp: _currentMonthlyXP,
+          level: _currentLevel,
+          updatedAt: DateTime.now(),
+        );
+        await LeaderboardRepository().updateUserScore(entry);
+      }
+    } catch (e) {
+      Logger.error('Failed to sync to leaderboard', e);
+    }
+  }
+
+  /// Check if weekly/monthly stats need reset
+  Future<void> _checkPeriodReset(SharedPreferences prefs) async {
+    final now = DateTime.now();
+    // Simple ISO week calculation (may vary but consistent for app usage)
+    final currentWeek = int.parse(DateFormat('w').format(now));
+    final currentMonth = now.month;
+    final currentYear = now.year; // Important for month crossing year
+
+    final lastWeek = prefs.getInt(_lastWeekKey) ?? currentWeek;
+    final lastMonth = prefs.getInt(_lastMonthKey) ?? currentMonth;
+    
+    // Check Week Reset
+    if (currentWeek != lastWeek) {
+      _currentWeeklyXP = 0;
+      await prefs.setInt(_weeklyXPKey, 0);
+      await prefs.setInt(_lastWeekKey, currentWeek);
+      Logger.info('Weekly XP reset. New week: $currentWeek');
+    }
+    
+    // Check Month Reset
+    if (currentMonth != lastMonth) {
+      _currentMonthlyXP = 0;
+      await prefs.setInt(_monthlyXPKey, 0);
+      await prefs.setInt(_lastMonthKey, currentMonth);
+      Logger.info('Monthly XP reset. New month: $currentMonth');
+    }
+    
+    // Ensure we save current periods if new install
+    if (!prefs.containsKey(_lastWeekKey)) await prefs.setInt(_lastWeekKey, currentWeek);
+    if (!prefs.containsKey(_lastMonthKey)) await prefs.setInt(_lastMonthKey, currentMonth);
   }
 
   /// Purchase a streak freeze using XP

@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../profile/application/theme_mode_provider.dart';
+import '../../profile/presentation/profile_screen.dart';
 import '../../auth/application/auth_providers.dart';
 import 'notification_settings_screen.dart';
 import '../../favorites/presentation/favorites_screen.dart';
@@ -318,7 +319,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   title: 'Profil Bilgileri',
                   subtitle: 'Hesap bilgilerinizi düzenleyin',
                   onTap: () {
-                    // Navigate to profile screen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
                   },
                   iconColor: AppColors.primary,
                 ),

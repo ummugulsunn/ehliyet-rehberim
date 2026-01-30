@@ -17,6 +17,7 @@ import 'widgets/achievements_widget.dart';
 import 'widgets/smart_review_card.dart';
 import 'widgets/readiness_card.dart';
 import 'widgets/exam_simulation_card.dart';
+import '../../leaderboard/presentation/leaderboard_screen.dart';
 
 
 class HomeScreen extends ConsumerWidget {
@@ -378,6 +379,19 @@ class HomeScreen extends ConsumerWidget {
                   controller: scrollController,
                   child: const AchievementsWidget(),
                 ),
+              ),
+            );
+          },
+        ),
+        _buildFeatureCard(
+          context,
+          icon: Icons.leaderboard_outlined,
+          title: 'Liderlik\nTablosu',
+          color: Colors.purple,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LeaderboardScreen(),
               ),
             );
           },

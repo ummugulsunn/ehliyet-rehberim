@@ -128,4 +128,15 @@ class AuthController {
       return false;
     }
   }
+
+  /// Update user display name
+  Future<bool> updateDisplayName(String name) async {
+    try {
+      await _authRepository.updateDisplayName(name);
+      return true;
+    } catch (e) {
+      Logger.authError('Update name', e.toString());
+      return false;
+    }
+  }
 }

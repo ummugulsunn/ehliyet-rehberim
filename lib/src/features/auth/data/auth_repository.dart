@@ -322,6 +322,16 @@ class AuthRepository {
   /// Get user profile photo URL
   String? get userPhotoURL => currentUser?.photoURL;
 
+  /// Update user display name
+  Future<void> updateDisplayName(String name) async {
+    final user = currentUser;
+    if (user != null) {
+      await user.updateDisplayName(name);
+      await user.reload(); // Reload to update state
+      Logger.info('Updated user display name: $name');
+    }
+  }
+
   /// Sign in anonymously as guest
   /// Returns the User if successful, null if failed
   Future<User?> signInAsGuest() async {

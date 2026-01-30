@@ -6,6 +6,7 @@ import '../../quiz/domain/test_result_model.dart';
 import '../../home/data/user_progress_repository.dart';
 import 'package:intl/intl.dart';
 import 'detailed_stats_screen.dart';
+import 'widgets/progress_line_chart.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -168,6 +169,10 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                 totalTests: summary.totalTests,
               ),
               const SizedBox(height: 20),
+
+              // Progress Chart Section
+              _ProgressChartSection(),
+              const SizedBox(height: 20),
               
               // Recent Activity Card
               _RecentActivityCard(results: results),
@@ -175,9 +180,64 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               
               // Category Breakdown Card with Horizontal Bar Chart + Weakest Topic Highlight
               _CategoryBreakdownCard(categoryRates: summary.categorySuccessRates),
+              const SizedBox(height: 20),
+
+              // Topic Distribution Section
+              // Calculate topic distribution (count of questions per topic) for Pie Chart
+              /* 
+              // TODO: Add Pie Chart section later if needed or integrate into Category Breakdown
+              _TopicDistributionSection(results: results),
+              */
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _ProgressChartSection extends ConsumerWidget {
+  const _ProgressChartSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // defaults to 7 days
+    final historyAsync = ref.watch(scoreHistoryProvider(7));
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Son 7 Gün Başarı Grafiği',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 16),
+          historyAsync.when(
+            data: (spots) {
+              if (spots.isEmpty) return const Text('Son 7 günde aktivite yok.');
+              return ProgressLineChart(spots: spots, days: 7);
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, _) => const Text('Grafik yüklenemedi'),
+          ),
+        ],
       ),
     );
   }

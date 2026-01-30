@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../home/data/user_progress_repository.dart';
 import '../../quiz/domain/test_result_model.dart';
+import 'package:fl_chart/fl_chart.dart';
+import '../data/stats_repository.dart';
 
 final testResultsProvider = StreamProvider<List<TestResult>>((ref) {
   final repository = UserProgressRepository.instance;
@@ -86,3 +88,25 @@ final summaryStatsProvider = Provider<SummaryStats>((ref) {
   );
 });
 
+
+
+// Repository Provider
+final statsRepositoryProvider = Provider<StatsRepository>((ref) {
+  // Ensure initialized? UserProgressRepository is singleton but might need init.
+  // Actually UserProgressRepository.instance used inside.
+  return StatsRepository(UserProgressRepository.instance);
+});
+
+final scoreHistoryProvider = FutureProvider.family<List<FlSpot>, int>((ref, days) async {
+  // Watch testResults to refresh when new results come in
+  ref.watch(testResultsProvider);
+  final repository = ref.watch(statsRepositoryProvider);
+  return repository.getScoreHistory(days: days);
+});
+
+final topicPerformanceProvider = Provider<Map<String, double>>((ref) {
+  // Watch testResults
+  ref.watch(testResultsProvider);
+  final repository = ref.watch(statsRepositoryProvider);
+  return repository.getTopicPerformance();
+});
