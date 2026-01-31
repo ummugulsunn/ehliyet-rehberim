@@ -1,109 +1,139 @@
-# Ehliyet Rehberim
+<div align="center">
+  <img src="assets/images/app_logo.png" alt="Ehliyet Rehberim Logo" width="120" height="auto" />
+  <h1>Ehliyet Rehberim</h1>
+  
+  <p>
+    <strong>Türkiye'nin En Kapsamlı Ehliyet Sınavı Hazırlık Uygulaması</strong>
+  </p>
 
-![Flutter Version](https://img.shields.io/badge/Flutter-%2302569B.svg?style=flat&logo=Flutter&logoColor=white)
-![Dart Version](https://img.shields.io/badge/Dart-%230175C2.svg?style=flat&logo=dart&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android-lightgrey.svg?style=flat)
+  <p>
+    <a href="https://flutter.dev">
+      <img src="https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white" alt="Flutter">
+    </a>
+    <a href="https://dart.dev">
+      <img src="https://img.shields.io/badge/Dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
+    </a>
+    <a href="https://firebase.google.com">
+      <img src="https://img.shields.io/badge/Firebase-%23FFCA28.svg?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase">
+    </a>
+    <a href="LICENSE">
+      <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
+    </a>
+  </p>
+</div>
 
-## About the Project
+---
 
-Ehliyet Rehberim is a comprehensive mobile application designed to assist users in preparing for the Turkish Driver's License Exam. It offers a robust platform featuring over 20 practice exams, detailed topic explanations, and visual study aids for traffic signs. The application is built with a focus on user experience, performance, and educational efficacy, utilizing data-driven insights to track user progress and highlight areas for improvement.
+## � Proje Hakkında
 
-## Key Features
+**Ehliyet Rehberim**, ehliyet sınavına hazırlanan adaylar için özel olarak tasarlanmış modern bir mobil uygulamadır. 20'den fazla deneme sınavı, konu anlatımları ve görsel hafıza teknikleri ile sınav stresini azaltmayı ve başarıyı artırmayı hedefler. Kullanıcı dostu arayüzü ve performans takibi özellikleri ile öğrenme sürecini kişiselleştirir.
 
-- **Extensive Exam Repository:** Access to 20+ full-length practice exams simulating real testing conditions.
-- **Advanced Analytics:** Detailed statistical analysis of user performance using interactive charts, allowing for targeted study sessions.
-- **Visual Learning Tools:** sophisticated modules for learning traffic signs and vehicular information.
-- **Dynamic Quiz Engine:** Interactive quiz interface with real-time feedback, confetti celebrations for achievements, and state preservation.
-- **Personalized Experience:** specific study guides, favorites system for difficult questions, and personal note-taking capabilities.
-- **Secure Authentication:** Robust user authentication system supporting Email, Google, and Apple Sign-In via Firebase.
-- **Offline Persistence:** Local data caching ensures continuous learning progress is saved even without an active internet connection.
+---
 
-## Technology Stack
+## ✨ Özellikler
 
-This project leverages a modern and scalable technology stack:
+| Özellik | Açıklama |
+| :--- | :--- |
+| 🎯 **Geniş Soru Havuzu** | Gerçek sınav formatında 20+ deneme sınavı ve yüzlerce soru. |
+| 📊 **Detaylı Analizler** | Gelişmiş grafiklerle performans takibi ve eksik konu belirleme. |
+| 🧠 **Görsel Öğrenme** | Trafik işaretleri ve araç bilgisi için özel görsel modüller. |
+| ⚡ **Dinamik Quiz** | Konfetili kutlamalar ve anlık geri bildirimlerle eğlenceli test deneyimi. |
+| 💾 **Çevrimdışı Mod** | İnternet olmadan da çalışabilen, verilerinizi yerel olarak saklayan yapı. |
+| � **Güvenli Giriş** | Firebase altyapısı ile Email, Google ve Apple ile güvenli oturum açma. |
 
-- **Framework:** Flutter (3.8.1+)
-- **Language:** Dart
-- **State Management:** Riverpod (2.6.1) for reactive and testable state management.
-- **Backend & Auth:** Firebase (Auth, Firestore, Core) for secure backend services.
-- **Visualization:** FL Chart for rendering complex statistical data.
-- **UI Components:** Google Fonts (Inter), Confetti, Smooth Page Indicator.
-- **Local Storage:** SharedPreferences for efficient local data persistence.
-- **Architecture:** Feature-first, clean architecture emphasizing separation of concerns and maintainability.
+---
 
-## Prerequisites
+## 📸 Ekran Görüntüleri
 
-Before running this project, ensure you have the following installed:
+| **Ana Sayfa** | **Quiz Ekranı** | **İstatistikler** | **Profil** |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/images/screenshots/home.png" width="200" alt="Home Screen" /> | <img src="assets/images/screenshots/quiz.png" width="200" alt="Quiz Screen" /> | <img src="assets/images/screenshots/stats.png" width="200" alt="Stats Screen" /> | <img src="assets/images/screenshots/profile.png" width="200" alt="Profile Screen" /> |
+> *Not: Ekran görüntüleri geliştirme aşamasındadır.*
 
-- **Flutter SDK:** Version 3.8.1 or later.
-- **Dart SDK:** Compatible version included with Flutter.
-- **IDE:** VS Code or Android Studio with Flutter/Dart plugins.
-- **Git:** For version control.
-- **CocoaPods:** (MacOS only) For managing iOS dependencies.
+---
 
-## Installation & Usage
+## 🛠️ Teknolojiler
 
-Follow these steps to set up the project locally:
+Bu proje, modern ve ölçeklenebilir teknolojiler kullanılarak geliştirilmiştir:
 
-1.  **Clone the Repository**
+| Alan | Teknoloji | Kullanım Amacı |
+| :--- | :--- | :--- |
+| **Framework** | Flutter (3.8.1+) | Cross-platform mobil uygulama geliştirme. |
+| **Dil** | Dart | Tip güvenli ve performanslı programlama dili. |
+| **State Management** | Riverpod | Test edilebilir ve reaktif durum yönetimi. |
+| **Backend** | Firebase | Auth, Firestore ve Core servisleri. |
+| **Veri Görselleştirme** | FL Chart | İstatistiksel verilerin grafiksel gösterimi. |
+| **Yerel Depolama** | SharedPreferences | Kullanıcı tercihlerinin cihazda saklanması. |
 
+---
+
+## 🚀 Kurulum
+
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
+
+### Gereksinimler
+*   Flutter SDK (3.8.1 veya üzeri)
+*   Dart SDK
+*   VS Code veya Android Studio
+
+### Adım Adım Kurulum
+
+1.  **Repoyu Klonlayın**
     ```bash
     git clone https://github.com/Start-Up-Academy-Mobile-App/ehliyet-rehberim.git
     cd ehliyet-rehberim
     ```
 
-2.  **Install Dependencies**
-
+2.  **Bağımlılıkları Yükleyin**
     ```bash
     flutter pub get
     ```
 
-3.  **Setup Firebase**
-    
-    Ensure you have the `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) files placed in their respective directories (`android/app` and `ios/Runner`).
+3.  **Firebase Yapılandırması**
+    *   `google-services.json` dosyasını `android/app/` dizinine ekleyin.
+    *   `GoogleService-Info.plist` dosyasını `ios/Runner/` dizinine ekleyin.
 
-4.  **Run the Application**
-
+4.  **Uygulamayı Başlatın**
     ```bash
     flutter run
     ```
 
-## Project Architecture
+---
 
-The project follows a **Feature-First** architecture, ensuring high modularity and scalability. Each feature is encapsulated with its own Domain, Data, and Presentation layers.
+## 📂 Proje Yapısı
+
+Proje, **Feature-First** (Özellik Odaklı) mimari prensiplerine göre yapılandırılmıştır:
 
 ```text
 lib/
 ├── src/
-│   ├── features/
-│   │   ├── auth/           # Authentication logic and UI
-│   │   ├── home/           # Main dashboard and navigation
-│   │   ├── quiz/           # Quiz engine and state management
-│   │   ├── stats/          # User progress analytics
-│   │   ├── profile/        # User profile management
-│   │   ├── favorites/      # Bookmarking functionality
+│   ├── features/           # Özellik bazlı modüller
+│   │   ├── auth/           # Kimlik doğrulama
+│   │   ├── home/           # Ana sayfa
+│   │   ├── quiz/           # Sınav motoru
+│   │   ├── stats/          # İstatistikler
 │   │   └── ...
-│   ├── common_widgets/     # Reusable UI components
-│   ├── constants/          # App-wide constants and theme
-│   ├── utils/              # Helper functions and extensions
-│   ├── routing/            # Navigation configuration
-│   └── localization/       # Internationalization support
-└── main.dart               # Application entry point
+│   ├── common_widgets/     # Paylaşılan UI bileşenleri
+│   ├── constants/          # Sabitler ve tema ayarları
+│   ├── utils/              # Yardımcı fonksiyonlar
+│   └── routing/            # Navigasyon yapılandırması
+└── main.dart               # Başlangıç noktası
 ```
 
-## Contributing
+---
 
-Contributions are welcome. Please adhere to the following guidelines:
+## � Katkıda Bulunma
 
-1.  Fork the repository.
-2.  Create a feature branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
+Katkılarınızı bekliyoruz! Lütfen aşağıdaki adımları takip edin:
 
-Please ensure your code follows the project's linting rules and "Clean Code" principles.
+1.  Bu repoyu Fork'layın.
+2.  Yeni bir feature branch oluşturun (`git checkout -b feature/HarikaOzellik`).
+3.  Değişikliklerinizi commit'leyin (`git commit -m 'HarikaOzellik eklendi'`).
+4.  Branch'inizi Push'layın (`git push origin feature/HarikaOzellik`).
+5.  Bir Pull Request oluşturun.
 
-## License
+---
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## 📄 Lisans
+
+Bu proje **MIT Lisansı** ile lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakabilirsiniz.
