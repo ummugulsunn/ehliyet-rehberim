@@ -19,7 +19,7 @@ class QuickActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
@@ -96,9 +96,10 @@ class _QuickActionButtonState extends State<_QuickActionButton>
       duration: const Duration(milliseconds: 100),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.92).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.92,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -144,11 +145,7 @@ class _QuickActionButtonState extends State<_QuickActionButton>
                   width: 1.5,
                 ),
               ),
-              child: Icon(
-                widget.icon,
-                size: 26,
-                color: widget.color,
-              ),
+              child: Icon(widget.icon, size: 26, color: widget.color),
             ),
             const SizedBox(height: 6),
             Text(
@@ -169,10 +166,7 @@ class _QuickActionButtonState extends State<_QuickActionButton>
 class QuickAccessChips extends StatelessWidget {
   final List<QuickAccessItem> items;
 
-  const QuickAccessChips({
-    super.key,
-    required this.items,
-  });
+  const QuickAccessChips({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +210,7 @@ class _AccessChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Material(
       color: item.color.withValues(alpha: 0.1),
       borderRadius: BorderRadius.circular(20),
@@ -240,7 +234,10 @@ class _AccessChip extends StatelessWidget {
               if (item.badge != null) ...[
                 const SizedBox(width: 6),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: item.color,
                     borderRadius: BorderRadius.circular(10),

@@ -6,4 +6,3 @@ final studyGuidesProvider = FutureProvider<List<StudyGuide>>((ref) async {
   final service = ref.watch(quizRepositoryProvider);
   return service.loadStudyGuides();
 });
-

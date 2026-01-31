@@ -5,11 +5,8 @@ import '../../../../core/theme/app_colors.dart';
 /// Widget that displays a pie chart showing category performance distribution
 class CategoryPerformancePieChart extends StatelessWidget {
   final Map<String, double> categoryScores;
-  
-  const CategoryPerformancePieChart({
-    super.key,
-    required this.categoryScores,
-  });
+
+  const CategoryPerformancePieChart({super.key, required this.categoryScores});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +55,7 @@ class CategoryPerformancePieChart extends StatelessWidget {
     return categoryScores.entries.map((entry) {
       final color = colors[index % colors.length];
       index++;
-      
+
       return PieChartSectionData(
         value: entry.value,
         title: '${entry.value.toInt()}%',
@@ -77,11 +74,8 @@ class CategoryPerformancePieChart extends StatelessWidget {
 /// Legend widget for the pie chart
 class CategoryLegend extends StatelessWidget {
   final Map<String, double> categoryScores;
-  
-  const CategoryLegend({
-    super.key,
-    required this.categoryScores,
-  });
+
+  const CategoryLegend({super.key, required this.categoryScores});
 
   @override
   Widget build(BuildContext context) {
@@ -103,23 +97,17 @@ class CategoryLegend extends StatelessWidget {
         final index = mapEntry.key;
         final entry = mapEntry.value;
         final color = colors[index % colors.length];
-        
+
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 16,
               height: 16,
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 8),
-            Text(
-              entry.key,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
+            Text(entry.key, style: Theme.of(context).textTheme.bodySmall),
           ],
         );
       }).toList(),

@@ -6,7 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 class DailyProgressLineChart extends StatelessWidget {
   final List<int> dailyProgress; // Last 7 days progress
   final List<String> labels; // Date labels
-  
+
   const DailyProgressLineChart({
     super.key,
     required this.dailyProgress,
@@ -38,7 +38,9 @@ class DailyProgressLineChart extends StatelessWidget {
               horizontalInterval: 10,
               getDrawingHorizontalLine: (value) {
                 return FlLine(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.1),
                   strokeWidth: 1,
                 );
               },
@@ -65,9 +67,9 @@ class DailyProgressLineChart extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
                         labels[index],
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 10,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.copyWith(fontSize: 10),
                       ),
                     );
                   },
@@ -81,9 +83,9 @@ class DailyProgressLineChart extends StatelessWidget {
                   getTitlesWidget: (double value, TitleMeta meta) {
                     return Text(
                       value.toInt().toString(),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(fontSize: 10),
                     );
                   },
                 ),
@@ -93,10 +95,14 @@ class DailyProgressLineChart extends StatelessWidget {
               show: true,
               border: Border(
                 bottom: BorderSide(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
                 left: BorderSide(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
               ),
             ),
@@ -109,10 +115,7 @@ class DailyProgressLineChart extends StatelessWidget {
                 spots: _createSpots(),
                 isCurved: true,
                 gradient: LinearGradient(
-                  colors: [
-                    AppColors.primary,
-                    AppColors.primaryLight,
-                  ],
+                  colors: [AppColors.primary, AppColors.primaryLight],
                 ),
                 barWidth: 3,
                 isStrokeCapRound: true,

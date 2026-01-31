@@ -15,20 +15,24 @@ final dailyProgressProvider = StreamProvider<int>((ref) {
 
 /// FutureProvider that gets the unified user progress state
 /// This ensures we wait for initialization before showing data
-final userProgressStateProvider = FutureProvider<UserProgressState>((ref) async {
+final userProgressStateProvider = FutureProvider<UserProgressState>((
+  ref,
+) async {
   final userProgressRepository = ref.read(userProgressRepositoryProvider);
-  
+
   // Wait for initialization if not done yet
   if (!userProgressRepository.isInitialized) {
     await userProgressRepository.initialize();
   }
-  
+
   // Return current state
   return UserProgressState(
     dailyProgress: await userProgressRepository.dailyProgress,
     streak: await userProgressRepository.currentStreak,
     xp: await userProgressRepository.totalXP,
-    level: userProgressRepository.calculateLevel(await userProgressRepository.totalXP),
+    level: userProgressRepository.calculateLevel(
+      await userProgressRepository.totalXP,
+    ),
     streakFreezes: await userProgressRepository.streakFreezes,
   );
 });
@@ -49,7 +53,7 @@ final dailyGoalProvider = Provider<int>((ref) {
 final dailyProgressPercentageProvider = Provider<double>((ref) {
   final dailyProgressAsync = ref.watch(dailyProgressProvider);
   final dailyGoal = ref.watch(dailyGoalProvider);
-  
+
   return dailyProgressAsync.when(
     data: (progress) => progress / dailyGoal,
     loading: () => 0.0,
@@ -61,7 +65,7 @@ final dailyProgressPercentageProvider = Provider<double>((ref) {
 final isDailyGoalCompletedProvider = Provider<bool>((ref) {
   final dailyProgressAsync = ref.watch(dailyProgressProvider);
   final dailyGoal = ref.watch(dailyGoalProvider);
-  
+
   return dailyProgressAsync.when(
     data: (progress) => progress >= dailyGoal,
     loading: () => false,
@@ -72,7 +76,7 @@ final isDailyGoalCompletedProvider = Provider<bool>((ref) {
 /// Provider that returns the formatted streak text
 final streakTextProvider = Provider<String>((ref) {
   final streakAsync = ref.watch(streakProvider);
-  
+
   return streakAsync.when(
     data: (streak) {
       if (streak == 0) return '';
@@ -99,7 +103,7 @@ final levelProvider = StreamProvider<int>((ref) {
 /// Provider for Level Title (Rank)
 final levelTitleProvider = Provider<String>((ref) {
   final levelAsync = ref.watch(levelProvider);
-  
+
   return levelAsync.when(
     data: (level) {
       if (level < 5) return 'Acemi Sürücü';
@@ -112,7 +116,6 @@ final levelTitleProvider = Provider<String>((ref) {
     error: (_, __) => 'Acemi Sürücü',
   );
 });
-
 
 /// Provider that loads the unlocked achievements
 final achievementsProvider = FutureProvider<List<String>>((ref) async {

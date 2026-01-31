@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 
-enum AchievementType {
-  streak,
-  xp,
-  level,
-  questions,
-  perfectScore,
-}
+enum AchievementType { streak, xp, level, questions, perfectScore }
 
 class Achievement {
   final String id;
   final String title;
   final String description;
-  final IconData iconData; 
+  final IconData iconData;
   final AchievementType type;
   final int requirement;
   final bool isSecret;
-  
+
   // UI helper props
   final Color color;
 
@@ -52,7 +46,7 @@ class Achievement {
       requirement: 7,
       color: Colors.deepOrange,
     ),
-    
+
     // Level Achievements
     Achievement(
       id: 'level_5',
@@ -72,7 +66,7 @@ class Achievement {
       requirement: 10,
       color: Colors.indigo,
     ),
-    
+
     // Questions Achievements
     Achievement(
       id: 'questions_100',

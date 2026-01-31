@@ -28,10 +28,7 @@ class SubheadingBlock extends ContentBlock {
   const SubheadingBlock(this.text);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'type': 'subheading',
-        'text': text,
-      };
+  Map<String, dynamic> toJson() => {'type': 'subheading', 'text': text};
 }
 
 class ParagraphBlock extends ContentBlock {
@@ -39,10 +36,7 @@ class ParagraphBlock extends ContentBlock {
   const ParagraphBlock(this.text);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'type': 'paragraph',
-        'text': text,
-      };
+  Map<String, dynamic> toJson() => {'type': 'paragraph', 'text': text};
 }
 
 class ImageBlock extends ContentBlock {
@@ -50,10 +44,7 @@ class ImageBlock extends ContentBlock {
   const ImageBlock(this.imageUrl);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'type': 'image',
-        'imageUrl': imageUrl,
-      };
+  Map<String, dynamic> toJson() => {'type': 'image', 'imageUrl': imageUrl};
 }
 
 class KeyInfoBlock extends ContentBlock {
@@ -61,10 +52,7 @@ class KeyInfoBlock extends ContentBlock {
   const KeyInfoBlock(this.text);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'type': 'key_info',
-        'text': text,
-      };
+  Map<String, dynamic> toJson() => {'type': 'key_info', 'text': text};
 }
 
 class StudyGuide {
@@ -102,9 +90,9 @@ class StudyGuide {
   }
 
   Map<String, dynamic> toJson() => {
-        'category': category,
-        'title': title,
-        'content': markdown ?? content.map((e) => e.toJson()).toList(growable: false),
-      };
+    'category': category,
+    'title': title,
+    'content':
+        markdown ?? content.map((e) => e.toJson()).toList(growable: false),
+  };
 }
-

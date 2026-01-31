@@ -6,7 +6,7 @@ import '../data/stats_repository.dart';
 
 final testResultsProvider = StreamProvider<List<TestResult>>((ref) {
   final repository = UserProgressRepository.instance;
-  
+
   Stream<List<TestResult>> stream() async* {
     if (!repository.isInitialized) {
       await repository.initialize();
@@ -16,7 +16,7 @@ final testResultsProvider = StreamProvider<List<TestResult>>((ref) {
     // Then listen for future updates
     yield* repository.resultsStream;
   }
-  
+
   return stream();
 });
 
@@ -55,7 +55,8 @@ final summaryStatsProvider = Provider<SummaryStats>((ref) {
       for (final r in results) {
         correctSum += r.correctAnswers;
         totalSum += r.totalQuestions;
-        catCorrect[r.category] = (catCorrect[r.category] ?? 0) + r.correctAnswers;
+        catCorrect[r.category] =
+            (catCorrect[r.category] ?? 0) + r.correctAnswers;
         catTotal[r.category] = (catTotal[r.category] ?? 0) + r.totalQuestions;
       }
 
@@ -88,8 +89,6 @@ final summaryStatsProvider = Provider<SummaryStats>((ref) {
   );
 });
 
-
-
 // Repository Provider
 final statsRepositoryProvider = Provider<StatsRepository>((ref) {
   // Ensure initialized? UserProgressRepository is singleton but might need init.
@@ -97,7 +96,10 @@ final statsRepositoryProvider = Provider<StatsRepository>((ref) {
   return StatsRepository(UserProgressRepository.instance);
 });
 
-final scoreHistoryProvider = FutureProvider.family<List<FlSpot>, int>((ref, days) async {
+final scoreHistoryProvider = FutureProvider.family<List<FlSpot>, int>((
+  ref,
+  days,
+) async {
   // Watch testResults to refresh when new results come in
   ref.watch(testResultsProvider);
   final repository = ref.watch(statsRepositoryProvider);

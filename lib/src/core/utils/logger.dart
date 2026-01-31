@@ -48,4 +48,4 @@ class Logger {
   static void purchaseError(String operation, Object error) {
     Logger.error('Purchase $operation failed: $error');
   }
-} 
+}

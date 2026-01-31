@@ -16,14 +16,15 @@ class Exam {
     return Exam(
       examId: json['examId'] as String,
       examName: json['examName'] as String,
-      questions: q.map((e) => Question.fromJson(e as Map<String, dynamic>)).toList(),
+      questions: q
+          .map((e) => Question.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'examId': examId,
-        'examName': examName,
-        'questions': questions.map((e) => e.toJson()).toList(),
-      };
+    'examId': examId,
+    'examName': examName,
+    'questions': questions.map((e) => e.toJson()).toList(),
+  };
 }
-

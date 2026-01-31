@@ -12,8 +12,6 @@ final quizRepositoryProvider = Provider<QuizRepository>((ref) {
   return QuizRepository();
 });
 
-
-
 /// Provider for the UserProgressRepository
 final userProgressRepositoryProvider = Provider<UserProgressRepository>((ref) {
   return UserProgressRepository.instance;
@@ -26,7 +24,10 @@ final proStatusProvider = StreamProvider<bool>((ref) async* {
 });
 
 /// Notifier for loading and caching all quiz questions
-final quizQuestionsProvider = FutureProvider.family<List<Question>, String>((ref, examId) async {
+final quizQuestionsProvider = FutureProvider.family<List<Question>, String>((
+  ref,
+  examId,
+) async {
   final service = ref.watch(quizRepositoryProvider);
   return service.loadQuestionsForExam(examId);
 });
@@ -34,8 +35,10 @@ final quizQuestionsProvider = FutureProvider.family<List<Question>, String>((ref
 /// Provider to get questions filtered by a specific category
 /// This provider is now deprecated - use quizQuestionsProvider.when() directly
 @Deprecated('Use quizQuestionsProvider.when() directly for better null safety')
-final questionsByCategoryProvider =
-    Provider.family<List<Question>, String>((ref, category) {
+final questionsByCategoryProvider = Provider.family<List<Question>, String>((
+  ref,
+  category,
+) {
   // Watch the main questions provider with default exam 'karma'
   final questionsAsync = ref.watch(quizQuestionsProvider('karma'));
 
@@ -84,13 +87,15 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     // Update selected answers
     final updatedSelectedAnswers = Map<int, String>.from(state.selectedAnswers);
     updatedSelectedAnswers[currentQuestion.id] = selectedOption;
-    
+
     // Debug: Log answer selection (removed for production)
 
     // Update score and combo
     final newScore = isCorrect ? state.score + 1 : state.score;
     final newCombo = isCorrect ? state.currentCombo + 1 : 0;
-    final newBestCombo = newCombo > state.bestCombo ? newCombo : state.bestCombo;
+    final newBestCombo = newCombo > state.bestCombo
+        ? newCombo
+        : state.bestCombo;
 
     // Update status
     final newStatus = isCorrect ? QuizStatus.correct : QuizStatus.incorrect;
@@ -115,7 +120,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     try {
       final userProgressRepository = ref.read(userProgressRepositoryProvider);
       await userProgressRepository.completeQuestion();
-      
+
       // Update SRS System (Mistake Tracking)
       final currentQ = state.currentQuestion;
       if (currentQ != null) {
@@ -127,14 +132,14 @@ class QuizController extends FamilyNotifier<QuizState, String> {
       }
 
       if (isCorrect) {
-        await userProgressRepository.addXP(UserProgressRepository.xpPerCorrectAnswer);
+        await userProgressRepository.addXP(
+          UserProgressRepository.xpPerCorrectAnswer,
+        );
       }
     } catch (e) {
       // Log error but don't fail the quiz
     }
   }
-
-
 
   /// Move to the next question
   void nextQuestion() {
@@ -144,14 +149,11 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     }
 
     final nextIndex = state.questionIndex + 1;
-    final newStatus = nextIndex >= state.questions.length 
-        ? QuizStatus.complete 
+    final newStatus = nextIndex >= state.questions.length
+        ? QuizStatus.complete
         : QuizStatus.initial;
 
-    state = state.copyWith(
-      questionIndex: nextIndex,
-      status: newStatus,
-    );
+    state = state.copyWith(questionIndex: nextIndex, status: newStatus);
   }
 
   /// Move to the previous question
@@ -171,10 +173,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     if (newIndex < 0 || newIndex >= state.questions.length) {
       return;
     }
-    state = state.copyWith(
-      questionIndex: newIndex,
-      status: QuizStatus.initial,
-    );
+    state = state.copyWith(questionIndex: newIndex, status: QuizStatus.initial);
   }
 
   /// Reset the quiz to initial state
@@ -197,23 +196,31 @@ class QuizController extends FamilyNotifier<QuizState, String> {
   }) {
     // Recalculate score based on restored answers
     int restoredScore = 0;
-    
+
     // Filter answers to ensure they belong to current questions
     final Map<int, String> validAnswers = {};
-    
+
     for (var entry in answers.entries) {
-       // Find question by ID
-       final question = state.questions.firstWhere(
-         (q) => q.id == entry.key, 
-         orElse: () => const Question(id: -1, questionText: '', options: {}, correctAnswerKey: '', explanation: '', category: '', examId: ''),
-       );
-       
-       if (question.id != -1) {
-         validAnswers[entry.key] = entry.value;
-         if (question.correctAnswerKey == entry.value) {
-           restoredScore++;
-         }
-       }
+      // Find question by ID
+      final question = state.questions.firstWhere(
+        (q) => q.id == entry.key,
+        orElse: () => const Question(
+          id: -1,
+          questionText: '',
+          options: {},
+          correctAnswerKey: '',
+          explanation: '',
+          category: '',
+          examId: '',
+        ),
+      );
+
+      if (question.id != -1) {
+        validAnswers[entry.key] = entry.value;
+        if (question.correctAnswerKey == entry.value) {
+          restoredScore++;
+        }
+      }
     }
 
     state = state.copyWith(
@@ -222,7 +229,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
       score: restoredScore,
       status: QuizStatus.initial,
     );
-    
+
     // Convert remaining seconds to Duration
     if (remainingSeconds > 0) {
       startExamMode(remainingTime: Duration(seconds: remainingSeconds));
@@ -280,7 +287,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
   void startExamMode({Duration? duration, Duration? remainingTime}) {
     final totalDuration = duration ?? const Duration(minutes: 45);
     DateTime? startTime = DateTime.now();
-    
+
     // Adjust start time if resuming
     if (remainingTime != null) {
       final elapsed = totalDuration - remainingTime;
@@ -297,11 +304,15 @@ class QuizController extends FamilyNotifier<QuizState, String> {
 
   /// Update exam timer (call this every second)
   void updateExamTimer() {
-    if (!state.isExamMode || state.examStartTime == null || state.status == QuizStatus.complete) return;
-    
+    if (!state.isExamMode ||
+        state.examStartTime == null ||
+        state.status == QuizStatus.complete) {
+      return;
+    }
+
     final elapsed = DateTime.now().difference(state.examStartTime!);
     final remaining = state.examDuration - elapsed;
-    
+
     if (remaining.inSeconds <= 0) {
       // Time's up - auto finish exam
       finishExam();
@@ -313,13 +324,15 @@ class QuizController extends FamilyNotifier<QuizState, String> {
   /// Finish exam (either manually or when time runs out)
   void finishExam() {
     if (state.examStartTime == null) return;
-    
+
     final finalElapsed = DateTime.now().difference(state.examStartTime!);
     final finalRemaining = state.examDuration - finalElapsed;
-    
+
     state = state.copyWith(
       status: QuizStatus.complete,
-      examTimeRemaining: finalRemaining.inSeconds > 0 ? finalRemaining : Duration.zero,
+      examTimeRemaining: finalRemaining.inSeconds > 0
+          ? finalRemaining
+          : Duration.zero,
     );
   }
 
@@ -328,7 +341,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
     if (!state.isExamMode) return false;
     final totalQuestions = state.questions.length;
     if (totalQuestions == 0) return false;
-    
+
     final percentage = (state.score / totalQuestions) * 100;
     return percentage >= 70;
   }
@@ -336,7 +349,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
   /// Get time taken for exam
   Duration? getTimeTaken() {
     if (!state.isExamMode || state.examStartTime == null) return null;
-    
+
     if (state.status == QuizStatus.complete) {
       // Exam completed
       return state.examDuration - (state.examTimeRemaining ?? Duration.zero);
@@ -348,9 +361,10 @@ class QuizController extends FamilyNotifier<QuizState, String> {
 }
 
 /// Provider for the QuizController with family support for multiple quiz instances
-final quizControllerProvider = NotifierProvider.family<QuizController, QuizState, String>(() {
-  return QuizController();
-});
+final quizControllerProvider =
+    NotifierProvider.family<QuizController, QuizState, String>(() {
+      return QuizController();
+    });
 
 /// Provider for wrong questions aggregated from all exams (karma) filtered by saved wrong IDs
 final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
@@ -358,7 +372,7 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
   // 1. Get both sources of wrong answers
   final srsPairs = await userProgress.getDueSRSItems();
   final legacyIds = await userProgress.getWrongAnswerIds();
-  
+
   final Set<Question> combinedQuestions = {};
   final quizRepository = ref.read(quizRepositoryProvider);
 
@@ -378,7 +392,8 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
     }
 
     for (final entry in examToIds.entries) {
-      final List<Question> questions = await quizRepository.loadQuestionsForExam(entry.key);
+      final List<Question> questions = await quizRepository
+          .loadQuestionsForExam(entry.key);
       final Set<int> ids = entry.value;
       combinedQuestions.addAll(questions.where((q) => ids.contains(q.id)));
     }
@@ -386,16 +401,16 @@ final wrongQuestionsProvider = FutureProvider<List<Question>>((ref) async {
 
   // 3. Process Legacy/Fallback IDs (Low accuracy, scan 'karma' pool)
   if (legacyIds.isNotEmpty) {
-     // Optimization: filter out IDs we already found via SRS to avoid double fetching
-     final loadedIds = combinedQuestions.map((q) => q.id).toSet();
-     final missingIds = legacyIds.where((id) => !loadedIds.contains(id)).toSet();
-     
-     if (missingIds.isNotEmpty) {
-        final allQuestions = await quizRepository.loadQuestionsForExam('karma');
-        combinedQuestions.addAll(
-            allQuestions.where((q) => missingIds.contains(q.id))
-        );
-     }
+    // Optimization: filter out IDs we already found via SRS to avoid double fetching
+    final loadedIds = combinedQuestions.map((q) => q.id).toSet();
+    final missingIds = legacyIds.where((id) => !loadedIds.contains(id)).toSet();
+
+    if (missingIds.isNotEmpty) {
+      final allQuestions = await quizRepository.loadQuestionsForExam('karma');
+      combinedQuestions.addAll(
+        allQuestions.where((q) => missingIds.contains(q.id)),
+      );
+    }
   }
 
   return combinedQuestions.toList();

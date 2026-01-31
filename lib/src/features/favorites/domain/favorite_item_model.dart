@@ -24,12 +24,8 @@ class FavoriteItem {
       savedAt: DateTime.parse(json['savedAt'] as String),
     );
   }
-    
-  FavoriteItem copyWith({
-    int? questionId,
-    String? note,
-    DateTime? savedAt,
-  }) {
+
+  FavoriteItem copyWith({int? questionId, String? note, DateTime? savedAt}) {
     return FavoriteItem(
       questionId: questionId ?? this.questionId,
       note: note ?? this.note,

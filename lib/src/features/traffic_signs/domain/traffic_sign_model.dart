@@ -21,21 +21,18 @@ class TrafficSign {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'imageUrl': imageUrl,
-        'description': description,
-      };
+    'id': id,
+    'name': name,
+    'imageUrl': imageUrl,
+    'description': description,
+  };
 }
 
 class TrafficSignCategory {
   final String categoryName;
   final List<TrafficSign> signs;
 
-  const TrafficSignCategory({
-    required this.categoryName,
-    required this.signs,
-  });
+  const TrafficSignCategory({required this.categoryName, required this.signs});
 
   factory TrafficSignCategory.fromJson(Map<String, dynamic> json) {
     final List<dynamic> rawSigns = json['signs'] as List<dynamic>? ?? [];
@@ -48,9 +45,7 @@ class TrafficSignCategory {
   }
 
   Map<String, dynamic> toJson() => {
-        'categoryName': categoryName,
-        'signs': signs.map((e) => e.toJson()).toList(),
-      };
+    'categoryName': categoryName,
+    'signs': signs.map((e) => e.toJson()).toList(),
+  };
 }
-
-

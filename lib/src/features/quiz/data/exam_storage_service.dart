@@ -17,9 +17,9 @@ class ExamStorageService {
   Future<UnfinishedExam?> getUnfinishedExam(String examId) async {
     final prefs = await SharedPreferences.getInstance();
     final jsonStr = prefs.getString('$_prefix$examId');
-    
+
     if (jsonStr == null) return null;
-    
+
     try {
       return UnfinishedExam.fromJson(jsonStr);
     } catch (e) {
@@ -43,7 +43,7 @@ class ExamStorageService {
     final prefs = await SharedPreferences.getInstance();
     final keys = prefs.getKeys();
     final unfinishedIds = <String>{};
-    
+
     for (final key in keys) {
       if (key.startsWith(_prefix)) {
         final examId = key.substring(_prefix.length);

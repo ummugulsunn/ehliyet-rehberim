@@ -11,7 +11,7 @@ class QuizState {
   final int currentCombo;
   final int bestCombo;
   final String? examId;
-  
+
   // Exam mode fields
   final bool isExamMode;
   final DateTime? examStartTime;

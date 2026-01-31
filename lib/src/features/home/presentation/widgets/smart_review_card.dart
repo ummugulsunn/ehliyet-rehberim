@@ -21,22 +21,26 @@ class SmartReviewCard extends ConsumerWidget {
       data: (results) {
         // Unlock if at least 1 exam is finished
         final isUnlocked = results.isNotEmpty;
-        
+
         // Determine what to show
         String statusText = 'Veri Toplanıyor (En az 1 sınav çözün)';
         bool hasMistakes = false;
         int mistakeCount = 0;
 
         if (isUnlocked) {
-           mistakeCount = mistakesAsync.valueOrNull?.length ?? 0;
-           if (mistakeCount > 0) {
-             statusText = 'Tekrar Edilecek: $mistakeCount Hata';
-             hasMistakes = true;
-           } else {
-             final weakCategories = ref.read(userProgressRepositoryProvider).getWeakestCategories(limit: 1);
-             final weakCategory = weakCategories.isNotEmpty ? weakCategories.first : 'Genel';
-             statusText = 'Zayıf Noktanız: $weakCategory';
-           }
+          mistakeCount = mistakesAsync.valueOrNull?.length ?? 0;
+          if (mistakeCount > 0) {
+            statusText = 'Tekrar Edilecek: $mistakeCount Hata';
+            hasMistakes = true;
+          } else {
+            final weakCategories = ref
+                .read(userProgressRepositoryProvider)
+                .getWeakestCategories(limit: 1);
+            final weakCategory = weakCategories.isNotEmpty
+                ? weakCategories.first
+                : 'Genel';
+            statusText = 'Zayıf Noktanız: $weakCategory';
+          }
         }
 
         final colorScheme = Theme.of(context).colorScheme;
@@ -45,25 +49,34 @@ class SmartReviewCard extends ConsumerWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isUnlocked 
-                  ? (hasMistakes ? AppColors.error.withValues(alpha: 0.5) : AppColors.primary.withValues(alpha: 0.3))
+              color: isUnlocked
+                  ? (hasMistakes
+                        ? AppColors.error.withValues(alpha: 0.5)
+                        : AppColors.primary.withValues(alpha: 0.3))
                   : colorScheme.outline.withValues(alpha: 0.2),
               width: 2,
             ),
-            boxShadow: isUnlocked ? [
-              BoxShadow(
-                color: (hasMistakes ? AppColors.error : AppColors.primary).withValues(alpha: 0.1),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ] : [],
+            boxShadow: isUnlocked
+                ? [
+                    BoxShadow(
+                      color: (hasMistakes ? AppColors.error : AppColors.primary)
+                          .withValues(alpha: 0.1),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : [],
           ),
           child: Card(
             elevation: 0,
             margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            color: isUnlocked 
-                ? (hasMistakes ? colorScheme.errorContainer.withValues(alpha: 0.3) : colorScheme.primaryContainer) 
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            color: isUnlocked
+                ? (hasMistakes
+                      ? colorScheme.errorContainer.withValues(alpha: 0.3)
+                      : colorScheme.primaryContainer)
                 : colorScheme.surfaceContainerHighest,
             child: InkWell(
               onTap: isUnlocked ? () => _startSmartQuiz(context, ref) : null,
@@ -75,13 +88,17 @@ class SmartReviewCard extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isUnlocked 
-                            ? (hasMistakes ? AppColors.error.withValues(alpha: 0.15) : AppColors.primary.withValues(alpha: 0.15))
+                        color: isUnlocked
+                            ? (hasMistakes
+                                  ? AppColors.error.withValues(alpha: 0.15)
+                                  : AppColors.primary.withValues(alpha: 0.15))
                             : Colors.grey.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isUnlocked 
-                              ? (hasMistakes ? AppColors.error.withValues(alpha: 0.3) : AppColors.primary.withValues(alpha: 0.3))
+                          color: isUnlocked
+                              ? (hasMistakes
+                                    ? AppColors.error.withValues(alpha: 0.3)
+                                    : AppColors.primary.withValues(alpha: 0.3))
                               : Colors.grey.withValues(alpha: 0.2),
                           width: 1.5,
                         ),
@@ -89,8 +106,10 @@ class SmartReviewCard extends ConsumerWidget {
                       child: Icon(
                         isUnlocked ? Icons.auto_awesome : Icons.lock_outline,
                         size: 28,
-                        color: isUnlocked 
-                            ? (hasMistakes ? AppColors.error : AppColors.primary)
+                        color: isUnlocked
+                            ? (hasMistakes
+                                  ? AppColors.error
+                                  : AppColors.primary)
                             : Colors.grey,
                       ),
                     ),
@@ -101,30 +120,41 @@ class SmartReviewCard extends ConsumerWidget {
                         children: [
                           Text(
                             'Akıllı Tekrar',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: isUnlocked 
-                                  ? (hasMistakes ? AppColors.error : colorScheme.onPrimaryContainer) 
-                                  : colorScheme.onSurfaceVariant,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: isUnlocked
+                                      ? (hasMistakes
+                                            ? AppColors.error
+                                            : colorScheme.onPrimaryContainer)
+                                      : colorScheme.onSurfaceVariant,
+                                ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             statusText,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: isUnlocked 
-                                  ? (hasMistakes ? AppColors.error.withValues(alpha: 0.8) : colorScheme.onPrimaryContainer.withValues(alpha: 0.8))
-                                  : colorScheme.onSurfaceVariant,
-                            ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: isUnlocked
+                                      ? (hasMistakes
+                                            ? AppColors.error.withValues(
+                                                alpha: 0.8,
+                                              )
+                                            : colorScheme.onPrimaryContainer
+                                                  .withValues(alpha: 0.8))
+                                      : colorScheme.onSurfaceVariant,
+                                ),
                           ),
                         ],
                       ),
                     ),
                     if (isUnlocked)
                       Icon(
-                        Icons.arrow_forward_ios, 
-                        size: 16, 
-                        color: (hasMistakes ? AppColors.error : AppColors.primary).withValues(alpha: 0.6)
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color:
+                            (hasMistakes ? AppColors.error : AppColors.primary)
+                                .withValues(alpha: 0.6),
                       ),
                   ],
                 ),
@@ -133,35 +163,34 @@ class SmartReviewCard extends ConsumerWidget {
           ),
         );
       },
-          loading: () => const SizedBox.shrink(),
-          error: (_, __) => const SizedBox.shrink(),
-        );
-      }
-
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+    );
+  }
 
   void _startSmartQuiz(BuildContext context, WidgetRef ref) async {
     // Show loading or similar if needed, but FutureProvider will be awaited in the provider itself or we await here
     // Ideally we transition to loading stats.
-    
+
     // We can't await a provider easily here without a FutureProvider reading execution.
-    // Let's manually trigger logic or use a helper. 
+    // Let's manually trigger logic or use a helper.
     // Actually, passing questions directly to QuizScreen is proper custom exam flow.
-    
+
     // Show loading indicator dialog
     showDialog(
-      context: context, 
+      context: context,
       barrierDismissible: false,
-      builder: (_) => const Center(child: CircularProgressIndicator())
+      builder: (_) => const Center(child: CircularProgressIndicator()),
     );
 
     try {
       final questions = await ref.read(smartQuizProvider.future);
-      
+
       if (context.mounted) {
         Navigator.pop(context); // Close loading
-        
+
         if (questions.isNotEmpty) {
-           Navigator.push(
+          Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => QuizScreen(
@@ -172,17 +201,17 @@ class SmartReviewCard extends ConsumerWidget {
             ),
           );
         } else {
-           ScaffoldMessenger.of(context).showSnackBar(
-             const SnackBar(content: Text('Yeterli soru bulunamadı.'))
-           );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Yeterli soru bulunamadı.')),
+          );
         }
       }
     } catch (e) {
       if (context.mounted) {
         Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text('Hata oluştu: $e'))
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Hata oluştu: $e')));
       }
     }
   }

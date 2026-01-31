@@ -1,10 +1,10 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../domain/leaderboard_entry.dart';
 import '../../../core/utils/logger.dart';
 
 class LeaderboardRepository {
-  static final LeaderboardRepository _instance = LeaderboardRepository._internal();
+  static final LeaderboardRepository _instance =
+      LeaderboardRepository._internal();
   factory LeaderboardRepository() => _instance;
   LeaderboardRepository._internal();
 
@@ -32,10 +32,10 @@ class LeaderboardRepository {
         .limit(limit)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs
-          .map((doc) => LeaderboardEntry.fromFirestore(doc))
-          .toList();
-    });
+          return snapshot.docs
+              .map((doc) => LeaderboardEntry.fromFirestore(doc))
+              .toList();
+        });
   }
 
   /// Get top users by Weekly XP
@@ -46,10 +46,10 @@ class LeaderboardRepository {
         .limit(limit)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs
-          .map((doc) => LeaderboardEntry.fromFirestore(doc))
-          .toList();
-    });
+          return snapshot.docs
+              .map((doc) => LeaderboardEntry.fromFirestore(doc))
+              .toList();
+        });
   }
 
   /// Get top users by Monthly XP
@@ -60,10 +60,10 @@ class LeaderboardRepository {
         .limit(limit)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs
-          .map((doc) => LeaderboardEntry.fromFirestore(doc))
-          .toList();
-    });
+          return snapshot.docs
+              .map((doc) => LeaderboardEntry.fromFirestore(doc))
+              .toList();
+        });
   }
 
   /// Get current user's entry
@@ -101,15 +101,15 @@ class LeaderboardRepository {
     ];
 
     final batch = _firestore.batch();
-    
+
     int i = 0;
     for (var u in dummyUsers) {
       i++;
       final uid = 'dummy_user_$i';
-      
+
       // Random generation using system time
       final now = DateTime.now().microsecondsSinceEpoch;
-      final xp = 500 + (now % 4500); 
+      final xp = 500 + (now % 4500);
       final weekly = now % 500;
       final monthly = 100 + (now % 1400);
       final level = (xp / 500).ceil();

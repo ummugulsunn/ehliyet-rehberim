@@ -41,5 +41,6 @@ class UnfinishedExam {
 
   String toJson() => json.encode(toMap());
 
-  factory UnfinishedExam.fromJson(String source) => UnfinishedExam.fromMap(json.decode(source));
+  factory UnfinishedExam.fromJson(String source) =>
+      UnfinishedExam.fromMap(json.decode(source));
 }

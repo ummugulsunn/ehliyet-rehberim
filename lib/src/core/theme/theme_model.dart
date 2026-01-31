@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AppThemeMode {
-  light,
-  dark,
-  system,
-}
+enum AppThemeMode { light, dark, system }
 
 class ThemePalette {
   final String id;
@@ -13,7 +9,7 @@ class ThemePalette {
   final Color secondary;
   final Color tertiary;
   final Color error;
-  
+
   const ThemePalette({
     required this.id,
     required this.name,

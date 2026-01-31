@@ -6,7 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 class WeeklyPerformanceBarChart extends StatelessWidget {
   final List<double> weeklyScores; // Success percentages for each day
   final List<String> labels; // Day labels (Mon, Tue, etc.)
-  
+
   const WeeklyPerformanceBarChart({
     super.key,
     required this.weeklyScores,
@@ -50,12 +50,10 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
             ),
             titlesData: FlTitlesData(
               show: true,
-              rightTitles: const AxisTitles(
+              rightTitles: AxisTitles(
                 sideTitles: SideTitles(showTitles: false),
               ),
-              topTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
+              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
@@ -68,9 +66,9 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
                         labels[index],
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 10,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.copyWith(fontSize: 10),
                       ),
                     );
                   },
@@ -85,9 +83,9 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
                   getTitlesWidget: (double value, TitleMeta meta) {
                     return Text(
                       '${value.toInt()}%',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(fontSize: 10),
                     );
                   },
                 ),
@@ -99,7 +97,9 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
               horizontalInterval: 20,
               getDrawingHorizontalLine: (value) {
                 return FlLine(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.1),
                   strokeWidth: 1,
                 );
               },
@@ -108,10 +108,14 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
               show: true,
               border: Border(
                 bottom: BorderSide(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
                 left: BorderSide(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
               ),
             ),
@@ -126,7 +130,7 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
     return weeklyScores.asMap().entries.map((entry) {
       final index = entry.key;
       final score = entry.value;
-      
+
       // Color based on performance
       Color barColor;
       if (score >= 80) {
@@ -136,7 +140,7 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
       } else {
         barColor = AppColors.error;
       }
-      
+
       return BarChartGroupData(
         x: index,
         barRods: [
@@ -144,9 +148,7 @@ class WeeklyPerformanceBarChart extends StatelessWidget {
             toY: score,
             color: barColor,
             width: 16,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(4),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
             backDrawRodData: BackgroundBarChartRodData(
               show: true,
               toY: 100,

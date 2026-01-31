@@ -20,9 +20,7 @@ class NotificationSettingsScreen extends ConsumerWidget {
       ),
       body: settingsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(
-          child: Text('Ayarlar yüklenemedi: $e'),
-        ),
+        error: (e, _) => Center(child: Text('Ayarlar yüklenemedi: $e')),
         data: (settings) => SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -35,9 +33,11 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 title: 'Günlük Hatırlatma',
                 subtitle: 'Her gün belirlediğiniz saatte çalışma hatırlatıcısı',
                 enabled: settings.dailyReminderEnabled,
-                time: '${settings.dailyReminderHour.toString().padLeft(2, '0')}:${settings.dailyReminderMinute.toString().padLeft(2, '0')}',
+                time:
+                    '${settings.dailyReminderHour.toString().padLeft(2, '0')}:${settings.dailyReminderMinute.toString().padLeft(2, '0')}',
                 onToggle: (value) {
-                  ref.read(notificationSettingsProvider.notifier)
+                  ref
+                      .read(notificationSettingsProvider.notifier)
                       .setDailyReminderEnabled(value);
                 },
                 onTimeChange: () async {
@@ -49,7 +49,8 @@ class NotificationSettingsScreen extends ConsumerWidget {
                     ),
                   );
                   if (time != null) {
-                    ref.read(notificationSettingsProvider.notifier)
+                    ref
+                        .read(notificationSettingsProvider.notifier)
                         .setDailyReminderTime(time.hour, time.minute);
                   }
                 },
@@ -66,9 +67,11 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 title: 'Seri Uyarısı',
                 subtitle: 'Bugün çalışmadıysanız seri kaybetme uyarısı',
                 enabled: settings.streakWarningEnabled,
-                time: '${settings.streakWarningHour.toString().padLeft(2, '0')}:${settings.streakWarningMinute.toString().padLeft(2, '0')}',
+                time:
+                    '${settings.streakWarningHour.toString().padLeft(2, '0')}:${settings.streakWarningMinute.toString().padLeft(2, '0')}',
                 onToggle: (value) {
-                  ref.read(notificationSettingsProvider.notifier)
+                  ref
+                      .read(notificationSettingsProvider.notifier)
                       .setStreakWarningEnabled(value);
                 },
                 onTimeChange: () async {
@@ -80,7 +83,8 @@ class NotificationSettingsScreen extends ConsumerWidget {
                     ),
                   );
                   if (time != null) {
-                    ref.read(notificationSettingsProvider.notifier)
+                    ref
+                        .read(notificationSettingsProvider.notifier)
                         .setStreakWarningTime(time.hour, time.minute);
                   }
                 },
@@ -98,7 +102,8 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 subtitle: 'Yeni başarım kazandığınızda bildirim',
                 enabled: settings.achievementNotificationsEnabled,
                 onToggle: (value) {
-                  ref.read(notificationSettingsProvider.notifier)
+                  ref
+                      .read(notificationSettingsProvider.notifier)
                       .setAchievementNotificationsEnabled(value);
                 },
                 iconColor: AppColors.warning,
@@ -115,7 +120,8 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 subtitle: 'Günlük hedefi tamamladığınızda bildirim',
                 enabled: settings.goalCompletedNotificationsEnabled,
                 onToggle: (value) {
-                  ref.read(notificationSettingsProvider.notifier)
+                  ref
+                      .read(notificationSettingsProvider.notifier)
                       .setGoalCompletedNotificationsEnabled(value);
                 },
                 iconColor: AppColors.success,
@@ -164,15 +170,15 @@ class NotificationSettingsScreen extends ConsumerWidget {
             ),
             title: Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
               subtitle,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
             ),
             trailing: Switch(
               value: enabled,
@@ -246,15 +252,15 @@ class NotificationSettingsScreen extends ConsumerWidget {
         ),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
           subtitle,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         ),
         trailing: Switch(
           value: enabled,

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -19,21 +20,26 @@ import 'src/features/onboarding/presentation/onboarding_screen.dart';
 void main() async {
   // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Firebase with timeout
   try {
     await Firebase.initializeApp().timeout(
       const Duration(seconds: 10),
       onTimeout: () {
-        debugPrint('Firebase initialization timeout - continuing without Firebase');
-        throw TimeoutException('Firebase initialization timeout', const Duration(seconds: 10));
+        debugPrint(
+          'Firebase initialization timeout - continuing without Firebase',
+        );
+        throw TimeoutException(
+          'Firebase initialization timeout',
+          const Duration(seconds: 10),
+        );
       },
     );
     debugPrint('Firebase initialized successfully');
   } catch (e) {
     debugPrint('Failed to initialize Firebase: $e');
   }
-  
+
   // Initialize intl localization
   try {
     await initializeDateFormatting('tr_TR', null);
@@ -66,10 +72,14 @@ void main() async {
     ProviderScope(
       overrides: [
         authRepositoryProvider.overrideWithValue(authRepository),
-        userProgressRepositoryProvider.overrideWithValue(userProgressRepository),
+        userProgressRepositoryProvider.overrideWithValue(
+          userProgressRepository,
+        ),
         onboardingRepositoryProvider.overrideWithValue(onboardingRepository),
       ],
-      child: MyApp(isOnboardingComplete: onboardingRepository.isOnboardingComplete),
+      child: MyApp(
+        isOnboardingComplete: onboardingRepository.isOnboardingComplete,
+      ),
     ),
   );
 }
@@ -77,16 +87,13 @@ void main() async {
 class MyApp extends ConsumerWidget {
   final bool isOnboardingComplete;
 
-  const MyApp({
-    super.key, 
-    required this.isOnboardingComplete,
-  });
+  const MyApp({super.key, required this.isOnboardingComplete});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Watch the new theme provider
     final themeStateAsync = ref.watch(appThemeProvider);
-    
+
     // Default fallback values if loading
     ThemeData lightTheme = ThemeData.light();
     ThemeData darkTheme = ThemeData.dark();
@@ -99,7 +106,7 @@ class MyApp extends ConsumerWidget {
       final state = themeStateAsync.value!;
       lightTheme = notifier.getLightTheme();
       darkTheme = notifier.getDarkTheme();
-      
+
       switch (state.mode) {
         case AppThemeMode.light:
           themeMode = ThemeMode.light;
@@ -118,8 +125,14 @@ class MyApp extends ConsumerWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
-      home: isOnboardingComplete ? const AuthGate() : const OnboardingScreen(), 
+      home: isOnboardingComplete ? const AuthGate() : const OnboardingScreen(),
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
     );
   }
 }

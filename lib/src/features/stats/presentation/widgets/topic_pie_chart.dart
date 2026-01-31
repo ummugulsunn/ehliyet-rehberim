@@ -1,15 +1,12 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class TopicPieChart extends StatefulWidget {
-  final Map<String, double> data; // TopicName -> Value (e.g. Percentage or Count)
+  final Map<String, double>
+  data; // TopicName -> Value (e.g. Percentage or Count)
 
-  const TopicPieChart({
-    super.key,
-    required this.data,
-  });
+  const TopicPieChart({super.key, required this.data});
 
   @override
   State<TopicPieChart> createState() => _TopicPieChartState();
@@ -44,13 +41,12 @@ class _TopicPieChartState extends State<TopicPieChart> {
                           return;
                         }
                         touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
+                            .touchedSection!
+                            .touchedSectionIndex;
                       });
                     },
                   ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
+                  borderData: FlBorderData(show: false),
                   sectionsSpace: 0,
                   centerSpaceRadius: 40,
                   sections: showingSections(),
@@ -64,17 +60,13 @@ class _TopicPieChartState extends State<TopicPieChart> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: widget.data.keys.toList().asMap().entries.map((entry) {
-                final index = entry.key;
-                final name = entry.value;
-                final color = _getColor(index);
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: Indicator(
-                    color: color,
-                    text: name,
-                    isSquare: true,
-                  ),
-                );
+              final index = entry.key;
+              final name = entry.value;
+              final color = _getColor(index);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: Indicator(color: color, text: name, isSquare: true),
+              );
             }).toList(),
           ),
           const SizedBox(width: 28),
@@ -91,7 +83,7 @@ class _TopicPieChartState extends State<TopicPieChart> {
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-      
+
       final value = mapEntry.value;
 
       return PieChartSectionData(
@@ -117,7 +109,7 @@ class _TopicPieChartState extends State<TopicPieChart> {
       AppColors.success,
       AppColors.error,
       AppColors.info,
-      AppColors.textSecondary, 
+      AppColors.textSecondary,
     ];
     return colors[index % colors.length];
   }
@@ -150,9 +142,7 @@ class Indicator extends StatelessWidget {
             color: color,
           ),
         ),
-        const SizedBox(
-          width: 4,
-        ),
+        const SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
@@ -160,7 +150,7 @@ class Indicator extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: textColor,
           ),
-        )
+        ),
       ],
     );
   }

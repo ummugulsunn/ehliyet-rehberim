@@ -11,9 +11,9 @@ final smartQuizProvider = FutureProvider<List<Question>>((ref) async {
 
   // 1. Get Due Mistakes (SRS) - High Priority
   final dueMistakes = await ref.read(wrongQuestionsProvider.future);
-  
+
   List<Question> smartExam = List.from(dueMistakes);
-  
+
   // If we have enough mistakes (e.g. 20+), just return them (shuffled)
   if (smartExam.length >= 20) {
     smartExam.shuffle();
@@ -24,22 +24,25 @@ final smartQuizProvider = FutureProvider<List<Question>>((ref) async {
   // If we need more questions, find weak topics
   final remainingCount = 20 - smartExam.length;
   final weakCategories = userProgressRepo.getWeakestCategories(limit: 3);
-  
+
   final allQuestions = await quizRepo.loadQuestionsForExam('karma');
   final random = Random();
 
   if (weakCategories.isNotEmpty) {
-     for (final category in weakCategories) {
-        if (smartExam.length >= 20) break;
-        
-        final categoryQuestions = allQuestions
-            .where((q) => q.category == category && !smartExam.any((e) => e.id == q.id))
-            .toList();
-            
-        categoryQuestions.shuffle(random);
-        // Add a few from each category
-        smartExam.addAll(categoryQuestions.take(5));
-     }
+    for (final category in weakCategories) {
+      if (smartExam.length >= 20) break;
+
+      final categoryQuestions = allQuestions
+          .where(
+            (q) =>
+                q.category == category && !smartExam.any((e) => e.id == q.id),
+          )
+          .toList();
+
+      categoryQuestions.shuffle(random);
+      // Add a few from each category
+      smartExam.addAll(categoryQuestions.take(5));
+    }
   }
 
   // 3. Fill with Randoms if still needed
@@ -51,7 +54,7 @@ final smartQuizProvider = FutureProvider<List<Question>>((ref) async {
     otherQuestions.shuffle(random);
     smartExam.addAll(otherQuestions.take(needed));
   }
-  
+
   smartExam.shuffle(random);
   return smartExam;
 });

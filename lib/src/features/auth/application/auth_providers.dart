@@ -77,9 +77,9 @@ final authControllerProvider = Provider<AuthController>((ref) {
 /// Provides methods with proper error handling and state management
 class AuthController {
   final Ref _ref;
-  
+
   AuthController(this._ref);
-  
+
   AuthRepository get _authRepository => _ref.read(authRepositoryProvider);
 
   /// Sign in with Google

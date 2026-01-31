@@ -77,13 +77,16 @@ Future<void> main(List<String> args) async {
 
   String suggestImageHint(String text) {
     final t = text.toLowerCase();
-    if (t.contains('gösterge') || t.contains('gosterge') || t.contains('ikaz')) {
+    if (t.contains('gösterge') ||
+        t.contains('gosterge') ||
+        t.contains('ikaz')) {
       return 'Araç gösterge paneli simgesi/ikaz ışığı görseli';
     }
     if (t.contains('levha') || t.contains('işaret') || t.contains('isaret')) {
       return 'İlgili trafik işaret/levha görseli';
     }
-    if (t.contains('yatay işaret') || t.contains('yatay isaret') ||
+    if (t.contains('yatay işaret') ||
+        t.contains('yatay isaret') ||
         t.contains('taşıt yolu üzerine çizilen') ||
         t.contains('tasit yolu uzerine cizilen')) {
       return 'Yol üzeri yatay işaretleme (ör. yaya geçidi, taralı alan) görseli';
@@ -94,7 +97,9 @@ Future<void> main(List<String> args) async {
     if (t.contains('polis') || t.contains('trafik polisi')) {
       return 'Trafik polisinin kol/beden işareti görseli';
     }
-    if (t.contains('şekil') || t.contains('sekil') || t.contains('resim') ||
+    if (t.contains('şekil') ||
+        t.contains('sekil') ||
+        t.contains('resim') ||
         t.contains('görsel')) {
       return 'Soruda atıf yapılan şekil/resim görseli';
     }
@@ -135,9 +140,11 @@ Future<void> main(List<String> args) async {
       });
 
       // Missing image heuristic: question text or any option contains visual cue
-      final indicatesVisual = textIndicatesVisual(text) ||
+      final indicatesVisual =
+          textIndicatesVisual(text) ||
           options.values.any((v) => textIndicatesVisual(v.toString()));
-      final hasImage = imageUrl != null && imageUrl.toString().trim().isNotEmpty;
+      final hasImage =
+          imageUrl != null && imageUrl.toString().trim().isNotEmpty;
       if (indicatesVisual && !hasImage) {
         missingImage.add({
           'examId': examId,
@@ -194,8 +201,10 @@ Future<void> main(List<String> args) async {
   final report = {
     'summary': {
       'totalExams': data.length,
-      'totalQuestions': normalizedTextToQuestions.values
-          .fold<int>(0, (sum, list) => sum + list.length),
+      'totalQuestions': normalizedTextToQuestions.values.fold<int>(
+        0,
+        (sum, list) => sum + list.length,
+      ),
       'missingImageCount': missingImage.length,
       'invalidCorrectKeyCount': invalidCorrectKey.length,
       'duplicateConflictClusters': duplicateClusters.length,
@@ -205,27 +214,29 @@ Future<void> main(List<String> args) async {
     'duplicateConflictClusters': duplicateClusters,
   };
 
-  final jsonReportPath =
-      '$analysisDirPath/exams_report.json';
-  final csvMissingImagesPath =
-      '$analysisDirPath/missing_images.csv';
+  final jsonReportPath = '$analysisDirPath/exams_report.json';
+  final csvMissingImagesPath = '$analysisDirPath/missing_images.csv';
 
-  await File(jsonReportPath)
-      .writeAsString(const JsonEncoder.withIndent('  ').convert(report));
+  await File(
+    jsonReportPath,
+  ).writeAsString(const JsonEncoder.withIndent('  ').convert(report));
 
   // CSV export for missing images
   final csvBuffer = StringBuffer();
   csvBuffer.writeln(
-      'examId,questionId,category,suggestedImageHint,questionText');
+    'examId,questionId,category,suggestedImageHint,questionText',
+  );
   for (final m in missingImage) {
     String esc(String v) => '"${v.replaceAll('"', '""')}"';
-    csvBuffer.writeln([
-      esc(m['examId']?.toString() ?? ''),
-      esc(m['id']?.toString() ?? ''),
-      esc(m['category']?.toString() ?? ''),
-      esc(m['suggestedImageHint']?.toString() ?? ''),
-      esc(m['questionText']?.toString() ?? ''),
-    ].join(','));
+    csvBuffer.writeln(
+      [
+        esc(m['examId']?.toString() ?? ''),
+        esc(m['id']?.toString() ?? ''),
+        esc(m['category']?.toString() ?? ''),
+        esc(m['suggestedImageHint']?.toString() ?? ''),
+        esc(m['questionText']?.toString() ?? ''),
+      ].join(','),
+    );
   }
   await File(csvMissingImagesPath).writeAsString(csvBuffer.toString());
 
@@ -233,4 +244,3 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Report: $jsonReportPath');
   stdout.writeln('Missing images CSV: $csvMissingImagesPath');
 }
-

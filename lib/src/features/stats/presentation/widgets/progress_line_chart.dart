@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -7,11 +6,7 @@ class ProgressLineChart extends StatelessWidget {
   final List<FlSpot> spots;
   final int days;
 
-  const ProgressLineChart({
-    super.key, 
-    required this.spots,
-    this.days = 7,
-  });
+  const ProgressLineChart({super.key, required this.spots, this.days = 7});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +14,7 @@ class ProgressLineChart extends StatelessWidget {
       aspectRatio: 1.70,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(18),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
         ),
         child: Padding(
           padding: const EdgeInsets.only(
@@ -30,9 +23,7 @@ class ProgressLineChart extends StatelessWidget {
             top: 24,
             bottom: 12,
           ),
-          child: LineChart(
-            mainData(context),
-          ),
+          child: LineChart(mainData(context)),
         ),
       ),
     );
@@ -41,7 +32,7 @@ class ProgressLineChart extends StatelessWidget {
   LineChartData mainData(BuildContext context) {
     final primaryColor = AppColors.primary;
     final secondaryColor = AppColors.secondary;
-    
+
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -50,13 +41,17 @@ class ProgressLineChart extends StatelessWidget {
         verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.2),
+            color: Theme.of(
+              context,
+            ).colorScheme.outlineVariant.withValues(alpha: 0.2),
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.2),
+            color: Theme.of(
+              context,
+            ).colorScheme.outlineVariant.withValues(alpha: 0.2),
             strokeWidth: 1,
           );
         },
@@ -66,9 +61,7 @@ class ProgressLineChart extends StatelessWidget {
         rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
@@ -88,7 +81,9 @@ class ProgressLineChart extends StatelessWidget {
       ),
       borderData: FlBorderData(
         show: true,
-        border: Border.all(color: const Color(0xff37434d).withValues(alpha: 0.1)),
+        border: Border.all(
+          color: const Color(0xff37434d).withValues(alpha: 0.1),
+        ),
       ),
       minX: 0,
       maxX: (days - 1).toDouble(),
@@ -96,18 +91,14 @@ class ProgressLineChart extends StatelessWidget {
       maxY: 100,
       lineBarsData: [
         LineChartBarData(
-          spots: spots.isEmpty 
-              ? [FlSpot(0, 0), FlSpot((days - 1).toDouble(), 0)] 
+          spots: spots.isEmpty
+              ? [FlSpot(0, 0), FlSpot((days - 1).toDouble(), 0)]
               : spots,
           isCurved: true,
-          gradient: LinearGradient(
-            colors: [primaryColor, secondaryColor],
-          ),
+          gradient: LinearGradient(colors: [primaryColor, secondaryColor]),
           barWidth: 5,
           isStrokeCapRound: true,
-          dotData: const FlDotData(
-            show: true,
-          ),
+          dotData: const FlDotData(show: true),
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
@@ -130,14 +121,14 @@ class ProgressLineChart extends StatelessWidget {
       fontSize: 10,
       color: Colors.grey,
     );
-    
+
     // value is index (0 to days-1)
     // 0 is (days) ago
     // days-1 is today
-    
+
     // We want to show maybe 3-4 labels depending on 'days'
     // If days=7, show every day? or every 2 days
-    
+
     if (value % 2 != 0) return Container(); // Show every other day
 
     final now = DateTime.now();

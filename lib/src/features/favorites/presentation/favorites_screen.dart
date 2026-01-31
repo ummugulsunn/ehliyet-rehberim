@@ -29,13 +29,18 @@ class FavoritesScreen extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest
+                          .withValues(alpha: 0.5),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.favorite_border,
                       size: 64,
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.5),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -61,10 +66,13 @@ class FavoritesScreen extends ConsumerWidget {
 
           return favoritedQuestionsAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Center(child: Text('Sorular yüklenemedi: $err')),
+            error: (err, stack) =>
+                Center(child: Text('Sorular yüklenemedi: $err')),
             data: (questions) {
               if (questions.isEmpty) {
-                return const Center(child: Text('Favori sorular yüklenirken hata oluştu.'));
+                return const Center(
+                  child: Text('Favori sorular yüklenirken hata oluştu.'),
+                );
               }
 
               return ListView.builder(
@@ -74,16 +82,17 @@ class FavoritesScreen extends ConsumerWidget {
                   // Sort by newest first
                   final reversedIndex = favorites.length - 1 - index;
                   final favItem = favorites[reversedIndex];
-                  
+
                   // Find corresponding question
                   final question = questions.firstWhere(
                     (q) => q.id == favItem.questionId,
-                    orElse: () => questions.first, // Fallback, shouldn't happen usually
+                    orElse: () =>
+                        questions.first, // Fallback, shouldn't happen usually
                   );
-                  
+
                   // If question not found (maybe data mismatch), skip or show placeholder
                   if (question.id != favItem.questionId) {
-                    return const SizedBox.shrink(); 
+                    return const SizedBox.shrink();
                   }
 
                   return Dismissible(
@@ -97,28 +106,38 @@ class FavoritesScreen extends ConsumerWidget {
                       ),
                       alignment: Alignment.centerRight,
                       padding: const EdgeInsets.only(right: 24),
-                      child: const Icon(Icons.delete_outline, color: Colors.white, size: 28),
+                      child: const Icon(
+                        Icons.delete_outline,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
                     onDismissed: (_) {
-                       ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
-                       ScaffoldMessenger.of(context).clearSnackBars();
-                       ScaffoldMessenger.of(context).showSnackBar(
-                         SnackBar(
-                           content: const Text('Favorilerden kaldırıldı'),
-                           action: SnackBarAction(
-                             label: 'Geri Al',
-                             onPressed: () {
-                               ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
-                             },
-                           ),
-                           duration: const Duration(seconds: 2),
-                         ),
-                       );
+                      ref
+                          .read(favoritesRepositoryProvider)
+                          .toggleFavorite(favItem.questionId);
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Favorilerden kaldırıldı'),
+                          action: SnackBarAction(
+                            label: 'Geri Al',
+                            onPressed: () {
+                              ref
+                                  .read(favoritesRepositoryProvider)
+                                  .toggleFavorite(favItem.questionId);
+                            },
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
                     },
                     child: Card(
                       margin: const EdgeInsets.only(bottom: 12),
                       elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(16),
                         title: Text(
@@ -131,7 +150,8 @@ class FavoritesScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 8),
-                            if (favItem.note != null && favItem.note!.isNotEmpty)
+                            if (favItem.note != null &&
+                                favItem.note!.isNotEmpty)
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
@@ -140,12 +160,18 @@ class FavoritesScreen extends ConsumerWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.sticky_note_2, size: 16, color: Colors.amber),
+                                    const Icon(
+                                      Icons.sticky_note_2,
+                                      size: 16,
+                                      color: Colors.amber,
+                                    ),
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
                                         favItem.note!,
-                                        style: Theme.of(context).textTheme.bodySmall,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodySmall,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -156,31 +182,37 @@ class FavoritesScreen extends ConsumerWidget {
                             const SizedBox(height: 4),
                             Text(
                               'Kategori: ${question.category}',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey[600],
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: Colors.grey[600]),
                             ),
                           ],
                         ),
                         trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                          icon: const Icon(
+                            Icons.delete_outline,
+                            color: AppColors.error,
+                          ),
                           onPressed: () {
                             // Manual delete also triggers same action, but Dismissible is primary now
                             // We can keep it or remove it. Keeping it for accessibility.
-                             ref.read(favoritesRepositoryProvider).toggleFavorite(favItem.questionId);
-                             ScaffoldMessenger.of(context).clearSnackBars();
-                             ScaffoldMessenger.of(context).showSnackBar(
-                               const SnackBar(
-                                 content: Text('Favorilerden kaldırıldı'),
-                                 duration: Duration(seconds: 2),
-                               ),
-                             );
+                            ref
+                                .read(favoritesRepositoryProvider)
+                                .toggleFavorite(favItem.questionId);
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Favorilerden kaldırıldı'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
                           },
                         ),
                         onTap: () {
                           // Show edit note dialog
-                           final noteController = TextEditingController(text: favItem.note);
-                           showDialog(
+                          final noteController = TextEditingController(
+                            text: favItem.note,
+                          );
+                          showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text('Not Düzenle'),
@@ -199,7 +231,12 @@ class FavoritesScreen extends ConsumerWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    ref.read(favoritesRepositoryProvider).saveNote(favItem.questionId, noteController.text);
+                                    ref
+                                        .read(favoritesRepositoryProvider)
+                                        .saveNote(
+                                          favItem.questionId,
+                                          noteController.text,
+                                        );
                                     Navigator.pop(context);
                                   },
                                   child: const Text('Kaydet'),

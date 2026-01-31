@@ -1,15 +1,17 @@
-
 /// Immutable model representing a quiz question
 class Question {
   final int id;
   final String questionText;
   final String? imageUrl;
-  final Map<String, dynamic> options; // Changed to dynamic to support both String and Map
+  final Map<String, dynamic>
+  options; // Changed to dynamic to support both String and Map
   final String correctAnswerKey;
   final String explanation;
   final String category;
+
   /// The source examId that this question belongs to. This is populated by the loader.
   final String? examId;
+
   /// The original question ID before any ephemeral ID assignment (used for karma/simulations)
   final int? originalQuestionId;
 
@@ -73,9 +75,11 @@ class Question {
 
   /// Helper method to create copy with new ID but preserving original
   Question withNewId(int newId) {
-     return Question(
+    return Question(
       id: newId,
-      originalQuestionId: originalQuestionId ?? id, // If not already set, current ID is original
+      originalQuestionId:
+          originalQuestionId ??
+          id, // If not already set, current ID is original
       questionText: questionText,
       imageUrl: imageUrl,
       options: options,
@@ -122,7 +126,7 @@ class Question {
         other.correctAnswerKey == correctAnswerKey &&
         other.explanation == explanation &&
         other.category == category &&
-        other.examId == examId && 
+        other.examId == examId &&
         other.originalQuestionId == originalQuestionId;
   }
 
@@ -145,4 +149,4 @@ class Question {
   String toString() {
     return 'Question(id: $id, questionText: $questionText, imageUrl: $imageUrl, options: $options, correctAnswerKey: $correctAnswerKey, explanation: $explanation, category: $category, examId: $examId)';
   }
-} 
+}

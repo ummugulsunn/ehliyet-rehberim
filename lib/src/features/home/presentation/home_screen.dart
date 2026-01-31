@@ -20,14 +20,13 @@ import 'widgets/exam_simulation_card.dart';
 import 'widgets/daily_tip_card.dart';
 import '../../leaderboard/presentation/leaderboard_screen.dart';
 
-
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-    
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -45,9 +44,7 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
               );
             },
             icon: Icon(Icons.settings_outlined, color: AppColors.textSecondary),
@@ -56,25 +53,40 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
             },
             icon: authState.when(
               data: (user) {
                 if (user == null) {
-                  return Icon(Icons.account_circle_outlined, color: AppColors.textSecondary);
+                  return Icon(
+                    Icons.account_circle_outlined,
+                    color: AppColors.textSecondary,
+                  );
                 } else if (user.photoURL != null && user.photoURL!.isNotEmpty) {
                   return ClipOval(
-                    child: Image.network(user.photoURL!, width: 24, height: 24, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Icon(Icons.account_circle, color: AppColors.primary)),
+                    child: Image.network(
+                      user.photoURL!,
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          Icon(Icons.account_circle, color: AppColors.primary),
+                    ),
                   );
                 } else {
                   return Icon(Icons.account_circle, color: AppColors.primary);
                 }
               },
-              loading: () => const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2)),
-              error: (_, __) => Icon(Icons.account_circle_outlined, color: AppColors.textSecondary),
+              loading: () => const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+              error: (_, __) => Icon(
+                Icons.account_circle_outlined,
+                color: AppColors.textSecondary,
+              ),
             ),
           ),
         ],
@@ -88,17 +100,17 @@ class HomeScreen extends ConsumerWidget {
             children: [
               // Dynamic Header
               DynamicHeaderWidget(authState: authState),
-              
+
               const SizedBox(height: 16),
-              
+
               // NEW: Daily Tip Card
               const DailyTipCard(),
-              
+
               const SizedBox(height: 24),
-              
+
               // Primary Action (Karma Test)
               _buildPrimaryActionCard(context),
-              
+
               const SizedBox(height: 32),
 
               // Status Section
@@ -116,15 +128,24 @@ class HomeScreen extends ConsumerWidget {
                   controller: PageController(viewportFraction: 0.92),
                   padEnds: false,
                   children: const [
-                    Padding(padding: EdgeInsets.only(right: 12), child: ReadinessCard()),
-                    Padding(padding: EdgeInsets.only(right: 12), child: SmartReviewCard()),
-                    Padding(padding: EdgeInsets.only(right: 12), child: ExamSimulationCard()),
+                    Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: ReadinessCard(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: SmartReviewCard(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: ExamSimulationCard(),
+                    ),
                   ],
                 ),
               ),
 
               const SizedBox(height: 32),
-              
+
               // Tools Section (Redesigned as List)
               Text(
                 'Çalışma Araçları',
@@ -134,9 +155,9 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              
+
               _buildFeatureList(context, ref),
-              
+
               const SizedBox(height: 32),
             ],
           ),
@@ -190,9 +211,16 @@ class HomeScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: AppColors.onPrimary.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.onPrimary.withValues(alpha: 0.4), width: 3),
+                    border: Border.all(
+                      color: AppColors.onPrimary.withValues(alpha: 0.4),
+                      width: 3,
+                    ),
                   ),
-                  child: Icon(Icons.play_arrow_rounded, size: 56, color: AppColors.onPrimary),
+                  child: Icon(
+                    Icons.play_arrow_rounded,
+                    size: 56,
+                    color: AppColors.onPrimary,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Text(
@@ -224,7 +252,11 @@ class HomeScreen extends ConsumerWidget {
                 title: 'Konu Listesi',
                 subtitle: 'Eksiklerini tamamla',
                 color: AppColors.info,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TopicSelectionScreen())),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const TopicSelectionScreen(),
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -235,13 +267,17 @@ class HomeScreen extends ConsumerWidget {
                 title: 'Konu Anlatımı',
                 subtitle: 'Ders notları',
                 color: AppColors.secondary,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StudyGuideListScreen())),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const StudyGuideListScreen(),
+                  ),
+                ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 12),
-         Row(
+        Row(
           children: [
             Expanded(
               child: _buildFeatureTile(
@@ -250,7 +286,9 @@ class HomeScreen extends ConsumerWidget {
                 title: 'Trafik İşaretleri',
                 subtitle: 'Görsel hafıza',
                 color: Colors.orange,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TrafficSignsScreen())),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const TrafficSignsScreen()),
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -262,25 +300,36 @@ class HomeScreen extends ConsumerWidget {
                 subtitle: 'Hatalarını çöz',
                 color: AppColors.error,
                 onTap: () async {
-                   // Yanlışlarım logic (Keeping existing logic)
-                   final userProgress = ref.read(userProgressRepositoryProvider);
-                   final wrongCount = await userProgress.getWrongAnswerIdsCount();
-                   
-                   if (wrongCount == 0) {
-                      if(!context.mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hiç yanlışın yok! Harika gidiyorsun.')));
-                      return;
-                   }
+                  // Yanlışlarım logic (Keeping existing logic)
+                  final userProgress = ref.read(userProgressRepositoryProvider);
+                  final wrongCount = await userProgress
+                      .getWrongAnswerIdsCount();
 
-                   final wrongQuestions = await ref.refresh(wrongQuestionsProvider.future);
-                   if(!context.mounted) return;
-                   
-                   if (wrongQuestions.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yüklenecek yanlış soru bulunamadı.')));
-                      return;
-                   }
-                   
-                   Navigator.of(context).push(
+                  if (wrongCount == 0) {
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Hiç yanlışın yok! Harika gidiyorsun.'),
+                      ),
+                    );
+                    return;
+                  }
+
+                  final wrongQuestions = await ref.refresh(
+                    wrongQuestionsProvider.future,
+                  );
+                  if (!context.mounted) return;
+
+                  if (wrongQuestions.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Yüklenecek yanlış soru bulunamadı.'),
+                      ),
+                    );
+                    return;
+                  }
+
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => QuizScreen(
                         examId: 'yanliş_sorular',
@@ -302,7 +351,9 @@ class HomeScreen extends ConsumerWidget {
           subtitle: 'Gelişimini takip et',
           color: AppColors.success,
           isHorizontal: true,
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StatsScreen())),
+          onTap: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const StatsScreen())),
         ),
 
         const SizedBox(height: 12),
@@ -315,7 +366,9 @@ class HomeScreen extends ConsumerWidget {
                 title: 'Favorilerim',
                 subtitle: 'Kaydettiğin sorular',
                 color: Colors.pink,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FavoritesScreen())),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -326,7 +379,9 @@ class HomeScreen extends ConsumerWidget {
                 title: 'Liderlik Tablosu',
                 subtitle: 'Sıralamanı gör',
                 color: Colors.deepPurple,
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LeaderboardScreen())),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const LeaderboardScreen()),
+                ),
               ),
             ),
           ],
@@ -349,7 +404,9 @@ class HomeScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+        ),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).shadowColor.withValues(alpha: 0.05),
@@ -365,42 +422,70 @@ class HomeScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: isHorizontal 
-            ? Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
-                    child: Icon(icon, color: color, size: 24),
+            child: isHorizontal
+                ? Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: color.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(icon, color: color, size: 24),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              title,
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              subtitle,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.textSecondary),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right,
+                        color: AppColors.textSecondary.withValues(alpha: 0.5),
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: color.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(icon, color: color, size: 32),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-                        Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary)),
-                      ],
-                    ),
-                  ),
-                  Icon(Icons.chevron_right, color: AppColors.textSecondary.withValues(alpha: 0.5)),
-                ],
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
-                    child: Icon(icon, color: color, size: 32),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                  const SizedBox(height: 4),
-                  Text(subtitle, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
-                ],
-              ),
           ),
         ),
       ),

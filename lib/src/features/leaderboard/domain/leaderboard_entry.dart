@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LeaderboardEntry {
@@ -25,15 +24,15 @@ class LeaderboardEntry {
   factory LeaderboardEntry.fromFirestore(DocumentSnapshot doc) {
     // If the document doesn't exist, return a default entry (shouldn't happen in query usually)
     if (!doc.exists) {
-       return LeaderboardEntry(
-         uid: doc.id, 
-         displayName: 'Unknown', 
-         xp: 0, 
-         level: 1, 
-         updatedAt: DateTime.now()
-       );
+      return LeaderboardEntry(
+        uid: doc.id,
+        displayName: 'Unknown',
+        xp: 0,
+        level: 1,
+        updatedAt: DateTime.now(),
+      );
     }
-    
+
     final data = doc.data() as Map<String, dynamic>;
     return LeaderboardEntry(
       uid: doc.id,

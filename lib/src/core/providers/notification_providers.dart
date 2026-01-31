@@ -43,9 +43,11 @@ class NotificationSettings {
       streakWarningHour: streakWarningHour ?? this.streakWarningHour,
       streakWarningMinute: streakWarningMinute ?? this.streakWarningMinute,
       achievementNotificationsEnabled:
-          achievementNotificationsEnabled ?? this.achievementNotificationsEnabled,
+          achievementNotificationsEnabled ??
+          this.achievementNotificationsEnabled,
       goalCompletedNotificationsEnabled:
-          goalCompletedNotificationsEnabled ?? this.goalCompletedNotificationsEnabled,
+          goalCompletedNotificationsEnabled ??
+          this.goalCompletedNotificationsEnabled,
     );
   }
 }
@@ -58,18 +60,20 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
   static const String _streakWarningEnabledKey = 'streak_warning_enabled';
   static const String _streakWarningHourKey = 'streak_warning_hour';
   static const String _streakWarningMinuteKey = 'streak_warning_minute';
-  static const String _achievementNotificationsKey = 'achievement_notifications_enabled';
-  static const String _goalCompletedNotificationsKey = 'goal_completed_notifications_enabled';
+  static const String _achievementNotificationsKey =
+      'achievement_notifications_enabled';
+  static const String _goalCompletedNotificationsKey =
+      'goal_completed_notifications_enabled';
 
   @override
   Future<NotificationSettings> build() async {
-    return await _loadSettings();
+    return _loadSettings();
   }
 
   Future<NotificationSettings> _loadSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      
+
       final settings = NotificationSettings(
         dailyReminderEnabled: prefs.getBool(_dailyReminderEnabledKey) ?? true,
         dailyReminderHour: prefs.getInt(_dailyReminderHourKey) ?? 20,
@@ -77,13 +81,15 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
         streakWarningEnabled: prefs.getBool(_streakWarningEnabledKey) ?? true,
         streakWarningHour: prefs.getInt(_streakWarningHourKey) ?? 21,
         streakWarningMinute: prefs.getInt(_streakWarningMinuteKey) ?? 0,
-        achievementNotificationsEnabled: prefs.getBool(_achievementNotificationsKey) ?? true,
-        goalCompletedNotificationsEnabled: prefs.getBool(_goalCompletedNotificationsKey) ?? true,
+        achievementNotificationsEnabled:
+            prefs.getBool(_achievementNotificationsKey) ?? true,
+        goalCompletedNotificationsEnabled:
+            prefs.getBool(_goalCompletedNotificationsKey) ?? true,
       );
 
       // Schedule notifications based on settings
       await _updateNotifications(settings);
-      
+
       return settings;
     } catch (e) {
       Logger.error('Failed to load notification settings', e);
@@ -95,7 +101,7 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
     final currentState = state.valueOrNull ?? const NotificationSettings();
     final newState = currentState.copyWith(dailyReminderEnabled: enabled);
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_dailyReminderEnabledKey, enabled);
     await _updateNotifications(newState);
@@ -108,7 +114,7 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
       dailyReminderMinute: minute,
     );
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_dailyReminderHourKey, hour);
     await prefs.setInt(_dailyReminderMinuteKey, minute);
@@ -119,7 +125,7 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
     final currentState = state.valueOrNull ?? const NotificationSettings();
     final newState = currentState.copyWith(streakWarningEnabled: enabled);
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_streakWarningEnabledKey, enabled);
     await _updateNotifications(newState);
@@ -132,7 +138,7 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
       streakWarningMinute: minute,
     );
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_streakWarningHourKey, hour);
     await prefs.setInt(_streakWarningMinuteKey, minute);
@@ -141,54 +147,36 @@ class NotificationSettingsNotifier extends AsyncNotifier<NotificationSettings> {
 
   Future<void> setAchievementNotificationsEnabled(bool enabled) async {
     final currentState = state.valueOrNull ?? const NotificationSettings();
-    final newState = currentState.copyWith(achievementNotificationsEnabled: enabled);
+    final newState = currentState.copyWith(
+      achievementNotificationsEnabled: enabled,
+    );
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_achievementNotificationsKey, enabled);
   }
 
   Future<void> setGoalCompletedNotificationsEnabled(bool enabled) async {
     final currentState = state.valueOrNull ?? const NotificationSettings();
-    final newState = currentState.copyWith(goalCompletedNotificationsEnabled: enabled);
+    final newState = currentState.copyWith(
+      goalCompletedNotificationsEnabled: enabled,
+    );
     state = AsyncValue.data(newState);
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_goalCompletedNotificationsKey, enabled);
   }
 
   Future<void> _updateNotifications(NotificationSettings settings) async {
     // Disabled due to build issues
-    /*
-    final notificationService = NotificationService(); // Was .instance
-
-    // Cancel all existing notifications
-    await notificationService.cancelAll();
-
-    // Schedule daily reminder if enabled
-    if (settings.dailyReminderEnabled) {
-      await notificationService.scheduleDailyReminder(
-        hour: settings.dailyReminderHour,
-        minute: settings.dailyReminderMinute,
-      );
-    }
-
-    // Schedule streak warning if enabled
-    if (settings.streakWarningEnabled) {
-      await notificationService.scheduleStreakWarning(
-        hour: settings.streakWarningHour,
-        minute: settings.streakWarningMinute,
-      );
-    }
-    */
   }
 }
 
 /// Provider for notification settings
 final notificationSettingsProvider =
     AsyncNotifierProvider<NotificationSettingsNotifier, NotificationSettings>(
-  NotificationSettingsNotifier.new,
-);
+      NotificationSettingsNotifier.new,
+    );
 
 /// Provider for notification service
 final notificationServiceProvider = Provider<NotificationService>((ref) {

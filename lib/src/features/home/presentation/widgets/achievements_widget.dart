@@ -20,9 +20,9 @@ class AchievementsWidget extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Başarımlar',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(height: 12),
@@ -37,7 +37,11 @@ class AchievementsWidget extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final achievement = Achievement.all[index];
                   final isUnlocked = unlockedIds.contains(achievement.id);
-                  return _buildAchievementTile(context, achievement, isUnlocked);
+                  return _buildAchievementTile(
+                    context,
+                    achievement,
+                    isUnlocked,
+                  );
                 },
               );
             },
@@ -49,39 +53,47 @@ class AchievementsWidget extends ConsumerWidget {
     );
   }
 
-  Widget _buildAchievementTile(BuildContext context, Achievement achievement, bool isUnlocked) {
+  Widget _buildAchievementTile(
+    BuildContext context,
+    Achievement achievement,
+    bool isUnlocked,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isUnlocked 
+          color: isUnlocked
               ? achievement.color.withValues(alpha: 0.5)
               : Theme.of(context).disabledColor.withValues(alpha: 0.2),
           width: isUnlocked ? 1.5 : 1,
         ),
-        boxShadow: isUnlocked ? [
-           BoxShadow(
-             color: achievement.color.withValues(alpha: 0.1),
-             blurRadius: 8,
-             offset: const Offset(0, 2),
-           )
-        ] : [],
+        boxShadow: isUnlocked
+            ? [
+                BoxShadow(
+                  color: achievement.color.withValues(alpha: 0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ]
+            : [],
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isUnlocked 
+              color: isUnlocked
                   ? achievement.color.withValues(alpha: 0.2)
                   : Theme.of(context).disabledColor.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
               achievement.iconData,
-              color: isUnlocked ? achievement.color : Theme.of(context).disabledColor,
+              color: isUnlocked
+                  ? achievement.color
+                  : Theme.of(context).disabledColor,
               size: 24,
             ),
           ),
@@ -94,7 +106,7 @@ class AchievementsWidget extends ConsumerWidget {
                   achievement.title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: isUnlocked 
+                    color: isUnlocked
                         ? Theme.of(context).colorScheme.onSurface
                         : Theme.of(context).disabledColor,
                   ),
@@ -103,9 +115,11 @@ class AchievementsWidget extends ConsumerWidget {
                 Text(
                   achievement.description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: isUnlocked 
+                    color: isUnlocked
                         ? Theme.of(context).colorScheme.onSurfaceVariant
-                        : Theme.of(context).disabledColor.withValues(alpha: 0.8),
+                        : Theme.of(
+                            context,
+                          ).disabledColor.withValues(alpha: 0.8),
                   ),
                 ),
               ],

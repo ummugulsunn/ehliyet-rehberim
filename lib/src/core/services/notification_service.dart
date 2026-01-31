@@ -7,11 +7,11 @@ class NotificationService {
   }
 
   Future<void> showDailyReminder() async {
-     // print('NotificationService: showDailyReminder (disabled)');
+    // print('NotificationService: showDailyReminder (disabled)');
   }
 
   Future<void> cancelAll() async {
-     // print('NotificationService: cancelAll (disabled)');
+    // print('NotificationService: cancelAll (disabled)');
   }
 }
 

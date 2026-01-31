@@ -44,9 +44,9 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
         title: Text(
           'İstatistiklerim',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
@@ -60,10 +60,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                 ),
               );
             },
-            icon: Icon(
-              Icons.insights,
-              color: AppColors.primary,
-            ),
+            icon: Icon(Icons.insights, color: AppColors.primary),
             tooltip: 'Detaylı İstatistikler',
           ),
           IconButton(
@@ -73,10 +70,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               // Then invalidate the provider
               ref.invalidate(testResultsProvider);
             },
-            icon: Icon(
-              Icons.refresh,
-              color: AppColors.primary,
-            ),
+            icon: Icon(Icons.refresh, color: AppColors.primary),
           ),
         ],
       ),
@@ -112,11 +106,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.error_outline,
-                size: 64,
-                color: AppColors.error,
-              ),
+              Icon(Icons.error_outline, size: 64, color: AppColors.error),
               const SizedBox(height: 16),
               Text(
                 'İstatistikler yüklenemedi',
@@ -163,7 +153,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               // Overall Success Card with Gradient
               _OverallSuccessCard(success: summary.overallSuccessRate),
               const SizedBox(height: 20),
-              
+
               // Totals Card
               _TotalsCard(
                 totalQuestions: summary.totalQuestionsAnswered,
@@ -174,15 +164,17 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               // Progress Chart Section
               _ProgressChartSection(),
               const SizedBox(height: 20),
-              
+
               // Recent Activity Card
               _RecentActivityCard(results: results),
               const SizedBox(height: 20),
-              
+
               // Category Breakdown Card with Horizontal Bar Chart + Weakest Topic Highlight
-              _CategoryBreakdownCard(categoryRates: summary.categorySuccessRates),
+              _CategoryBreakdownCard(
+                categoryRates: summary.categorySuccessRates,
+              ),
               const SizedBox(height: 20),
-              
+
               // Achievements Section (Restored)
               const AchievementsWidget(),
               const SizedBox(height: 20),
@@ -214,7 +206,9 @@ class _ProgressChartSection extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.08),
@@ -256,13 +250,15 @@ class _OverallSuccessCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final percentage = (success * 100).clamp(0, 100).round();
     final motivationalText = _getMotivationalText(percentage);
-    
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.08),
@@ -286,7 +282,9 @@ class _OverallSuccessCard extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                   ),
                 ),
                 // Gradient progress indicator
@@ -298,9 +296,13 @@ class _OverallSuccessCard extends StatelessWidget {
                     strokeWidth: 10,
                     backgroundColor: Colors.transparent,
                     valueColor: AlwaysStoppedAnimation(
-                      success >= 0.8 ? AppColors.success :
-                      success >= 0.6 ? AppColors.primary :
-                      success >= 0.4 ? AppColors.warning : AppColors.error,
+                      success >= 0.8
+                          ? AppColors.success
+                          : success >= 0.6
+                          ? AppColors.primary
+                          : success >= 0.4
+                          ? AppColors.warning
+                          : AppColors.error,
                     ),
                   ),
                 ),
@@ -310,16 +312,21 @@ class _OverallSuccessCard extends StatelessWidget {
                   children: [
                     Text(
                       '$percentage%',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                     ),
                     Icon(
                       _getSuccessIcon(percentage),
-                      color: success >= 0.8 ? AppColors.success :
-                             success >= 0.6 ? AppColors.primary :
-                             success >= 0.4 ? AppColors.warning : AppColors.error,
+                      color: success >= 0.8
+                          ? AppColors.success
+                          : success >= 0.6
+                          ? AppColors.primary
+                          : success >= 0.4
+                          ? AppColors.warning
+                          : AppColors.error,
                       size: 20,
                     ),
                   ],
@@ -334,11 +341,7 @@ class _OverallSuccessCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.trending_up,
-                      color: AppColors.primary,
-                      size: 20,
-                    ),
+                    Icon(Icons.trending_up, color: AppColors.primary, size: 20),
                     const SizedBox(width: 8),
                     Text(
                       'Genel Başarı',
@@ -358,7 +361,10 @@ class _OverallSuccessCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryContainer,
                     borderRadius: BorderRadius.circular(8),
@@ -408,7 +414,9 @@ class _TotalsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.08),
@@ -421,11 +429,7 @@ class _TotalsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.bar_chart,
-                color: AppColors.secondary,
-                size: 20,
-              ),
+              Icon(Icons.bar_chart, color: AppColors.secondary, size: 20),
               const SizedBox(width: 8),
               Text(
                 'Toplam İstatistikler',
@@ -483,18 +487,11 @@ class _StatChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: color,
-            size: 24,
-          ),
+          Icon(icon, color: color, size: 24),
           const SizedBox(height: 8),
           Text(
             value,
@@ -524,9 +521,8 @@ class _RecentActivityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get last 5 results, sorted by date descending
-    final recentResults = results
-        .toList()
-        ..sort((a, b) => b.date.compareTo(a.date));
+    final recentResults = results.toList()
+      ..sort((a, b) => b.date.compareTo(a.date));
     final displayResults = recentResults.take(5).toList();
 
     return Container(
@@ -534,7 +530,9 @@ class _RecentActivityCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.08),
@@ -548,11 +546,7 @@ class _RecentActivityCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.history,
-                color: AppColors.warning,
-                size: 20,
-              ),
+              Icon(Icons.history, color: AppColors.warning, size: 20),
               const SizedBox(width: 8),
               Text(
                 'Son Aktiviteler',
@@ -567,7 +561,7 @@ class _RecentActivityCard extends StatelessWidget {
           ...displayResults.map((result) {
             final percentage = (result.successRate * 100).round();
             final isGoodScore = percentage >= 70;
-            
+
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
@@ -575,13 +569,16 @@ class _RecentActivityCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: (isGoodScore ? AppColors.success : AppColors.warning)
-                          .withValues(alpha: 0.1),
+                      color:
+                          (isGoodScore ? AppColors.success : AppColors.warning)
+                              .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
                       isGoodScore ? Icons.check_circle : Icons.access_time,
-                      color: isGoodScore ? AppColors.success : AppColors.warning,
+                      color: isGoodScore
+                          ? AppColors.success
+                          : AppColors.warning,
                       size: 16,
                     ),
                   ),
@@ -592,25 +589,35 @@ class _RecentActivityCard extends StatelessWidget {
                       children: [
                         Text(
                           '${result.category} - ${result.correctAnswers}/${result.totalQuestions}',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
                         ),
                         Text(
-                          DateFormat('dd MMM yyyy, HH:mm', 'tr_TR').format(result.date),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                          DateFormat(
+                            'dd MMM yyyy, HH:mm',
+                            'tr_TR',
+                          ).format(result.date),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: isGoodScore 
-                          ? AppColors.successContainer 
+                      color: isGoodScore
+                          ? AppColors.successContainer
                           : AppColors.warningContainer,
                       borderRadius: BorderRadius.circular(6),
                     ),
@@ -618,7 +625,9 @@ class _RecentActivityCard extends StatelessWidget {
                       '$percentage%',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: isGoodScore ? AppColors.success : AppColors.warning,
+                        color: isGoodScore
+                            ? AppColors.success
+                            : AppColors.warning,
                       ),
                     ),
                   ),
@@ -653,7 +662,9 @@ class _CategoryBreakdownCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadow.withValues(alpha: 0.08),
@@ -667,11 +678,7 @@ class _CategoryBreakdownCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.category_outlined,
-                color: AppColors.info,
-                size: 20,
-              ),
+              Icon(Icons.category_outlined, color: AppColors.info, size: 20),
               const SizedBox(width: 8),
               Text(
                 'Konu Bazlı Başarı',
@@ -709,85 +716,101 @@ class _CategoryBreakdownCard extends StatelessWidget {
                 ],
               ),
             )
-          else ...categoryRates.entries.map((entry) {
-            final category = entry.key;
-            final rate = entry.value;
-            final percentage = (rate * 100).clamp(0, 100).round();
-            // Color thresholds: green > 80%, yellow 50-80%, red < 50%
-            final barColor = rate > 0.8 ? AppColors.success :
-                            rate >= 0.5 ? AppColors.warning :
-                                          AppColors.error;
-            
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          category,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                      ),
-                      if (weakestCategory != null && category == weakestCategory)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: AppColors.error.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
-                          ),
+          else
+            ...categoryRates.entries.map((entry) {
+              final category = entry.key;
+              final rate = entry.value;
+              final percentage = (rate * 100).clamp(0, 100).round();
+              // Color thresholds: green > 80%, yellow 50-80%, red < 50%
+              final barColor = rate > 0.8
+                  ? AppColors.success
+                  : rate >= 0.5
+                  ? AppColors.warning
+                  : AppColors.error;
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
                           child: Text(
-                            'Bu Konuya Odaklan!',
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.error,
+                            category,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
+                          ),
+                        ),
+                        if (weakestCategory != null &&
+                            category == weakestCategory)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.error.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: AppColors.error.withValues(alpha: 0.2),
+                              ),
+                            ),
+                            child: Text(
+                              'Bu Konuya Odaklan!',
+                              style: Theme.of(context).textTheme.labelSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.error,
+                                  ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerHighest,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: LinearProgressIndicator(
+                                value: rate,
+                                minHeight: 10,
+                                backgroundColor: Colors.transparent,
+                                valueColor: AlwaysStoppedAnimation(barColor),
+                              ),
                             ),
                           ),
                         ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 10,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: LinearProgressIndicator(
-                              value: rate,
-                              minHeight: 10,
-                              backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation(barColor),
-                            ),
-                          ),
+                        const SizedBox(width: 12),
+                        Text(
+                          '$percentage%',
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: barColor,
+                              ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        '$percentage%',
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: barColor,
-                            ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }),
         ],
       ),
     );

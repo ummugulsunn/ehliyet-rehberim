@@ -21,9 +21,13 @@ class QuizRepository {
     }
 
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/exams.json');
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/exams.json',
+      );
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-      _examsCache = jsonList.map((e) => Exam.fromJson(e as Map<String, dynamic>)).toList();
+      _examsCache = jsonList
+          .map((e) => Exam.fromJson(e as Map<String, dynamic>))
+          .toList();
       return _examsCache!;
     } on PlatformException catch (e) {
       throw Exception('Failed to load exams: ${e.message}');
@@ -37,7 +41,7 @@ class QuizRepository {
   /// Load questions for a specific exam
   Future<List<Question>> loadQuestionsForExam(String examId) async {
     final exams = await loadExams();
-    
+
     // Special handling for 'karma' or 'exam_simulation' - aggregate and randomize
     if (examId == 'karma' || examId == 'exam_simulation') {
       final List<Question> allQuestions = [];
@@ -48,25 +52,26 @@ class QuizRepository {
           final uniqueQuestion = question
               .withExamId(exam.examId)
               .withNewId(uniqueIdCounter++);
-              
+
           allQuestions.add(uniqueQuestion);
         }
       }
-      
+
       allQuestions.shuffle();
-      
+
       // If exam_simulation, take exactly 50 questions
       if (examId == 'exam_simulation') {
         return allQuestions.take(50).toList();
       }
-      
+
       return allQuestions;
     }
-    
+
     // Regular exam lookup
     final exam = exams.firstWhere(
-      (e) => e.examId == examId, 
-      orElse: () => Exam(examId: examId, examName: 'Unknown', questions: const [])
+      (e) => e.examId == examId,
+      orElse: () =>
+          Exam(examId: examId, examName: 'Unknown', questions: const []),
     );
     return exam.questions.map((q) => q.withExamId(exam.examId)).toList();
   }
@@ -79,7 +84,9 @@ class QuizRepository {
     }
 
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/traffic_signs.json');
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/traffic_signs.json',
+      );
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
       _signsCache = jsonList
           .map((e) => TrafficSignCategory.fromJson(e as Map<String, dynamic>))
@@ -102,7 +109,9 @@ class QuizRepository {
     }
 
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/study_guides.json');
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/study_guides.json',
+      );
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
       _guidesCache = jsonList
           .map((e) => StudyGuide.fromJson(e as Map<String, dynamic>))
@@ -123,4 +132,4 @@ class QuizRepository {
     _signsCache = null;
     _guidesCache = null;
   }
-} 
+}

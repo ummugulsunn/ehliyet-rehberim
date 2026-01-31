@@ -26,19 +26,17 @@ class AnimatedProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(height / 2);
-    final effectiveBackgroundColor = backgroundColor ?? 
-        theme.colorScheme.surfaceContainerHighest;
+    final effectiveBorderRadius =
+        borderRadius ?? BorderRadius.circular(height / 2);
+    final effectiveBackgroundColor =
+        backgroundColor ?? theme.colorScheme.surfaceContainerHighest;
     final effectiveValueColor = valueColor ?? theme.colorScheme.primary;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label != null) ...[
-          label!,
-          const SizedBox(height: 4),
-        ],
+        if (label != null) ...[label!, const SizedBox(height: 4)],
         Container(
           height: height,
           decoration: BoxDecoration(
@@ -100,7 +98,8 @@ class AnimatedCircularProgress extends StatefulWidget {
   });
 
   @override
-  State<AnimatedCircularProgress> createState() => _AnimatedCircularProgressState();
+  State<AnimatedCircularProgress> createState() =>
+      _AnimatedCircularProgressState();
 }
 
 class _AnimatedCircularProgressState extends State<AnimatedCircularProgress>
@@ -118,7 +117,7 @@ class _AnimatedCircularProgressState extends State<AnimatedCircularProgress>
     _pulseAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
-    
+
     if (widget.showPulse) {
       _pulseController.repeat(reverse: true);
     }
@@ -143,8 +142,8 @@ class _AnimatedCircularProgressState extends State<AnimatedCircularProgress>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveBackgroundColor = widget.backgroundColor ?? 
-        theme.colorScheme.surfaceContainerHighest;
+    final effectiveBackgroundColor =
+        widget.backgroundColor ?? theme.colorScheme.surfaceContainerHighest;
     final effectiveValueColor = widget.valueColor ?? theme.colorScheme.primary;
 
     return AnimatedBuilder(
@@ -170,7 +169,9 @@ class _AnimatedCircularProgressState extends State<AnimatedCircularProgress>
                   value: animatedValue,
                   strokeWidth: widget.strokeWidth,
                   backgroundColor: effectiveBackgroundColor,
-                  valueColor: AlwaysStoppedAnimation<Color>(effectiveValueColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    effectiveValueColor,
+                  ),
                 ),
                 if (widget.center != null) widget.center!,
               ],
@@ -212,26 +213,21 @@ class LabeledProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: labelStyle ?? theme.textTheme.bodyMedium,
-            ),
+            Text(label, style: labelStyle ?? theme.textTheme.bodyMedium),
             if (showPercentage)
               Text(
                 '%$percentage',
-                style: percentageStyle ?? theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: valueColor ?? theme.colorScheme.primary,
-                ),
+                style:
+                    percentageStyle ??
+                    theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: valueColor ?? theme.colorScheme.primary,
+                    ),
               ),
           ],
         ),
         const SizedBox(height: 8),
-        AnimatedProgressBar(
-          value: value,
-          height: 10,
-          valueColor: valueColor,
-        ),
+        AnimatedProgressBar(value: value, height: 10, valueColor: valueColor),
       ],
     );
   }

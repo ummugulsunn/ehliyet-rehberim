@@ -20,7 +20,7 @@ class AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', 'profile'],
-    clientId: Platform.isAndroid 
+    clientId: Platform.isAndroid
         ? null // Android uses google-services.json
         : '516693747698-6qbfvl44bp1g3bdthvvf795klc4o9ofj.apps.googleusercontent.com', // iOS client ID
   );
@@ -31,16 +31,16 @@ class AuthRepository {
   /// Initialize the AuthService
   Future<void> initialize() async {
     if (_isInitialized) return;
-    
+
     try {
       Logger.info('Initializing AuthService');
-      
+
       // Wait a bit for Firebase to be fully ready
       await Future.delayed(const Duration(milliseconds: 500));
-      
+
       // Check if Firebase is initialized by trying to get current user
       _firebaseAuth.currentUser;
-      
+
       Logger.info('AuthService initialization completed');
     } catch (e) {
       Logger.error('AuthService initialization failed: $e');
@@ -65,7 +65,7 @@ class AuthRepository {
   /// Returns the User if successful, null if cancelled or failed
   Future<User?> signInWithGoogle() async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       // Check internet connectivity first
       if (!await _connectivityService.hasInternetConnection()) {
@@ -85,7 +85,7 @@ class AuthRepository {
 
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         // User cancelled the sign-in flow
         Logger.info('User cancelled Google Sign-In');
@@ -95,7 +95,8 @@ class AuthRepository {
       Logger.info('Google account selected: ${googleUser.email}');
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         Logger.error('Failed to obtain authentication tokens from Google');
@@ -111,14 +112,13 @@ class AuthRepository {
       Logger.info('Signing in with Firebase using Google credential');
 
       // Sign in the user with Firebase
-      final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential);
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithCredential(credential);
 
       final user = userCredential.user;
       if (user != null) {
         stopwatch.stop();
         Logger.info('Google sign in successful: ${user.uid}');
-        
-
       }
 
       return user;
@@ -133,7 +133,7 @@ class AuthRepository {
   /// Returns the User if successful, null if cancelled or failed
   Future<User?> signInWithApple() async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       // Check if Apple Sign-In is available (iOS 13.0+ or macOS 10.15+)
       if (!Platform.isIOS && !Platform.isMacOS) {
@@ -180,25 +180,25 @@ class AuthRepository {
       Logger.info('Signing in with Firebase using Apple credential');
 
       // Sign in the user with Firebase
-      final UserCredential userCredential = await _firebaseAuth.signInWithCredential(oauthCredential);
-      
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithCredential(oauthCredential);
+
       final user = userCredential.user;
       if (user != null) {
         stopwatch.stop();
         Logger.info('Apple sign in successful: ${user.uid}');
-        
+
         // Update display name if it's not set and we have it from Apple
         if (user.displayName == null && appleCredential.givenName != null) {
           try {
-            final displayName = '${appleCredential.givenName} ${appleCredential.familyName ?? ''}';
+            final displayName =
+                '${appleCredential.givenName} ${appleCredential.familyName ?? ''}';
             await user.updateDisplayName(displayName);
             Logger.info('Updated display name: $displayName');
           } catch (e) {
             Logger.error('Failed to update display name: $e');
           }
         }
-        
-
       }
 
       return user;
@@ -213,10 +213,10 @@ class AuthRepository {
   /// Clears both Firebase Auth and Google Sign-In sessions
   Future<void> signOut() async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       Logger.info('Starting sign out process');
-      
+
       // Sign out from Google
       try {
         // Check if signed in with a short timeout
@@ -224,10 +224,10 @@ class AuthRepository {
           const Duration(seconds: 2),
           onTimeout: () => false,
         );
-        
+
         if (isSignedIn) {
           await _googleSignIn.disconnect().timeout(
-            const Duration(seconds: 2), 
+            const Duration(seconds: 2),
             onTimeout: () => null,
           );
         }
@@ -240,7 +240,7 @@ class AuthRepository {
         Logger.error('Failed to sign out from Google: $e');
         // Continue to Firebase sign out even if Google fails
       }
-      
+
       // Sign out from Firebase
       try {
         await _firebaseAuth.signOut();
@@ -249,12 +249,10 @@ class AuthRepository {
         Logger.error('Failed to sign out from Firebase: $e');
         rethrow; // Re-throw Firebase errors as they're critical
       }
-      
 
-      
       stopwatch.stop();
       // Logger.performance('sign_out', stopwatch.elapsed);
-      
+
       Logger.info('Sign out process completed');
     } catch (e) {
       stopwatch.stop();
@@ -267,7 +265,7 @@ class AuthRepository {
   /// This is a destructive operation that cannot be undone
   Future<bool> deleteAccount() async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       final user = currentUser;
       if (user == null) {
@@ -286,18 +284,20 @@ class AuthRepository {
       // Delete the user account
       await user.delete();
       Logger.info('Firebase account deletion successful');
-      
+
       // Also sign out from Google if they were signed in with Google
       try {
         await _googleSignIn.signOut();
         Logger.info('Google sign out after deletion successful');
       } catch (e) {
-        Logger.error('Failed to sign out from Google after account deletion: $e');
+        Logger.error(
+          'Failed to sign out from Google after account deletion: $e',
+        );
       }
-      
+
       stopwatch.stop();
       // Logger.performance('delete_account', stopwatch.elapsed);
-      
+
       Logger.info('Account deletion process completed successfully');
       return true;
     } catch (e) {
@@ -311,7 +311,7 @@ class AuthRepository {
   String? get userDisplayName {
     final user = currentUser;
     if (user == null) return null;
-    
+
     return user.displayName ?? user.email?.split('@').first;
   }
 
@@ -335,12 +335,13 @@ class AuthRepository {
   /// Returns the User if successful, null if failed
   Future<User?> signInAsGuest() async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       Logger.info('Starting anonymous sign-in process');
 
       // Sign in anonymously with Firebase
-      final UserCredential userCredential = await _firebaseAuth.signInAnonymously();
+      final UserCredential userCredential = await _firebaseAuth
+          .signInAnonymously();
 
       final user = userCredential.user;
       if (user != null) {
@@ -368,7 +369,9 @@ class AuthRepository {
 
       // Check internet connectivity first
       if (!await _connectivityService.hasInternetConnection()) {
-        Logger.error('Link Guest with Google: No internet connection available');
+        Logger.error(
+          'Link Guest with Google: No internet connection available',
+        );
         return null;
       }
 
@@ -376,7 +379,7 @@ class AuthRepository {
 
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         // User cancelled the sign-in flow
         Logger.info('Google Sign-In cancelled by user during linking');
@@ -386,10 +389,14 @@ class AuthRepository {
       Logger.info('Google account selected for linking: ${googleUser.email}');
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
-        Logger.authError('Link Guest with Google', 'Failed to obtain authentication tokens');
+        Logger.authError(
+          'Link Guest with Google',
+          'Failed to obtain authentication tokens',
+        );
         return null;
       }
 
@@ -402,7 +409,8 @@ class AuthRepository {
       Logger.info('Linking anonymous account with Google credential');
 
       // Link the anonymous account with Google credential
-      final UserCredential userCredential = await currentUser.linkWithCredential(credential);
+      final UserCredential userCredential = await currentUser
+          .linkWithCredential(credential);
 
       final user = userCredential.user;
       if (user != null) {
@@ -415,12 +423,12 @@ class AuthRepository {
       if (e.code == 'credential-already-in-use') {
         // The credential is already associated with a different user account
         Logger.authError('Link Guest with Google', e);
-        
+
         // In this case, we should sign out the anonymous user and sign in with the existing account
         try {
           await _firebaseAuth.signOut();
           Logger.info('Signed out anonymous user due to credential conflict');
-          
+
           // Now sign in with the Google account
           final googleUser = await _googleSignIn.signIn();
           if (googleUser != null) {
@@ -429,12 +437,19 @@ class AuthRepository {
               accessToken: googleAuth.accessToken,
               idToken: googleAuth.idToken,
             );
-            
-            final userCredential = await _firebaseAuth.signInWithCredential(credential);
-            Logger.info('Signed in with existing Google account: ${userCredential.user?.uid}');
+
+            final userCredential = await _firebaseAuth.signInWithCredential(
+              credential,
+            );
+            Logger.info(
+              'Signed in with existing Google account: ${userCredential.user?.uid}',
+            );
             return userCredential.user;
           } else {
-            Logger.authError('Link Guest with Google Fallback', 'Google user is null');
+            Logger.authError(
+              'Link Guest with Google Fallback',
+              'Google user is null',
+            );
             return null;
           }
         } catch (fallbackError) {
@@ -442,7 +457,10 @@ class AuthRepository {
           return null;
         }
       } else {
-        Logger.authError('Link Guest with Google', 'Firebase error: ${e.message}');
+        Logger.authError(
+          'Link Guest with Google',
+          'Firebase error: ${e.message}',
+        );
         return null;
       }
     } catch (e) {
@@ -463,7 +481,10 @@ class AuthRepository {
 
       // Check if Apple Sign-In is available (iOS 13.0+ or macOS 10.15+)
       if (!Platform.isIOS && !Platform.isMacOS) {
-        Logger.authError('Link Guest with Apple', 'Platform not supported (Apple Sign-In is only available on iOS and macOS)');
+        Logger.authError(
+          'Link Guest with Apple',
+          'Platform not supported (Apple Sign-In is only available on iOS and macOS)',
+        );
         return null;
       }
 
@@ -476,7 +497,10 @@ class AuthRepository {
       // Check if Apple Sign-In is available on this device
       final isAvailable = await SignInWithApple.isAvailable();
       if (!isAvailable) {
-        Logger.authError('Link Guest with Apple', 'Service not available (Apple Sign-In not available on device)');
+        Logger.authError(
+          'Link Guest with Apple',
+          'Service not available (Apple Sign-In not available on device)',
+        );
         return null;
       }
 
@@ -491,7 +515,10 @@ class AuthRepository {
       );
 
       if (appleCredential.identityToken == null) {
-        Logger.authError('Link Guest with Apple', 'Failed to obtain identity token');
+        Logger.authError(
+          'Link Guest with Apple',
+          'Failed to obtain identity token',
+        );
         return null;
       }
 
@@ -506,17 +533,19 @@ class AuthRepository {
       Logger.info('Linking anonymous account with Apple credential');
 
       // Link the anonymous account with Apple credential
-      final UserCredential userCredential = await currentUser.linkWithCredential(oauthCredential);
-      
+      final UserCredential userCredential = await currentUser
+          .linkWithCredential(oauthCredential);
+
       final user = userCredential.user;
       if (user != null) {
         Logger.info('Account linking successful: ${user.uid}');
         Logger.info('User is no longer anonymous: ${!user.isAnonymous}');
-        
+
         // Update display name if it's not set and we have it from Apple
         if (user.displayName == null && appleCredential.givenName != null) {
           try {
-            final displayName = '${appleCredential.givenName} ${appleCredential.familyName ?? ''}';
+            final displayName =
+                '${appleCredential.givenName} ${appleCredential.familyName ?? ''}';
             await user.updateDisplayName(displayName);
             Logger.info('Updated display name: $displayName');
           } catch (e) {
@@ -530,31 +559,41 @@ class AuthRepository {
       if (e.code == 'credential-already-in-use') {
         // The credential is already associated with a different user account
         Logger.authError('Link Guest with Apple', e);
-        
+
         // In this case, we should sign out the anonymous user and sign in with the existing account
         try {
           await _firebaseAuth.signOut();
           Logger.info('Signed out anonymous user due to credential conflict');
-          
+
           // Now sign in with the Apple account
           final appleCredential = await SignInWithApple.getAppleIDCredential(
-            scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName],
+            scopes: [
+              AppleIDAuthorizationScopes.email,
+              AppleIDAuthorizationScopes.fullName,
+            ],
           );
-          
+
           final oauthCredential = OAuthProvider("apple.com").credential(
             idToken: appleCredential.identityToken,
             accessToken: appleCredential.authorizationCode,
           );
-          
-          final userCredential = await _firebaseAuth.signInWithCredential(oauthCredential);
-          Logger.info('Signed in with existing Apple account: ${userCredential.user?.uid}');
+
+          final userCredential = await _firebaseAuth.signInWithCredential(
+            oauthCredential,
+          );
+          Logger.info(
+            'Signed in with existing Apple account: ${userCredential.user?.uid}',
+          );
           return userCredential.user;
         } catch (fallbackError) {
           Logger.authError('Link Guest with Apple Fallback', fallbackError);
           return null;
         }
       } else {
-        Logger.authError('Link Guest with Apple', 'Firebase error: ${e.message}');
+        Logger.authError(
+          'Link Guest with Apple',
+          'Firebase error: ${e.message}',
+        );
         return null;
       }
     } catch (e) {

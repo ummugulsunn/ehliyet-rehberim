@@ -60,12 +60,12 @@ class _ExamTimerWidgetState extends State<ExamTimerWidget>
         setState(() {
           if (_remainingTime.inSeconds > 0) {
             _remainingTime = Duration(seconds: _remainingTime.inSeconds - 1);
-            
+
             // Start pulsing when less than 5 minutes remain
             if (_remainingTime.inMinutes < 5 && !_pulseController.isAnimating) {
               _pulseController.repeat(reverse: true);
             }
-            
+
             // Stop pulsing when time is up
             if (_remainingTime.inSeconds == 0) {
               _pulseController.stop();
@@ -114,7 +114,7 @@ class _ExamTimerWidgetState extends State<ExamTimerWidget>
       animation: _pulseController,
       builder: (context, child) {
         final scale = isLowTime ? 1.0 + (_pulseController.value * 0.05) : 1.0;
-        
+
         return Transform.scale(
           scale: scale,
           child: Container(
@@ -130,11 +130,7 @@ class _ExamTimerWidgetState extends State<ExamTimerWidget>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.timer_outlined,
-                  color: timerColor,
-                  size: 24,
-                ),
+                Icon(Icons.timer_outlined, color: timerColor, size: 24),
                 const SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,18 +146,22 @@ class _ExamTimerWidgetState extends State<ExamTimerWidget>
                     const SizedBox(height: 2),
                     Text(
                       _formatTime(),
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: timerColor,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
+                            color: timerColor,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
+                          ),
                     ),
                   ],
                 ),
                 if (widget.isPaused) ...[
                   const SizedBox(width: 12),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.warning.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),

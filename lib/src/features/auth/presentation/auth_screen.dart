@@ -39,22 +39,24 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   Future<void> _signInWithGoogle() async {
     setState(() => _isGoogleLoading = true);
-    
+
     try {
       final authController = ref.read(authControllerProvider);
       final success = await authController.signInWithGoogle();
-      
+
       if (success) {
         // Force refresh auth state to ensure Home Screen gets the user
         ref.invalidate(authStateProvider);
-        
+
         // Small delay to allow state to propagate
         await Future.delayed(const Duration(milliseconds: 500));
-        
+
         // Manually navigate to Home
         _navigateToHome();
       } else {
-        _showErrorSnackBar('Google ile giriş yapılamadı. Lütfen tekrar deneyin.');
+        _showErrorSnackBar(
+          'Google ile giriş yapılamadı. Lütfen tekrar deneyin.',
+        );
       }
     } catch (e) {
       _showErrorSnackBar('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -67,17 +69,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   Future<void> _signInWithApple() async {
     setState(() => _isAppleLoading = true);
-    
+
     try {
       final authController = ref.read(authControllerProvider);
       final success = await authController.signInWithApple();
-      
+
       if (success) {
         ref.invalidate(authStateProvider);
         await Future.delayed(const Duration(milliseconds: 500));
         _navigateToHome();
       } else {
-        _showErrorSnackBar('Apple ile giriş yapılamadı. Lütfen tekrar deneyin.');
+        _showErrorSnackBar(
+          'Apple ile giriş yapılamadı. Lütfen tekrar deneyin.',
+        );
       }
     } catch (e) {
       _showErrorSnackBar('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -102,7 +106,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              
+
               // App Logo and Title
               Column(
                 children: [
@@ -138,9 +142,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 40),
-              
+
               // Welcome Message
               Column(
                 children: [
@@ -162,9 +166,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 40),
-              
+
               // Authentication Buttons
               Column(
                 children: [
@@ -173,11 +177,18 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton.icon(
-                      onPressed: _isGoogleLoading || _isAppleLoading ? null : _signInWithGoogle,
+                      onPressed: _isGoogleLoading || _isAppleLoading
+                          ? null
+                          : _signInWithGoogle,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.surface,
-                        foregroundColor: Theme.of(context).colorScheme.onSurface,
-                        side: BorderSide(color: Theme.of(context).colorScheme.outline, width: 1),
+                        foregroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onSurface,
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                          width: 1,
+                        ),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -189,7 +200,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                               height: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColors.primary,
+                                ),
                               ),
                             )
                           : Icon(
@@ -198,26 +211,33 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                               color: Theme.of(context).colorScheme.primary,
                             ),
                       label: Text(
-                        _isGoogleLoading ? 'Giriş yapılıyor...' : 'Google ile Giriş Yap',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        _isGoogleLoading
+                            ? 'Giriş yapılıyor...'
+                            : 'Google ile Giriş Yap',
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Apple Sign-In Button (iOS only)
                   if (Platform.isIOS) ...[
                     SizedBox(
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton.icon(
-                        onPressed: _isGoogleLoading || _isAppleLoading ? null : _signInWithApple,
+                        onPressed: _isGoogleLoading || _isAppleLoading
+                            ? null
+                            : _signInWithApple,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.onSurface,
-                          foregroundColor: Theme.of(context).colorScheme.surface,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onSurface,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surface,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -229,7 +249,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                                 height: 20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.surface),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Theme.of(context).colorScheme.surface,
+                                  ),
                                 ),
                               )
                             : Icon(
@@ -238,11 +260,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                                 color: Theme.of(context).colorScheme.surface,
                               ),
                         label: Text(
-                          _isAppleLoading ? 'Giriş yapılıyor...' : 'Apple ile Giriş Yap',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.surface,
-                          ),
+                          _isAppleLoading
+                              ? 'Giriş yapılıyor...'
+                              : 'Apple ile Giriş Yap',
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
                         ),
                       ),
                     ),
@@ -250,17 +275,21 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ],
                 ],
               ),
-              
+
               const SizedBox(height: 40),
-              
+
               // Continue as Guest Button
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: TextButton(
-                  onPressed: _isGoogleLoading || _isAppleLoading ? null : _continueAsGuest,
+                  onPressed: _isGoogleLoading || _isAppleLoading
+                      ? null
+                      : _continueAsGuest,
                   style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                    foregroundColor: Theme.of(
+                      context,
+                    ).colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
@@ -272,7 +301,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ),
               ),
-              
+
               // Privacy Note
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),

@@ -11,7 +11,6 @@ import '../../../core/theme/app_colors.dart';
 import 'quiz_screen.dart';
 import 'quiz_review_screen.dart';
 
-
 class ExamSelectionScreen extends ConsumerWidget {
   const ExamSelectionScreen({super.key});
 
@@ -23,7 +22,13 @@ class ExamSelectionScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text('Deneme Sınavları', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface)),
+        title: Text(
+          'Deneme Sınavları',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.onSurface,
@@ -44,9 +49,18 @@ class ExamSelectionScreen extends ConsumerWidget {
                 children: [
                   const Icon(Icons.error_outline, size: 48, color: Colors.red),
                   const SizedBox(height: 12),
-                  Text('Sınavlar yüklenemedi', style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    'Sınavlar yüklenemedi',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   const SizedBox(height: 6),
-                  Text(snapshot.error.toString(), style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant), textAlign: TextAlign.center),
+                  Text(
+                    snapshot.error.toString(),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             );
@@ -54,10 +68,10 @@ class ExamSelectionScreen extends ConsumerWidget {
           if (!snapshot.hasData) {
             return const Center(child: Text('Sınav verisi bulunamadı'));
           }
-          
+
           final exams = snapshot.data![0] as List<Exam>;
           final unfinishedIds = snapshot.data![1] as Set<String>;
-          
+
           if (exams.isEmpty) {
             return const Center(child: Text('Henüz deneme sınavı yok.'));
           }
@@ -66,7 +80,15 @@ class ExamSelectionScreen extends ConsumerWidget {
             child: Column(
               children: [
                 // Messages list
-                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context, ref, unfinishedIds)),
+                ...exams.map(
+                  (exam) => _buildExamCard(
+                    exam,
+                    progressRepository,
+                    context,
+                    ref,
+                    unfinishedIds,
+                  ),
+                ),
               ],
             ),
           );
@@ -75,9 +97,17 @@ class ExamSelectionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context, WidgetRef ref, Set<String> unfinishedIds) {
+  Widget _buildExamCard(
+    Exam exam,
+    UserProgressRepository progressRepository,
+    BuildContext context,
+    WidgetRef ref,
+    Set<String> unfinishedIds,
+  ) {
     final results = progressRepository.getAllTestResults(examId: exam.examId);
-    final best = results.isEmpty ? null : results.map((r) => r.correctAnswers).reduce((a, b) => a > b ? a : b);
+    final best = results.isEmpty
+        ? null
+        : results.map((r) => r.correctAnswers).reduce((a, b) => a > b ? a : b);
     final hasUnfinished = unfinishedIds.contains(exam.examId);
 
     return Container(
@@ -85,23 +115,47 @@ class ExamSelectionScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+        ),
         boxShadow: [
-          BoxShadow(color: AppColors.shadow.withValues(alpha: 0.08), blurRadius: 12, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: AppColors.shadow.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        title: Text(exam.examName, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+        title: Text(
+          exam.examName,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
         subtitle: best != null
-            ? Text('En Yüksek: $best/${exam.questions.length}', style: Theme.of(context).textTheme.bodyMedium)
-            : Text('Hazır mısın? Hemen başla!', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+            ? Text(
+                'En Yüksek: $best/${exam.questions.length}',
+                style: Theme.of(context).textTheme.bodyMedium,
+              )
+            : Text(
+                'Hazır mısın? Hemen başla!',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
         trailing: ElevatedButton(
           onPressed: () async {
             if (!context.mounted) return;
             // Check if there is a saved result for this exam
-            final results = progressRepository.getAllTestResults(examId: exam.examId);
-            
+            final results = progressRepository.getAllTestResults(
+              examId: exam.examId,
+            );
+
             if (results.isNotEmpty) {
               // Get the most recent result
               results.sort((a, b) => b.date.compareTo(a.date));
@@ -118,7 +172,9 @@ class ExamSelectionScreen extends ConsumerWidget {
                     children: [
                       Text('Bu sınavı daha önce çözdünüz.'),
                       const SizedBox(height: 8),
-                      Text('Son Sonuç: ${lastResult.correctAnswers}/${lastResult.totalQuestions} Doğru'),
+                      Text(
+                        'Son Sonuç: ${lastResult.correctAnswers}/${lastResult.totalQuestions} Doğru',
+                      ),
                       const SizedBox(height: 16),
                       const Text('Ne yapmak istersiniz?'),
                     ],
@@ -137,15 +193,18 @@ class ExamSelectionScreen extends ConsumerWidget {
               );
 
               if (choice == 'review' && context.mounted) {
-                 Navigator.of(context).push(
+                Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => QuizReviewScreen(result: lastResult, questions: exam.questions),
+                    builder: (_) => QuizReviewScreen(
+                      result: lastResult,
+                      questions: exam.questions,
+                    ),
                   ),
                 );
               } else if (choice == 'restart' && context.mounted) {
                 // Reset quiz state to ensure a fresh start
                 ref.read(quizControllerProvider(exam.examId).notifier).reset();
-                
+
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => QuizScreen(examId: exam.examId),
@@ -162,17 +221,18 @@ class ExamSelectionScreen extends ConsumerWidget {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: hasUnfinished ? AppColors.warning : AppColors.primary, 
-            foregroundColor: AppColors.onPrimary
+            backgroundColor: hasUnfinished
+                ? AppColors.warning
+                : AppColors.primary,
+            foregroundColor: AppColors.onPrimary,
           ),
           child: Text(
-            hasUnfinished ? 'Devam Et' : (best != null ? 'Tekrarla / İncele' : 'Başla')
+            hasUnfinished
+                ? 'Devam Et'
+                : (best != null ? 'Tekrarla / İncele' : 'Başla'),
           ),
         ),
       ),
     );
   }
-
-
 }
-

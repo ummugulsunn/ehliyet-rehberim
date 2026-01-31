@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../features/quiz/domain/test_result_model.dart';
 import '../utils/logger.dart';
@@ -28,7 +26,9 @@ class FileStorageService {
       final file = await _localFile;
       final jsonStr = TestResult.encodeList(results);
       await file.writeAsString(jsonStr);
-      Logger.info('Saved ${results.length} results to file storage: ${file.path}');
+      Logger.info(
+        'Saved ${results.length} results to file storage: ${file.path}',
+      );
     } catch (e) {
       Logger.error('Failed to save results to file', e);
     }

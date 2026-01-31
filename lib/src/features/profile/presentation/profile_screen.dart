@@ -44,11 +44,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Çıkış Yap'),
-        content: const Text('Hesabınızdan çıkış yapmak istediğinizden emin misiniz?'),
+        content: const Text(
+          'Hesabınızdan çıkış yapmak istediğinizden emin misiniz?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('İptal', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+            child: Text(
+              'İptal',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
@@ -62,11 +69,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (shouldSignOut != true) return;
 
     setState(() => _isSigningOut = true);
-    
+
     try {
       final authController = ref.read(authControllerProvider);
       final success = await authController.signOut();
-      
+
       if (success && mounted) {
         _showSuccessSnackBar('Başarıyla çıkış yapıldı');
         // Navigate to auth screen
@@ -88,7 +95,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _showEditProfileDialog(String? currentName) async {
     final nameController = TextEditingController(text: currentName);
-    
+
     final shouldSave = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -119,7 +126,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       if (newName == currentName) return;
 
       try {
-        final success = await ref.read(authControllerProvider).updateDisplayName(newName);
+        final success = await ref
+            .read(authControllerProvider)
+            .updateDisplayName(newName);
         if (success) {
           _showSuccessSnackBar('Profil güncellendi');
         } else {
@@ -132,16 +141,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   void _navigateToAuth() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const AuthScreen()),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const AuthScreen()));
   }
 
   Widget _buildGuestProfile() {
     return Column(
       children: [
         const SizedBox(height: 32),
-        
+
         // Guest Icon
         Container(
           padding: const EdgeInsets.all(24),
@@ -155,9 +164,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
-        
+
         const SizedBox(height: 24),
-        
+
         Text(
           'Misafir Kullanıcı',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -165,9 +174,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
-        
+
         const SizedBox(height: 8),
-        
+
         Text(
           'İlerlemenizi kaydetmek ve tüm cihazlarınızda\nsenkronize etmek için giriş yapın.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -175,9 +184,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
           textAlign: TextAlign.center,
         ),
-        
+
         const SizedBox(height: 32),
-        
+
         // Sign In Button
         SizedBox(
           width: double.infinity,
@@ -194,11 +203,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Widget _buildSignedInProfile(String? displayName, String? email, String? photoURL) {
+  Widget _buildSignedInProfile(
+    String? displayName,
+    String? email,
+    String? photoURL,
+  ) {
     return Column(
       children: [
         const SizedBox(height: 32),
-        
+
         // Profile Photo
         Container(
           decoration: BoxDecoration(
@@ -210,17 +223,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             backgroundColor: AppColors.primaryContainer,
             backgroundImage: photoURL != null ? NetworkImage(photoURL) : null,
             child: photoURL == null
-                ? Icon(
-                    Icons.person,
-                    size: 50,
-                    color: AppColors.primary,
-                  )
+                ? Icon(Icons.person, size: 50, color: AppColors.primary)
                 : null,
           ),
         ),
-        
+
         const SizedBox(height: 24),
-        
+
         // User Name with Edit Icon
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -240,9 +249,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
           ],
         ),
-        
+
         const SizedBox(height: 8),
-        
+
         // User Email
         if (email != null) ...[
           Text(
@@ -254,7 +263,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
           const SizedBox(height: 32),
         ],
-        
+
         // Account Status
         Container(
           width: double.infinity,
@@ -266,11 +275,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
           child: Row(
             children: [
-              Icon(
-                Icons.verified_user,
-                color: AppColors.success,
-                size: 20,
-              ),
+              Icon(Icons.verified_user, color: AppColors.success, size: 20),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -284,9 +289,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ],
           ),
         ),
-        
+
         const SizedBox(height: 32),
-        
+
         // Sign Out Button
         SizedBox(
           width: double.infinity,
@@ -298,7 +303,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     height: 16,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.error),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.error,
+                      ),
                     ),
                   )
                 : const Icon(Icons.logout),
@@ -334,11 +341,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.error_outline,
-                size: 64,
-                color: AppColors.error,
-              ),
+              Icon(Icons.error_outline, size: 64, color: AppColors.error),
               const SizedBox(height: 16),
               Text(
                 'Bir hata oluştu',
@@ -372,7 +375,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14),
                   boxShadow: [
-                    BoxShadow(color: AppColors.shadow, blurRadius: 10, offset: const Offset(0, 3)),
+                    BoxShadow(
+                      color: AppColors.shadow,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
                   ],
                 ),
                 child: ListTile(

@@ -34,10 +34,11 @@ Future<void> main(List<String> args) async {
   }
 
   String normalizeOptions(Map<String, dynamic> options) {
-    final entries = options.entries
-        .map((e) => '${e.key}:${normalize(e.value.toString())}')
-        .toList()
-      ..sort();
+    final entries =
+        options.entries
+            .map((e) => '${e.key}:${normalize(e.value.toString())}')
+            .toList()
+          ..sort();
     return entries.join('|');
   }
 
@@ -88,7 +89,9 @@ Future<void> main(List<String> args) async {
       final groupKey = '${normalize(text)}||${normalizeOptions(options)}';
       final enriched = Map<String, dynamic>.from(q);
       enriched['__examId'] = examId;
-      grouped.putIfAbsent(groupKey, () => <Map<String, dynamic>>[]).add(enriched);
+      grouped
+          .putIfAbsent(groupKey, () => <Map<String, dynamic>>[])
+          .add(enriched);
     }
   }
 
@@ -109,13 +112,15 @@ Future<void> main(List<String> args) async {
       canonicalPerGroup[key] = {
         'correctAnswerKey': '',
         'explanation': majorityExplanation(
-            list.map((q) => (q['explanation'] ?? '').toString())),
+          list.map((q) => (q['explanation'] ?? '').toString()),
+        ),
       };
       return;
     }
     final canonicalKey = majority(keyVotes);
     final canonicalExplanation = majorityExplanation(
-        list.map((q) => (q['explanation'] ?? '').toString()));
+      list.map((q) => (q['explanation'] ?? '').toString()),
+    );
     canonicalPerGroup[key] = {
       'correctAnswerKey': canonicalKey,
       'explanation': canonicalExplanation,
@@ -192,11 +197,11 @@ Future<void> main(List<String> args) async {
     'changes': changes,
     'skippedInvalidKeys': skippedInvalidKeys,
   };
-  await File('$analysisDirPath/canonicalize_report.json')
-      .writeAsString(encoder.convert(report));
+  await File(
+    '$analysisDirPath/canonicalize_report.json',
+  ).writeAsString(encoder.convert(report));
 
   stdout.writeln('Canonicalization complete. Changes: \'${changes.length}\'.');
   stdout.writeln('Backup: $backupPath');
   stdout.writeln('Report: $analysisDirPath/canonicalize_report.json');
 }
-

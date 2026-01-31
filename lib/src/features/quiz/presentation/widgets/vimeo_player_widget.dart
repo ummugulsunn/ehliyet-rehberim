@@ -16,7 +16,9 @@ class VimeoPlayerWidget extends StatelessWidget {
 
   String? _extractVideoId() {
     if (videoUrl.contains('player.vimeo.com/video/')) {
-      final match = RegExp(r'player\.vimeo\.com/video/(\d+)').firstMatch(videoUrl);
+      final match = RegExp(
+        r'player\.vimeo\.com/video/(\d+)',
+      ).firstMatch(videoUrl);
       return match?.group(1);
     }
     final match = RegExp(r'vimeo\.com/(\d+)').firstMatch(videoUrl);
@@ -44,11 +46,11 @@ class VimeoPlayerWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(12),
-          image: videoId != null 
+          image: videoId != null
               ? DecorationImage(
                   image: NetworkImage('https://vumbnail.com/$videoId.jpg'),
                   fit: BoxFit.cover,
-                  onError: (_, __) {}, 
+                  onError: (_, __) {},
                 )
               : null,
         ),
@@ -62,7 +64,7 @@ class VimeoPlayerWidget extends StatelessWidget {
                 color: Colors.black.withValues(alpha: 0.4),
               ),
             ),
-            
+
             // Play Button
             Container(
               width: 60,
@@ -84,12 +86,15 @@ class VimeoPlayerWidget extends StatelessWidget {
                 size: 40,
               ),
             ),
-            
+
             // Text Label
             Positioned(
               bottom: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.7),
                   borderRadius: BorderRadius.circular(20),
@@ -97,7 +102,11 @@ class VimeoPlayerWidget extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.open_in_new, color: Colors.white, size: 14),
+                    const Icon(
+                      Icons.open_in_new,
+                      color: Colors.white,
+                      size: 14,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       'Videoyu İzle (Tarayıcıda)',
@@ -120,7 +129,7 @@ class VimeoPlayerWidget extends StatelessWidget {
 
 bool isVideoUrl(String? url) {
   if (url == null) return false;
-  return url.contains('vimeo.com') || 
-         url.contains('youtube.com') || 
-         url.endsWith('.mp4');
+  return url.contains('vimeo.com') ||
+      url.contains('youtube.com') ||
+      url.endsWith('.mp4');
 }

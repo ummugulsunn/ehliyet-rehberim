@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,14 +5,15 @@ import '../../auth/data/auth_repository.dart';
 import '../application/leaderboard_providers.dart';
 import '../domain/leaderboard_entry.dart';
 
-class LeaderboardScreen extends ConsumerStatefulWidget {
+class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
 
   @override
-  ConsumerState<LeaderboardScreen> createState() => _LeaderboardScreenState();
+  State<LeaderboardScreen> createState() => _LeaderboardScreenState();
 }
 
-class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with SingleTickerProviderStateMixin {
+class _LeaderboardScreenState extends State<LeaderboardScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -32,7 +32,6 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
   Widget build(BuildContext context) {
     final currentUser = AuthRepository.instance.currentUser;
 
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liderlik Tablosu'),
@@ -40,35 +39,40 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> with Sing
         actions: [
           // Dev Menu
           if (kDebugMode)
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert),
-              onSelected: (value) async {
-                if (value == 'populate') {
-                  // Show confirmation or just do it
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Botlar ekleniyor...')),
-                  );
-                  await ref.read(leaderboardRepositoryProvider).populateDummyData();
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Botlar eklendi!')),
-                    );
-                  }
-                }
-              },
-              itemBuilder: (BuildContext context) {
-                return [
-                  const PopupMenuItem<String>(
-                    value: 'populate',
-                    child: Row(
-                      children: [
-                        Icon(Icons.smart_toy, color: Colors.grey),
-                        SizedBox(width: 8),
-                        Text('Bot Ekle (Dev)'),
-                      ],
-                    ),
-                  ),
-                ];
+            Consumer(
+              builder: (context, ref, _) {
+                return PopupMenuButton<String>(
+                  icon: const Icon(Icons.more_vert),
+                  onSelected: (value) async {
+                    if (value == 'populate') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Botlar ekleniyor...')),
+                      );
+                      await ref
+                          .read(leaderboardRepositoryProvider)
+                          .populateDummyData();
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Botlar eklendi!')),
+                        );
+                      }
+                    }
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      const PopupMenuItem<String>(
+                        value: 'populate',
+                        child: Row(
+                          children: [
+                            Icon(Icons.smart_toy, color: Colors.grey),
+                            SizedBox(width: 8),
+                            Text('Bot Ekle (Dev)'),
+                          ],
+                        ),
+                      ),
+                    ];
+                  },
+                );
               },
             ),
         ],
@@ -129,7 +133,10 @@ class _LeaderboardList extends ConsumerWidget {
               children: [
                 Icon(Icons.emoji_events_outlined, size: 64, color: Colors.grey),
                 SizedBox(height: 16),
-                Text('Henüz veri yok', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                Text(
+                  'Henüz veri yok',
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                ),
               ],
             ),
           );
@@ -143,7 +150,7 @@ class _LeaderboardList extends ConsumerWidget {
             final entry = entries[index];
             final rank = index + 1;
             final isMe = entry.uid == currentUserId;
-            
+
             // Determine score based on period
             int score;
             if (period == 'weekly') {
@@ -204,11 +211,11 @@ class _LeaderboardTile extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: isMe 
+        color: isMe
             ? theme.colorScheme.primaryContainer.withValues(alpha: 0.3)
             : theme.cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: isMe 
+        border: isMe
             ? Border.all(color: theme.colorScheme.primary, width: 1.5)
             : null,
         boxShadow: [
@@ -231,7 +238,9 @@ class _LeaderboardTile extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: rank <= 3 ? rankColor : theme.textTheme.bodyMedium?.color,
+                  color: rank <= 3
+                      ? rankColor
+                      : theme.textTheme.bodyMedium?.color,
                 ),
               ),
               const SizedBox(width: 8),
@@ -250,8 +259,13 @@ class _LeaderboardTile extends StatelessWidget {
               backgroundColor: theme.colorScheme.primary.withValues(alpha: 0.1),
               child: entry.photoUrl == null
                   ? Text(
-                      entry.displayName.isNotEmpty ? entry.displayName[0].toUpperCase() : '?',
-                      style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.bold),
+                      entry.displayName.isNotEmpty
+                          ? entry.displayName[0].toUpperCase()
+                          : '?',
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     )
                   : null,
             ),

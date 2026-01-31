@@ -1,4 +1,3 @@
-
 /// A collection of daily tips and facts for driver candidates
 class DailyTips {
   static const List<String> tips = [
@@ -16,12 +15,14 @@ class DailyTips {
     "3 şeritli yollarda ağır vasıtalar en sağ şeridi kullanmalıdır.",
     "Dönel kavşaklarda, kavşak içindeki araca yol verilmelidir.",
     "Alkollü araç kullanmak trafikten men sebebidir.",
-    "Yangın söndürme cihazı, sürücünün en kolay ulaşabileceği yerde olmalıdır."
+    "Yangın söndürme cihazı, sürücünün en kolay ulaşabileceği yerde olmalıdır.",
   ];
 
   /// Returns a tip based on the day of the year to ensure it changes daily but stays same during the day
   static String getTodayTip() {
-    final dayOfYear = DateTime.now().difference(DateTime(DateTime.now().year, 1, 1)).inDays;
+    final dayOfYear = DateTime.now()
+        .difference(DateTime(DateTime.now().year, 1, 1))
+        .inDays;
     return tips[dayOfYear % tips.length];
   }
 }

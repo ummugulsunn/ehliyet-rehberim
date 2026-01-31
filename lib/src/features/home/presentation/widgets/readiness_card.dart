@@ -14,9 +14,13 @@ class ReadinessCard extends ConsumerWidget {
 
     return testResultsAsync.when(
       data: (results) {
-        final validResults = results.where((r) => r.category != 'Yanlışlarım' && r.totalQuestions >= 10).toList();
-        final score = ref.read(userProgressRepositoryProvider).calculateReadinessScore();
-        
+        final validResults = results
+            .where((r) => r.category != 'Yanlışlarım' && r.totalQuestions >= 10)
+            .toList();
+        final score = ref
+            .read(userProgressRepositoryProvider)
+            .calculateReadinessScore();
+
         if (score == -1) {
           // Insufficient data view
           return _buildCard(
@@ -33,7 +37,7 @@ class ReadinessCard extends ConsumerWidget {
         Color color;
         String status;
         IconData icon;
-        
+
         if (score >= 90) {
           color = const Color(0xFFFFD700); // Gold
           status = 'Efsane!';
@@ -111,16 +115,16 @@ class ReadinessCard extends ConsumerWidget {
                   ),
                 ),
                 Center(
-                  child: score != null 
-                    ? Text(
-                        '$score',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: color,
-                        ),
-                      )
-                    : Icon(icon, color: color.withValues(alpha: 0.5)),
+                  child: score != null
+                      ? Text(
+                          '$score',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: color,
+                          ),
+                        )
+                      : Icon(icon, color: color.withValues(alpha: 0.5)),
                 ),
               ],
             ),

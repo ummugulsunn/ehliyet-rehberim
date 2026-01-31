@@ -19,11 +19,20 @@ class TrafficSignsScreen extends ConsumerWidget {
         title: const Text('Trafik İşaretleri'),
         actions: [
           IconButton(
-            icon: Icon(viewMode == TrafficSignViewMode.list ? Icons.grid_view : Icons.view_list),
-            tooltip: viewMode == TrafficSignViewMode.list ? 'Izgara Görünümü' : 'Liste Görünümü',
+            icon: Icon(
+              viewMode == TrafficSignViewMode.list
+                  ? Icons.grid_view
+                  : Icons.view_list,
+            ),
+            tooltip: viewMode == TrafficSignViewMode.list
+                ? 'Izgara Görünümü'
+                : 'Liste Görünümü',
             onPressed: () {
-              ref.read(trafficSignViewModeProvider.notifier).state = 
-                  viewMode == TrafficSignViewMode.list ? TrafficSignViewMode.grid : TrafficSignViewMode.list;
+              ref
+                  .read(trafficSignViewModeProvider.notifier)
+                  .state = viewMode == TrafficSignViewMode.list
+                  ? TrafficSignViewMode.grid
+                  : TrafficSignViewMode.list;
             },
           ),
         ],
@@ -41,25 +50,32 @@ class TrafficSignsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context, WidgetRef ref, List<TrafficSignCategory> categories) {
+  Widget _buildContent(
+    BuildContext context,
+    WidgetRef ref,
+    List<TrafficSignCategory> categories,
+  ) {
     // Get all unique category names for filter chips
     final categoryNames = categories.map((cat) => cat.categoryName).toList();
-    
+
     return Column(
       children: [
         // Search Bar
         _buildSearchBar(context, ref),
-        
+
         // Filter Chips
         _buildFilterChips(context, ref, categoryNames),
-        
+
         // Content List
         Expanded(
           child: Consumer(
             builder: (context, ref, child) {
-              final filteredCategories = ref.watch(filteredTrafficSignsProvider);
+              final filteredCategories = ref.watch(
+                filteredTrafficSignsProvider,
+              );
               return filteredCategories.when(
-                data: (filteredCats) => _buildCategoriesList(context, ref, filteredCats),
+                data: (filteredCats) =>
+                    _buildCategoriesList(context, ref, filteredCats),
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (e, st) => Center(child: Text('Hata: $e')),
               );
@@ -72,7 +88,11 @@ class TrafficSignsScreen extends ConsumerWidget {
 
   // ... _buildSearchBar and _buildFilterChips remain same ...
 
-  Widget _buildCategoriesList(BuildContext context, WidgetRef ref, List<TrafficSignCategory> categories) {
+  Widget _buildCategoriesList(
+    BuildContext context,
+    WidgetRef ref,
+    List<TrafficSignCategory> categories,
+  ) {
     final viewMode = ref.watch(trafficSignViewModeProvider);
 
     if (categories.isEmpty) {
@@ -115,63 +135,64 @@ class TrafficSignsScreen extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          leading: Icon(
-            Icons.traffic,
-            color: AppColors.primary,
-          ),
+          leading: Icon(Icons.traffic, color: AppColors.primary),
           children: [
             if (viewMode == TrafficSignViewMode.list)
-              ...category.signs.map((sign) => ListTile(
-                leading: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+              ...category.signs.map(
+                (sign) => ListTile(
+                  leading: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.outline.withValues(alpha: 0.3),
+                      ),
                     ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      sign.imageUrl,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) => Icon(
-                        Icons.image_not_supported,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        sign.imageUrl,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => Icon(
+                          Icons.image_not_supported,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                title: Text(
-                  sign.name,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontWeight: FontWeight.w600,
+                  title: Text(
+                    sign.name,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                subtitle: Text(
-                  sign.description.length > 50 
-                      ? '${sign.description.substring(0, 50)}...'
-                      : sign.description,
-                  style: TextStyle(
+                  subtitle: Text(
+                    sign.description.length > 50
+                        ? '${sign.description.substring(0, 50)}...'
+                        : sign.description,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 12,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    fontSize: 12,
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => TrafficSignDetailScreen(sign: sign),
+                    ),
                   ),
                 ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => TrafficSignDetailScreen(sign: sign),
-                  ),
-                ),
-              ))
+              )
             else
               GridView.builder(
                 shrinkWrap: true,
@@ -198,11 +219,15 @@ class TrafficSignsScreen extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.outline.withValues(alpha: 0.2),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Theme.of(context).shadowColor.withValues(alpha: 0.05),
+                            color: Theme.of(
+                              context,
+                            ).shadowColor.withValues(alpha: 0.05),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -218,7 +243,8 @@ class TrafficSignsScreen extends ConsumerWidget {
                               child: Image.asset(
                                 sign.imageUrl,
                                 fit: BoxFit.contain,
-                                errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
+                                errorBuilder: (_, __, ___) =>
+                                    const Icon(Icons.image_not_supported),
                               ),
                             ),
                           ),
@@ -226,17 +252,24 @@ class TrafficSignsScreen extends ConsumerWidget {
                             flex: 2,
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 8,
+                              ),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .surfaceContainerHighest
+                                    .withValues(alpha: 0.5),
+                                borderRadius: const BorderRadius.vertical(
+                                  bottom: Radius.circular(16),
+                                ),
                               ),
                               child: Center(
                                 child: Text(
                                   sign.name,
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall
+                                      ?.copyWith(fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
@@ -255,6 +288,7 @@ class TrafficSignsScreen extends ConsumerWidget {
       },
     );
   }
+
   Widget _buildSearchBar(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -264,9 +298,7 @@ class TrafficSignsScreen extends ConsumerWidget {
         decoration: InputDecoration(
           hintText: 'Trafik işareti ara...',
           prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           filled: true,
           fillColor: Theme.of(context).cardColor,
         ),
@@ -275,7 +307,10 @@ class TrafficSignsScreen extends ConsumerWidget {
   }
 
   Widget _buildFilterChips(
-      BuildContext context, WidgetRef ref, List<String> categories) {
+    BuildContext context,
+    WidgetRef ref,
+    List<String> categories,
+  ) {
     final selectedCategory = ref.watch(trafficSignCategoryFilterProvider);
 
     return SingleChildScrollView(
@@ -289,7 +324,8 @@ class TrafficSignsScreen extends ConsumerWidget {
               label: const Text('Tümü'),
               selected: selectedCategory == null,
               onSelected: (selected) {
-                 ref.read(trafficSignCategoryFilterProvider.notifier).state = null;
+                ref.read(trafficSignCategoryFilterProvider.notifier).state =
+                    null;
               },
             ),
           ),
@@ -331,14 +367,12 @@ class TrafficSignDetailScreen extends StatelessWidget {
                 width: 220,
                 height: 220,
                 fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported, size: 64),
+                errorBuilder: (_, __, ___) =>
+                    const Icon(Icons.image_not_supported, size: 64),
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              sign.name,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            Text(sign.name, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 8),
             Text(
               sign.description,
@@ -350,5 +384,3 @@ class TrafficSignDetailScreen extends StatelessWidget {
     );
   }
 }
-
-

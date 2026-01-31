@@ -63,7 +63,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         // App Store ID: 6739002862
         // Application ID: com.ehliyetrehberim.app
         if (Platform.isAndroid) {
-          await inAppReview.openStoreListing(appStoreId: 'com.ehliyetrehberim.app');
+          await inAppReview.openStoreListing(
+            appStoreId: 'com.ehliyetrehberim.app',
+          );
         } else if (Platform.isIOS) {
           await inAppReview.openStoreListing(appStoreId: '6739002862');
         }
@@ -81,7 +83,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final authState = ref.watch(authStateProvider);
     final userDisplayName = ref.watch(userDisplayNameProvider);
     final userEmail = ref.watch(userEmailProvider);
-    
+
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       padding: const EdgeInsets.all(20),
@@ -89,10 +91,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppColors.primary,
-            AppColors.primary.withValues(alpha: 0.8),
-          ],
+          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -120,11 +119,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             fit: BoxFit.cover,
                           ),
                         )
-                      : const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 30,
-                        ),
+                      : const Icon(Icons.person, color: Colors.white, size: 30),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -188,9 +183,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             );
           }
         },
-        loading: () => const Center(
-          child: CircularProgressIndicator(color: Colors.white),
-        ),
+        loading: () =>
+            const Center(child: CircularProgressIndicator(color: Colors.white)),
         error: (_, __) => const SizedBox.shrink(),
       ),
     );
@@ -235,11 +229,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     color: iconColor ?? AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
-                    size: 20,
-                  ),
+                  child: Icon(icon, color: Colors.white, size: 20),
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -281,29 +271,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
       ),
       subtitle: subtitle != null
           ? Text(
               subtitle,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
             )
           : null,
-      trailing: trailing ?? 
-          (onTap != null 
-              ? Icon(
-                  Icons.chevron_right,
-                  color: AppColors.textSecondary,
-                )
+      trailing:
+          trailing ??
+          (onTap != null
+              ? Icon(Icons.chevron_right, color: AppColors.textSecondary)
               : null),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -374,7 +360,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const NotificationSettingsScreen(),
+                        builder: (context) =>
+                            const NotificationSettingsScreen(),
                       ),
                     );
                   },
@@ -391,7 +378,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       builder: (context) => AlertDialog(
                         title: const Text('Yanlışları Temizle'),
                         content: const Text(
-                          'Tüm yanlış cevap geçmişiniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?'
+                          'Tüm yanlış cevap geçmişiniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?',
                         ),
                         actions: [
                           TextButton(
@@ -411,16 +398,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
                     if (shouldClear == true && context.mounted) {
                       try {
-                        final userProgress = ref.read(userProgressRepositoryProvider);
-                        
+                        final userProgress = ref.read(
+                          userProgressRepositoryProvider,
+                        );
+
                         // Clear both old and new wrong answer systems
                         await userProgress.clearAllWrongAnswerIds();
                         await userProgress.clearAllWrongAnswerPairs();
-                        
+
                         if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Yanlış cevap geçmişiniz temizlendi.'),
+                            content: Text(
+                              'Yanlış cevap geçmişiniz temizlendi.',
+                            ),
                             backgroundColor: Colors.green,
                           ),
                         );
@@ -428,7 +419,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Hata oluştu. Lütfen tekrar deneyin.'),
+                            content: Text(
+                              'Hata oluştu. Lütfen tekrar deneyin.',
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -450,14 +443,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: Icons.privacy_tip,
                   title: 'Gizlilik Politikası',
                   subtitle: 'Verilerinizin nasıl korunduğunu öğrenin',
-                  onTap: () => _launchURL('https://ummugulsunn.github.io/ummugulsun-portfolio/ehliyet-rehberim/privacy-policy.html'),
+                  onTap: () => _launchURL(
+                    'https://ummugulsunn.github.io/ummugulsun-portfolio/ehliyet-rehberim/privacy-policy.html',
+                  ),
                   iconColor: AppColors.error,
                 ),
                 _buildSettingsTile(
                   icon: Icons.description,
                   title: 'Kullanım Şartları',
                   subtitle: 'Hizmet kullanım koşullarını inceleyin',
-                  onTap: () => _launchURL('https://ummugulsunn.github.io/ummugulsun-portfolio/ehliyet-rehberim/terms-of-service.html'),
+                  onTap: () => _launchURL(
+                    'https://ummugulsunn.github.io/ummugulsun-portfolio/ehliyet-rehberim/terms-of-service.html',
+                  ),
                   iconColor: AppColors.warning,
                 ),
               ],
@@ -473,14 +470,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: Icons.help_outline,
                   title: 'Yardım ve Destek',
                   subtitle: 'Sıkça sorulan sorular ve yardım',
-                  onTap: () => _launchURL('mailto:ugturkmen.dev@gmail.com?subject=Ehliyet Rehberim - Destek'),
+                  onTap: () => _launchURL(
+                    'mailto:ugturkmen.dev@gmail.com?subject=Ehliyet Rehberim - Destek',
+                  ),
                   iconColor: AppColors.success,
                 ),
                 _buildSettingsTile(
                   icon: Icons.bug_report,
                   title: 'Hata Bildir',
                   subtitle: 'Karşılaştığınız sorunları bildirin',
-                  onTap: () => _launchURL('mailto:ugturkmen.dev@gmail.com?subject=Ehliyet Rehberim - Hata Raporu'),
+                  onTap: () => _launchURL(
+                    'mailto:ugturkmen.dev@gmail.com?subject=Ehliyet Rehberim - Hata Raporu',
+                  ),
                   iconColor: AppColors.error,
                 ),
                 _buildSettingsTile(
@@ -504,14 +505,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   title: 'Neden Ücretsiz?',
                   subtitle: 'Misyonumuz ve amacımız',
                   onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const FreeAppInfoScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => const FreeAppInfoScreen(),
+                    ),
                   ),
                   iconColor: AppColors.primary,
                 ),
                 _buildSettingsTile(
                   icon: Icons.info_outline,
                   title: 'Uygulama Versiyonu',
-                  subtitle: _appVersion.isNotEmpty ? _appVersion : 'Yükleniyor...',
+                  subtitle: _appVersion.isNotEmpty
+                      ? _appVersion
+                      : 'Yükleniyor...',
                   iconColor: AppColors.textSecondary,
                 ),
                 _buildSettingsTile(

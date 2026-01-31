@@ -4,6 +4,8 @@ import '../application/auth_providers.dart';
 import '../../home/presentation/home_screen.dart';
 import 'auth_screen.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../onboarding/presentation/setup_wizard_screen.dart';
+import '../../home/application/home_providers.dart'; // Import provider from here
 
 /// Robust authentication gate widget that handles all authentication states
 /// This widget ensures proper loading states and error handling
@@ -14,11 +16,11 @@ class AuthGate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
     debugPrint('DEBUG: AuthGate state: $authState');
-    
+
     return authState.when(
       // Loading state - show a full-page loading screen
       loading: () => const _LoadingScreen(),
-      
+
       // Error state - show error screen with retry option
       error: (error, stackTrace) {
         debugPrint('AuthGate: Authentication error: $error');
@@ -30,15 +32,59 @@ class AuthGate extends ConsumerWidget {
           },
         );
       },
-      
+
       // Data state - show appropriate screen based on user authentication
       data: (user) {
         if (user != null) {
-          // User is signed in - show HomeScreen
-          return const HomeScreen();
+          // User is signed in
+          // Check if Setup Wizard (Post-Auth) is complete
+          // We need to watch this state using a FutureProvider or similar,
+          // but for now we can wrap HomeScreen in a checker or check inside HomeScreen.
+          // Better approach: Use a StateProvider for isSetupComplete loaded at startup.
+
+          // However, UserProgressRepository is singleton.
+          // Let's rely on a check wrapper here.
+          return const _SetupCheckWrapper();
         } else {
           // User is not signed in - show AuthScreen
           return const AuthScreen();
+        }
+      },
+    );
+  }
+}
+
+class _SetupCheckWrapper extends ConsumerStatefulWidget {
+  const _SetupCheckWrapper();
+
+  @override
+  ConsumerState<_SetupCheckWrapper> createState() => _SetupCheckWrapperState();
+}
+
+class _SetupCheckWrapperState extends ConsumerState<_SetupCheckWrapper> {
+  // Simple FutureBuilder logic since we don't have a provider stream for this specific bool easily available
+  // without refactoring the whole Repo to Riverpod proper.
+
+  @override
+  Widget build(BuildContext context) {
+    // We can access the repository instance directly as it's a singleton
+    // Or via the provider
+    final repo = ref.watch(userProgressRepositoryProvider);
+
+    return FutureBuilder<bool>(
+      future: repo.isSetupComplete,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const _LoadingScreen();
+        }
+
+        final isComplete = snapshot.data ?? false;
+        if (isComplete) {
+          return const HomeScreen();
+        } else {
+          // Import this implicitly or via relative path
+          // We need to import SetupWizardScreen
+          return const SetupWizardScreen();
         }
       },
     );
@@ -78,9 +124,9 @@ class _LoadingScreen extends StatelessWidget {
                   color: AppColors.primary,
                 ),
               ),
-              
+
               const SizedBox(height: 32),
-              
+
               // App title
               Text(
                 'Ehliyet Rehberim',
@@ -90,9 +136,9 @@ class _LoadingScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               const SizedBox(height: 8),
-              
+
               // Subtitle
               Text(
                 'Sınav Soruları 2026',
@@ -102,14 +148,16 @@ class _LoadingScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               const SizedBox(height: 48),
-              
+
               // Loading indicator
               Column(
                 children: [
                   CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColors.primary,
+                    ),
                     strokeWidth: 3,
                   ),
                   const SizedBox(height: 16),
@@ -134,10 +182,7 @@ class _ErrorScreen extends StatelessWidget {
   final Object error;
   final VoidCallback onRetry;
 
-  const _ErrorScreen({
-    required this.error,
-    required this.onRetry,
-  });
+  const _ErrorScreen({required this.error, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -163,9 +208,9 @@ class _ErrorScreen extends StatelessWidget {
                     color: AppColors.error,
                   ),
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Error title
                 Text(
                   'Bir Hata Oluştu',
@@ -175,9 +220,9 @@ class _ErrorScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Error message
                 Text(
                   'Uygulama başlatılırken bir sorun oluştu. Lütfen tekrar deneyin.',
@@ -187,9 +232,9 @@ class _ErrorScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Retry button
                 SizedBox(
                   width: double.infinity,
@@ -208,9 +253,9 @@ class _ErrorScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Debug info (only in debug mode)
                 if (const bool.fromEnvironment('dart.vm.product') == false) ...[
                   Container(
@@ -228,18 +273,20 @@ class _ErrorScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Debug Bilgisi:',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textSecondary,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textSecondary,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           error.toString(),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
-                            fontFamily: 'monospace',
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.textSecondary,
+                                fontFamily: 'monospace',
+                              ),
                         ),
                       ],
                     ),
@@ -252,4 +299,4 @@ class _ErrorScreen extends StatelessWidget {
       ),
     );
   }
-} 
+}

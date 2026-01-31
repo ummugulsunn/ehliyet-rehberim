@@ -18,7 +18,7 @@ class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
   final List<Question>? preloadedQuestions;
   final bool isExamMode;
-  
+
   const QuizScreen({
     super.key,
     required this.examId,
@@ -41,8 +41,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     super.initState();
     // Her kategori değişiminde sıfırdan başlat
     _pageController = PageController(initialPage: 0);
-    _confettiController = ConfettiController(duration: const Duration(seconds: 1));
-    
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 1),
+    );
+
     // Check for unfinished exam for ALL modes (except explicitly stateless ones if any)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkForUnfinishedExam();
@@ -52,11 +54,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   Future<void> _checkForUnfinishedExam() async {
     final storage = ref.read(examStorageServiceProvider);
     final unfinished = await storage.getUnfinishedExam(widget.examId);
-    
+
     if (unfinished != null && mounted) {
       // Safety check: Ensure the loaded exam matches the current one
       if (unfinished.examId != widget.examId) {
-        debugPrint('Mismatch in saved exam ID. Expected: ${widget.examId}, Found: ${unfinished.examId}. Deleting invalid save.');
+        debugPrint(
+          'Mismatch in saved exam ID. Expected: ${widget.examId}, Found: ${unfinished.examId}. Deleting invalid save.',
+        );
         await storage.deleteUnfinishedExam(widget.examId);
         return;
       }
@@ -68,7 +72,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Yarım Kalan Sınav'),
           content: Text(
-            'Bu bölümde daha önce ${unfinished.currentQuestionIndex + 1}. soruda kalmıştınız.\n\nKaldığınız yerden devam etmek ister misiniz?'
+            'Bu bölümde daha önce ${unfinished.currentQuestionIndex + 1}. soruda kalmıştınız.\n\nKaldığınız yerden devam etmek ister misiniz?',
           ),
           actions: [
             TextButton(
@@ -86,33 +90,38 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           ],
         ),
       );
-      
+
       if (shouldResume == true && mounted) {
         // Restore state
-        final controller = ref.read(quizControllerProvider(widget.examId).notifier);
-        
+        final controller = ref.read(
+          quizControllerProvider(widget.examId).notifier,
+        );
+
         // 1. Restore Questions (Critical for random/karma tests)
         // primarily for dynamic exams where questions list changes every time
-        bool isDynamicExam = widget.examId == 'karma' || widget.examId == 'exam_simulation';
-        
+        bool isDynamicExam =
+            widget.examId == 'karma' || widget.examId == 'exam_simulation';
+
         if (isDynamicExam && unfinished.questionIds.isNotEmpty) {
-           // Fetch ALL questions to find the specific ones we saved
-           // 'karma' returns the aggregated pool of all questions
-           final allQuestions = await ref.read(quizRepositoryProvider).loadQuestionsForExam('karma');
-           
-           final List<Question> restoredQuestions = [];
-           for (final id in unfinished.questionIds) {
-             try {
-               final q = allQuestions.firstWhere((q) => q.id == id);
-               restoredQuestions.add(q);
-             } catch (_) {
-               // Question ID not found (fetched from different pool or removed), skip
-             }
-           }
-           
-           if (restoredQuestions.isNotEmpty) {
-              controller.initializeQuiz(restoredQuestions, examId: widget.examId);
-           }
+          // Fetch ALL questions to find the specific ones we saved
+          // 'karma' returns the aggregated pool of all questions
+          final allQuestions = await ref
+              .read(quizRepositoryProvider)
+              .loadQuestionsForExam('karma');
+
+          final List<Question> restoredQuestions = [];
+          for (final id in unfinished.questionIds) {
+            try {
+              final q = allQuestions.firstWhere((q) => q.id == id);
+              restoredQuestions.add(q);
+            } catch (_) {
+              // Question ID not found (fetched from different pool or removed), skip
+            }
+          }
+
+          if (restoredQuestions.isNotEmpty) {
+            controller.initializeQuiz(restoredQuestions, examId: widget.examId);
+          }
         }
 
         // 2. Restore Answers and Index
@@ -123,20 +132,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             answers[intKey] = value;
           }
         });
-        
+
         controller.restoreState(
           index: unfinished.currentQuestionIndex,
           answers: answers,
           remainingSeconds: unfinished.remainingSeconds,
         );
-        
+
         // Jump to page
         if (_pageController.hasClients) {
           _pageController.jumpToPage(unfinished.currentQuestionIndex);
         }
       } else {
         // Ensure old data is cleared if they chose to restart
-         await storage.deleteUnfinishedExam(widget.examId);
+        await storage.deleteUnfinishedExam(widget.examId);
       }
     }
   }
@@ -154,7 +163,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       Navigator.of(context).pop();
       return;
     }
-    
+
     // Allow saving state for ALL modes logic
     final action = await showDialog<String>(
       context: context,
@@ -164,12 +173,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         actionsAlignment: MainAxisAlignment.spaceBetween,
         actions: [
           TextButton(
-             onPressed: () => Navigator.of(context).pop('cancel'),
-             child: const Text('İptal'),
+            onPressed: () => Navigator.of(context).pop('cancel'),
+            child: const Text('İptal'),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop('finish'),
-             child: const Text('Bitir'),
+            child: const Text('Bitir'),
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop('save'),
@@ -178,70 +187,78 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         ],
       ),
     );
-    
+
     if (!mounted) return;
-    
+
     if (action == 'save') {
-       await _saveAndExit();
+      await _saveAndExit();
     } else if (action == 'finish') {
-       // Finish exam logic
-       await ref.read(examStorageServiceProvider).deleteUnfinishedExam(widget.examId); // Clear saved state
-       ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
-       await _saveResult(isFinal: true);
-       if (mounted) {
-         if (widget.isExamMode) {
-             Navigator.of(context).pushReplacement(
-               MaterialPageRoute(
-                  builder: (_) => ResultsScreen(
-                    examId: widget.examId,
-                    result: TestResult(
-                      date: DateTime.now(), 
-                      correctAnswers: state.score, 
-                      totalQuestions: state.totalQuestions, 
-                      category: widget.category ?? 'Genel', 
-                      examId: widget.examId, 
-                      selectedAnswers: state.selectedAnswers,
-                      isExamMode: true,
-                      isPassed: state.score >= 35, // Approx 70% of 50
-                    ),
-                  ),
-               ),
-             );
-         } else {
-             Navigator.of(context).pushReplacement(
-               MaterialPageRoute(
-                 builder: (context) => ResultsScreen(examId: widget.examId),
-               ),
-             );
-         }
-       }
+      // Finish exam logic
+      await ref
+          .read(examStorageServiceProvider)
+          .deleteUnfinishedExam(widget.examId); // Clear saved state
+      ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
+      await _saveResult(isFinal: true);
+      if (mounted) {
+        if (widget.isExamMode) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (_) => ResultsScreen(
+                examId: widget.examId,
+                result: TestResult(
+                  date: DateTime.now(),
+                  correctAnswers: state.score,
+                  totalQuestions: state.totalQuestions,
+                  category: widget.category ?? 'Genel',
+                  examId: widget.examId,
+                  selectedAnswers: state.selectedAnswers,
+                  isExamMode: true,
+                  isPassed: state.score >= 35, // Approx 70% of 50
+                ),
+              ),
+            ),
+          );
+        } else {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ResultsScreen(examId: widget.examId),
+            ),
+          );
+        }
+      }
     }
   }
 
   Future<void> _saveAndExit() async {
     final state = ref.read(quizControllerProvider(widget.examId));
     final storage = ref.read(examStorageServiceProvider);
-    
+
     // Map<int, String> to Map<String, String>
-    final answers = state.selectedAnswers.map((k, v) => MapEntry(k.toString(), v));
-    
+    final answers = state.selectedAnswers.map(
+      (k, v) => MapEntry(k.toString(), v),
+    );
+
     final unfinished = UnfinishedExam(
       examId: widget.examId,
-      questionIds: state.questions.map((q) => q.id).toList(), // Save Question IDs
+      questionIds: state.questions
+          .map((q) => q.id)
+          .toList(), // Save Question IDs
       currentQuestionIndex: state.questionIndex,
       remainingSeconds: state.examTimeRemaining?.inSeconds ?? 0,
       answers: answers,
       savedAt: DateTime.now(),
     );
-    
+
     await storage.saveExam(unfinished);
-    
+
     // Also sync wrong answers so they appear in "Yanlışlarım" immediately
     await _syncAnswersToProgress(state.selectedAnswers, state.questions);
-    
+
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sınav kaydedildi. Daha sonra devam edebilirsiniz.')),
+        const SnackBar(
+          content: Text('Sınav kaydedildi. Daha sonra devam edebilirsiniz.'),
+        ),
       );
       Navigator.of(context).pop();
     }
@@ -267,11 +284,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         children: List.generate(total, (i) {
           final question = questions[i];
           final selected = selectedAnswers[question.id];
-          final isCorrect = selected != null && selected == question.correctAnswerKey;
+          final isCorrect =
+              selected != null && selected == question.correctAnswerKey;
           final isAnswered = selected != null;
 
           Color bg = Theme.of(context).colorScheme.surfaceContainerHighest;
-          BorderSide border = BorderSide(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.6));
+          BorderSide border = BorderSide(
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.6),
+          );
           Widget? icon;
 
           if (isCorrect) {
@@ -294,19 +314,30 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 width: isCurrent ? 32 : 26,
                 height: isCurrent ? 32 : 26,
                 decoration: BoxDecoration(
-                  color: (isCorrect || (isAnswered && !isCorrect)) ? bg : Theme.of(context).colorScheme.surface,
+                  color: (isCorrect || (isAnswered && !isCorrect))
+                      ? bg
+                      : Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: isCurrent ? AppColors.primary : border.color, width: isCurrent ? 2 : 1),
+                  border: Border.all(
+                    color: isCurrent ? AppColors.primary : border.color,
+                    width: isCurrent ? 2 : 1,
+                  ),
                 ),
                 child: Center(
-                  child: icon ?? Text(
-                    '${i + 1}',
-                    style: TextStyle(
-                      fontSize: isCurrent ? 12 : 11,
-                      color: isCurrent ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontWeight: isCurrent ? FontWeight.bold : FontWeight.w600,
-                    ),
-                  ),
+                  child:
+                      icon ??
+                      Text(
+                        '${i + 1}',
+                        style: TextStyle(
+                          fontSize: isCurrent ? 12 : 11,
+                          color: isCurrent
+                              ? AppColors.primary
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                          fontWeight: isCurrent
+                              ? FontWeight.bold
+                              : FontWeight.w600,
+                        ),
+                      ),
                 ),
               ),
             ),
@@ -316,52 +347,58 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     );
   }
 
-
-
-  Future<void> _syncAnswersToProgress(Map<int, String> answers, List<Question> questions) async {
+  Future<void> _syncAnswersToProgress(
+    Map<int, String> answers,
+    List<Question> questions,
+  ) async {
     try {
       final questionsById = {for (final q in questions) q.id: q};
       final ups = ref.read(userProgressRepositoryProvider);
       final isMyMistakesMode = widget.category == 'Yanlışlarım';
-      
+
       for (final entry in answers.entries) {
         final numberKey = entry.key; // This might be originalId or uniqueId
         final selectedAnswer = entry.value;
         final q = questionsById[numberKey];
-        
+
         if (q != null) {
-           final isCorrect = selectedAnswer == q.correctAnswerKey;
-           
-           // Logic:
-           // 1. If MyMistakes Mode: Process ALL (Correct->Fix, Wrong->Reset)
-           // 2. If Regular Mode: Process ONLY WRONG (Wrong->Add)
-           
-           if (isMyMistakesMode) {
-             if (q.examId != null) {
-                await ups.updateSRSStatus(
-                  examId: q.examId!, 
-                  questionId: q.originalQuestionId ?? numberKey, 
-                  isCorrect: isCorrect
+          final isCorrect = selectedAnswer == q.correctAnswerKey;
+
+          // Logic:
+          // 1. If MyMistakes Mode: Process ALL (Correct->Fix, Wrong->Reset)
+          // 2. If Regular Mode: Process ONLY WRONG (Wrong->Add)
+
+          if (isMyMistakesMode) {
+            if (q.examId != null) {
+              await ups.updateSRSStatus(
+                examId: q.examId!,
+                questionId: q.originalQuestionId ?? numberKey,
+                isCorrect: isCorrect,
+              );
+            } else {
+              // Fallback for legacy IDs (rarely have logic to remove from legacy list via simple API, usually handled in repository)
+              if (isCorrect) {
+                await ups.removeWrongAnswerId(
+                  q.originalQuestionId ?? numberKey,
                 );
-             } else {
-               // Fallback for legacy IDs (rarely have logic to remove from legacy list via simple API, usually handled in repository)
-               if (isCorrect) await ups.removeWrongAnswerId(q.originalQuestionId ?? numberKey);
-               else await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey);
-             }
-           } else {
-             // Regular Mode: Only record MISTAKES
-             if (!isCorrect) {
-               if (q.examId != null) {
-                 await ups.updateSRSStatus(
-                   examId: q.examId!, 
-                   questionId: q.originalQuestionId ?? numberKey, 
-                   isCorrect: false
-                 );
-               } else {
-                 await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey); 
-               }
-             }
-           }
+              } else {
+                await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey);
+              }
+            }
+          } else {
+            // Regular Mode: Only record MISTAKES
+            if (!isCorrect) {
+              if (q.examId != null) {
+                await ups.updateSRSStatus(
+                  examId: q.examId!,
+                  questionId: q.originalQuestionId ?? numberKey,
+                  isCorrect: false,
+                );
+              } else {
+                await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey);
+              }
+            }
+          }
         }
       }
     } catch (_) {
@@ -376,13 +413,19 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
     final correct = quizState.score;
     final answeredCount = quizState.selectedAnswers.length;
-    if (answeredCount == 0 && isFinal == false) return; // Don't save empty partials
+    if (answeredCount == 0 && isFinal == false) {
+      return; // Don't save empty partials
+    }
 
-    final totalForThisAttempt = isFinal ? quizState.totalQuestions : answeredCount;
+    final totalForThisAttempt = isFinal
+        ? quizState.totalQuestions
+        : answeredCount;
     final category = widget.category ?? 'Karma';
 
-    final timeTaken = widget.isExamMode 
-        ? ref.read(quizControllerProvider(widget.examId).notifier).getTimeTaken() 
+    final timeTaken = widget.isExamMode
+        ? ref
+              .read(quizControllerProvider(widget.examId).notifier)
+              .getTimeTaken()
         : null;
 
     final result = TestResult(
@@ -394,7 +437,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       selectedAnswers: quizState.selectedAnswers,
       isExamMode: widget.isExamMode,
       timeTakenInSeconds: timeTaken?.inSeconds,
-      isPassed: isFinal && widget.isExamMode ? (correct / totalForThisAttempt >= 0.7) : null,
+      isPassed: isFinal && widget.isExamMode
+          ? (correct / totalForThisAttempt >= 0.7)
+          : null,
     );
 
     // Persist test result (History) - Only if final or sufficiently substantial?
@@ -406,8 +451,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
     // Handle wrong answer IDs (SRS / Mistakes List)
     // This allows "Yanlışlarım" to be updated immediately even if exam isn't finished
-    await _syncAnswersToProgress(quizState.selectedAnswers, quizState.questions);
-    
+    await _syncAnswersToProgress(
+      quizState.selectedAnswers,
+      quizState.questions,
+    );
+
     if (isFinal) {
       _resultSaved = true;
     }
@@ -480,9 +528,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              ref.read(favoritesRepositoryProvider).saveNote(questionId, noteController.text);
+              ref
+                  .read(favoritesRepositoryProvider)
+                  .saveNote(questionId, noteController.text);
               Navigator.pop(context);
-              
+
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Not kaydedildi'),
@@ -506,7 +556,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       // When preloaded questions are provided, use them as-is without filtering by category
       final List<Question> questions = base;
 
-    final quizState = ref.watch(quizControllerProvider(widget.examId));
+      final quizState = ref.watch(quizControllerProvider(widget.examId));
       final bool examChanged = quizState.examId != widget.examId;
       // final bool questionCountChanged = quizState.questions.length != questions.length;
       final bool questionsEmpty = quizState.questions.isEmpty;
@@ -515,7 +565,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       // Don't reinitialize if questions are already loaded and exam is the same
       if (questionsEmpty && questions.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+          final notifier = ref.read(
+            quizControllerProvider(widget.examId).notifier,
+          );
           notifier.initializeQuiz(questions, examId: widget.examId);
           if (widget.isExamMode) {
             notifier.startExamMode();
@@ -524,7 +576,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       } else if (examChanged && questions.isNotEmpty) {
         // Only reinitialize if exam changed
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+          final notifier = ref.read(
+            quizControllerProvider(widget.examId).notifier,
+          );
           notifier.initializeQuiz(questions, examId: widget.examId);
           if (widget.isExamMode) {
             notifier.startExamMode();
@@ -538,229 +592,279 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             title: Text(widget.category ?? 'Ehliyet Rehberim'),
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           ),
-          body: const Center(
-            child: Text('Bu kategoride soru bulunamadı.'),
-          ),
+          body: const Center(child: Text('Bu kategoride soru bulunamadı.')),
         );
       }
 
       return PopScope(
-          canPop: false,
-          onPopInvokedWithResult: (didPop, result) async {
-            if (didPop) return;
-            await _onExitPressed();
-          },
-          child: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            appBar: AppBar(
-              title: Text(
-                widget.category ?? 'Karma Test',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (didPop) return;
+          await _onExitPressed();
+        },
+        child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          appBar: AppBar(
+            title: Text(
+              widget.category ?? 'Karma Test',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              elevation: 0,
-              foregroundColor: Theme.of(context).colorScheme.onSurface,
-              leading: widget.isExamMode
+            ),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            elevation: 0,
+            foregroundColor: Theme.of(context).colorScheme.onSurface,
+            leading: widget.isExamMode
                 ? IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: _onExitPressed,
                   )
                 : const BackButton(),
-              actions: [
-                // Display progress
-                Container(
-                  margin: const EdgeInsets.only(right: 16.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryContainer,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 128),
-                    ),
-                  ),
-                  child: Text(
-                    '${quizState.questionIndex + 1} / ${quizState.totalQuestions}',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
+            actions: [
+              // Display progress
+              Container(
+                margin: const EdgeInsets.only(right: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryContainer,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 128),
                   ),
                 ),
-              ],
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(110),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'İlerleme',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                          Text(
-                            '${(quizState.progressPercentage * 100).round()}%',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: LinearProgressIndicator(
-                          value: quizState.progressPercentage,
-                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                          minHeight: 8,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        height: 40,
-                        child: _questionIndicators(
-                          total: quizState.totalQuestions,
-                          currentIndex: quizState.questionIndex,
-                          selectedAnswers: quizState.selectedAnswers,
-                          questions: quizState.questions,
-                          onTap: (targetIndex) {
-                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(targetIndex);
-                            _pageController.animateToPage(
-                              targetIndex,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                child: Text(
+                  '${quizState.questionIndex + 1} / ${quizState.totalQuestions}',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
                   ),
                 ),
               ),
-            ),
-            body: Stack(
-              children: [
-                Positioned.fill(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: PageView.builder(
-                          controller: _pageController,
-                          itemCount: quizState.totalQuestions,
-                          onPageChanged: (index) {
-                            // PageView değiştiğinde quiz state'i sync et
-                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(index);
-                          },
-                          itemBuilder: (context, index) {
-                            final question = quizState.questions[index];
-                            return _QuestionCard(
-                              question: question,
-                              questionNumber: index + 1,
-                              totalQuestions: quizState.totalQuestions,
-                              selectedAnswer: quizState.selectedAnswers[question.id],
-                              isAnswered: quizState.selectedAnswers.containsKey(question.id),
-                              isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
-                              isExamMode: widget.isExamMode,
-                              onAnswerSelected: (answer) {
-                                ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
-                                // Trigger confetti animation for correct answers only in normal mode
-                                if (!widget.isExamMode) {
-                                  final currentQuestion = quizState.questions[index];
-                                  if (answer == currentQuestion.correctAnswerKey) {
-                                    _confettiController.play();
-                                  }
-                                }
-                              },
-                               onNextQuestion: () {
-                                ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
-                                if (index < quizState.totalQuestions - 1) {
-                                  _pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                              },
-                               onPreviousQuestion: () {
-                                 if (index > 0) {
-                                   ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
-                                   _pageController.previousPage(
-                                     duration: const Duration(milliseconds: 300),
-                                     curve: Curves.easeInOut,
-                                   );
-                                 }
-                                },
-                              onFinishQuiz: () async {
-                                if (widget.isExamMode) {
-                                  _confirmFinishExam(context);
-                                } else {
-                                  final route = MaterialPageRoute(
-                                    builder: (context) => ResultsScreen(examId: widget.examId),
-                                  );
-                                  final navigator = Navigator.of(context);
-                                  await _saveResult(isFinal: true);
-                                  if (mounted) {
-                                    navigator.pushReplacement(route);
-                                  }
-                                }
-                              },
-                               autoShowExplainOnWrong: widget.category == 'Yanlışlarım',
-                            );
-                          },
+            ],
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(110),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'İlerleme',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                         ),
+                        Text(
+                          '${(quizState.progressPercentage * 100).round()}%',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primary,
+                              ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: LinearProgressIndicator(
+                        value: quizState.progressPercentage,
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHighest,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
+                        minHeight: 8,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 40,
+                      child: _questionIndicators(
+                        total: quizState.totalQuestions,
+                        currentIndex: quizState.questionIndex,
+                        selectedAnswers: quizState.selectedAnswers,
+                        questions: quizState.questions,
+                        onTap: (targetIndex) {
+                          ref
+                              .read(
+                                quizControllerProvider(widget.examId).notifier,
+                              )
+                              .setQuestionIndex(targetIndex);
+                          _pageController.animateToPage(
+                            targetIndex,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                if (ref.watch(quizControllerProvider(widget.examId)).currentCombo >= 3)
-                  Positioned(
-                    top: 12,
-                    left: 0,
-                    right: 0,
-                    child: _ComboToast(combo: ref.watch(quizControllerProvider(widget.examId)).currentCombo),
-                  ),
-                // Confetti animation for correct answers
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: ConfettiWidget(
-                    confettiController: _confettiController,
-                    blastDirectionality: BlastDirectionality.explosive,
-                    shouldLoop: false,
-                    colors: [
-                      AppColors.success,
-                      AppColors.primary,
-                      AppColors.warning,
-                      const Color(0xFFFFD700), // Gold
-                      const Color(0xFFFF69B4), // Hot pink
-                    ],
-                    numberOfParticles: 20,
-                    gravity: 0.3,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        );
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: quizState.totalQuestions,
+                        onPageChanged: (index) {
+                          // PageView değiştiğinde quiz state'i sync et
+                          ref
+                              .read(
+                                quizControllerProvider(widget.examId).notifier,
+                              )
+                              .setQuestionIndex(index);
+                        },
+                        itemBuilder: (context, index) {
+                          final question = quizState.questions[index];
+                          return _QuestionCard(
+                            question: question,
+                            questionNumber: index + 1,
+                            totalQuestions: quizState.totalQuestions,
+                            selectedAnswer:
+                                quizState.selectedAnswers[question.id],
+                            isAnswered: quizState.selectedAnswers.containsKey(
+                              question.id,
+                            ),
+                            isCorrect:
+                                quizState.selectedAnswers[question.id] ==
+                                question.correctAnswerKey,
+                            isExamMode: widget.isExamMode,
+                            onAnswerSelected: (answer) {
+                              ref
+                                  .read(
+                                    quizControllerProvider(
+                                      widget.examId,
+                                    ).notifier,
+                                  )
+                                  .answerQuestion(answer);
+                              // Trigger confetti animation for correct answers only in normal mode
+                              if (!widget.isExamMode) {
+                                final currentQuestion =
+                                    quizState.questions[index];
+                                if (answer ==
+                                    currentQuestion.correctAnswerKey) {
+                                  _confettiController.play();
+                                }
+                              }
+                            },
+                            onNextQuestion: () {
+                              ref
+                                  .read(
+                                    quizControllerProvider(
+                                      widget.examId,
+                                    ).notifier,
+                                  )
+                                  .nextQuestion();
+                              if (index < quizState.totalQuestions - 1) {
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                            },
+                            onPreviousQuestion: () {
+                              if (index > 0) {
+                                ref
+                                    .read(
+                                      quizControllerProvider(
+                                        widget.examId,
+                                      ).notifier,
+                                    )
+                                    .previousQuestion();
+                                _pageController.previousPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                            },
+                            onFinishQuiz: () async {
+                              if (widget.isExamMode) {
+                                _confirmFinishExam(context);
+                              } else {
+                                final route = MaterialPageRoute(
+                                  builder: (context) =>
+                                      ResultsScreen(examId: widget.examId),
+                                );
+                                final navigator = Navigator.of(context);
+                                await _saveResult(isFinal: true);
+                                if (mounted) {
+                                  navigator.pushReplacement(route);
+                                }
+                              }
+                            },
+                            autoShowExplainOnWrong:
+                                widget.category == 'Yanlışlarım',
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (ref
+                      .watch(quizControllerProvider(widget.examId))
+                      .currentCombo >=
+                  3)
+                Positioned(
+                  top: 12,
+                  left: 0,
+                  right: 0,
+                  child: _ComboToast(
+                    combo: ref
+                        .watch(quizControllerProvider(widget.examId))
+                        .currentCombo,
+                  ),
+                ),
+              // Confetti animation for correct answers
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  shouldLoop: false,
+                  colors: [
+                    AppColors.success,
+                    AppColors.primary,
+                    AppColors.warning,
+                    const Color(0xFFFFD700), // Gold
+                    const Color(0xFFFF69B4), // Hot pink
+                  ],
+                  numberOfParticles: 20,
+                  gravity: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
     }
 
     // Handle loading and error states for questions (default flow)
     final allQuestionsAsync = ref.watch(quizQuestionsProvider(widget.examId));
-    
+
     return allQuestionsAsync.when(
-      loading: () => const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
       error: (error, stackTrace) => Scaffold(
         body: Center(
           child: Column(
@@ -790,20 +894,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       ),
       data: (allQuestions) {
         // Filter questions by category if specified
-        final questions = widget.category != null 
+        final questions = widget.category != null
             ? allQuestions.where((q) => q.category == widget.category).toList()
             : allQuestions;
-        
+
         final quizState = ref.watch(quizControllerProvider(widget.examId));
 
         // Initialize or re-initialize quiz only when necessary
         final bool examChanged = quizState.examId != widget.examId;
         final bool questionsEmpty = quizState.questions.isEmpty;
-        
+
         // Only initialize if quiz state is truly empty or exam changed
         if (questionsEmpty && questions.isNotEmpty) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+            final notifier = ref.read(
+              quizControllerProvider(widget.examId).notifier,
+            );
             notifier.initializeQuiz(questions, examId: widget.examId);
             if (widget.isExamMode) {
               notifier.startExamMode();
@@ -812,7 +918,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         } else if (examChanged && questions.isNotEmpty) {
           // Only reinitialize if exam changed
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            final notifier = ref.read(quizControllerProvider(widget.examId).notifier);
+            final notifier = ref.read(
+              quizControllerProvider(widget.examId).notifier,
+            );
             notifier.initializeQuiz(questions, examId: widget.examId);
             if (widget.isExamMode) {
               notifier.startExamMode();
@@ -824,12 +932,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         if (questions.isEmpty) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Ehliyet Rehberim')),
+              title: Text(
+                widget.isExamMode
+                    ? 'Sınav Simülasyonu'
+                    : (widget.category ?? 'Ehliyet Rehberim'),
+              ),
               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             ),
-            body: const Center(
-              child: Text('Bu kategoride soru bulunamadı.'),
-            ),
+            body: const Center(child: Text('Bu kategoride soru bulunamadı.')),
           );
         }
 
@@ -843,7 +953,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
               title: Text(
-                widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Karma Test'),
+                widget.isExamMode
+                    ? 'Sınav Simülasyonu'
+                    : (widget.category ?? 'Karma Test'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onSurface,
@@ -853,29 +965,37 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               elevation: 0,
               foregroundColor: Theme.of(context).colorScheme.onSurface,
               leading: widget.isExamMode
-                ? IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: _onExitPressed,
-                  )
-                : const BackButton(),
+                  ? IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: _onExitPressed,
+                    )
+                  : const BackButton(),
               actions: [
                 // Favorite Button
                 if (quizState.questions.isNotEmpty)
                   Consumer(
                     builder: (context, ref, child) {
-                      final currentQ = quizState.questions[quizState.questionIndex];
+                      final currentQ =
+                          quizState.questions[quizState.questionIndex];
                       final isFav = ref.watch(isFavoriteProvider(currentQ.id));
-                      
+
                       return IconButton(
                         icon: Icon(
                           isFav ? Icons.favorite : Icons.favorite_border,
-                          color: isFav ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: isFav
+                              ? AppColors.error
+                              : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         onPressed: () {
-                          ref.read(favoritesRepositoryProvider).toggleFavorite(currentQ.id);
+                          ref
+                              .read(favoritesRepositoryProvider)
+                              .toggleFavorite(currentQ.id);
                         },
-                        onLongPress: () => _showNoteDialog(context, currentQ.id),
-                        tooltip: isFav ? 'Favorilerden Çıkar (Not için basılı tut)' : 'Favorilere Ekle (Not için basılı tut)',
+                        onLongPress: () =>
+                            _showNoteDialog(context, currentQ.id),
+                        tooltip: isFav
+                            ? 'Favorilerden Çıkar (Not için basılı tut)'
+                            : 'Favorilere Ekle (Not için basılı tut)',
                       );
                     },
                   ),
@@ -883,7 +1003,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                   TextButton(
                     onPressed: () => _confirmFinishExam(context),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.error.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
@@ -900,7 +1023,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 // Display progress
                 Container(
                   margin: const EdgeInsets.only(right: 16.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryContainer,
                     borderRadius: BorderRadius.circular(16),
@@ -927,13 +1053,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         ExamTimerWidget(
                           // Key ensures widget is rebuilt when exam session changes or is restored
                           key: ValueKey(quizState.examStartTime),
-                          duration: quizState.examTimeRemaining ?? const Duration(minutes: 45),
+                          duration:
+                              quizState.examTimeRemaining ??
+                              const Duration(minutes: 45),
                           onTimeUp: () {
-                            ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
+                            ref
+                                .read(
+                                  quizControllerProvider(
+                                    widget.examId,
+                                  ).notifier,
+                                )
+                                .finishExam();
                             // Navigate to results screen
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => ResultsScreen(examId: widget.examId),
+                                builder: (context) =>
+                                    ResultsScreen(examId: widget.examId),
                               ),
                             );
                           },
@@ -945,17 +1080,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         children: [
                           Text(
                             'İlerleme',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                                ),
                           ),
                           Text(
                             '${(quizState.progressPercentage * 100).round()}%',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
                           ),
                         ],
                       ),
@@ -964,8 +1103,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
                           value: quizState.progressPercentage,
-                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerHighest,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primary,
+                          ),
                           minHeight: 8,
                         ),
                       ),
@@ -978,7 +1121,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           selectedAnswers: quizState.selectedAnswers,
                           questions: quizState.questions,
                           onTap: (targetIndex) {
-                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(targetIndex);
+                            ref
+                                .read(
+                                  quizControllerProvider(
+                                    widget.examId,
+                                  ).notifier,
+                                )
+                                .setQuestionIndex(targetIndex);
                             _pageController.animateToPage(
                               targetIndex,
                               duration: const Duration(milliseconds: 300),
@@ -1003,7 +1152,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           itemCount: quizState.totalQuestions,
                           onPageChanged: (index) {
                             // PageView değiştiğinde quiz state'i sync et
-                            ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(index);
+                            ref
+                                .read(
+                                  quizControllerProvider(
+                                    widget.examId,
+                                  ).notifier,
+                                )
+                                .setQuestionIndex(index);
                           },
                           itemBuilder: (context, index) {
                             final question = quizState.questions[index];
@@ -1011,23 +1166,43 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               question: question,
                               questionNumber: index + 1,
                               totalQuestions: quizState.totalQuestions,
-                              selectedAnswer: quizState.selectedAnswers[question.id],
-                              isAnswered: quizState.selectedAnswers.containsKey(question.id),
-                              isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
+                              selectedAnswer:
+                                  quizState.selectedAnswers[question.id],
+                              isAnswered: quizState.selectedAnswers.containsKey(
+                                question.id,
+                              ),
+                              isCorrect:
+                                  quizState.selectedAnswers[question.id] ==
+                                  question.correctAnswerKey,
                               isExamMode: widget.isExamMode,
-                               autoShowExplainOnWrong: widget.category == 'Yanlışlarım',
+                              autoShowExplainOnWrong:
+                                  widget.category == 'Yanlışlarım',
                               onAnswerSelected: (answer) {
-                                ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
+                                ref
+                                    .read(
+                                      quizControllerProvider(
+                                        widget.examId,
+                                      ).notifier,
+                                    )
+                                    .answerQuestion(answer);
                                 // Trigger confetti animation for correct answers only in normal mode
                                 if (!widget.isExamMode) {
-                                  final currentQuestion = quizState.questions[index];
-                                  if (answer == currentQuestion.correctAnswerKey) {
+                                  final currentQuestion =
+                                      quizState.questions[index];
+                                  if (answer ==
+                                      currentQuestion.correctAnswerKey) {
                                     _confettiController.play();
                                   }
                                 }
                               },
                               onNextQuestion: () {
-                                ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
+                                ref
+                                    .read(
+                                      quizControllerProvider(
+                                        widget.examId,
+                                      ).notifier,
+                                    )
+                                    .nextQuestion();
                                 if (index < quizState.totalQuestions - 1) {
                                   _pageController.nextPage(
                                     duration: const Duration(milliseconds: 300),
@@ -1037,7 +1212,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                               },
                               onPreviousQuestion: () {
                                 if (index > 0) {
-                                  ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
+                                  ref
+                                      .read(
+                                        quizControllerProvider(
+                                          widget.examId,
+                                        ).notifier,
+                                      )
+                                      .previousQuestion();
                                   _pageController.previousPage(
                                     duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOut,
@@ -1049,7 +1230,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                   _confirmFinishExam(context);
                                 } else {
                                   final route = MaterialPageRoute(
-                                    builder: (context) => ResultsScreen(examId: widget.examId),
+                                    builder: (context) =>
+                                        ResultsScreen(examId: widget.examId),
                                   );
                                   final navigator = Navigator.of(context);
                                   await _saveResult(isFinal: true);
@@ -1065,12 +1247,19 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     ],
                   ),
                 ),
-                if (ref.watch(quizControllerProvider(widget.examId)).currentCombo >= 3)
+                if (ref
+                        .watch(quizControllerProvider(widget.examId))
+                        .currentCombo >=
+                    3)
                   Positioned(
                     top: 12,
                     left: 0,
                     right: 0,
-                    child: _ComboToast(combo: ref.watch(quizControllerProvider(widget.examId)).currentCombo),
+                    child: _ComboToast(
+                      combo: ref
+                          .watch(quizControllerProvider(widget.examId))
+                          .currentCombo,
+                    ),
                   ),
                 // Confetti animation for correct answers
                 Positioned(
@@ -1172,7 +1361,9 @@ class _QuestionCard extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     width: 1,
                   ),
                 ),
@@ -1181,7 +1372,10 @@ class _QuestionCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -1200,31 +1394,42 @@ class _QuestionCard extends StatelessWidget {
                     child: Text(
                       'Soru $questionNumber / $totalQuestions',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primary,
-                          ),
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                   if (isAnswered && !isExamMode)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.15),
-                            (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.08),
+                            (isCorrect ? AppColors.success : AppColors.error)
+                                .withValues(alpha: 0.15),
+                            (isCorrect ? AppColors.success : AppColors.error)
+                                .withValues(alpha: 0.08),
                           ],
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.3),
+                          color:
+                              (isCorrect ? AppColors.success : AppColors.error)
+                                  .withValues(alpha: 0.3),
                           width: 1.5,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
+                            color:
+                                (isCorrect
+                                        ? AppColors.success
+                                        : AppColors.error)
+                                    .withValues(alpha: 0.1),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -1233,16 +1438,23 @@ class _QuestionCard extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
-                            color: isCorrect ? AppColors.success : AppColors.error,
+                            isCorrect
+                                ? Icons.check_circle_rounded
+                                : Icons.cancel_rounded,
+                            color: isCorrect
+                                ? AppColors.success
+                                : AppColors.error,
                             size: 20,
                           ),
                           const SizedBox(width: 8),
                           Text(
                             isCorrect ? 'Doğru' : 'Yanlış',
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
                                   fontWeight: FontWeight.w700,
-                                  color: isCorrect ? AppColors.success : AppColors.error,
+                                  color: isCorrect
+                                      ? AppColors.success
+                                      : AppColors.error,
                                 ),
                           ),
                         ],
@@ -1254,16 +1466,15 @@ class _QuestionCard extends StatelessWidget {
             const SizedBox(height: 16),
             if (question.imageUrl != null && !question.hasOptionImages) ...[
               if (isVideoUrl(question.imageUrl))
-                VimeoPlayerWidget(
-                  videoUrl: question.imageUrl!,
-                  height: 200,
-                )
+                VimeoPlayerWidget(videoUrl: question.imageUrl!, height: 200)
               else
                 Container(
                   width: double.infinity,
                   height: 150,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ClipRRect(
@@ -1282,9 +1493,13 @@ class _QuestionCard extends StatelessWidget {
                                   height: 24,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
+                                    value:
+                                        loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                  .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
                                         : null,
                                   ),
                                 ),
@@ -1305,19 +1520,27 @@ class _QuestionCard extends StatelessWidget {
                             width: double.infinity,
                             height: 150,
                             fit: BoxFit.contain,
-                            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                              if (wasSynchronouslyLoaded) return child;
-                              if (frame == null) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 24,
-                                    height: 24,
-                                    child: CircularProgressIndicator(strokeWidth: 2),
-                                  ),
-                                );
-                              }
-                              return child;
-                            },
+                            frameBuilder:
+                                (
+                                  context,
+                                  child,
+                                  frame,
+                                  wasSynchronouslyLoaded,
+                                ) {
+                                  if (wasSynchronouslyLoaded) return child;
+                                  if (frame == null) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 24,
+                                        height: 24,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return child;
+                                },
                             errorBuilder: (context, error, stackTrace) {
                               return Center(
                                 child: Icon(
@@ -1335,9 +1558,9 @@ class _QuestionCard extends StatelessWidget {
             Text(
               question.questionText,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
             const SizedBox(height: 24),
             ListView.separated(
@@ -1349,17 +1572,18 @@ class _QuestionCard extends StatelessWidget {
                 final optionKey = question.options.keys.elementAt(idx);
                 final rawOptionText = question.getOptionText(optionKey);
                 final existingImageUrl = question.getOptionImageUrl(optionKey);
-                
+
                 // Check if the text itself is an image URL
                 String? finalImageUrl = existingImageUrl;
                 String displayText = rawOptionText;
 
-                if (finalImageUrl == null && 
-                    (rawOptionText.startsWith('http') || rawOptionText.startsWith('assets/')) && 
-                    (rawOptionText.toLowerCase().endsWith('.jpg') || 
-                     rawOptionText.toLowerCase().endsWith('.png') || 
-                     rawOptionText.toLowerCase().endsWith('.gif') || 
-                     rawOptionText.toLowerCase().endsWith('.jpeg'))) {
+                if (finalImageUrl == null &&
+                    (rawOptionText.startsWith('http') ||
+                        rawOptionText.startsWith('assets/')) &&
+                    (rawOptionText.toLowerCase().endsWith('.jpg') ||
+                        rawOptionText.toLowerCase().endsWith('.png') ||
+                        rawOptionText.toLowerCase().endsWith('.gif') ||
+                        rawOptionText.toLowerCase().endsWith('.jpeg'))) {
                   finalImageUrl = rawOptionText;
                   displayText = ''; // Hide text as it is just the URL
                 }
@@ -1367,27 +1591,42 @@ class _QuestionCard extends StatelessWidget {
                 final isSelected = selectedAnswer == optionKey;
                 final isCorrectAnswer = optionKey == question.correctAnswerKey;
 
-                Color containerColor = Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.3)
+                Color containerColor =
+                    Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainer.withValues(alpha: 0.3)
                     : Theme.of(context).colorScheme.surface;
-                Color borderColor = Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).colorScheme.outline.withValues(alpha: 0.6)
-                    : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3);
+                Color borderColor =
+                    Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(
+                        context,
+                      ).colorScheme.outline.withValues(alpha: 0.6)
+                    : Theme.of(
+                        context,
+                      ).colorScheme.outline.withValues(alpha: 0.3);
                 Widget? trailingIcon;
-                Color letterBg = Theme.of(context).colorScheme.surfaceContainerHighest;
+                Color letterBg = Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest;
                 Color letterFg = Theme.of(context).colorScheme.onSurface;
 
                 if (isAnswered && !isExamMode) {
                   if (isCorrectAnswer) {
-                    containerColor = Theme.of(context).brightness == Brightness.dark
+                    containerColor =
+                        Theme.of(context).brightness == Brightness.dark
                         ? AppColors.successContainer.withValues(alpha: 0.3)
                         : AppColors.successContainer;
                     borderColor = AppColors.success;
-                    trailingIcon = Icon(Icons.check_circle, color: AppColors.success);
+                    trailingIcon = Icon(
+                      Icons.check_circle,
+                      color: AppColors.success,
+                    );
                     letterBg = AppColors.success;
                     letterFg = AppColors.onSuccess;
                   } else if (isSelected && !isCorrect) {
-                    containerColor = Theme.of(context).brightness == Brightness.dark
+                    containerColor =
+                        Theme.of(context).brightness == Brightness.dark
                         ? AppColors.errorContainer.withValues(alpha: 0.3)
                         : AppColors.errorContainer;
                     borderColor = AppColors.error;
@@ -1396,7 +1635,8 @@ class _QuestionCard extends StatelessWidget {
                     letterFg = AppColors.onError;
                   }
                 } else if (isSelected) {
-                  containerColor = Theme.of(context).brightness == Brightness.dark
+                  containerColor =
+                      Theme.of(context).brightness == Brightness.dark
                       ? AppColors.primaryContainer.withValues(alpha: 0.3)
                       : AppColors.primaryContainer;
                   borderColor = AppColors.primary.withValues(alpha: 0.8);
@@ -1409,10 +1649,15 @@ class _QuestionCard extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: (isAnswered && !isExamMode) ? null : () => onAnswerSelected(optionKey),
+                      onTap: (isAnswered && !isExamMode)
+                          ? null
+                          : () => onAnswerSelected(optionKey),
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                          horizontal: 20,
+                        ),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -1423,10 +1668,15 @@ class _QuestionCard extends StatelessWidget {
                             end: Alignment.bottomRight,
                           ),
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: borderColor, width: isSelected || isAnswered ? 2 : 1.5),
+                          border: Border.all(
+                            color: borderColor,
+                            width: isSelected || isAnswered ? 2 : 1.5,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: Theme.of(context).shadowColor.withValues(alpha: 0.08),
+                              color: Theme.of(
+                                context,
+                              ).shadowColor.withValues(alpha: 0.08),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                               spreadRadius: 1,
@@ -1485,24 +1735,45 @@ class _QuestionCard extends StatelessWidget {
                                   if (displayText.isNotEmpty)
                                     Text(
                                       displayText,
-                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                                            color: Theme.of(context).brightness == Brightness.dark
-                                                ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.95)
-                                                : Theme.of(context).colorScheme.onSurface,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            fontWeight: isSelected
+                                                ? FontWeight.w600
+                                                : FontWeight.w500,
+                                            color:
+                                                Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface
+                                                      .withValues(alpha: 0.95)
+                                                : Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurface,
                                           ),
                                     ),
                                   if (finalImageUrl != null) ...[
-                                    if (displayText.isNotEmpty) const SizedBox(height: 8),
+                                    if (displayText.isNotEmpty)
+                                      const SizedBox(height: 8),
                                     Container(
                                       // Larger size if it is the main content (no text)
                                       height: displayText.isEmpty ? 120 : 80,
-                                      width: displayText.isEmpty ? double.infinity : 100,
+                                      width: displayText.isEmpty
+                                          ? double.infinity
+                                          : 100,
                                       alignment: Alignment.centerLeft,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
-                                        color: Colors.white, // White bg for images usually safer
+                                        border: Border.all(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .outline
+                                              .withValues(alpha: 0.3),
+                                        ),
+                                        color: Colors
+                                            .white, // White bg for images usually safer
                                       ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
@@ -1512,18 +1783,27 @@ class _QuestionCard extends StatelessWidget {
                                                 fit: BoxFit.contain,
                                                 width: double.infinity,
                                                 height: double.infinity,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Container(
-                                                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                                                    child: Center(
-                                                      child: Icon(
-                                                        Icons.broken_image,
-                                                        size: 24,
-                                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
+                                                errorBuilder:
+                                                    (
+                                                      context,
+                                                      error,
+                                                      stackTrace,
+                                                    ) {
+                                                      return Container(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .surfaceContainerHighest,
+                                                        child: Center(
+                                                          child: Icon(
+                                                            Icons.broken_image,
+                                                            size: 24,
+                                                            color: Theme.of(context)
+                                                                .colorScheme
+                                                                .onSurfaceVariant,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
                                               )
                                             : Image.asset(
                                                 finalImageUrl,
@@ -1532,12 +1812,17 @@ class _QuestionCard extends StatelessWidget {
                                                 height: double.infinity,
                                                 errorBuilder: (context, error, stackTrace) {
                                                   return Container(
-                                                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .surfaceContainerHighest,
                                                     child: Center(
                                                       child: Icon(
-                                                        Icons.image_not_supported,
+                                                        Icons
+                                                            .image_not_supported,
                                                         size: 24,
-                                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSurfaceVariant,
                                                       ),
                                                     ),
                                                   );
@@ -1581,17 +1866,17 @@ class _QuestionCard extends StatelessWidget {
                     Text(
                       'Doğru Cevap: ',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.success,
-                          ),
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.success,
+                      ),
                     ),
                     Expanded(
                       child: Text(
                         '${question.correctAnswerKey.toUpperCase()}) ${question.getOptionText(question.correctAnswerKey)}',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.success,
-                            ),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.success,
+                        ),
                       ),
                     ),
                   ],
@@ -1602,10 +1887,14 @@ class _QuestionCard extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
+                  color: AppColors.surfaceContainerHighest.withValues(
+                    alpha: 128,
+                  ),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 128),
                   ),
                 ),
                 child: Column(
@@ -1614,9 +1903,9 @@ class _QuestionCard extends StatelessWidget {
                     Text(
                       'Açıklama',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -1624,9 +1913,9 @@ class _QuestionCard extends StatelessWidget {
                           ? question.explanation
                           : 'Bu soru için açıklama mevcut değil.',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            height: 1.5,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                        height: 1.5,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                   ],
                 ),
@@ -1635,7 +1924,9 @@ class _QuestionCard extends StatelessWidget {
 
             if (isAnswered || isExamMode) ...[
               const SizedBox(height: 16),
-              if (!isExamMode && isAnswered && !(autoShowExplainOnWrong && !isCorrect))
+              if (!isExamMode &&
+                  isAnswered &&
+                  !(autoShowExplainOnWrong && !isCorrect))
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
@@ -1661,7 +1952,9 @@ class _QuestionCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      backgroundColor: AppColors.warning.withValues(alpha: 0.08),
+                      backgroundColor: AppColors.warning.withValues(
+                        alpha: 0.08,
+                      ),
                     ),
                   ),
                 ),
@@ -1675,7 +1968,9 @@ class _QuestionCard extends StatelessWidget {
                       label: const Text('Önceki Soru'),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
@@ -1689,13 +1984,25 @@ class _QuestionCard extends StatelessWidget {
                           onFinishQuiz();
                         }
                       },
-                      icon: Icon(questionNumber < totalQuestions ? Icons.arrow_forward : Icons.flag),
-                      label: Text(questionNumber < totalQuestions ? 'Sonraki Soru' : 'Testi Bitir'),
+                      icon: Icon(
+                        questionNumber < totalQuestions
+                            ? Icons.arrow_forward
+                            : Icons.flag,
+                      ),
+                      label: Text(
+                        questionNumber < totalQuestions
+                            ? 'Sonraki Soru'
+                            : 'Testi Bitir',
+                      ),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        foregroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         elevation: 2,
                       ),
                     ),
@@ -1713,7 +2020,9 @@ class _QuestionCard extends StatelessWidget {
                       label: const Text('Önceki Soru'),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
@@ -1738,19 +2047,15 @@ class _QuestionCard extends StatelessWidget {
           ),
           title: Row(
             children: [
-              Icon(
-                Icons.lightbulb,
-                color: AppColors.warning,
-                size: 24,
-              ),
+              Icon(Icons.lightbulb, color: AppColors.warning, size: 24),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   'Açıklama',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ),
             ],
@@ -1763,18 +2068,22 @@ class _QuestionCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
+                    color: AppColors.surfaceContainerHighest.withValues(
+                      alpha: 128,
+                    ),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outline.withValues(alpha: 128),
                     ),
                   ),
                   child: Text(
                     question.questionText,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -1789,20 +2098,22 @@ class _QuestionCard extends StatelessWidget {
                   ),
                   child: Builder(
                     builder: (context) {
-                      final answerText = question.options[question.correctAnswerKey] ?? '';
+                      final answerText =
+                          question.options[question.correctAnswerKey] ?? '';
                       // Check if the answer text is an image URL
                       bool textIsImage = false;
                       String? imageUrl;
                       String displayText = answerText;
 
-                      if ((answerText.startsWith('http') || answerText.startsWith('assets/')) && 
-                          (answerText.toLowerCase().endsWith('.jpg') || 
-                           answerText.toLowerCase().endsWith('.png') || 
-                           answerText.toLowerCase().endsWith('.gif') || 
-                           answerText.toLowerCase().endsWith('.jpeg'))) {
+                      if ((answerText.startsWith('http') ||
+                              answerText.startsWith('assets/')) &&
+                          (answerText.toLowerCase().endsWith('.jpg') ||
+                              answerText.toLowerCase().endsWith('.png') ||
+                              answerText.toLowerCase().endsWith('.gif') ||
+                              answerText.toLowerCase().endsWith('.jpeg'))) {
                         textIsImage = true;
                         imageUrl = answerText;
-                        displayText = ''; 
+                        displayText = '';
                       }
 
                       return Row(
@@ -1815,7 +2126,8 @@ class _QuestionCard extends StatelessWidget {
                           const SizedBox(width: 8),
                           Text(
                             'Doğru Cevap: ',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.success,
                                 ),
@@ -1826,7 +2138,8 @@ class _QuestionCard extends StatelessWidget {
                               children: [
                                 Text(
                                   '${question.correctAnswerKey.toUpperCase()}) $displayText',
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.success,
                                       ),
@@ -1840,7 +2153,9 @@ class _QuestionCard extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(8),
                                       color: Colors.white,
                                       border: Border.all(
-                                        color: AppColors.success.withValues(alpha: 0.3),
+                                        color: AppColors.success.withValues(
+                                          alpha: 0.3,
+                                        ),
                                       ),
                                     ),
                                     child: ClipRRect(
@@ -1849,14 +2164,26 @@ class _QuestionCard extends StatelessWidget {
                                           ? Image.network(
                                               imageUrl,
                                               fit: BoxFit.contain,
-                                              errorBuilder: (context, error, stackTrace) =>
-                                                  const Icon(Icons.broken_image),
+                                              errorBuilder:
+                                                  (
+                                                    context,
+                                                    error,
+                                                    stackTrace,
+                                                  ) => const Icon(
+                                                    Icons.broken_image,
+                                                  ),
                                             )
                                           : Image.asset(
                                               imageUrl,
                                               fit: BoxFit.contain,
-                                              errorBuilder: (context, error, stackTrace) =>
-                                                  const Icon(Icons.image_not_supported),
+                                              errorBuilder:
+                                                  (
+                                                    context,
+                                                    error,
+                                                    stackTrace,
+                                                  ) => const Icon(
+                                                    Icons.image_not_supported,
+                                                  ),
                                             ),
                                     ),
                                   ),
@@ -1866,16 +2193,16 @@ class _QuestionCard extends StatelessWidget {
                           ),
                         ],
                       );
-                    }
+                    },
                   ),
                 ),
                 const SizedBox(height: 16),
                 Text(
                   'Açıklama:',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -1883,9 +2210,9 @@ class _QuestionCard extends StatelessWidget {
                       ? question.explanation
                       : 'Bu soru için açıklama mevcut değil.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        height: 1.5,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    height: 1.5,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ],
             ),
@@ -1893,11 +2220,7 @@ class _QuestionCard extends StatelessWidget {
           actions: [
             TextButton.icon(
               onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(
-                Icons.check,
-                size: 18,
-                color: AppColors.primary,
-              ),
+              icon: Icon(Icons.check, size: 18, color: AppColors.primary),
               label: Text(
                 'Anladım',
                 style: TextStyle(
@@ -1906,7 +2229,10 @@ class _QuestionCard extends StatelessWidget {
                 ),
               ),
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -1928,14 +2254,18 @@ class _ComboToast extends StatefulWidget {
   State<_ComboToast> createState() => _ComboToastState();
 }
 
-class _ComboToastState extends State<_ComboToast> with SingleTickerProviderStateMixin {
+class _ComboToastState extends State<_ComboToast>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacity;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     _opacity = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.forward();
 
@@ -1969,7 +2299,10 @@ class _ComboToastState extends State<_ComboToast> with SingleTickerProviderState
               const SizedBox(width: 8),
               Text(
                 "${widget.combo}'te ${widget.combo}! Harikasın!",
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

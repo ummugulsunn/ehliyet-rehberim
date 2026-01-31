@@ -45,22 +45,22 @@ class SettingsScreen extends ConsumerWidget {
           children: [
             // Theme Selection Card with Visual Preview
             _buildThemeSelectionCard(context, ref, themeMode),
-            
+
             const SizedBox(height: 24),
-            
+
             // Notification Settings Section
             _buildNotificationSettingsSection(context, ref),
-            
+
             const SizedBox(height: 24),
-            
+
             // App Info Section
             _buildAppInfoSection(context),
-            
+
             const SizedBox(height: 24),
-            
+
             // Account Actions Section
             _buildAccountSection(context),
-            
+
             const SizedBox(height: 40),
           ],
         ),
@@ -68,7 +68,11 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildThemeSelectionCard(BuildContext context, WidgetRef ref, ThemeMode themeMode) {
+  Widget _buildThemeSelectionCard(
+    BuildContext context,
+    WidgetRef ref,
+    ThemeMode themeMode,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
@@ -125,16 +129,16 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           // Theme Options
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Column(
               children: [
                 _buildThemeOption(
-                  context, 
-                  ref, 
-                  ThemeMode.system, 
+                  context,
+                  ref,
+                  ThemeMode.system,
                   themeMode,
                   'Sistem Varsayılanı',
                   'Cihazınızın ayarını takip eder',
@@ -143,9 +147,9 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildThemeOption(
-                  context, 
-                  ref, 
-                  ThemeMode.light, 
+                  context,
+                  ref,
+                  ThemeMode.light,
                   themeMode,
                   'Açık Tema',
                   'Gözleri yormayan aydınlık tasarım',
@@ -154,9 +158,9 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildThemeOption(
-                  context, 
-                  ref, 
-                  ThemeMode.dark, 
+                  context,
+                  ref,
+                  ThemeMode.dark,
                   themeMode,
                   'Koyu Tema',
                   'Gece kullanımı için ideal',
@@ -182,7 +186,7 @@ class SettingsScreen extends ConsumerWidget {
     List<Color> gradientColors,
   ) {
     final isSelected = mode == currentMode;
-    
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -195,14 +199,18 @@ class SettingsScreen extends ConsumerWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isSelected 
-                ? AppColors.premium 
-                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+              color: isSelected
+                  ? AppColors.premium
+                  : Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.3),
               width: isSelected ? 2 : 1,
             ),
-            color: isSelected 
-              ? AppColors.premium.withValues(alpha: 0.05)
-              : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            color: isSelected
+                ? AppColors.premium.withValues(alpha: 0.05)
+                : Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
           ),
           child: Row(
             children: [
@@ -216,11 +224,7 @@ class SettingsScreen extends ConsumerWidget {
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 20,
-                ),
+                child: Icon(icon, color: Colors.white, size: 20),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -264,9 +268,12 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildNotificationSettingsSection(BuildContext context, WidgetRef ref) {
+  Widget _buildNotificationSettingsSection(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
     final settingsAsync = ref.watch(notificationSettingsProvider);
-    
+
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
@@ -289,252 +296,282 @@ class SettingsScreen extends ConsumerWidget {
           child: Text('Ayarlar yüklenemedi: $e'),
         ),
         data: (settings) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(
+                      Icons.notifications_outlined,
+                      color: AppColors.primary,
+                      size: 24,
+                    ),
                   ),
-                  child: Icon(
-                    Icons.notifications_outlined,
+                  const SizedBox(width: 16),
+                  Text(
+                    'Bildirimler',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            _buildDivider(context),
+
+            // Daily Reminder
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Günlük Hatırlatma',
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          settings.dailyReminderEnabled
+                              ? '${settings.dailyReminderHour.toString().padLeft(2, '0')}:${settings.dailyReminderMinute.toString().padLeft(2, '0')}'
+                              : 'Kapalı',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch(
+                    value: settings.dailyReminderEnabled,
+                    onChanged: (value) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setDailyReminderEnabled(value);
+                    },
+                    activeThumbColor: AppColors.primary,
+                  ),
+                ],
+              ),
+            ),
+
+            if (settings.dailyReminderEnabled) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextButton.icon(
+                  onPressed: () async {
+                    final time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay(
+                        hour: settings.dailyReminderHour,
+                        minute: settings.dailyReminderMinute,
+                      ),
+                    );
+                    if (time != null) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setDailyReminderTime(time.hour, time.minute);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.access_time,
+                    size: 18,
                     color: AppColors.primary,
-                    size: 24,
+                  ),
+                  label: Text(
+                    'Zamanı Değiştir',
+                    style: TextStyle(color: AppColors.primary),
                   ),
                 ),
-                const SizedBox(width: 16),
-                Text(
-                  'Bildirimler',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          _buildDivider(context),
-          
-          // Daily Reminder
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Günlük Hatırlatma',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        settings.dailyReminderEnabled
-                            ? '${settings.dailyReminderHour.toString().padLeft(2, '0')}:${settings.dailyReminderMinute.toString().padLeft(2, '0')}'
-                            : 'Kapalı',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: settings.dailyReminderEnabled,
-                  onChanged: (value) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setDailyReminderEnabled(value);
-                  },
-                  activeThumbColor: AppColors.primary,
-                ),
-              ],
-            ),
-          ),
-          
-          if (settings.dailyReminderEnabled) ...[
+              ),
+            ],
+
+            _buildDivider(context),
+
+            // Streak Warning
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextButton.icon(
-                onPressed: () async {
-                  final time = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay(
-                      hour: settings.dailyReminderHour,
-                      minute: settings.dailyReminderMinute,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Seri Uyarısı',
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          settings.streakWarningEnabled
+                              ? '${settings.streakWarningHour.toString().padLeft(2, '0')}:${settings.streakWarningMinute.toString().padLeft(2, '0')}'
+                              : 'Kapalı',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      ],
                     ),
-                  );
-                  if (time != null) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setDailyReminderTime(time.hour, time.minute);
-                  }
-                },
-                icon: Icon(Icons.access_time, size: 18, color: AppColors.primary),
-                label: Text(
-                  'Zamanı Değiştir',
-                  style: TextStyle(color: AppColors.primary),
+                  ),
+                  Switch(
+                    value: settings.streakWarningEnabled,
+                    onChanged: (value) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setStreakWarningEnabled(value);
+                    },
+                    activeThumbColor: AppColors.primary,
+                  ),
+                ],
+              ),
+            ),
+
+            if (settings.streakWarningEnabled) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextButton.icon(
+                  onPressed: () async {
+                    final time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay(
+                        hour: settings.streakWarningHour,
+                        minute: settings.streakWarningMinute,
+                      ),
+                    );
+                    if (time != null) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setStreakWarningTime(time.hour, time.minute);
+                    }
+                  },
+                  icon: Icon(
+                    Icons.access_time,
+                    size: 18,
+                    color: AppColors.primary,
+                  ),
+                  label: Text(
+                    'Zamanı Değiştir',
+                    style: TextStyle(color: AppColors.primary),
+                  ),
                 ),
+              ),
+            ],
+
+            _buildDivider(context),
+
+            // Achievement Notifications
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Başarım Bildirimleri',
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Yeni başarım kazandığında bildirim al',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch(
+                    value: settings.achievementNotificationsEnabled,
+                    onChanged: (value) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setAchievementNotificationsEnabled(value);
+                    },
+                    activeThumbColor: AppColors.primary,
+                  ),
+                ],
+              ),
+            ),
+
+            _buildDivider(context),
+
+            // Goal Completed Notifications
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hedef Tamamlama Bildirimleri',
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Günlük hedefini tamamladığında bildirim al',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch(
+                    value: settings.goalCompletedNotificationsEnabled,
+                    onChanged: (value) {
+                      ref
+                          .read(notificationSettingsProvider.notifier)
+                          .setGoalCompletedNotificationsEnabled(value);
+                    },
+                    activeThumbColor: AppColors.primary,
+                  ),
+                ],
               ),
             ),
           ],
-          
-          _buildDivider(context),
-          
-          // Streak Warning
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Seri Uyarısı',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        settings.streakWarningEnabled
-                            ? '${settings.streakWarningHour.toString().padLeft(2, '0')}:${settings.streakWarningMinute.toString().padLeft(2, '0')}'
-                            : 'Kapalı',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: settings.streakWarningEnabled,
-                  onChanged: (value) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setStreakWarningEnabled(value);
-                  },
-                  activeThumbColor: AppColors.primary,
-                ),
-              ],
-            ),
-          ),
-          
-          if (settings.streakWarningEnabled) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextButton.icon(
-                onPressed: () async {
-                  final time = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay(
-                      hour: settings.streakWarningHour,
-                      minute: settings.streakWarningMinute,
-                    ),
-                  );
-                  if (time != null) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setStreakWarningTime(time.hour, time.minute);
-                  }
-                },
-                icon: Icon(Icons.access_time, size: 18, color: AppColors.primary),
-                label: Text(
-                  'Zamanı Değiştir',
-                  style: TextStyle(color: AppColors.primary),
-                ),
-              ),
-            ),
-          ],
-          
-          _buildDivider(context),
-          
-          // Achievement Notifications
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Başarım Bildirimleri',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Yeni başarım kazandığında bildirim al',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: settings.achievementNotificationsEnabled,
-                  onChanged: (value) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setAchievementNotificationsEnabled(value);
-                  },
-                  activeThumbColor: AppColors.primary,
-                ),
-              ],
-            ),
-          ),
-          
-          _buildDivider(context),
-          
-          // Goal Completed Notifications
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hedef Tamamlama Bildirimleri',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Günlük hedefini tamamladığında bildirim al',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: settings.goalCompletedNotificationsEnabled,
-                  onChanged: (value) {
-                    ref.read(notificationSettingsProvider.notifier)
-                        .setGoalCompletedNotificationsEnabled(value);
-                  },
-                  activeThumbColor: AppColors.primary,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
       ),
     );
   }
@@ -596,7 +633,7 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           _buildActionTile(
             context,
             icon: Icons.star_rate_rounded,
@@ -605,9 +642,9 @@ class SettingsScreen extends ConsumerWidget {
             iconColor: Colors.amber,
             onTap: _requestReview,
           ),
-          
+
           _buildDivider(context),
-          
+
           _buildActionTile(
             context,
             icon: Icons.mail_outline_rounded,
@@ -616,38 +653,48 @@ class SettingsScreen extends ConsumerWidget {
             iconColor: AppColors.primary,
             onTap: () => _sendEmail('ugturkmen.dev@gmail.com'),
           ),
-          
+
           _buildDivider(context),
-          
+
           _buildActionTile(
             context,
             icon: Icons.privacy_tip_outlined,
             title: 'Gizlilik Politikası',
             subtitle: 'Verilerinizin güvenliği hakkında',
             iconColor: AppColors.secondary,
-            onTap: () => _openUrl(Uri.parse('https://ummugulsun.me/ehliyet-rehberim/privacy-policy.html')),
+            onTap: () => _openUrl(
+              Uri.parse(
+                'https://ummugulsun.me/ehliyet-rehberim/privacy-policy.html',
+              ),
+            ),
           ),
-          
+
           _buildDivider(context),
-          
+
           _buildActionTile(
             context,
             icon: Icons.description_outlined,
             title: 'Kullanım Koşulları',
             subtitle: 'Hizmet şartları ve koşulları',
             iconColor: AppColors.info,
-            onTap: () => _openUrl(Uri.parse('https://ummugulsun.me/ehliyet-rehberim/terms-of-service.html')),
+            onTap: () => _openUrl(
+              Uri.parse(
+                'https://ummugulsun.me/ehliyet-rehberim/terms-of-service.html',
+              ),
+            ),
           ),
-          
+
           _buildDivider(context),
-          
+
           FutureBuilder<String>(
             future: _appVersion(),
             builder: (context, snapshot) {
               return _buildActionTile(
                 context,
                 icon: Icons.code_rounded,
-                title: snapshot.hasData ? 'Versiyon ${snapshot.data}' : 'Versiyon Bilgisi',
+                title: snapshot.hasData
+                    ? 'Versiyon ${snapshot.data}'
+                    : 'Versiyon Bilgisi',
                 subtitle: 'Güncel sürüm bilgileri',
                 iconColor: AppColors.success,
                 onTap: null,
@@ -717,7 +764,7 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           _buildActionTile(
             context,
             icon: Icons.restore_rounded,
@@ -726,9 +773,9 @@ class SettingsScreen extends ConsumerWidget {
             iconColor: AppColors.warning,
             onTap: () => _confirmResetProgress(context),
           ),
-          
+
           _buildDivider(context),
-          
+
           _buildActionTile(
             context,
             icon: Icons.logout_rounded,
@@ -767,11 +814,7 @@ class SettingsScreen extends ConsumerWidget {
                   color: iconColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  icon,
-                  color: iconColor,
-                  size: 20,
-                ),
+                child: Icon(icon, color: iconColor, size: 20),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -825,9 +868,11 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   Future<void> _sendEmail(String to) async {
-    final uri = Uri(scheme: 'mailto', path: to, queryParameters: {
-      'subject': 'Ehliyet Rehberim - Geri Bildirim',
-    });
+    final uri = Uri(
+      scheme: 'mailto',
+      path: to,
+      queryParameters: {'subject': 'Ehliyet Rehberim - Geri Bildirim'},
+    );
     await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
@@ -871,20 +916,22 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
     );
-    
+
     if (confirmed == true) {
       await UserProgressRepository.instance.clearAllWrongAnswerIds();
       await UserProgressRepository.instance.clearAllWrongAnswerPairs();
       await UserProgressRepository.instance.resetDailyProgress();
       await UserProgressRepository.instance.resetStreak();
-      
+
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('✓ Tüm ilerleme başarıyla sıfırlandı'),
             backgroundColor: AppColors.success,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         );
       }

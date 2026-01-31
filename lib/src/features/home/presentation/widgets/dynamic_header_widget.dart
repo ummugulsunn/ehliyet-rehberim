@@ -8,10 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 class DynamicHeaderWidget extends ConsumerWidget {
   final AsyncValue<User?> authState;
 
-  const DynamicHeaderWidget({
-    super.key,
-    required this.authState,
-  });
+  const DynamicHeaderWidget({super.key, required this.authState});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +32,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
             offset: const Offset(0, 6),
           ),
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+            color: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.05),
             blurRadius: 40,
             offset: const Offset(0, 12),
           ),
@@ -44,15 +43,20 @@ class DynamicHeaderWidget extends ConsumerWidget {
       child: userProgressStateAsync.when(
         data: (state) {
           final dailyProgress = state.dailyProgress;
-          final progressPercentage = (dailyProgress / dailyGoal).clamp(0.0, 1.0);
+          final progressPercentage = (dailyProgress / dailyGoal).clamp(
+            0.0,
+            1.0,
+          );
           final level = state.level;
           final xp = state.xp;
           final streak = state.streak;
-          
+
           // Enhanced Streak Text Logic
           String streakText = '';
           if (streak > 0) {
-             streakText = streak == 1 ? '1 Günlük Seri!' : '$streak Günlük Seri!';
+            streakText = streak == 1
+                ? '1 Günlük Seri!'
+                : '$streak Günlük Seri!';
           }
 
           // Level Title Logic
@@ -70,12 +74,19 @@ class DynamicHeaderWidget extends ConsumerWidget {
           }
 
           // XP Calculation
-          final userProgressRepository = ref.read(userProgressRepositoryProvider);
-          final currentLevelBaseXP = userProgressRepository.getXPForCurrentLevel(level);
-          final nextLevelBaseXP = userProgressRepository.getXPForNextLevel(level);
+          final userProgressRepository = ref.read(
+            userProgressRepositoryProvider,
+          );
+          final currentLevelBaseXP = userProgressRepository
+              .getXPForCurrentLevel(level);
+          final nextLevelBaseXP = userProgressRepository.getXPForNextLevel(
+            level,
+          );
           final levelRange = nextLevelBaseXP - currentLevelBaseXP;
           final xpInLevel = xp - currentLevelBaseXP;
-          final xpProgress = levelRange > 0 ? (xpInLevel / levelRange).clamp(0.0, 1.0) : 1.0;
+          final xpProgress = levelRange > 0
+              ? (xpInLevel / levelRange).clamp(0.0, 1.0)
+              : 1.0;
 
           return Column(
             children: [
@@ -84,10 +95,15 @@ class DynamicHeaderWidget extends ConsumerWidget {
               Row(
                 children: [
                   // Circular Progress Indicator
-                  _buildProgressIndicator(context, AsyncValue.data(dailyProgress), dailyGoal, progressPercentage),
-                  
+                  _buildProgressIndicator(
+                    context,
+                    AsyncValue.data(dailyProgress),
+                    dailyGoal,
+                    progressPercentage,
+                  ),
+
                   const SizedBox(width: 20),
-                  
+
                   // Greeting and Streak Info
                   Expanded(
                     child: Column(
@@ -96,28 +112,34 @@ class DynamicHeaderWidget extends ConsumerWidget {
                         // Personalized Greeting
                         Text(
                           _getGreetingText(),
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white.withValues(alpha: 0.95)
-                                : Theme.of(context).colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white.withValues(alpha: 0.95)
+                                    : Theme.of(context).colorScheme.onSurface,
+                              ),
                         ),
-                        
+
                         const SizedBox(height: 8),
-                        
+
                         // Level and Rank Display
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               '$levelTitle (Lvl $level)',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: Theme.of(context).brightness == Brightness.dark
-                                    ? AppColors.primaryLight 
-                                    : AppColors.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    color:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppColors.primaryLight
+                                        : AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                             const SizedBox(height: 4),
                             // XP Progress Bar
@@ -129,11 +151,14 @@ class DynamicHeaderWidget extends ConsumerWidget {
                                   child: LinearProgressIndicator(
                                     value: xpProgress,
                                     minHeight: 6,
-                                    backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                    backgroundColor:
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
                                         ? Colors.white.withValues(alpha: 0.1)
                                         : Colors.grey.withValues(alpha: 0.2),
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                      Theme.of(context).brightness == Brightness.dark
+                                      Theme.of(context).brightness ==
+                                              Brightness.dark
                                           ? AppColors.successLight
                                           : AppColors.success,
                                     ),
@@ -142,40 +167,64 @@ class DynamicHeaderWidget extends ConsumerWidget {
                                 const SizedBox(height: 2),
                                 Text(
                                   '${(xpProgress * 100).toInt()}% (Sonraki Seviye)',
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 10,
-                                    color: Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white.withValues(alpha: 0.6)
-                                        : Theme.of(context).colorScheme.onSurfaceVariant,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall
+                                      ?.copyWith(
+                                        fontSize: 10,
+                                        color:
+                                            Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.white.withValues(
+                                                alpha: 0.6,
+                                              )
+                                            : Theme.of(
+                                                context,
+                                              ).colorScheme.onSurfaceVariant,
+                                      ),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        
+
                         const SizedBox(height: 12),
-                        
+
                         // Enhanced Streak Display
                         if (streakText.isNotEmpty) ...[
                           GestureDetector(
-                            onTap: () => _showStreakShop(context, ref, streak, state.streakFreezes, xp),
+                            onTap: () => _showStreakShop(
+                              context,
+                              ref,
+                              streak,
+                              state.streakFreezes,
+                              xp,
+                            ),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).brightness == Brightness.dark 
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
                                     ? AppColors.warning.withValues(alpha: 0.2)
                                     : AppColors.warning.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
-                                  color: Theme.of(context).brightness == Brightness.dark 
-                                    ? AppColors.warning.withValues(alpha: 0.4)
-                                    : AppColors.warning.withValues(alpha: 0.3),
+                                  color:
+                                      Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? AppColors.warning.withValues(alpha: 0.4)
+                                      : AppColors.warning.withValues(
+                                          alpha: 0.3,
+                                        ),
                                   width: 1,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.warning.withValues(alpha: 0.1),
+                                    color: AppColors.warning.withValues(
+                                      alpha: 0.1,
+                                    ),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
@@ -187,9 +236,15 @@ class DynamicHeaderWidget extends ConsumerWidget {
                                   Container(
                                     padding: const EdgeInsets.all(4),
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context).brightness == Brightness.dark 
-                                        ? AppColors.warning.withValues(alpha: 0.3)
-                                        : AppColors.warning.withValues(alpha: 0.2),
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? AppColors.warning.withValues(
+                                              alpha: 0.3,
+                                            )
+                                          : AppColors.warning.withValues(
+                                              alpha: 0.2,
+                                            ),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Text(
@@ -200,22 +255,34 @@ class DynamicHeaderWidget extends ConsumerWidget {
                                   const SizedBox(width: 8),
                                   Text(
                                     streakText,
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).brightness == Brightness.dark 
-                                        ? AppColors.warning.withValues(alpha: 0.9)
-                                        : AppColors.warning,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? AppColors.warning.withValues(
+                                                  alpha: 0.9,
+                                                )
+                                              : AppColors.warning,
+                                        ),
                                   ),
                                   if (state.streakFreezes > 0) ...[
                                     const SizedBox(width: 8),
                                     Container(
-                                      width: 1, 
-                                      height: 16, 
-                                      color: Theme.of(context).dividerColor.withValues(alpha: 0.5)
+                                      width: 1,
+                                      height: 16,
+                                      color: Theme.of(
+                                        context,
+                                      ).dividerColor.withValues(alpha: 0.5),
                                     ),
                                     const SizedBox(width: 8),
-                                    const Text('❄️', style: TextStyle(fontSize: 14)),
+                                    const Text(
+                                      '❄️',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
                                     const SizedBox(width: 2),
                                     Text(
                                       '${state.streakFreezes}',
@@ -225,7 +292,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
                                         color: Colors.blue.shade300,
                                       ),
                                     ),
-                                  ]
+                                  ],
                                 ],
                               ),
                             ),
@@ -241,26 +308,38 @@ class DynamicHeaderWidget extends ConsumerWidget {
         },
         loading: () => Column(
           children: [
-             Row(
-                children: [
-                  _buildProgressIndicator(context, const AsyncValue.loading(), dailyGoal, 0.0),
-                   const SizedBox(width: 20),
-                   // Skeleton text or loading simplified
-                   const Expanded(child: Center(child: CircularProgressIndicator())),
-                ]
-             )
-          ]
+            Row(
+              children: [
+                _buildProgressIndicator(
+                  context,
+                  const AsyncValue.loading(),
+                  dailyGoal,
+                  0.0,
+                ),
+                const SizedBox(width: 20),
+                // Skeleton text or loading simplified
+                const Expanded(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ],
+            ),
+          ],
         ),
         error: (_, __) => Column(
           children: [
-             Row(
-                children: [
-                  _buildProgressIndicator(context, const AsyncValue.loading(), dailyGoal, 0.0),
-                   const SizedBox(width: 20),
-                   const Text('Bir hata oluştu'),
-                ]
-             )
-          ]
+            Row(
+              children: [
+                _buildProgressIndicator(
+                  context,
+                  const AsyncValue.loading(),
+                  dailyGoal,
+                  0.0,
+                ),
+                const SizedBox(width: 20),
+                const Text('Bir hata oluştu'),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -283,8 +362,11 @@ class DynamicHeaderWidget extends ConsumerWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.6)
-                  : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.9),
+                  ? Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainer.withValues(alpha: 0.6)
+                  : Theme.of(context).colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.9),
               boxShadow: [
                 BoxShadow(
                   color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
@@ -294,7 +376,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           // Progress circle with enhanced design
           SizedBox(
             width: 110,
@@ -304,15 +386,17 @@ class DynamicHeaderWidget extends ConsumerWidget {
               strokeWidth: 8,
               backgroundColor: Colors.transparent,
               valueColor: AlwaysStoppedAnimation<Color>(
-                progressPercentage >= 1.0 ? AppColors.success : AppColors.primary,
+                progressPercentage >= 1.0
+                    ? AppColors.success
+                    : AppColors.primary,
               ),
               strokeCap: StrokeCap.round,
             ),
           ),
-          
+
           // User profile image or default icon
           _buildUserProfileImage(context),
-          
+
           // Progress text overlay (only show if no profile image)
           if (!_hasProfileImage()) ...[
             Positioned(
@@ -326,8 +410,12 @@ class DynamicHeaderWidget extends ConsumerWidget {
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).brightness == Brightness.dark
-                          ? (progressPercentage >= 1.0 ? AppColors.successLight : AppColors.primaryLight)
-                          : (progressPercentage >= 1.0 ? AppColors.success : AppColors.primary),
+                          ? (progressPercentage >= 1.0
+                                ? AppColors.successLight
+                                : AppColors.primaryLight)
+                          : (progressPercentage >= 1.0
+                                ? AppColors.success
+                                : AppColors.primary),
                     ),
                   ),
                   Text(
@@ -355,8 +443,11 @@ class DynamicHeaderWidget extends ConsumerWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.6)
-                  : Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.9),
+                  ? Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainer.withValues(alpha: 0.6)
+                  : Theme.of(context).colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.9),
               boxShadow: [
                 BoxShadow(
                   color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
@@ -366,7 +457,7 @@ class DynamicHeaderWidget extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           // User profile image or default icon (no loading indicator)
           _buildUserProfileImage(context),
         ],
@@ -383,7 +474,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
               gradient: LinearGradient(
                 colors: [
                   Theme.of(context).colorScheme.surfaceContainerHighest,
-                  Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                  Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.8),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -397,14 +490,10 @@ class DynamicHeaderWidget extends ConsumerWidget {
               ],
             ),
           ),
-          
+
           // Error icon
-          Icon(
-            Icons.error_outline,
-            color: AppColors.error,
-            size: 32,
-          ),
-          
+          Icon(Icons.error_outline, color: AppColors.error, size: 32),
+
           // User profile image or default icon (even during error)
           _buildUserProfileImage(context),
         ],
@@ -446,7 +535,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                     ),
                     child: Icon(
                       Icons.account_circle,
@@ -521,7 +612,8 @@ class DynamicHeaderWidget extends ConsumerWidget {
         if (user == null) {
           return 'Merhaba!';
         }
-        final displayName = user.displayName ?? user.email?.split('@').first ?? 'Kullanıcı';
+        final displayName =
+            user.displayName ?? user.email?.split('@').first ?? 'Kullanıcı';
         return 'Merhaba $displayName,';
       },
       loading: () => 'Merhaba!',
@@ -529,7 +621,13 @@ class DynamicHeaderWidget extends ConsumerWidget {
     );
   }
 
-  void _showStreakShop(BuildContext context, WidgetRef ref, int currentStreak, int freezes, int currentXP) {
+  void _showStreakShop(
+    BuildContext context,
+    WidgetRef ref,
+    int currentStreak,
+    int freezes,
+    int currentXP,
+  ) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -572,16 +670,14 @@ class DynamicHeaderWidget extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 32),
-            
+
             // Streak Freeze Info Card
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.blue.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.blue.withValues(alpha: 0.3),
-                ),
+                border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
@@ -600,10 +696,11 @@ class DynamicHeaderWidget extends ConsumerWidget {
                       children: [
                         Text(
                           'Seri Dondurucu',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -616,32 +713,36 @@ class DynamicHeaderWidget extends ConsumerWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Buy Button
             SizedBox(
               width: double.infinity,
               height: 56,
               child: FilledButton(
-                onPressed: freezes >= 2 
-                  ? null 
-                  : (currentXP < 500 ? null : () async {
-                      Navigator.pop(context); // Close sheet first
-                      final success = await ref.read(userProgressRepositoryProvider).buyStreakFreeze();
-                      if (!context.mounted) return;
-                      if (success) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('❄️ Seri Dondurucu alındı!'),
-                            backgroundColor: Colors.blue,
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
-                      } else {
-                        // Error handling normally not needed due to button disable
-                      }
-                    }),
+                onPressed: freezes >= 2
+                    ? null
+                    : (currentXP < 500
+                          ? null
+                          : () async {
+                              Navigator.pop(context); // Close sheet first
+                              final success = await ref
+                                  .read(userProgressRepositoryProvider)
+                                  .buyStreakFreeze();
+                              if (!context.mounted) return;
+                              if (success) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('❄️ Seri Dondurucu alındı!'),
+                                    backgroundColor: Colors.blue,
+                                    behavior: SnackBarBehavior.floating,
+                                  ),
+                                );
+                              } else {
+                                // Error handling normally not needed due to button disable
+                              }
+                            }),
                 style: FilledButton.styleFrom(
                   backgroundColor: Colors.blue,
                   disabledBackgroundColor: Colors.grey.withValues(alpha: 0.2),
@@ -655,7 +756,10 @@ class DynamicHeaderWidget extends ConsumerWidget {
                       const Text('Satın Al'),
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
@@ -665,7 +769,9 @@ class DynamicHeaderWidget extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color: currentXP >= 500 ? Colors.white : Colors.red.shade200,
+                            color: currentXP >= 500
+                                ? Colors.white
+                                : Colors.red.shade200,
                           ),
                         ),
                       ),
@@ -674,12 +780,15 @@ class DynamicHeaderWidget extends ConsumerWidget {
                 ),
               ),
             ),
-            if (currentXP < 500 && freezes < 2) 
+            if (currentXP < 500 && freezes < 2)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   'Yetersiz XP (Mevcut: $currentXP)',
-                  style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             const SizedBox(height: 16),
@@ -688,6 +797,4 @@ class DynamicHeaderWidget extends ConsumerWidget {
       ),
     );
   }
-
-
-} 
+}

@@ -8,14 +8,16 @@ class FreeAppInfoScreen extends StatelessWidget {
 
   Future<void> _rateApp(BuildContext context) async {
     final InAppReview inAppReview = InAppReview.instance;
-    
+
     if (await inAppReview.isAvailable()) {
       await inAppReview.requestReview();
     } else {
       // Fallback logic
       try {
         if (Platform.isAndroid) {
-          await inAppReview.openStoreListing(appStoreId: 'com.ehliyetrehberim.app');
+          await inAppReview.openStoreListing(
+            appStoreId: 'com.ehliyetrehberim.app',
+          );
         } else if (Platform.isIOS) {
           await inAppReview.openStoreListing(appStoreId: '6739002862');
         }
@@ -32,10 +34,7 @@ class FreeAppInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Neden Ücretsiz?'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Neden Ücretsiz?'), centerTitle: true),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -88,7 +87,9 @@ class FreeAppInfoScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.outline.withValues(alpha: 0.5)),
+                  border: Border.all(
+                    color: AppColors.outline.withValues(alpha: 0.5),
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.shadow.withValues(alpha: 0.05),

@@ -15,121 +15,124 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _pageController = PageController();
-  bool isLastPage = false;
+  int _currentPage = 0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _finishOnboarding() async {
+    // 1. Mark Phase 1 (Persuasive) as complete
+    await ref.read(onboardingRepositoryProvider).setOnboardingComplete();
+
+    // 2. Navigate to AuthGate to start login/setup flow
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const AuthGate()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Page View
           PageView(
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
-                isLastPage = index == 2;
+                _currentPage = index;
               });
             },
-            children: [
+            children: const [
               OnboardingPageWidget(
-                title: 'Çıkmış Sorular',
-                description: 'Geçmiş yılların ehliyet sınav sorularını çözerek gerçek sınav deneyimi yaşayın. Eksiklerinizi görün.',
-                icon: Icons.assignment_turned_in_rounded,
-                iconColor: AppColors.primary,
+                title: 'Tek Seferde Geç',
+                description:
+                    'Binlerce aday bizimle hazırlandı ve ilk sınavda ehliyetini aldı. Başarı garantili sistem.',
+                icon: Icons.check_circle_outline,
+                gradient: LinearGradient(
+                  colors: [AppColors.primary, AppColors.secondary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
               OnboardingPageWidget(
-                title: 'Akıllı Tekrar',
-                description: 'Yapay zeka destekli sistem ile hatalarınızı analiz ediyoruz. Sadece eksik olduğunuz konulara odaklanın.',
-                icon: Icons.psychology_rounded,
-                iconColor: AppColors.secondary,
+                title: 'Sadece Çıkacaklara Çalış',
+                description:
+                    'Gereksiz konularda boğulma. Akıllı sistemimiz sana sadece sınavda çıkma ihtimali olan soruları göstersin.',
+                icon: Icons.filter_alt_outlined,
+                gradient: LinearGradient(
+                  colors: [Color(0xFFFF9966), Color(0xFFFF5E62)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
               OnboardingPageWidget(
-                title: 'İlerleme Takibi',
-                description: 'Detaylı grafiklerle gelişiminizi gün gün takip edin. Başarı oranınızı artırın.',
-                icon: Icons.trending_up_rounded,
-                iconColor: AppColors.premium,
+                title: 'Sınav Simülasyonu',
+                description:
+                    'Gerçek sınav heyecanını yaşa. Süre tutarak kendini dene, sınav stresi yaşamadan hazır ol.',
+                icon: Icons.phone_android_rounded,
+                gradient: LinearGradient(
+                  colors: [Color(0xFF56CCF2), Color(0xFF2F80ED)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
             ],
           ),
 
-          // Bottom Controls
           Container(
             alignment: const Alignment(0, 0.85),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Skip Button
-                if (!isLastPage)
-                  TextButton(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SmoothPageIndicator(
+                    controller: _pageController,
+                    count: 3,
+                    effect: const ExpandingDotsEffect(
+                      activeDotColor: AppColors.primary,
+                      dotColor: Color(0xFFE0E0E0),
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      expansionFactor: 4,
+                      spacing: 8,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  FilledButton(
                     onPressed: () {
-                      _pageController.jumpToPage(2);
+                      if (_currentPage < 2) {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      } else {
+                        _finishOnboarding();
+                      }
                     },
-                    child: Text(
-                      'Atla',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.w600,
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 56),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                  )
-                else
-                  const SizedBox(width: 64), // Placeholder to keep spacing
-
-                // Page Indicator
-                SmoothPageIndicator(
-                  controller: _pageController,
-                  count: 3,
-                  effect: WormEffect(
-                    spacing: 16,
-                    dotColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
-                    activeDotColor: AppColors.primary,
-                    dotHeight: 10,
-                    dotWidth: 10,
-                  ),
-                ),
-
-                // Next / Done Button
-                if (!isLastPage)
-                  TextButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: const Text(
-                      'İleri',
-                      style: TextStyle(
-                        color: AppColors.primary,
+                    child: Text(
+                      _currentPage == 2 ? 'Hemen Başla' : 'İlerle',
+                      style: const TextStyle(
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  )
-                else
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Save completion state
-                      await ref.read(onboardingRepositoryProvider).setOnboardingComplete();
-
-                      // Navigate to AuthGate
-                      if (context.mounted) {
-                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => const AuthGate()),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: AppColors.onPrimary,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text('Başla'),
                   ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

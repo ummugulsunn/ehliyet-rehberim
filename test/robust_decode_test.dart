@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/domain/test_result_model.dart';
@@ -18,7 +17,7 @@ void main() {
         'correctAnswers': 5,
         'totalQuestions': 10,
         'category': 'Corrupt',
-      }
+      },
     ]);
 
     try {

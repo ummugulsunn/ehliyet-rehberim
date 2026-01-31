@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  
+
   group('QuizProviders', () {
     late ProviderContainer container;
 
@@ -19,7 +19,9 @@ void main() {
     });
 
     test('quizQuestionsProvider should load questions', () async {
-      final questions = await container.read(quizQuestionsProvider('karma').future);
+      final questions = await container.read(
+        quizQuestionsProvider('karma').future,
+      );
       expect(questions, isA<List<Question>>());
     });
 
@@ -34,7 +36,9 @@ void main() {
     });
 
     test('QuizController should initialize quiz with questions', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,
@@ -57,7 +61,9 @@ void main() {
     });
 
     test('QuizController should handle correct answer', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,
@@ -79,7 +85,9 @@ void main() {
     });
 
     test('QuizController should handle incorrect answer', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,
@@ -101,7 +109,9 @@ void main() {
     });
 
     test('QuizController should move to next question', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,
@@ -131,7 +141,9 @@ void main() {
     });
 
     test('QuizController should complete quiz', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,
@@ -154,7 +166,9 @@ void main() {
     });
 
     test('QuizController should reset quiz', () {
-      final quizController = container.read(quizControllerProvider('karma').notifier);
+      final quizController = container.read(
+        quizControllerProvider('karma').notifier,
+      );
       final questions = [
         Question(
           id: 1,

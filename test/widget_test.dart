@@ -15,9 +15,7 @@ void main() {
   testWidgets('QuizScreen smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      const ProviderScope(
-        child: MyApp(),
-      ),
+      const ProviderScope(child: MyApp(isOnboardingComplete: false)),
     );
 
     // Wait for the quiz to load

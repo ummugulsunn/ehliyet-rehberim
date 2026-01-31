@@ -14,10 +14,7 @@ class AppThemeState {
     this.palette = ThemePalette.defaultPalette,
   });
 
-  AppThemeState copyWith({
-    AppThemeMode? mode,
-    ThemePalette? palette,
-  }) {
+  AppThemeState copyWith({AppThemeMode? mode, ThemePalette? palette}) {
     return AppThemeState(
       mode: mode ?? this.mode,
       palette: palette ?? this.palette,
@@ -36,13 +33,14 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
 
   Future<AppThemeState> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
-    
+
     // Load Mode
     final modeIndex = prefs.getInt(_themeModeKey) ?? AppThemeMode.system.index;
     final mode = AppThemeMode.values[modeIndex];
 
     // Load Palette
-    final paletteId = prefs.getString(_themePaletteKey) ?? ThemePalette.defaultPalette.id;
+    final paletteId =
+        prefs.getString(_themePaletteKey) ?? ThemePalette.defaultPalette.id;
     final palette = ThemePalette.all.firstWhere(
       (p) => p.id == paletteId,
       orElse: () => ThemePalette.defaultPalette,
@@ -54,7 +52,7 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
   Future<void> setThemeMode(AppThemeMode mode) async {
     final currentState = state.value ?? const AppThemeState();
     state = AsyncValue.data(currentState.copyWith(mode: mode));
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_themeModeKey, mode.index);
   }
@@ -62,7 +60,7 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
   Future<void> setPalette(ThemePalette palette) async {
     final currentState = state.value ?? const AppThemeState();
     state = AsyncValue.data(currentState.copyWith(palette: palette));
-    
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themePaletteKey, palette.id);
   }
@@ -71,7 +69,7 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
 
   ThemeData getLightTheme() {
     final palette = state.value?.palette ?? ThemePalette.defaultPalette;
-    
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -101,7 +99,7 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
 
   ThemeData getDarkTheme() {
     final palette = state.value?.palette ?? ThemePalette.defaultPalette;
-    
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -130,6 +128,8 @@ class AppThemeNotifier extends AsyncNotifier<AppThemeState> {
   }
 }
 
-final appThemeProvider = AsyncNotifierProvider<AppThemeNotifier, AppThemeState>(() {
-  return AppThemeNotifier();
-});
+final appThemeProvider = AsyncNotifierProvider<AppThemeNotifier, AppThemeState>(
+  () {
+    return AppThemeNotifier();
+  },
+);

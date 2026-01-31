@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import '../../home/data/user_progress_repository.dart';
 
@@ -24,7 +23,7 @@ class StatsRepository {
     for (var result in results) {
       final date = result.date;
       final resultDate = DateTime(date.year, date.month, date.day);
-      
+
       if (resultDate.isBefore(startDate)) continue;
 
       final dayIndex = resultDate.difference(startDate).inDays;
@@ -37,18 +36,18 @@ class StatsRepository {
     // Convert to FlSpot list
     final List<FlSpot> spots = [];
     for (int i = 0; i < days; i++) {
-        if (dailyScores.containsKey(i)) {
-            final scores = dailyScores[i]!;
-            final average = scores.reduce((a, b) => a + b) / scores.length;
-            spots.add(FlSpot(i.toDouble(), average));
-        } else {
-             // Optional: Add gap or 0? 
-             // Ideally we want gap, but FlChart handles gaps via null spots in separate lists or custom handling.
-             // For simple line chart, we might just skip the point, but that draws a line across.
-             // Let's return only existing points.
-        }
+      if (dailyScores.containsKey(i)) {
+        final scores = dailyScores[i]!;
+        final average = scores.reduce((a, b) => a + b) / scores.length;
+        spots.add(FlSpot(i.toDouble(), average));
+      } else {
+        // Optional: Add gap or 0?
+        // Ideally we want gap, but FlChart handles gaps via null spots in separate lists or custom handling.
+        // For simple line chart, we might just skip the point, but that draws a line across.
+        // Let's return only existing points.
+      }
     }
-    
+
     // Sort by x coordinate
     spots.sort((a, b) => a.x.compareTo(b.x));
 

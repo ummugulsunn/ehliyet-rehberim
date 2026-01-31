@@ -58,9 +58,9 @@ class ThemeSelectorWidget extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
               child: Row(
                 children: [
-                   Icon(
-                    Icons.palette, 
-                    size: 18, 
+                  Icon(
+                    Icons.palette,
+                    size: 18,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(width: 8),
@@ -74,7 +74,7 @@ class ThemeSelectorWidget extends ConsumerWidget {
                 ],
               ),
             ),
-            
+
             // Horizontal Palette List
             SizedBox(
               height: 100,
@@ -86,7 +86,7 @@ class ThemeSelectorWidget extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final palette = ThemePalette.all[index];
                   final isSelected = state.palette.id == palette.id;
-                  
+
                   return _buildPaletteItem(
                     context,
                     palette: palette,
@@ -118,8 +118,8 @@ class ThemeSelectorWidget extends ConsumerWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected 
-                ? Theme.of(context).colorScheme.primary 
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
@@ -128,8 +128,8 @@ class ThemeSelectorWidget extends ConsumerWidget {
               Icon(
                 icon,
                 size: 20,
-                color: isSelected 
-                    ? Colors.white 
+                color: isSelected
+                    ? Colors.white
                     : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(height: 4),
@@ -137,8 +137,8 @@ class ThemeSelectorWidget extends ConsumerWidget {
                 label,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                  color: isSelected 
-                      ? Colors.white 
+                  color: isSelected
+                      ? Colors.white
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),

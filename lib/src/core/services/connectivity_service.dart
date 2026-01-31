@@ -12,8 +12,9 @@ class ConnectivityService {
   /// Check if device has internet connection by looking up google.com
   Future<bool> hasInternetConnection() async {
     try {
-      final result = await InternetAddress.lookup('google.com')
-          .timeout(const Duration(seconds: 5));
+      final result = await InternetAddress.lookup(
+        'google.com',
+      ).timeout(const Duration(seconds: 5));
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;
       }
