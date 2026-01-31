@@ -43,12 +43,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _pageController = PageController(initialPage: 0);
     _confettiController = ConfettiController(duration: const Duration(seconds: 1));
     
-    // Check for unfinished exam only in Exam Mode
-    if (widget.isExamMode) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _checkForUnfinishedExam();
-      });
-    }
+    // Check for unfinished exam for ALL modes (except explicitly stateless ones if any)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkForUnfinishedExam();
+    });
   }
 
   Future<void> _checkForUnfinishedExam() async {
@@ -56,6 +54,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     final unfinished = await storage.getUnfinishedExam(widget.examId);
     
     if (unfinished != null && mounted) {
+      // Safety check: Ensure the loaded exam matches the current one
+      if (unfinished.examId != widget.examId) {
+        debugPrint('Mismatch in saved exam ID. Expected: ${widget.examId}, Found: ${unfinished.examId}. Deleting invalid save.');
+        await storage.deleteUnfinishedExam(widget.examId);
+        return;
+      }
+
       // Show dialog asking to resume
       final shouldResume = await showDialog<bool>(
         context: context,
@@ -63,7 +68,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Yarım Kalan Sınav'),
           content: Text(
-            'Bu sınavda daha önce ${unfinished.currentQuestionIndex + 1}. soruda kalmıştınız.\n\nKaldığınız yerden devam etmek ister misiniz?'
+            'Bu bölümde daha önce ${unfinished.currentQuestionIndex + 1}. soruda kalmıştınız.\n\nKaldığınız yerden devam etmek ister misiniz?'
           ),
           actions: [
             TextButton(
@@ -86,7 +91,31 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         // Restore state
         final controller = ref.read(quizControllerProvider(widget.examId).notifier);
         
-        // Convert Map<String, String> to Map<int, String>
+        // 1. Restore Questions (Critical for random/karma tests)
+        // primarily for dynamic exams where questions list changes every time
+        bool isDynamicExam = widget.examId == 'karma' || widget.examId == 'exam_simulation';
+        
+        if (isDynamicExam && unfinished.questionIds.isNotEmpty) {
+           // Fetch ALL questions to find the specific ones we saved
+           // 'karma' returns the aggregated pool of all questions
+           final allQuestions = await ref.read(quizRepositoryProvider).loadQuestionsForExam('karma');
+           
+           final List<Question> restoredQuestions = [];
+           for (final id in unfinished.questionIds) {
+             try {
+               final q = allQuestions.firstWhere((q) => q.id == id);
+               restoredQuestions.add(q);
+             } catch (_) {
+               // Question ID not found (fetched from different pool or removed), skip
+             }
+           }
+           
+           if (restoredQuestions.isNotEmpty) {
+              controller.initializeQuiz(restoredQuestions, examId: widget.examId);
+           }
+        }
+
+        // 2. Restore Answers and Index
         final Map<int, String> answers = {};
         unfinished.answers.forEach((key, value) {
           final intKey = int.tryParse(key);
@@ -102,7 +131,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         );
         
         // Jump to page
-        _pageController.jumpToPage(unfinished.currentQuestionIndex);
+        if (_pageController.hasClients) {
+          _pageController.jumpToPage(unfinished.currentQuestionIndex);
+        }
       } else {
         // Ensure old data is cleared if they chose to restart
          await storage.deleteUnfinishedExam(widget.examId);
@@ -111,25 +142,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 
   Future<void> _onExitPressed() async {
-     // If not in exam mode or result already saved/finished, just pop
     final state = ref.read(quizControllerProvider(widget.examId));
-    
-    // For non-exam mode (Karma, Wrong Answers, etc.), we MUST save before exiting
-    // to ensure wrong answers (or corrections) are persisted.
-    if (!widget.isExamMode) {
-      if (!_resultSaved && state.status != QuizStatus.complete && state.selectedAnswers.isNotEmpty) {
-        // Save partial result logic
-        await _saveResult(isFinal: false);
-      }
-      if (mounted) Navigator.of(context).pop();
-      return;
-    }
 
     if (_resultSaved || state.status == QuizStatus.complete) {
       Navigator.of(context).pop();
       return;
     }
+
+    // If no questions answered, exit immediately without asking
+    if (state.selectedAnswers.isEmpty) {
+      Navigator.of(context).pop();
+      return;
+    }
     
+    // Allow saving state for ALL modes logic
     final action = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
@@ -159,26 +185,35 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
        await _saveAndExit();
     } else if (action == 'finish') {
        // Finish exam logic
+       await ref.read(examStorageServiceProvider).deleteUnfinishedExam(widget.examId); // Clear saved state
        ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
        await _saveResult(isFinal: true);
        if (mounted) {
-         Navigator.of(context).pushReplacement(
-           MaterialPageRoute(
-              builder: (_) => ResultsScreen(
-                examId: widget.examId,
-                result: TestResult(
-                  date: DateTime.now(), 
-                  correctAnswers: state.score, 
-                  totalQuestions: state.totalQuestions, 
-                  category: widget.category ?? 'Genel', 
-                  examId: widget.examId, 
-                  selectedAnswers: state.selectedAnswers,
-                  isExamMode: true,
-                  isPassed: state.score >= 35, // Approx 70% of 50
-                ),
-              ),
-           ),
-         );
+         if (widget.isExamMode) {
+             Navigator.of(context).pushReplacement(
+               MaterialPageRoute(
+                  builder: (_) => ResultsScreen(
+                    examId: widget.examId,
+                    result: TestResult(
+                      date: DateTime.now(), 
+                      correctAnswers: state.score, 
+                      totalQuestions: state.totalQuestions, 
+                      category: widget.category ?? 'Genel', 
+                      examId: widget.examId, 
+                      selectedAnswers: state.selectedAnswers,
+                      isExamMode: true,
+                      isPassed: state.score >= 35, // Approx 70% of 50
+                    ),
+                  ),
+               ),
+             );
+         } else {
+             Navigator.of(context).pushReplacement(
+               MaterialPageRoute(
+                 builder: (context) => ResultsScreen(examId: widget.examId),
+               ),
+             );
+         }
        }
     }
   }
@@ -192,6 +227,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     
     final unfinished = UnfinishedExam(
       examId: widget.examId,
+      questionIds: state.questions.map((q) => q.id).toList(), // Save Question IDs
       currentQuestionIndex: state.questionIndex,
       remainingSeconds: state.examTimeRemaining?.inSeconds ?? 0,
       answers: answers,
@@ -199,6 +235,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     );
     
     await storage.saveExam(unfinished);
+    
+    // Also sync wrong answers so they appear in "Yanlışlarım" immediately
+    await _syncAnswersToProgress(state.selectedAnswers, state.questions);
+    
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Sınav kaydedildi. Daha sonra devam edebilirsiniz.')),
@@ -276,6 +316,59 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     );
   }
 
+
+
+  Future<void> _syncAnswersToProgress(Map<int, String> answers, List<Question> questions) async {
+    try {
+      final questionsById = {for (final q in questions) q.id: q};
+      final ups = ref.read(userProgressRepositoryProvider);
+      final isMyMistakesMode = widget.category == 'Yanlışlarım';
+      
+      for (final entry in answers.entries) {
+        final numberKey = entry.key; // This might be originalId or uniqueId
+        final selectedAnswer = entry.value;
+        final q = questionsById[numberKey];
+        
+        if (q != null) {
+           final isCorrect = selectedAnswer == q.correctAnswerKey;
+           
+           // Logic:
+           // 1. If MyMistakes Mode: Process ALL (Correct->Fix, Wrong->Reset)
+           // 2. If Regular Mode: Process ONLY WRONG (Wrong->Add)
+           
+           if (isMyMistakesMode) {
+             if (q.examId != null) {
+                await ups.updateSRSStatus(
+                  examId: q.examId!, 
+                  questionId: q.originalQuestionId ?? numberKey, 
+                  isCorrect: isCorrect
+                );
+             } else {
+               // Fallback for legacy IDs (rarely have logic to remove from legacy list via simple API, usually handled in repository)
+               if (isCorrect) await ups.removeWrongAnswerId(q.originalQuestionId ?? numberKey);
+               else await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey);
+             }
+           } else {
+             // Regular Mode: Only record MISTAKES
+             if (!isCorrect) {
+               if (q.examId != null) {
+                 await ups.updateSRSStatus(
+                   examId: q.examId!, 
+                   questionId: q.originalQuestionId ?? numberKey, 
+                   isCorrect: false
+                 );
+               } else {
+                 await ups.addWrongAnswerId(q.originalQuestionId ?? numberKey); 
+               }
+             }
+           }
+        }
+      }
+    } catch (_) {
+      // Non-critical: ignore errors when persisting wrong ids
+    }
+  }
+
   Future<void> _saveResult({required bool isFinal}) async {
     if (_resultSaved) return;
     final quizState = ref.read(quizControllerProvider(widget.examId));
@@ -283,7 +376,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
     final correct = quizState.score;
     final answeredCount = quizState.selectedAnswers.length;
-    if (answeredCount == 0) return;
+    if (answeredCount == 0 && isFinal == false) return; // Don't save empty partials
 
     final totalForThisAttempt = isFinal ? quizState.totalQuestions : answeredCount;
     final category = widget.category ?? 'Karma';
@@ -301,60 +394,23 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       selectedAnswers: quizState.selectedAnswers,
       isExamMode: widget.isExamMode,
       timeTakenInSeconds: timeTaken?.inSeconds,
-      isPassed: widget.isExamMode ? (correct / totalForThisAttempt >= 0.7) : null,
+      isPassed: isFinal && widget.isExamMode ? (correct / totalForThisAttempt >= 0.7) : null,
     );
 
-    // Persist test result
-    await ref.read(userProgressRepositoryProvider).saveTestResult(result);
-
-    // Handle wrong answer IDs based on test type
-    try {
-      final questionsById = {for (final q in quizState.questions) q.id: q};
-      final ups = ref.read(userProgressRepositoryProvider);
-      
-        if (widget.category == 'Yanlışlarım') {
-        // In "Yanlışlarım" test: update SRS status for ALL answered questions
-        for (final entry in quizState.selectedAnswers.entries) {
-           final questionId = entry.key;
-           final selectedAnswer = entry.value;
-           final q = questionsById[questionId];
-           
-           if (q != null && q.examId != null) {
-              final isCorrect = selectedAnswer == q.correctAnswerKey;
-              // Updates SRS (promotes if correct, resets if wrong)
-              await ups.updateSRSStatus(
-                examId: q.examId!, 
-                questionId: q.originalQuestionId ?? questionId, // Use original ID if available
-                isCorrect: isCorrect
-              );
-           }
-        }
-      } else {
-        // In regular tests: add wrong answers to the wrong list (SRS Level 0)
-        for (final entry in quizState.selectedAnswers.entries) {
-          final questionId = entry.key;
-          final selectedAnswer = entry.value;
-          final q = questionsById[questionId];
-          
-          if (q != null && selectedAnswer != q.correctAnswerKey) {
-             // WRONG Answer -> Add to SRS
-             if (q.examId != null) {
-               await ups.updateSRSStatus(
-                 examId: q.examId!, 
-                 questionId: q.originalQuestionId ?? questionId, // Use original ID if available 
-                 isCorrect: false
-               );
-             } else {
-               // Fallback for questions without examId
-               await ups.addWrongAnswerId(q.originalQuestionId ?? questionId); 
-             }
-          }
-        }
-      }
-    } catch (_) {
-      // Non-critical: ignore errors when persisting wrong ids
+    // Persist test result (History) - Only if final or sufficiently substantial?
+    // User requested "Resume", not "Show half-finished test in history".
+    // So we ONLY save history if isFinal is true.
+    if (isFinal) {
+      await ref.read(userProgressRepositoryProvider).saveTestResult(result);
     }
-    _resultSaved = true;
+
+    // Handle wrong answer IDs (SRS / Mistakes List)
+    // This allows "Yanlışlarım" to be updated immediately even if exam isn't finished
+    await _syncAnswersToProgress(quizState.selectedAnswers, quizState.questions);
+    
+    if (isFinal) {
+      _resultSaved = true;
+    }
   }
 
   Future<void> _confirmFinishExam(BuildContext context) async {
@@ -764,18 +820,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           });
         }
 
-    // If questions are empty after loading, show a message
+        // If questions are empty after loading, show a message
         if (questions.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Ehliyet Rehberim')),
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        body: const Center(
-          child: Text('Bu kategoride soru bulunamadı.'),
-        ),
-      );
-    }
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Ehliyet Rehberim')),
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            body: const Center(
+              child: Text('Bu kategoride soru bulunamadı.'),
+            ),
+          );
+        }
 
         return PopScope(
           canPop: false,
@@ -785,7 +841,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           },
           child: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          appBar: AppBar(
+            appBar: AppBar(
               title: Text(
                 widget.isExamMode ? 'Sınav Simülasyonu' : (widget.category ?? 'Karma Test'),
                 style: TextStyle(
@@ -802,46 +858,46 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     onPressed: _onExitPressed,
                   )
                 : const BackButton(),
-            actions: [
-              // Favorite Button
-              if (quizState.questions.isNotEmpty)
-                Consumer(
-                  builder: (context, ref, child) {
-                    final currentQ = quizState.questions[quizState.questionIndex];
-                    final isFav = ref.watch(isFavoriteProvider(currentQ.id));
-                    
-                    return IconButton(
-                      icon: Icon(
-                        isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
+              actions: [
+                // Favorite Button
+                if (quizState.questions.isNotEmpty)
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final currentQ = quizState.questions[quizState.questionIndex];
+                      final isFav = ref.watch(isFavoriteProvider(currentQ.id));
+                      
+                      return IconButton(
+                        icon: Icon(
+                          isFav ? Icons.favorite : Icons.favorite_border,
+                          color: isFav ? AppColors.error : Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                        onPressed: () {
+                          ref.read(favoritesRepositoryProvider).toggleFavorite(currentQ.id);
+                        },
+                        onLongPress: () => _showNoteDialog(context, currentQ.id),
+                        tooltip: isFav ? 'Favorilerden Çıkar (Not için basılı tut)' : 'Favorilere Ekle (Not için basılı tut)',
+                      );
+                    },
+                  ),
+                if (widget.isExamMode)
+                  TextButton(
+                    onPressed: () => _confirmFinishExam(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: AppColors.error.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      onPressed: () {
-                        ref.read(favoritesRepositoryProvider).toggleFavorite(currentQ.id);
-                      },
-                      onLongPress: () => _showNoteDialog(context, currentQ.id),
-                      tooltip: isFav ? 'Favorilerden Çıkar (Not için basılı tut)' : 'Favorilere Ekle (Not için basılı tut)',
-                    );
-                  },
-                ),
-              if (widget.isExamMode)
-                TextButton(
-                  onPressed: () => _confirmFinishExam(context),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.error.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Text(
-                      'Bitir',
-                      style: TextStyle(
-                        color: AppColors.error,
-                        fontWeight: FontWeight.bold,
+                      child: const Text(
+                        'Bitir',
+                        style: TextStyle(
+                          color: AppColors.error,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              // Display progress
+                // Display progress
                 Container(
                   margin: const EdgeInsets.only(right: 16.0),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -857,10 +913,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primary,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(widget.isExamMode ? 170 : 110),
                 child: Padding(
@@ -871,7 +927,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         ExamTimerWidget(
                           // Key ensures widget is rebuilt when exam session changes or is restored
                           key: ValueKey(quizState.examStartTime),
-                          duration: quizState.examTimeRemaining ?? const Duration(minutes: 30),
+                          duration: quizState.examTimeRemaining ?? const Duration(minutes: 45),
                           onTimeUp: () {
                             ref.read(quizControllerProvider(widget.examId).notifier).finishExam();
                             // Navigate to results screen
@@ -907,7 +963,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
-                value: quizState.progressPercentage,
+                          value: quizState.progressPercentage,
                           backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                           valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                           minHeight: 8,
@@ -941,67 +997,72 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 Positioned.fill(
                   child: Column(
                     children: [
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: quizState.totalQuestions,
-                  onPageChanged: (index) {
+                      Expanded(
+                        child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: quizState.totalQuestions,
+                          onPageChanged: (index) {
                             // PageView değiştiğinde quiz state'i sync et
                             ref.read(quizControllerProvider(widget.examId).notifier).setQuestionIndex(index);
-                  },
-                  itemBuilder: (context, index) {
-                    final question = quizState.questions[index];
-                    return _QuestionCard(
-                      question: question,
-                      questionNumber: index + 1,
-                      totalQuestions: quizState.totalQuestions,
-                      selectedAnswer: quizState.selectedAnswers[question.id],
-                      isAnswered: quizState.selectedAnswers.containsKey(question.id),
-                      isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
-                      isExamMode: widget.isExamMode,
-                      onAnswerSelected: (answer) {
-                        ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
-                        // Trigger confetti animation for correct answers only in normal mode
-                        if (!widget.isExamMode) {
-                          final currentQuestion = quizState.questions[index];
-                          if (answer == currentQuestion.correctAnswerKey) {
-                            _confettiController.play();
-                          }
-                        }
-                      },
-                      onNextQuestion: () {
-                        ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
-                        if (index < quizState.totalQuestions - 1) {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                               onPreviousQuestion: () {
-                                 if (index > 0) {
-                                   ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
-                                   _pageController.previousPage(
-                                     duration: const Duration(milliseconds: 300),
-                                     curve: Curves.easeInOut,
-                                   );
-                                 }
-                               },
-                              onFinishQuiz: () async {
-                                final route = MaterialPageRoute(
-                                  builder: (context) => ResultsScreen(examId: widget.examId),
-                                );
-                                final navigator = Navigator.of(context);
-                                await _saveResult(isFinal: true);
-                                if (mounted) {
-                                  navigator.pushReplacement(route);
+                          },
+                          itemBuilder: (context, index) {
+                            final question = quizState.questions[index];
+                            return _QuestionCard(
+                              question: question,
+                              questionNumber: index + 1,
+                              totalQuestions: quizState.totalQuestions,
+                              selectedAnswer: quizState.selectedAnswers[question.id],
+                              isAnswered: quizState.selectedAnswers.containsKey(question.id),
+                              isCorrect: quizState.selectedAnswers[question.id] == question.correctAnswerKey,
+                              isExamMode: widget.isExamMode,
+                               autoShowExplainOnWrong: widget.category == 'Yanlışlarım',
+                              onAnswerSelected: (answer) {
+                                ref.read(quizControllerProvider(widget.examId).notifier).answerQuestion(answer);
+                                // Trigger confetti animation for correct answers only in normal mode
+                                if (!widget.isExamMode) {
+                                  final currentQuestion = quizState.questions[index];
+                                  if (answer == currentQuestion.correctAnswerKey) {
+                                    _confettiController.play();
+                                  }
                                 }
                               },
-                    );
-                  },
-                ),
-              ),
-            ],
+                              onNextQuestion: () {
+                                ref.read(quizControllerProvider(widget.examId).notifier).nextQuestion();
+                                if (index < quizState.totalQuestions - 1) {
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onPreviousQuestion: () {
+                                if (index > 0) {
+                                  ref.read(quizControllerProvider(widget.examId).notifier).previousQuestion();
+                                  _pageController.previousPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onFinishQuiz: () async {
+                                if (widget.isExamMode) {
+                                  _confirmFinishExam(context);
+                                } else {
+                                  final route = MaterialPageRoute(
+                                    builder: (context) => ResultsScreen(examId: widget.examId),
+                                  );
+                                  final navigator = Navigator.of(context);
+                                  await _saveResult(isFinal: true);
+                                  if (mounted) {
+                                    navigator.pushReplacement(route);
+                                  }
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 if (ref.watch(quizControllerProvider(widget.examId)).currentCombo >= 3)
@@ -1036,7 +1097,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           ),
         );
       },
-        );
+    );
   }
 }
 
@@ -1103,112 +1164,111 @@ class _QuestionCard extends StatelessWidget {
         ],
       ),
       child: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(bottom: 24),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
-                  width: 1,
-                ),
-              ),
-            ),
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.primary.withValues(alpha: 0.12),
-                        AppColors.primary.withValues(alpha: 0.08),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.2),
-                      width: 1,
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(bottom: 24),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
+                    width: 1,
                   ),
-                  child: Text(
-                'Soru $questionNumber / $totalQuestions',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                    ),
                 ),
               ),
-              if (isAnswered && !isExamMode)
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.15),
-                          (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.08),
+                          AppColors.primary.withValues(alpha: 0.12),
+                          AppColors.primary.withValues(alpha: 0.08),
                         ],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.3),
-                        width: 1.5,
+                        color: AppColors.primary.withValues(alpha: 0.2),
+                        width: 1,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
-                    child: Row(
-                      children: [
-                Icon(
-                          isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
-                          color: isCorrect ? AppColors.success : AppColors.error,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          isCorrect ? 'Doğru' : 'Yanlış',
-                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    child: Text(
+                      'Soru $questionNumber / $totalQuestions',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
-                            color: isCorrect ? AppColors.success : AppColors.error,
+                            color: AppColors.primary,
                           ),
-                        ),
-                      ],
                     ),
                   ),
-              ],
+                  if (isAnswered && !isExamMode)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.15),
+                            (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.08),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.3),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: (isCorrect ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                            color: isCorrect ? AppColors.success : AppColors.error,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            isCorrect ? 'Doğru' : 'Yanlış',
+                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: isCorrect ? AppColors.success : AppColors.error,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          if (question.imageUrl != null && !question.hasOptionImages) ...[
-            // Check if it's a video URL
-            if (isVideoUrl(question.imageUrl))
-              VimeoPlayerWidget(
-                videoUrl: question.imageUrl!,
-                height: 200,
-              )
-            else
-              Container(
-                width: double.infinity,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: question.imageUrl!.startsWith('http')
+            const SizedBox(height: 16),
+            if (question.imageUrl != null && !question.hasOptionImages) ...[
+              if (isVideoUrl(question.imageUrl))
+                VimeoPlayerWidget(
+                  videoUrl: question.imageUrl!,
+                  height: 200,
+                )
+              else
+                Container(
+                  width: double.infinity,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: question.imageUrl!.startsWith('http')
                         ? Image.network(
                             question.imageUrl!,
                             width: double.infinity,
@@ -1268,31 +1328,45 @@ class _QuestionCard extends StatelessWidget {
                               );
                             },
                           ),
+                  ),
                 ),
-              ),
-            const SizedBox(height: 16),
-          ],
-          Text(
-            question.questionText,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSurface,
+              const SizedBox(height: 16),
+            ],
+            Text(
+              question.questionText,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
             ),
-          ),
-          const SizedBox(height: 24),
-          // Options list should size to its content so that the whole card can scroll
-          ListView.separated(
+            const SizedBox(height: 24),
+            ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: question.options.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, idx) {
                 final optionKey = question.options.keys.elementAt(idx);
-                final optionText = question.getOptionText(optionKey);
-                final optionImageUrl = question.getOptionImageUrl(optionKey);
+                final rawOptionText = question.getOptionText(optionKey);
+                final existingImageUrl = question.getOptionImageUrl(optionKey);
+                
+                // Check if the text itself is an image URL
+                String? finalImageUrl = existingImageUrl;
+                String displayText = rawOptionText;
+
+                if (finalImageUrl == null && 
+                    (rawOptionText.startsWith('http') || rawOptionText.startsWith('assets/')) && 
+                    (rawOptionText.toLowerCase().endsWith('.jpg') || 
+                     rawOptionText.toLowerCase().endsWith('.png') || 
+                     rawOptionText.toLowerCase().endsWith('.gif') || 
+                     rawOptionText.toLowerCase().endsWith('.jpeg'))) {
+                  finalImageUrl = rawOptionText;
+                  displayText = ''; // Hide text as it is just the URL
+                }
+
                 final isSelected = selectedAnswer == optionKey;
                 final isCorrectAnswer = optionKey == question.correctAnswerKey;
-                
+
                 Color containerColor = Theme.of(context).brightness == Brightness.dark
                     ? Theme.of(context).colorScheme.surfaceContainer.withValues(alpha: 0.3)
                     : Theme.of(context).colorScheme.surface;
@@ -1364,108 +1438,120 @@ class _QuestionCard extends StatelessWidget {
                                 offset: const Offset(0, 6),
                               ),
                           ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                          width: 36,
-                          height: 36,
-                            decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                letterBg,
-                                letterBg.withValues(alpha: 0.85),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                              shape: BoxShape.circle,
-                            border: Border.all(
-                              color: letterFg.withValues(alpha: 0.2),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: letterBg.withValues(alpha: 0.3),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                            ),
-                            child: Center(
-                              child: Text(
-                                optionKey,
-                                style: TextStyle(
-                                color: letterFg,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                              optionText,
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.95)
-                                  : Theme.of(context).colorScheme.onSurface,
-                            ),
-                              ),
-                              if (optionImageUrl != null) ...[
-                                const SizedBox(height: 8),
-                                Container(
-                                  width: 80,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: optionImageUrl.startsWith('http')
-                                        ? Image.network(
-                                            optionImageUrl,
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Container(
-                                                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                                                child: Icon(
-                                                  Icons.broken_image,
-                                                  size: 24,
-                                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                                ),
-                                              );
-                                            },
-                                          )
-                                        : Image.asset(
-                                            optionImageUrl,
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Container(
-                                                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                                                child: Icon(
-                                                  Icons.image_not_supported,
-                                                  size: 24,
-                                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
                         ),
-                        if (trailingIcon != null) trailingIcon,
-                      ],
-                    ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    letterBg,
+                                    letterBg.withValues(alpha: 0.85),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: letterFg.withValues(alpha: 0.2),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: letterBg.withValues(alpha: 0.3),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  optionKey,
+                                  style: TextStyle(
+                                    color: letterFg,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (displayText.isNotEmpty)
+                                    Text(
+                                      displayText,
+                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                                            color: Theme.of(context).brightness == Brightness.dark
+                                                ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.95)
+                                                : Theme.of(context).colorScheme.onSurface,
+                                          ),
+                                    ),
+                                  if (finalImageUrl != null) ...[
+                                    if (displayText.isNotEmpty) const SizedBox(height: 8),
+                                    Container(
+                                      // Larger size if it is the main content (no text)
+                                      height: displayText.isEmpty ? 120 : 80,
+                                      width: displayText.isEmpty ? double.infinity : 100,
+                                      alignment: Alignment.centerLeft,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3)),
+                                        color: Colors.white, // White bg for images usually safer
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: finalImageUrl.startsWith('http')
+                                            ? Image.network(
+                                                finalImageUrl,
+                                                fit: BoxFit.contain,
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                errorBuilder: (context, error, stackTrace) {
+                                                  return Container(
+                                                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        size: 24,
+                                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            : Image.asset(
+                                                finalImageUrl,
+                                                fit: BoxFit.contain,
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                errorBuilder: (context, error, stackTrace) {
+                                                  return Container(
+                                                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.image_not_supported,
+                                                        size: 24,
+                                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                            if (trailingIcon != null) trailingIcon,
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -1473,192 +1559,181 @@ class _QuestionCard extends StatelessWidget {
               },
             ),
 
-          // Auto show explanation block for Wrong Answers Test when answered incorrectly
-          if (isAnswered && !isCorrect && autoShowExplainOnWrong) ...[
-            const SizedBox(height: 16),
-            // Correct answer indicator
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.successContainer.withValues(alpha: 128),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: AppColors.success.withValues(alpha: 128),
+            if (isAnswered && !isCorrect && autoShowExplainOnWrong) ...[
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.successContainer.withValues(alpha: 128),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: AppColors.success.withValues(alpha: 128),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: AppColors.success,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Doğru Cevap: ',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.success,
+                          ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '${question.correctAnswerKey.toUpperCase()}) ${question.getOptionText(question.correctAnswerKey)}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.success,
+                            ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: AppColors.success,
-                    size: 20,
+              const SizedBox(height: 12),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Doğru Cevap: ',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.success,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Açıklama',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      question.explanation.isNotEmpty
+                          ? question.explanation
+                          : 'Bu soru için açıklama mevcut değil.',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            height: 1.5,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
+            if (isAnswered || isExamMode) ...[
+              const SizedBox(height: 16),
+              if (!isExamMode && isAnswered && !(autoShowExplainOnWrong && !isCorrect))
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () => _showExplanationDialog(context, question),
+                    icon: Icon(
+                      Icons.lightbulb_outline,
+                      size: 20,
+                      color: AppColors.warning,
+                    ),
+                    label: Text(
+                      'Açıklamayı Gör',
+                      style: TextStyle(
+                        color: AppColors.warning,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      side: BorderSide(
+                        color: AppColors.warning.withValues(alpha: 0.5),
+                        width: 1.5,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      backgroundColor: AppColors.warning.withValues(alpha: 0.08),
                     ),
                   ),
+                ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
                   Expanded(
-                    child: Text(
-                      '${question.correctAnswerKey.toUpperCase()}) ${question.getOptionText(question.correctAnswerKey)}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.success,
+                    child: OutlinedButton.icon(
+                      onPressed: questionNumber > 1 ? onPreviousQuestion : null,
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text('Önceki Soru'),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (questionNumber < totalQuestions) {
+                          onNextQuestion();
+                        } else {
+                          onFinishQuiz();
+                        }
+                      },
+                      icon: Icon(questionNumber < totalQuestions ? Icons.arrow_forward : Icons.flag),
+                      label: Text(questionNumber < totalQuestions ? 'Sonraki Soru' : 'Testi Bitir'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        elevation: 2,
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 12),
-            // Explanation text
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.surfaceContainerHighest.withValues(alpha: 128),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 128),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ] else if (!isExamMode) ...[
+              const SizedBox(height: 16),
+              Row(
                 children: [
-                  Text(
-                    'Açıklama',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.onSurface,
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: questionNumber > 1 ? onPreviousQuestion : null,
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text('Önceki Soru'),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    question.explanation.isNotEmpty
-                        ? question.explanation
-                        : 'Bu soru için açıklama mevcut değil.',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      height: 1.5,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
-            ),
+            ],
           ],
-          
-          // Action buttons section (Explanation button and Prev/Next buttons)
-          if (isAnswered || isExamMode) ...[
-            const SizedBox(height: 16),
-            
-            // Explanation button (Only in normal mode when answered)
-            if (!isExamMode && isAnswered && !(autoShowExplainOnWrong && !isCorrect))
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: () => _showExplanationDialog(context, question),
-                icon: Icon(
-                  Icons.lightbulb_outline,
-                  size: 20,
-                  color: AppColors.warning,
-                ),
-                label: Text(
-                  'Açıklamayı Gör',
-                  style: TextStyle(
-                    color: AppColors.warning,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  side: BorderSide(
-                    color: AppColors.warning.withValues(alpha: 0.5),
-                    width: 1.5,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  backgroundColor: AppColors.warning.withValues(alpha: 0.08),
-                ),
-              ),
-            ),
-            
-            const SizedBox(height: 12),
-            
-            // Prev/Next buttons row (Prev always visible, disabled for first question)
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: questionNumber > 1 ? onPreviousQuestion : null,
-                    icon: const Icon(Icons.arrow_back),
-                    label: const Text('Önceki Soru'),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ElevatedButton.icon(
-                onPressed: () {
-                  if (questionNumber < totalQuestions) {
-                    onNextQuestion();
-                  } else {
-                        onFinishQuiz();
-                      }
-                    },
-                    icon: Icon(questionNumber < totalQuestions ? Icons.arrow_forward : Icons.flag),
-                    label: Text(questionNumber < totalQuestions ? 'Sonraki Soru' : 'Testi Bitir'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      elevation: 2,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ]
-          else if (!isExamMode) ...[
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: questionNumber > 1 ? onPreviousQuestion : null,
-                    icon: const Icon(Icons.arrow_back),
-                    label: const Text('Önceki Soru'),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Expanded(child: SizedBox()),
-              ],
-            ),
-          ],
-        ],
         ),
       ),
     );
   }
 
-  /// Show explanation dialog for the current question
   void _showExplanationDialog(BuildContext context, Question question) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-                  shape: RoundedRectangleBorder(
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           title: Row(
@@ -1673,19 +1748,18 @@ class _QuestionCard extends StatelessWidget {
                 child: Text(
                   'Açıklama',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
               ),
-            ),
-        ],
+            ],
           ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Question text
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -1698,14 +1772,12 @@ class _QuestionCard extends StatelessWidget {
                   child: Text(
                     question.questionText,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                
-                // Correct answer indicator
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -1715,52 +1787,105 @@ class _QuestionCard extends StatelessWidget {
                       color: AppColors.success.withValues(alpha: 128),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: AppColors.success,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Doğru Cevap: ',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.success,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          '${question.correctAnswerKey.toUpperCase()}) ${question.options[question.correctAnswerKey]}',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
+                  child: Builder(
+                    builder: (context) {
+                      final answerText = question.options[question.correctAnswerKey] ?? '';
+                      // Check if the answer text is an image URL
+                      bool textIsImage = false;
+                      String? imageUrl;
+                      String displayText = answerText;
+
+                      if ((answerText.startsWith('http') || answerText.startsWith('assets/')) && 
+                          (answerText.toLowerCase().endsWith('.jpg') || 
+                           answerText.toLowerCase().endsWith('.png') || 
+                           answerText.toLowerCase().endsWith('.gif') || 
+                           answerText.toLowerCase().endsWith('.jpeg'))) {
+                        textIsImage = true;
+                        imageUrl = answerText;
+                        displayText = ''; 
+                      }
+
+                      return Row(
+                        children: [
+                          Icon(
+                            Icons.check_circle,
                             color: AppColors.success,
+                            size: 20,
                           ),
-                        ),
-                      ),
-                    ],
+                          const SizedBox(width: 8),
+                          Text(
+                            'Doğru Cevap: ',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.success,
+                                ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${question.correctAnswerKey.toUpperCase()}) $displayText',
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.success,
+                                      ),
+                                ),
+                                if (textIsImage && imageUrl != null) ...[
+                                  const SizedBox(height: 8),
+                                  Container(
+                                    height: 100,
+                                    alignment: Alignment.centerLeft,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: AppColors.success.withValues(alpha: 0.3),
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: imageUrl.startsWith('http')
+                                          ? Image.network(
+                                              imageUrl,
+                                              fit: BoxFit.contain,
+                                              errorBuilder: (context, error, stackTrace) =>
+                                                  const Icon(Icons.broken_image),
+                                            )
+                                          : Image.asset(
+                                              imageUrl,
+                                              fit: BoxFit.contain,
+                                              errorBuilder: (context, error, stackTrace) =>
+                                                  const Icon(Icons.image_not_supported),
+                                            ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }
                   ),
                 ),
                 const SizedBox(height: 16),
-                
-                // Explanation text
                 Text(
                   'Açıklama:',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  question.explanation.isNotEmpty 
-                      ? question.explanation 
+                  question.explanation.isNotEmpty
+                      ? question.explanation
                       : 'Bu soru için açıklama mevcut değil.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    height: 1.5,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                        height: 1.5,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
               ],
             ),

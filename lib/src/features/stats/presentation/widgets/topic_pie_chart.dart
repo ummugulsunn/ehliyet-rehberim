@@ -1,6 +1,7 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/theme/app_colors.dart';
 
 class TopicPieChart extends StatefulWidget {
   final Map<String, double> data; // TopicName -> Value (e.g. Percentage or Count)
@@ -110,13 +111,13 @@ class _TopicPieChartState extends State<TopicPieChart> {
 
   Color _getColor(int index) {
     const colors = [
-      Color(0xFF0293ee),
-      Color(0xFFf8b250),
-      Color(0xFF845bef),
-      Color(0xFF13d38e),
-      Color(0xFFff5722),
-      Color(0xFF795548),
-      Color(0xFF9c27b0),
+      AppColors.primary,
+      AppColors.secondary,
+      AppColors.premium,
+      AppColors.success,
+      AppColors.error,
+      AppColors.info,
+      AppColors.textSecondary, 
     ];
     return colors[index % colors.length];
   }

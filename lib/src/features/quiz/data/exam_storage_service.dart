@@ -38,4 +38,18 @@ class ExamStorageService {
     final prefs = await SharedPreferences.getInstance();
     return prefs.containsKey('$_prefix$examId');
   }
+
+  Future<Set<String>> getAllUnfinishedExamIds() async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys();
+    final unfinishedIds = <String>{};
+    
+    for (final key in keys) {
+      if (key.startsWith(_prefix)) {
+        final examId = key.substring(_prefix.length);
+        unfinishedIds.add(examId);
+      }
+    }
+    return unfinishedIds;
+  }
 }

@@ -7,6 +7,7 @@ import '../../leaderboard/data/leaderboard_repository.dart';
 import '../../leaderboard/domain/leaderboard_entry.dart';
 import '../../auth/data/auth_repository.dart';
 import 'package:intl/intl.dart';
+import '../../../core/services/file_storage_service.dart';
 
 class _SRSItem {
   final String examId;
@@ -517,7 +518,16 @@ class UserProgressRepository {
     try {
       final prefs = await SharedPreferences.getInstance();
       final List<String> existing = prefs.getStringList(_wrongAnswerIdsKey) ?? <String>[];
-      return existing.map(int.parse).toList(growable: false);
+      
+      // Safe parsing to avoid losing all data if one ID is corrupt
+      final List<int> ids = [];
+      for (var s in existing) {
+        final id = int.tryParse(s);
+        if (id != null) {
+          ids.add(id);
+        }
+      }
+      return ids;
     } catch (e) {
       Logger.error('Failed to load wrong answer ids', e);
       return <int>[];
@@ -958,8 +968,14 @@ class UserProgressRepository {
       final List<TestResult> list = existing == null || existing.isEmpty
           ? <TestResult>[]
           : TestResult.decodeList(existing);
+      
       list.add(result);
-      await prefs.setString(_testResultsKey, TestResult.encodeList(list));
+      final encoded = TestResult.encodeList(list);
+      await prefs.setString(_testResultsKey, encoded);
+      
+      // Backup to File Storage
+      FileStorageService().saveTestResults(list).ignore(); 
+      
       // Update cache and emit updated list to all listeners
       _cachedResults = list;
       _testResultsController.add(list);
@@ -984,13 +1000,36 @@ class UserProgressRepository {
   Future<void> _loadTestResults() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      
+      // 1. Try Loading from SharedPreferences
       final jsonStr = prefs.getString(_testResultsKey);
-      final results = jsonStr == null || jsonStr.isEmpty 
-          ? <TestResult>[]
-          : TestResult.decodeList(jsonStr);
+      List<TestResult> results = [];
+      
+      if (jsonStr != null && jsonStr.isNotEmpty) {
+        results = TestResult.decodeList(jsonStr);
+      }
+      
+      // 2. Try Loading from FileStorage (Backup)
+      try {
+        final fileResults = await FileStorageService().loadTestResults();
+        
+        // If FileStorage has more data (e.g. SharedPrefs was cleared), use FileStorage
+        if (fileResults.length > results.length) {
+          Logger.info('Recovering data: FileStorage has ${fileResults.length} items vs SharedPrefs ${results.length}. Restoring...');
+          results = fileResults;
+          
+          // Restore SharedPreferences from File Backup
+          await prefs.setString(_testResultsKey, TestResult.encodeList(results));
+        } else if (results.isNotEmpty && fileResults.isEmpty) {
+          // If SharedPrefs has data but File is empty, back it up now
+           await FileStorageService().saveTestResults(results);
+        }
+      } catch (e) {
+        Logger.error('Failed to sync with FileStorage', e);
+      }
+      
       _cachedResults = results;
       _testResultsController.add(results);
-      Logger.info('Loaded ${results.length} test results from storage and emitted to stream');
     } catch (e) {
       Logger.error('Failed to load test results', e);
       _cachedResults = [];

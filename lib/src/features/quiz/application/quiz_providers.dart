@@ -116,14 +116,21 @@ class QuizController extends FamilyNotifier<QuizState, String> {
       final userProgressRepository = ref.read(userProgressRepositoryProvider);
       await userProgressRepository.completeQuestion();
       
+      // Update SRS System (Mistake Tracking)
+      final currentQ = state.currentQuestion;
+      if (currentQ != null) {
+        await userProgressRepository.updateSRSStatus(
+          examId: state.examId ?? 'general',
+          questionId: currentQ.id,
+          isCorrect: isCorrect,
+        );
+      }
+
       if (isCorrect) {
         await userProgressRepository.addXP(UserProgressRepository.xpPerCorrectAnswer);
-        // wait, xpPerCorrectAnswer is likely static? Let's check. Assuming it is static or on instance.
-        // Actually UserProgressService had xpPerCorrectAnswer? I didn't check that constant.
       }
     } catch (e) {
       // Log error but don't fail the quiz
-      // The progress update is not critical for quiz functionality
     }
   }
 
@@ -271,7 +278,7 @@ class QuizController extends FamilyNotifier<QuizState, String> {
 
   /// Start exam mode
   void startExamMode({Duration? duration, Duration? remainingTime}) {
-    final totalDuration = duration ?? const Duration(minutes: 30);
+    final totalDuration = duration ?? const Duration(minutes: 45);
     DateTime? startTime = DateTime.now();
     
     // Adjust start time if resuming

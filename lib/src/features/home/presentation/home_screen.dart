@@ -13,6 +13,7 @@ import '../../stats/presentation/stats_screen.dart';
 import '../../traffic_signs/presentation/traffic_signs_screen.dart';
 import '../../study_guides/presentation/study_guide_list_screen.dart';
 import '../../favorites/presentation/favorites_screen.dart';
+import '../../settings/presentation/settings_screen.dart';
 import 'widgets/smart_review_card.dart';
 import 'widgets/readiness_card.dart';
 import 'widgets/exam_simulation_card.dart';
@@ -41,6 +42,17 @@ class HomeScreen extends ConsumerWidget {
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
+                ),
+              );
+            },
+            icon: Icon(Icons.settings_outlined, color: AppColors.textSecondary),
+            tooltip: 'Ayarlar',
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:ehliyet_rehberim/src/core/theme/app_colors.dart';
+import '../../../../core/theme/app_colors.dart';
 // import 'package:ehliyet_rehberim/src/features/home/data/user_progress_repository.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/application/smart_quiz_provider.dart';
 import 'package:ehliyet_rehberim/src/features/quiz/presentation/quiz_screen.dart';
@@ -14,26 +14,45 @@ class SmartReviewCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Watch user progress to check if unlocked
-    final testResultsAsync = ref.watch(testResultsProvider);
+    final resultsAsync = ref.watch(testResultsProvider);
+    final mistakesAsync = ref.watch(wrongQuestionsProvider); // Watch mistakes
 
-    return testResultsAsync.when(
+    return resultsAsync.when(
       data: (results) {
-        final isUnlocked = results.length >= 3;
-        final weakCategories = ref.read(userProgressRepositoryProvider).getWeakestCategories(limit: 1);
-        final weakCategory = weakCategories.isNotEmpty ? weakCategories.first : 'Genel';
+        // Unlock if at least 1 exam is finished
+        final isUnlocked = results.isNotEmpty;
+        
+        // Determine what to show
+        String statusText = 'Veri Toplanıyor (En az 1 sınav çözün)';
+        bool hasMistakes = false;
+        int mistakeCount = 0;
+
+        if (isUnlocked) {
+           mistakeCount = mistakesAsync.valueOrNull?.length ?? 0;
+           if (mistakeCount > 0) {
+             statusText = 'Tekrar Edilecek: $mistakeCount Hata';
+             hasMistakes = true;
+           } else {
+             final weakCategories = ref.read(userProgressRepositoryProvider).getWeakestCategories(limit: 1);
+             final weakCategory = weakCategories.isNotEmpty ? weakCategories.first : 'Genel';
+             statusText = 'Zayıf Noktanız: $weakCategory';
+           }
+        }
+
+        final colorScheme = Theme.of(context).colorScheme;
 
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isUnlocked 
-                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
-                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  ? (hasMistakes ? AppColors.error.withValues(alpha: 0.5) : AppColors.primary.withValues(alpha: 0.3))
+                  : colorScheme.outline.withValues(alpha: 0.2),
               width: 2,
             ),
             boxShadow: isUnlocked ? [
               BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                color: (hasMistakes ? AppColors.error : AppColors.primary).withValues(alpha: 0.1),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -44,8 +63,8 @@ class SmartReviewCard extends ConsumerWidget {
             margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             color: isUnlocked 
-                ? Theme.of(context).colorScheme.primaryContainer 
-                : Theme.of(context).colorScheme.surfaceContainerHighest,
+                ? (hasMistakes ? colorScheme.errorContainer.withValues(alpha: 0.3) : colorScheme.primaryContainer) 
+                : colorScheme.surfaceContainerHighest,
             child: InkWell(
               onTap: isUnlocked ? () => _startSmartQuiz(context, ref) : null,
               borderRadius: BorderRadius.circular(16),
@@ -57,12 +76,12 @@ class SmartReviewCard extends ConsumerWidget {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: isUnlocked 
-                            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15)
+                            ? (hasMistakes ? AppColors.error.withValues(alpha: 0.15) : AppColors.primary.withValues(alpha: 0.15))
                             : Colors.grey.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: isUnlocked 
-                              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
+                              ? (hasMistakes ? AppColors.error.withValues(alpha: 0.3) : AppColors.primary.withValues(alpha: 0.3))
                               : Colors.grey.withValues(alpha: 0.2),
                           width: 1.5,
                         ),
@@ -71,7 +90,7 @@ class SmartReviewCard extends ConsumerWidget {
                         isUnlocked ? Icons.auto_awesome : Icons.lock_outline,
                         size: 28,
                         color: isUnlocked 
-                            ? Theme.of(context).colorScheme.primary
+                            ? (hasMistakes ? AppColors.error : AppColors.primary)
                             : Colors.grey,
                       ),
                     ),
@@ -85,19 +104,17 @@ class SmartReviewCard extends ConsumerWidget {
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: isUnlocked 
-                                  ? Theme.of(context).colorScheme.onPrimaryContainer 
-                                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  ? (hasMistakes ? AppColors.error : colorScheme.onPrimaryContainer) 
+                                  : colorScheme.onSurfaceVariant,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            isUnlocked 
-                                ? 'Zayıf Noktan: $weakCategory'
-                                : 'Veri Toplanıyor (${results.length}/3 Test)',
+                            statusText,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: isUnlocked 
-                                  ? Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8)
-                                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  ? (hasMistakes ? AppColors.error.withValues(alpha: 0.8) : colorScheme.onPrimaryContainer.withValues(alpha: 0.8))
+                                  : colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -107,7 +124,7 @@ class SmartReviewCard extends ConsumerWidget {
                       Icon(
                         Icons.arrow_forward_ios, 
                         size: 16, 
-                        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.6)
+                        color: (hasMistakes ? AppColors.error : AppColors.primary).withValues(alpha: 0.6)
                       ),
                   ],
                 ),
@@ -116,10 +133,11 @@ class SmartReviewCard extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const SizedBox.shrink(),
-      error: (_, __) => const SizedBox.shrink(),
-    );
-  }
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      }
+
 
   void _startSmartQuiz(BuildContext context, WidgetRef ref) async {
     // Show loading or similar if needed, but FutureProvider will be awaited in the provider itself or we await here

@@ -60,12 +60,25 @@ class TestResult {
       );
 
   static List<TestResult> decodeList(String jsonStr) {
-    final dynamic data = jsonDecode(jsonStr);
-    if (data is List) {
-      return data
-          .whereType<Map<String, dynamic>>()
-          .map((e) => TestResult.fromJson(e))
-          .toList();
+    // Robust decoding that skips malformed items instead of crashing the whole list
+    try {
+      final dynamic data = jsonDecode(jsonStr);
+      if (data is List) {
+        final List<TestResult> results = [];
+        for (var item in data) {
+          if (item is Map<String, dynamic>) {
+            try {
+              results.add(TestResult.fromJson(item));
+            } catch (e) {
+              // Skip malformed item, but log it (if we had logger access, here we just skip)
+              // print('Skipping malformed TestResult: $e'); 
+            }
+          }
+        }
+        return results;
+      }
+    } catch (e) {
+      // If global jsonDecode fails, return empty list
     }
     return const [];
   }

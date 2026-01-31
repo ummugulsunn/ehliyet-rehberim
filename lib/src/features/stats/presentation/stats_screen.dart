@@ -7,6 +7,7 @@ import '../../home/data/user_progress_repository.dart';
 import 'package:intl/intl.dart';
 import 'detailed_stats_screen.dart';
 import 'widgets/progress_line_chart.dart';
+import '../../home/presentation/widgets/achievements_widget.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
   const StatsScreen({super.key});
@@ -180,6 +181,10 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
               
               // Category Breakdown Card with Horizontal Bar Chart + Weakest Topic Highlight
               _CategoryBreakdownCard(categoryRates: summary.categorySuccessRates),
+              const SizedBox(height: 20),
+              
+              // Achievements Section (Restored)
+              const AchievementsWidget(),
               const SizedBox(height: 20),
 
               // Topic Distribution Section

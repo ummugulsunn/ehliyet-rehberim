@@ -140,7 +140,7 @@ class ExamSimulationCard extends ConsumerWidget {
                                   ),
                                   const SizedBox(width: 8),
                                   Text(
-                                    '30 Dakika',
+                                    '45 Dakika',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall

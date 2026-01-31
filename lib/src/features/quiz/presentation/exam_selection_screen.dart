@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import '../../../core/services/quiz_service.dart';
 import '../application/quiz_providers.dart';
+import '../data/exam_storage_service.dart';
 // ignore: unused_import
 import '../data/quiz_repository.dart';
 import '../domain/exam_model.dart';
@@ -27,8 +28,11 @@ class ExamSelectionScreen extends ConsumerWidget {
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.onSurface,
       ),
-      body: FutureBuilder<List<Exam>>(
-        future: quizRepository.loadExams(),
+      body: FutureBuilder<List<dynamic>>(
+        future: Future.wait([
+          quizRepository.loadExams(),
+          ref.read(examStorageServiceProvider).getAllUnfinishedExamIds(),
+        ]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -50,7 +54,10 @@ class ExamSelectionScreen extends ConsumerWidget {
           if (!snapshot.hasData) {
             return const Center(child: Text('Sınav verisi bulunamadı'));
           }
-          final exams = snapshot.data!;
+          
+          final exams = snapshot.data![0] as List<Exam>;
+          final unfinishedIds = snapshot.data![1] as Set<String>;
+          
           if (exams.isEmpty) {
             return const Center(child: Text('Henüz deneme sınavı yok.'));
           }
@@ -59,7 +66,7 @@ class ExamSelectionScreen extends ConsumerWidget {
             child: Column(
               children: [
                 // Messages list
-                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context, ref)),
+                ...exams.map((exam) => _buildExamCard(exam, progressRepository, context, ref, unfinishedIds)),
               ],
             ),
           );
@@ -68,9 +75,10 @@ class ExamSelectionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context, WidgetRef ref) {
+  Widget _buildExamCard(Exam exam, UserProgressRepository progressRepository, BuildContext context, WidgetRef ref, Set<String> unfinishedIds) {
     final results = progressRepository.getAllTestResults(examId: exam.examId);
     final best = results.isEmpty ? null : results.map((r) => r.correctAnswers).reduce((a, b) => a > b ? a : b);
+    final hasUnfinished = unfinishedIds.contains(exam.examId);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -153,8 +161,13 @@ class ExamSelectionScreen extends ConsumerWidget {
               );
             }
           },
-          style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: AppColors.onPrimary),
-          child: Text(best != null ? 'Tekrarla / İncele' : 'Başla'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: hasUnfinished ? AppColors.warning : AppColors.primary, 
+            foregroundColor: AppColors.onPrimary
+          ),
+          child: Text(
+            hasUnfinished ? 'Devam Et' : (best != null ? 'Tekrarla / İncele' : 'Başla')
+          ),
         ),
       ),
     );

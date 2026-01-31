@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.3+7
+version: 1.0.4+8
 
 environment:
   sdk: ^3.8.1
@@ -56,6 +56,7 @@ dependencies:
   
   # Local storage for user progress
   shared_preferences: ^2.2.2
+  path_provider: ^2.1.5
   intl: ^0.19.0
   
   # Confetti animations for quiz celebrations
@@ -71,6 +72,7 @@ dependencies:
   in_app_review: ^2.0.9
   url_launcher: ^6.3.0
   package_info_plus: ^8.0.2
+  smooth_page_indicator: ^2.0.1
   
   # WebView for video embeds (Vimeo)
 
@@ -114,6 +116,11 @@ flutter:
     - assets/images/downloaded/deneme_sinavi_23/
     - assets/images/downloaded/deneme_sinavi_24/
     - assets/images/downloaded/deneme_sinavi_25/
+    - assets/images/downloaded/deneme_sinavi_26/
+    - assets/images/downloaded/deneme_sinavi_27/
+    - assets/images/downloaded/deneme_sinavi_28/
+    - assets/images/downloaded/deneme_sinavi_29/
+    - assets/images/downloaded/deneme_sinavi_30/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
