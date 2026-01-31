@@ -51,12 +51,13 @@ class AuthRepository {
   /// Get the current user
   User? get currentUser => _firebaseAuth.currentUser;
 
-  /// Get stream of auth state changes
+  /// Get stream of auth state changes (including profile updates)
   Stream<User?> get authStateChanges {
     try {
-      return _firebaseAuth.authStateChanges();
+      // userChanges fires on sign-in, sign-out, AND profile updates
+      return _firebaseAuth.userChanges();
     } catch (e) {
-      Logger.error('AuthService: Error creating authStateChanges stream', e);
+      Logger.error('AuthService: Error creating userChanges stream', e);
       return Stream.value(null);
     }
   }
