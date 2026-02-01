@@ -93,3 +93,7 @@ coverage/
 
 # RevenueCat API keys (should be added to .env)
 # lib/src/core/services/purchase_service.dart contains placeholder keys
+
+# Firebase Secrets
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json

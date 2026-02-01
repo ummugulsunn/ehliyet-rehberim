@@ -843,31 +843,31 @@
       {
         "id": "B-1",
         "name": "Hastane",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/b_1_hastane.png",
         "description": "Yakın çevrede hastane bulunduğunu bildirir. Kornaya basmaktan kaçının ve sessiz ilerleyin."
       },
       {
         "id": "B-3",
         "name": "Akaryakıt İstasyonu",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/b_3_akaryakit.png",
         "description": "Yakın çevrede akaryakıt istasyonu bulunduğunu bildirir."
       },
       {
         "id": "B-13",
         "name": "Otopark",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/b_13_otopark.png",
         "description": "Belirtilen alanda otopark bulunduğunu bildirir. Park kurallarına uyun."
       },
       {
         "id": "B-31",
         "name": "Otoyol Başlangıcı",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/b_31_otoyol_baslangici.png",
         "description": "Otoyol başlangıcını bildirir. Otoyol kuralları geçerli olur."
       },
       {
         "id": "B-32",
         "name": "Otoyol Sonu",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/b_32_otoyol_sonu.png",
         "description": "Otoyol sonunu bildirir. Normal yol kuralları geçerli olur."
       }
     ]
@@ -878,25 +878,25 @@
       {
         "id": "P-1",
         "name": "Durma ve Park Etme Yasak",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/p_1_durma_ve_park_etme_yasak.png",
         "description": "Bu bölgede durma ve park etme yasaktır. Hiç durmayın."
       },
       {
         "id": "P-2",
         "name": "Park Etme Yasak",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/p_2_park_etme_yasak.png",
         "description": "Bu bölgede park etme yasaktır. Kısa süreli durabilirsiniz."
       },
       {
         "id": "P-11",
         "name": "Taksi Durağı",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/p_11_taksi_duragi.png",
         "description": "Taksi durağıdır. Sadece taksiler durup yolcu alabilir."
       },
       {
         "id": "P-12",
         "name": "Otobüs Durağı",
-        "imageUrl": "assets/images/traffic_signs/(T).jpg",
+        "imageUrl": "assets/images/traffic_signs/p_12_otobus_duragi.png",
         "description": "Otobüs durağıdır. Sadece otobüsler durup yolcu alabilir."
       }
     ]
