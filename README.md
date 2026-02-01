@@ -5,6 +5,8 @@
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)
 
+[🇹🇷 Türkçe Oku](README.tr.md)
+
 Ehliyet Rehberim is a comprehensive mobile application engineered to facilitate preparation for the Turkish Driver's License Exam. It integrates advanced performance analytics, visual mnemonic techniques, and real-time state management to deliver an optimized learning experience.
 
 ## Overview
