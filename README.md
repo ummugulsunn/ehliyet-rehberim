@@ -96,9 +96,13 @@ lib/
 
 ## Screenshots
 
-| Home | Quiz Interface | Analytics | Profile |
-|:---:|:---:|:---:|:---:|
-| <img src="assets/images/screenshots/home.png" width="220" alt="Home" /> | <img src="assets/images/screenshots/quiz.png" width="220" alt="Quiz" /> | <img src="assets/images/screenshots/stats.png" width="220" alt="Stats" /> | <img src="assets/images/screenshots/profile.png" width="220" alt="Profile" /> |
+| Onboarding 1 | Onboarding 2 | Screen 1 |
+|:---:|:---:|:---:|
+| <img src="assets/images/screenshots/screen_start_1.png" width="220" alt="Onboarding 1" /> | <img src="assets/images/screenshots/screen_start_2.png" width="220" alt="Onboarding 2" /> | <img src="assets/images/screenshots/screen_1.png" width="220" alt="Screen 1" /> |
+| **Screen 2** | **Screen 3** | **Screen 4** |
+| <img src="assets/images/screenshots/screen_2.png" width="220" alt="Screen 2" /> | <img src="assets/images/screenshots/screen_3.png" width="220" alt="Screen 3" /> | <img src="assets/images/screenshots/screen_4.png" width="220" alt="Screen 4" /> |
+| **Screen 5** | | |
+| <img src="assets/images/screenshots/screen_5.png" width="220" alt="Screen 5" /> | | |
 
 ## License
 
